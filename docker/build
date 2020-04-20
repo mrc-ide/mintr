@@ -9,6 +9,6 @@ docker build --pull \
        --build-arg PKGAPI_VERSION=$PKG_VERSION \
        --tag $TAG_SHA \
        -f docker/Dockerfile \
-       .
+       $PACKAGE_ROOT
 
 docker push $TAG_SHA
