@@ -14,8 +14,7 @@ endpoint_table_impact_config <- function() {
   pkgapi::pkgapi_endpoint$new(
     "GET", "/table/impact/config", target_table_impact_config,
     returning = pkgapi::pkgapi_returning_json("TableDefinition.schema",
-                                              schema_root()),
-    validate = TRUE)
+                                              schema_root()))
 }
 
 
