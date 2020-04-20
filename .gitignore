@@ -1,0 +1,7 @@
+docs
+js/node_modules
+js/bundle*js
+inst/doc
+vignettes/*.html
+vignettes/*.R
+.V8history
