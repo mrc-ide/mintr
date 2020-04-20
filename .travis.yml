@@ -2,7 +2,15 @@
 
 language: R
 cache: packages
+dist: xenial
+addons:
+  apt:
+    packages:
+      - libnode-dev
 r_packages:
   - covr
+r_github_packages:
+  - ropensci/jsonvalidate
+  - reside-ic/pkgapi
 after_success:
   - Rscript -e 'covr::codecov(quiet = FALSE)'
