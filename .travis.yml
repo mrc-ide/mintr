@@ -1,0 +1,16 @@
+# R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
+
+language: R
+cache: packages
+dist: xenial
+addons:
+  apt:
+    packages:
+      - libnode-dev
+r_packages:
+  - covr
+r_github_packages:
+  - ropensci/jsonvalidate
+  - reside-ic/pkgapi
+after_success:
+  - Rscript -e 'covr::codecov(quiet = FALSE)'
