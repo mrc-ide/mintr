@@ -14,3 +14,13 @@ main <- function(args = commandArgs()) {
   port <- opts$port
   api_run(port)
 }
+
+
+write_script <- function(dest) {
+  dir.create(dest, FALSE, TRUE)
+  code <- "#!/usr/bin/env Rscript\nmintr:::main()"
+  path <- file.path(dest, "mintr")
+  writeLines(code, path)
+  Sys.chmod(path, "0755")
+  invisible(path)
+}

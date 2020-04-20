@@ -19,4 +19,5 @@ RUN installGithub.r \
         reside-ic/pkgapi
 
 COPY . /src
-RUN R CMD INSTALL /src
+RUN R CMD INSTALL /src && \
+    Rscript -e 'mintr:::write_script("/usr/bin")'

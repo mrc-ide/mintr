@@ -15,3 +15,11 @@ test_that("cli can call api", {
   mockery::expect_called(mock_api, 1)
   expect_equal(mockery::mock_args(mock_api), list(list(1234L)))
 })
+
+
+test_that("Can write script", {
+  path <- tempfile()
+  res <- write_script(path)
+  expect_equal(basename(res), "mintr")
+  expect_equal(file.info(res)$mode, as.octmode("755"))
+})
