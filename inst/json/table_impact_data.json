@@ -1,0 +1,29 @@
+[
+    {
+        "intervention": "none",
+        "net_use": 20,
+        "irs_use": 0,
+        "prev_year_1": 7.32,
+        "prev_year_2": 7.34,
+        "prev_year_3": 7.48,
+        "cases_averted": 0
+
+    },
+    {
+        "intervention": "none",
+        "net_use": 40,
+        "irs_use": 0,
+        "prev_year_1": 7.32,
+        "prev_year_2": 7.34,
+        "prev_year_3": 7.48,
+        "cases_averted": 0
+    },
+    {
+        "intervention": "none",
+        "net_use": 60,
+        "irs_use": 0,
+        "prev_year_1": 7.32,
+        "prev_year_2": 7.34,
+        "prev_year_3": 7.48
+    }
+]

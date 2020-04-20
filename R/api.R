@@ -2,11 +2,41 @@ api_run <- function(port) {
   api_build()$run("0.0.0.0", port) # nocov
 }
 
-
 api_build <- function() {
   pr <- pkgapi::pkgapi$new()
+  pr$handle(endpoint_graph_prevalence_config())
+  pr$handle(endpoint_graph_prevalence_data())
   pr$handle(endpoint_table_impact_config())
+  pr$handle(endpoint_table_impact_data())
   pr
+}
+
+
+endpoint_graph_prevalence_config <- function() {
+  pkgapi::pkgapi_endpoint$new(
+    "GET", "/graph/prevalence/config", target_graph_prevalence_config,
+    returning = pkgapi::pkgapi_returning_json("Graph.schema",
+                                              schema_root()))
+}
+
+
+target_graph_prevalence_config <- function() {
+  read_json(mintr_path("json/graph_prevalence_config.json"))
+}
+
+
+endpoint_graph_prevalence_data <- function() {
+  root <- schema_root()
+  pkgapi::pkgapi_endpoint$new(
+    "POST", "/graph/prevalence/data", target_graph_prevalence_data,
+    pkgapi::pkgapi_input_body_json("options", "DataOptions.schema", root),
+    returning = pkgapi::pkgapi_returning_json("Data.schema", root))
+}
+
+
+target_graph_prevalence_data <- function(options) {
+  force(options)
+  read_json(mintr_path("json/graph_prevalence_data.json"))
 }
 
 
@@ -20,4 +50,19 @@ endpoint_table_impact_config <- function() {
 
 target_table_impact_config <- function() {
   read_json(mintr_path("json/table_impact_config.json"))
+}
+
+
+endpoint_table_impact_data <- function() {
+  root <- schema_root()
+  pkgapi::pkgapi_endpoint$new(
+    "POST", "/table/impact/data", target_table_impact_data,
+    pkgapi::pkgapi_input_body_json("options", "DataOptions.schema", root),
+    returning = pkgapi::pkgapi_returning_json("Data.schema", root))
+}
+
+
+target_table_impact_data <- function(options) {
+  force(options)
+  read_json(mintr_path("json/table_impact_data.json"))
 }
