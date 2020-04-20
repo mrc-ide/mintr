@@ -21,3 +21,7 @@ RUN installGithub.r \
 COPY . /src
 RUN R CMD INSTALL /src && \
     Rscript -e 'mintr:::write_script("/usr/bin")'
+
+EXPOSE 8888
+
+ENTRYPOINT ["/usr/bin/mintr"]
