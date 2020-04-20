@@ -103,7 +103,6 @@ Return schema: [Data.schema.json](./Data.schema.json)
 Returns an array of graph configuration object for the prevalence graph.
 
 Properties:
-* an id
 * a plotly layout object
 * a data object containing all the plotly metadata for the data series as well as the columns defining the series
 
@@ -117,7 +116,6 @@ Plotly documentation: https://plotly.com/javascript/plotly-fundamentals/
 ### Example 
 ```
 {
-    "id": "prev",
     "layout": {
            "title": "Projected prevalence in under 5 year olds",
            "xaxis": {
