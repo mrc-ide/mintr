@@ -3,7 +3,10 @@
   "type": "object",
   "properties": {
     "data": {
-      "type": "object"
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
     },
     "layout": {
       "type": "object"
@@ -13,5 +16,8 @@
     }
   },
   "additionalProperties": false,
-  "required": ["data", "layout"]
+  "required": [
+    "data",
+    "layout"
+  ]
 }
