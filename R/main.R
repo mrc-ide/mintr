@@ -1,4 +1,4 @@
-main_args <- function(args = commandArgs()) {
+main_args <- function(args = commandArgs(TRUE)) {
   usage <- "Usage:
   mintr [options]
 
@@ -9,7 +9,7 @@ Options:
 }
 
 
-main <- function(args = commandArgs()) {
+main <- function(args = commandArgs(TRUE)) {
   opts <- main_args(args)
   port <- opts$port
   api_run(port)
