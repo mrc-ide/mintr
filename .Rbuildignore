@@ -6,3 +6,4 @@
 ^js$
 \.V8history$
 ^codecov\.yml$
+^docker$
