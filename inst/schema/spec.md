@@ -109,7 +109,7 @@ Properties:
 and optionally:
 * a plotly config object
 
-Schema: [Graphs.schema.json](./Graphs.schema.json)
+Schema: [Graph.schema.json](./Graph.schema.json)
 
 Plotly documentation: https://plotly.com/javascript/plotly-fundamentals/
 
@@ -158,7 +158,7 @@ Plotly documentation: https://plotly.com/javascript/plotly-fundamentals/
          }
     ],
     "config": {
-        { "editable": true }
+         "editable": true
     } 
 }
 
@@ -226,12 +226,12 @@ Returns about the column display names
 Schema: [TableDefinition.schema.json](./TableDefinition.schema.json)
 
 ```
-[
-    {"intervention": "Interventions"},
-    {"net_use": "Net use"},
-    {"prev_year_1": "Prevalence Under 5 yrs: Yr 1 post intervention"},
-    {"prev_year_2": "Prevalence Under 5 yrs: Yr 2 post intervention"},
-    {"prev_year_3": "Prevalence Under 5 yrs: Yr 3 post intervention"},
-    {"cases_averted": "Cases averted across 3 yrs since intervention"}
-]
+{   
+    "intervention": "Interventions",
+    "net_use": "Net use",
+    "prev_year_1": "Prevalence Under 5 yrs: Yr 1 post intervention",
+    "prev_year_2": "Prevalence Under 5 yrs: Yr 2 post intervention",
+    "prev_year_3": "Prevalence Under 5 yrs: Yr 3 post intervention",
+    "cases_averted": "Cases averted across 3 yrs since intervention"
+}
 ```
