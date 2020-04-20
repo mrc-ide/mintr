@@ -1,5 +1,5 @@
 Package: mintr
-Title: API for 'mint'
+Title: API for 'MINT'
 Version: 0.1.0
 Authors@R: c(person("Rich", "FitzJohn", role = c("aut", "cre"),
                     email = "rich.fitzjohn@gmail.com"),
@@ -8,7 +8,7 @@ Authors@R: c(person("Rich", "FitzJohn", role = c("aut", "cre"),
              person("Arran", "Hamlet", role = "aut"),
              person("Imperial College of Science, Technology and Medicine",
                     role = "cph"))
-Description: Provides an API for use by 'mint'.
+Description: Provides an API for use by 'MINT'.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
