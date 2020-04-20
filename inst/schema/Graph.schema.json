@@ -2,9 +2,6 @@
   "$schema": "http://json-schema.org/draft-04/schema#",
   "type": "object",
   "properties": {
-    "id": {
-      "type": "string"
-    },
     "data": {
       "type": "object"
     },
@@ -16,5 +13,5 @@
     }
   },
   "additionalProperties": false,
-  "required": ["id", "data", "layout"]
+  "required": ["data", "layout"]
 }
