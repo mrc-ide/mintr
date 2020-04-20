@@ -2,13 +2,13 @@
     "layout": {
            "title": "Projected prevalence in under 5 year olds",
            "xaxis": {
-               "title": 'years of intervention',
+               "title": "years of intervention",
                "showline": true,
                "tickvals": [12, 24, 36],
                "ticktext": [1, 2, 3],
            },
            "yaxis": {
-               "title": 'prevalence (%)',
+               "title": "prevalence (%)",
                "showline": true,
                "range": [0, 100],
                "autorange": false
@@ -16,28 +16,28 @@
     },
     "data": [
          {
-             x_col: "month",
-             y_col: "value",
-             id: "none",
-             name: "No intervention",
-             type: "lines",
-             marker: {color: "grey"}
+             "x_col": "month",
+             "y_col": "value",
+             "id": "none",
+             "name": "No intervention",
+             "type": "lines",
+             "marker": {"color": "grey"}
          },
          {
-             x_col: "month",
-             y_col: "value",
-             id: "ITN",
-             name: "Pyrethoid ITN",
-             type: "lines",
-             marker: {color: "blue"}
+             "x_col": "month",
+             "y_col": "value",
+             "id": "ITN",
+             "name": "Pyrethoid ITN",
+             "type": "lines",
+             "marker": {"color": "blue"}
          },
          {
-             x_col: "month",
-             y_col: "value",
-             id: "PBO",
-             name: "Switch to Pyrethoid-PBO ITN",
-             type: "lines",
-             marker: {color: "aquamarine"}
+             "x_col": "month",
+             "y_col": "value",
+             "id": "PBO",
+             "name": "Switch to Pyrethoid-PBO ITN",
+             "type": "lines",
+             "marker": {"color": "aquamarine"}
          }
     ],
     "config": {
