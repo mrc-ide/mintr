@@ -8,3 +8,4 @@
 ^codecov\.yml$
 ^docker$
 ^buildkite$
+^LICENSE\.md$
