@@ -1,0 +1,11 @@
+^scripts$
+^Makefile$
+^README\.Rmd$
+^\.travis\.yml$
+^docs$
+^js$
+\.V8history$
+^codecov\.yml$
+^docker$
+^buildkite$
+^LICENSE\.md$
