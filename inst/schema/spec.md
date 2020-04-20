@@ -1,8 +1,8 @@
 This is all highly uncertain and liable to change!
 
 # Data
-## POST /data/tab-name/
-Accepts a set of baseline options, and returns a data set for the data under the named tab.
+## POST /data/impact
+Accepts a set of baseline options and generates a data set 
 
 Request schema: [DataOptions.schema.json](./DataOptions.schema.json)
 
@@ -104,8 +104,9 @@ Schema: [TableDefinition.schema.json](./TableDefinition.schema.json)
 
 # Graphs
 
-## GET /graphs/:tab-name/
-Returns an array of graph metadata objects for the named tab. Each graph metadata object must have:
+## GET /graphs/impact/
+## GET /graphs/cost/
+Returns an array of graph metadata objects for impact/cost graphs respectively. Each graph metadata object must have:
 * an id
 * a plotly layout object
 * a data object containing all the plotly metadata for the data series as well as the columns defining the series
