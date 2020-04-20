@@ -10,7 +10,7 @@ test_that("table impact config", {
   expect_equal(res_endpoint$content_type, "application/json")
   expect_equal(res_endpoint$data, res)
 
-  res_api <- api()$request("GET", "/table/impact/config")
+  res_api <- api_build()$request("GET", "/table/impact/config")
   expect_equal(res_api$status, 200)
   expect_equal(res_api$body, res_endpoint$body)
 })

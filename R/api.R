@@ -1,4 +1,9 @@
-api <- function() {
+api_run <- function(port) {
+  api_build()$run("0.0.0.0", port)
+}
+
+
+api_build <- function() {
   pr <- pkgapi::pkgapi$new()
   pr$handle(endpoint_table_impact_config())
   pr
