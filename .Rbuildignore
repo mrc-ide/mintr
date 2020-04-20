@@ -7,3 +7,4 @@
 \.V8history$
 ^codecov\.yml$
 ^docker$
+^buildkite$
