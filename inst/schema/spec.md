@@ -123,7 +123,7 @@ Plotly documentation: https://plotly.com/javascript/plotly-fundamentals/
            "xaxis": {
                "title": 'years of intervention',
                "showline": true,
-               "tickvals": ["prev_year_1", "prev_year_2", "prev_year_3"],
+               "tickvals": [12, 24, 36],
                "ticktext": [1, 2, 3],
            },
            "yaxis": {
@@ -135,21 +135,24 @@ Plotly documentation: https://plotly.com/javascript/plotly-fundamentals/
     },
     "data": [
          {
-             cols: ["prev_year_1", "prev_year_2", "prev_year_3"],
+             x_col: "month",
+             y_col: "value", 
              id: "none",
              name: "No intervention",
              type: "lines",
              marker: {color: "grey"}
          },
          {
-             cols: ["prev_year_1", "prev_year_2", "prev_year_3"],
+             x_col: "month",
+             y_col: "value", 
              id: "ITN",
              name: "Pyrethoid ITN",
              type: "lines",
              marker: {color: "blue"}
          },
          {
-             cols: ["prev_year_1", "prev_year_2", "prev_year_3"],
+             x_col: "month",
+             y_col: "value", 
              id: "PBO",
              name: "Switch to Pyrethoid-PBO ITN",
              type: "lines",
