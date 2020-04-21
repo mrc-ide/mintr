@@ -2,6 +2,7 @@ api_run <- function(port) {
   api_build()$run("0.0.0.0", port) # nocov
 }
 
+
 api_build <- function() {
   pr <- pkgapi::pkgapi$new()
   pr$handle(endpoint_graph_prevalence_config())
@@ -12,6 +13,20 @@ api_build <- function() {
 }
 
 
+## Every endpoint comes as a pair of functions:
+##
+## * an endpoint generator function, which returns a pkgapi_endpoint
+##   object
+## * a target function, which carries out the request
+##
+## We hope that we'll be able to use a roxygen extension to eventually
+## automate the creation of the endpoint functions from some
+## annotations around the target functions, but that's a way off
+## still.
+
+## At present these endpoints just return some sample responses
+## directly from from inst/json - however, it's possible that the
+## /config endpoints will stay like this as it's not terrible to edit.
 endpoint_graph_prevalence_config <- function() {
   pkgapi::pkgapi_endpoint$new(
     "GET", "/graph/prevalence/config", target_graph_prevalence_config,
