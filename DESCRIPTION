@@ -13,6 +13,9 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Imports:
+    docopt,
+    jsonlite,
     pkgapi
 Suggests:
+    mockery,
     testthat
