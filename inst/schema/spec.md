@@ -11,7 +11,7 @@ Return schema: [Data.schema.json](./Data.schema.json)
 
 ### Example
 #### Request
-```
+```json
 {
   "irs_future": "80%",
   "sprayInput": 1,
@@ -21,7 +21,7 @@ Return schema: [Data.schema.json](./Data.schema.json)
 ```
 
 #### Response
-```
+```json
 [
   {
     "month": 0,
@@ -114,18 +114,19 @@ Schema: [Graph.schema.json](./Graph.schema.json)
 Plotly documentation: https://plotly.com/javascript/plotly-fundamentals/
 
 ### Example 
-```
+
+```json
 {
     "layout": {
            "title": "Projected prevalence in under 5 year olds",
            "xaxis": {
-               "title": 'years of intervention',
+               "title": "years of intervention",
                "showline": true,
                "tickvals": [12, 24, 36],
                "ticktext": [1, 2, 3],
            },
            "yaxis": {
-               "title": 'prevalence (%)',
+               "title": "prevalence (%)",
                "showline": true,
                "range": [0, 100],
                "autorange": false
@@ -133,35 +134,34 @@ Plotly documentation: https://plotly.com/javascript/plotly-fundamentals/
     },
     "data": [
          {
-             x_col: "month",
-             y_col: "value", 
-             id: "none",
-             name: "No intervention",
-             type: "lines",
-             marker: {color: "grey"}
+             "x_col": "month",
+             "y_col": "value",
+             "id": "none",
+             "name": "No intervention",
+             "type": "lines",
+             "marker": {"color": "grey"}
          },
          {
-             x_col: "month",
-             y_col: "value", 
-             id: "ITN",
-             name: "Pyrethoid ITN",
-             type: "lines",
-             marker: {color: "blue"}
+             "x_col": "month",
+             "y_col": "value",
+             "id": "ITN",
+             "name": "Pyrethoid ITN",
+             "type": "lines",
+             "marker": {"color": "blue"}
          },
          {
-             x_col: "month",
-             y_col: "value", 
-             id: "PBO",
-             name: "Switch to Pyrethoid-PBO ITN",
-             type: "lines",
-             marker: {color: "aquamarine"}
+             "x_col": "month",
+             "y_col": "value",
+             "id": "PBO",
+             "name": "Switch to Pyrethoid-PBO ITN",
+             "type": "lines",
+             "marker": {"color": "aquamarine"}
          }
     ],
     "config": {
          "editable": true
-    } 
+    }
 }
-
 ```
 
 # Tables
@@ -176,7 +176,7 @@ Return schema: [Data.schema.json](./Data.schema.json)
 
 ### Example
 #### Request
-```
+```json
 {
   "irs_future": "80%",
   "sprayInput": 1,
@@ -187,7 +187,7 @@ Return schema: [Data.schema.json](./Data.schema.json)
 
 #### Response
 
-```
+```json
 [
     {
         "intervention": "none",
@@ -225,8 +225,8 @@ Returns about the column display names
 
 Schema: [TableDefinition.schema.json](./TableDefinition.schema.json)
 
-```
-{   
+```json
+{
     "intervention": "Interventions",
     "net_use": "Net use",
     "prev_year_1": "Prevalence Under 5 yrs: Yr 1 post intervention",
