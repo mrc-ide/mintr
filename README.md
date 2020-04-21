@@ -12,7 +12,7 @@ Run from docker with:
 docker run --rm -p 8888:8888 mrcide/mintr:v0.1.0
 ```
 
-Note that at present both `POST` endpoints accept *any* json as a body so long as it exists.
+Note that at present both `POST` endpoints accept *any* json object as as body (it does however have to be an object following [the spec](inst/schema/Data.schema.json)).  We'll either tighten this later via the schema or do validation in the target functions.
 
 ```
 curl http://localhost:8888/graph/prevalence/config
