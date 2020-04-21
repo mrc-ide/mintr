@@ -4,6 +4,8 @@ context("api: endpoints")
 test_that("graph prevalence config", {
   res <- target_graph_prevalence_config()
   expect_is(res, "json")
+  expect_identical(res,
+                   read_json(mintr_path("json/graph_prevalence_config.json")))
 
   endpoint <- endpoint_graph_prevalence_config()
   res_endpoint <- endpoint$run()
@@ -24,6 +26,8 @@ test_that("graph prevalence data", {
                   "population" = 1000)
   res <- target_graph_prevalence_data(options)
   expect_is(res, "json")
+  expect_identical(res,
+                   read_json(mintr_path("json/graph_prevalence_data.json")))
 
   endpoint <- endpoint_graph_prevalence_data()
   res_endpoint <- endpoint$run(options)
@@ -41,6 +45,8 @@ test_that("graph prevalence data", {
 test_that("table impact config", {
   res <- target_table_impact_config()
   expect_is(res, "json")
+  expect_identical(res,
+                   read_json(mintr_path("json/table_impact_config.json")))
 
   endpoint <- endpoint_table_impact_config()
   res_endpoint <- endpoint$run()
@@ -61,6 +67,8 @@ test_that("table impact data", {
                   "population" = 1000)
   res <- target_table_impact_data(options)
   expect_is(res, "json")
+  expect_identical(res,
+                   read_json(mintr_path("json/table_impact_data.json")))
 
   endpoint <- endpoint_table_impact_data()
   res_endpoint <- endpoint$run(options)
