@@ -5,7 +5,7 @@
                "title": "years of intervention",
                "showline": true,
                "tickvals": [12, 24, 36],
-               "ticktext": [1, 2, 3],
+               "ticktext": [1, 2, 3]
            },
            "yaxis": {
                "title": "prevalence (%)",
