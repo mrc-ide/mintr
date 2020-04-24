@@ -1,5 +1,40 @@
 This is all highly uncertain and liable to change!
 
+# Baseline
+
+## GET /baseline/options
+Returns an object defining baseline options, and how they should be presented to the user. The [DataOptions](./DataOptions.schema.json) objects provided in the request for other endpoints represent selected values of these options. 
+
+Return schema: [BaselineOptions.schema.json](./BaselineOptions.schema.json)
+
+### Example
+#### Response
+```json
+{
+ "controlSections": [
+  {
+    "label": "Site Inputs",
+    "controlGroups": [
+      {
+        "controls": [
+           {
+             "name": "population",
+             "label": "Population Size",
+             "type": "number",
+             "required": true,
+             "value": 1000,
+             "helpText": "The population of the region",
+             "min": 1,
+             "max": 1e7
+             }
+          ]
+       }
+     ]
+   }
+ ]
+}                    
+```
+
 # Graphs
 
 ## POST /graph/prevalence/data
