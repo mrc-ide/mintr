@@ -5,6 +5,8 @@ api_run <- function(port) {
 
 api_build <- function() {
   pr <- pkgapi::pkgapi$new()
+  pr$handle(endpoint_baseline_options())
+  pr$handle(endpoint_graph_prevalence_data())
   pr$handle(endpoint_graph_prevalence_config())
   pr$handle(endpoint_graph_prevalence_data())
   pr$handle(endpoint_table_impact_config())
