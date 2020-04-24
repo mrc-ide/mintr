@@ -27,6 +27,19 @@ api_build <- function() {
 ## At present these endpoints just return some sample responses
 ## directly from from inst/json - however, it's possible that the
 ## /config endpoints will stay like this as it's not terrible to edit.
+endpoint_baseline_options <- function() {
+  pkgapi::pkgapi_endpoint$new(
+    "GET", "/baseline/options", target_baseline_options,
+    returning = pkgapi::pkgapi_returning_json("BaselineOptions.schema",
+                                              schema_root()))
+}
+
+
+target_baseline_options <- function() {
+  read_json(mintr_path("json/baseline_options.json"))
+}
+
+
 endpoint_graph_prevalence_config <- function() {
   pkgapi::pkgapi_endpoint$new(
     "GET", "/graph/prevalence/config", target_graph_prevalence_config,

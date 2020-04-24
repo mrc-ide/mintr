@@ -1,6 +1,24 @@
 context("api: endpoints")
 
 
+test_that("baseline_options", {
+  res <- target_baseline_options()
+  expect_is(res, "json")
+  expect_identical(res,
+                   read_json(mintr_path("json/baseline_options.json")))
+  
+  endpoint <- endpoint_baseline_options()
+  res_endpoint <- endpoint$run()
+  expect_equal(res_endpoint$status_code, 200)
+  expect_equal(res_endpoint$content_type, "application/json")
+  expect_equal(res_endpoint$data, res)
+  
+  res_api <- api_build()$request("GET", "/baseline/options")
+  expect_equal(res_api$status, 200)
+  expect_equal(res_api$body, res_endpoint$body)
+})
+
+
 test_that("graph prevalence config", {
   res <- target_graph_prevalence_config()
   expect_is(res, "json")
