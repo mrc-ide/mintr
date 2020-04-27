@@ -21,7 +21,7 @@
         "format": { "enum": ["wide"] }
       },
       "additionalProperties": false,
-      "required": ["x_col","y_col","id_col","format"]
+      "required": ["cols","id_col","format"]
     },
     "seriesDefinition": {
       "type": "object",
