@@ -63,8 +63,6 @@ Return schema: [Data.schema.json](./Data.schema.json)
     "intervention": "none",
     "net_use": 0,
     "irs_use": 0,
-    "prevalence": "low",
-    "resistance": 0.2,
     "value": 0.4287
   },
   {
@@ -72,8 +70,6 @@ Return schema: [Data.schema.json](./Data.schema.json)
     "intervention": "none",
     "net_use": 0,
     "irs_use": 0,
-    "prevalence": "low",
-    "resistance": 0.4,
     "value": 0.4119
   },
   {
@@ -81,8 +77,6 @@ Return schema: [Data.schema.json](./Data.schema.json)
     "intervention": "none",
     "net_use": 0,
     "irs_use": 0,
-    "prevalence": "low",
-    "resistance": 0.6,
     "value": 0.6894
   },
   {
@@ -90,17 +84,13 @@ Return schema: [Data.schema.json](./Data.schema.json)
     "intervention": "none",
     "net_use": 0,
     "irs_use": 0,
-    "prevalence": "low",
-    "resistance": 0.8,
-    "value": 0.6217906241600673
+    "value": 0.6217
   },
   {
     "month": 0,
     "intervention": "none",
     "net_use": 0,
     "irs_use": 0,
-    "prevalence": "med",
-    "resistance": 0.2,
     "value": 0.4716
   },
   {
@@ -108,8 +98,6 @@ Return schema: [Data.schema.json](./Data.schema.json)
     "intervention": "none",
     "net_use": 0,
     "irs_use": 0,
-    "prevalence": "med",
-    "resistance": 0.4,
     "value": 0.8187
   },
   {
@@ -117,8 +105,6 @@ Return schema: [Data.schema.json](./Data.schema.json)
     "intervention": "none",
     "net_use": 0,
     "irs_use": 0,
-    "prevalence": "med",
-    "resistance": 0.6,
     "value": 0.0453
   },
   {
@@ -126,8 +112,6 @@ Return schema: [Data.schema.json](./Data.schema.json)
     "intervention": "none",
     "net_use": 0,
     "irs_use": 0,
-    "prevalence": "med",
-    "resistance": 0.8,
     "value": 0.1402
   },
   ...
