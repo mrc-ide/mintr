@@ -16,7 +16,8 @@
            "yaxis": {
                "title": "prevalence (%)",
                "showline": true,
-               "autorange": true
+               "range": [0, 1],
+               "autorange": false
            }
     },
     "series": [
@@ -37,6 +38,18 @@
              "name": "Switch to Pyrethoid-PBO ITN",
              "type": "lines",
              "marker": {"color": "aquamarine"}
+         },
+         {
+             "x": [12, 12],
+             "y": [1, 1],
+             "line": {
+                 "dash": "dot",
+                 "width": 2,
+                 "color": "grey"
+             },
+             "name": "",
+             "showlegend": false,
+             "hoverinfo": "none"
          }
     ],
     "config": {
