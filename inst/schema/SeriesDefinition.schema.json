@@ -5,13 +5,13 @@
     "x": {
       "type": "array",
       "items": {
-        "type": "object"
+        "type": "number"
       }
     },
     "y": {
       "type": "array",
       "items": {
-        "type": "object"
+        "type": "number"
       }
     },
     "id": {"type:" :"string"},
