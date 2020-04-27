@@ -16,8 +16,7 @@
            "yaxis": {
                "title": "prevalence (%)",
                "showline": true,
-               "range": [0, 100],
-               "autorange": false
+               "autorange": true
            }
     },
     "series": [
