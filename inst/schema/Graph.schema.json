@@ -1,11 +1,65 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
   "type": "object",
+  "definitions": {
+    "longFormatMetadata": {
+      "type": "object",
+      "properties": {
+        "x_col": { "type": "string" },
+        "y_col": { "type": "string" },
+        "id_col": {"type": "string" },
+        "format": { "enum": ["long"] }
+      },
+      "additionalProperties": false,
+      "required": ["x_col","y_col","id_col","format"]
+    },
+    "wideFormatMetadata": {
+      "type": "object",
+      "properties": {
+        "cols": { "type": "array", "items": { "type": "string"}},
+        "id_col": {"type": "string" },
+        "format": { "enum": ["wide"] }
+      },
+      "additionalProperties": false,
+      "required": ["cols","id_col","format"]
+    },
+    "seriesDefinition": {
+      "type": "object",
+      "properties": {
+        "x": {
+          "type": "array",
+          "items": {
+            "oneOf": [{"type": "number"}, {"type": "string"}]
+          }
+        },
+        "y": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        "id": {"type:" :"string"},
+        "name": {"type":  "string"},
+        "type": {"type": "string"}
+      },
+      "additionalProperties": true
+    }
+  },
   "properties": {
-    "data": {
+    "metadata": {
+      "oneOf": [
+        {
+          "$ref": "#/definitions/longFormatMetadata"
+        },
+        {
+          "$ref": "#/definitions/wideFormatMetadata"
+        }
+      ]
+    },
+    "series": {
       "type": "array",
       "items": {
-        "type": "object"
+        "$ref": "#/definitions/seriesDefinition"
       }
     },
     "layout": {
@@ -17,7 +71,8 @@
   },
   "additionalProperties": false,
   "required": [
-    "data",
+    "metadata",
+    "series",
     "layout"
   ]
 }

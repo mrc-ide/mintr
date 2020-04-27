@@ -63,8 +63,6 @@ Return schema: [Data.schema.json](./Data.schema.json)
     "intervention": "none",
     "net_use": 0,
     "irs_use": 0,
-    "prevalence": "low",
-    "resistance": 0.2,
     "value": 0.4287
   },
   {
@@ -72,8 +70,6 @@ Return schema: [Data.schema.json](./Data.schema.json)
     "intervention": "none",
     "net_use": 0,
     "irs_use": 0,
-    "prevalence": "low",
-    "resistance": 0.4,
     "value": 0.4119
   },
   {
@@ -81,8 +77,6 @@ Return schema: [Data.schema.json](./Data.schema.json)
     "intervention": "none",
     "net_use": 0,
     "irs_use": 0,
-    "prevalence": "low",
-    "resistance": 0.6,
     "value": 0.6894
   },
   {
@@ -90,17 +84,13 @@ Return schema: [Data.schema.json](./Data.schema.json)
     "intervention": "none",
     "net_use": 0,
     "irs_use": 0,
-    "prevalence": "low",
-    "resistance": 0.8,
-    "value": 0.6217906241600673
+    "value": 0.6217
   },
   {
     "month": 0,
     "intervention": "none",
     "net_use": 0,
     "irs_use": 0,
-    "prevalence": "med",
-    "resistance": 0.2,
     "value": 0.4716
   },
   {
@@ -108,8 +98,6 @@ Return schema: [Data.schema.json](./Data.schema.json)
     "intervention": "none",
     "net_use": 0,
     "irs_use": 0,
-    "prevalence": "med",
-    "resistance": 0.4,
     "value": 0.8187
   },
   {
@@ -117,8 +105,6 @@ Return schema: [Data.schema.json](./Data.schema.json)
     "intervention": "none",
     "net_use": 0,
     "irs_use": 0,
-    "prevalence": "med",
-    "resistance": 0.6,
     "value": 0.0453
   },
   {
@@ -126,8 +112,6 @@ Return schema: [Data.schema.json](./Data.schema.json)
     "intervention": "none",
     "net_use": 0,
     "irs_use": 0,
-    "prevalence": "med",
-    "resistance": 0.8,
     "value": 0.1402
   },
   ...
@@ -138,11 +122,13 @@ Return schema: [Data.schema.json](./Data.schema.json)
 Returns an array of graph configuration object for the prevalence graph.
 
 Properties:
-* a plotly layout object
-* a data object containing all the plotly metadata for the data series as well as the columns defining the series
+* `layout` - a plotly layout object
+* `series` -  object containing the plotly metadata for the data series 
+* `metadata` - object containg the information about the data format and how to derive the 
+series from the data
 
 and optionally:
-* a plotly config object
+* `config` - a plotly config object
 
 Schema: [Graph.schema.json](./Graph.schema.json)
 
@@ -158,7 +144,7 @@ Plotly documentation: https://plotly.com/javascript/plotly-fundamentals/
                "title": "years of intervention",
                "showline": true,
                "tickvals": [12, 24, 36],
-               "ticktext": [1, 2, 3],
+               "ticktext": [1, 2, 3]
            },
            "yaxis": {
                "title": "prevalence (%)",
@@ -166,27 +152,27 @@ Plotly documentation: https://plotly.com/javascript/plotly-fundamentals/
                "range": [0, 100],
                "autorange": false
            }
+    },  
+    "metadata": {
+          "format": "long",
+          "id_col": "intervention",
+          "x_col": "month",
+          "y_col": "value"
     },
-    "data": [
+    "series": [
          {
-             "x_col": "month",
-             "y_col": "value",
              "id": "none",
              "name": "No intervention",
              "type": "lines",
              "marker": {"color": "grey"}
          },
-         {
-             "x_col": "month",
-             "y_col": "value",
+         {           
              "id": "ITN",
              "name": "Pyrethoid ITN",
              "type": "lines",
              "marker": {"color": "blue"}
          },
-         {
-             "x_col": "month",
-             "y_col": "value",
+         {         
              "id": "PBO",
              "name": "Switch to Pyrethoid-PBO ITN",
              "type": "lines",
