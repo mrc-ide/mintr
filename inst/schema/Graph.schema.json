@@ -2,10 +2,20 @@
   "$schema": "http://json-schema.org/draft-04/schema#",
   "type": "object",
   "properties": {
-    "data": {
+    "metadata": {
+      "oneOf": [
+        {
+          "$ref": "LongFormatMetadata.schema.json"
+        },
+        {
+          "$ref": "WideFormatMetadata.schema.json"
+        }
+      ]
+    },
+    "series": {
       "type": "array",
       "items": {
-        "type": "object"
+        "$ref": "SeriesDefinition.schema.json"
       }
     },
     "layout": {
@@ -17,7 +27,8 @@
   },
   "additionalProperties": false,
   "required": [
-    "data",
+    "metadata",
+    "series",
     "layout"
   ]
 }

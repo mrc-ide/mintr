@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "cols": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "id_col": {
+      "type": "string"
+    },
+    "format": {
+      "enum": [
+        "wide"
+      ]
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "cols",
+    "id_col",
+    "format"
+  ]
+}

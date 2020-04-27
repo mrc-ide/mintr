@@ -1,4 +1,10 @@
 {
+    "metadata": {
+          "x_col": "month",
+          "y_col": "value",
+          "id_col": "intervention",
+          "format": "long"
+    },
     "layout": {
            "title": "Projected prevalence in under 5 year olds",
            "xaxis": {
@@ -14,26 +20,20 @@
                "autorange": false
            }
     },
-    "data": [
+    "series": [
          {
-             "x_col": "month",
-             "y_col": "value",
              "id": "none",
              "name": "No intervention",
              "type": "lines",
              "marker": {"color": "grey"}
          },
          {
-             "x_col": "month",
-             "y_col": "value",
              "id": "ITN",
              "name": "Pyrethoid ITN",
              "type": "lines",
              "marker": {"color": "blue"}
          },
          {
-             "x_col": "month",
-             "y_col": "value",
              "id": "PBO",
              "name": "Switch to Pyrethoid-PBO ITN",
              "type": "lines",

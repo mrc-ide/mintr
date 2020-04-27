@@ -1,0 +1,22 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "x": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "y": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "id": {"type:" :"string"},
+    "name": {"type":  "string"},
+    "type": {"type": "string"}
+  },
+  "additionalProperties": true
+}
