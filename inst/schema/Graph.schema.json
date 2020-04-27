@@ -29,7 +29,7 @@
         "x": {
           "type": "array",
           "items": {
-            "type": "number"
+            "oneOf": [{"type": "number"}, {"type": "string"}]
           }
         },
         "y": {
