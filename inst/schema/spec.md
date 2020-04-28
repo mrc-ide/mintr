@@ -1,6 +1,6 @@
 This is all highly uncertain and liable to change!
 
-# Options/settings
+# Options
 
 ## GET /baseline/options
 Returns an object defining baseline options, and how they should be presented to the user. The [DataOptions](./DataOptions.schema.json) objects provided in the request for other endpoints represent selected values of these options. 
