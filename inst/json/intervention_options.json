@@ -1,108 +1,65 @@
 {
         "controlSections": [
             {
-                "label": "Site Inputs",
+                "label": "Procurement and distribution",
                 "controlGroups": [
                     {
                         "controls": [
                             {
-                                "name": "population",
-                                "label": "Population Size",
+                                "name": "procure_people_per_net",
+                                "label": "When planning procurement, what number of people per net is used?",
                                 "type": "number",
                                 "required": true,
-                                "value": 1000,
-                                "min": 1,
-                                "max": 1e7
+                                "value": 1.8
                             }
                         ]
                     },
                     {
                         "controls": [
                             {
-                                "name": "seasonality",
-                                "label": "Seasonality of transmission",
-                                "type": "select",
+                                "name": "procure_buffer",
+                                "label": "What percentage is your procurement buffer, if used? (%)",
+                                "type": "number",
                                 "required": true,
-                                "value": "seasonal",
-                                "helpText": "Seasonal: a district with a transmission season.<br/>Perennial: a district with transmission throughout the year.",
-                                "options": [
-                                    {"id": "seasonal", "label": "Seasonal"},
-                                    {"id": "perennial", "label": "Perennial"}
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "controls": [
-                            {
-                                "name": "prevalence",
-                                "label": "Current malaria prevalence",
-                                "type": "select",
-                                "required": true,
-                                "value": "low",
-                                "helpText": "Low = less than 10% of children under 5-years have malaria<br/>Medium = approximately 30% of children under 5-years have malaria<br/>High = approximately 65% of children  under 5-years have malaria",
-                                "options": [
-                                    {"id": "low", "label": "Low"},
-                                    {"id": "med", "label": "Medium"},
-                                    {"id": "high", "label": "High"}
-                                ]
+                                "value": 7
                             }
                         ]
                     }
                 ]
             },
             {
-                "label": "Mosquito Inputs",
+                "label": "Price of interventions",
                 "controlGroups": [
                     {
                         "controls": [
                             {
-                                "name": "biting_indoors",
-                                "label": "Preference for biting indoors",
-                                "type": "select",
+                                "name": "price_net_standard",
+                                "label": "Price of standard ITN ($USD)",
+                                "type": "number",
                                 "required": true,
-                                "value": "high",
-                                "helpText": "High: indicates ~97% bites taken when people are indoors.<br/>Low: indicates ~78% bites taken when people are indoors.",
-                                "options": [
-                                    {"id": "high", "label": "High"},
-                                    {"id": "low", "label": "Low"}
-                                ]
+                                "value": 1.5
                             }
                         ]
                     },
                     {
                         "controls": [
                             {
-                                "name": "anthrophilic",
-                                "label": "Preference for biting people",
-                                "type": "select",
+                                "name": "price_net_pbo",
+                                "label": "Price of PBO ITN ($USD)",
+                                "type": "numbre",
                                 "required": true,
-                                "value": "low",
-                                "helpText": "High: ~92% of mosquito bites taken on humans.<br/>Low: ~74% of mosquito bites taken on humans.",
-                                "options": [
-                                    {"id": "low", "label": "Low"},
-                                    {"id": "high", "label": "High"}
-                                ]
+                                "value": 2.5
                             }
                         ]
                     },
                     {
                         "controls": [
                             {
-                                "name": "resistance",
-                                "label": "Level of pyrethoid resistance",
-                                "type": "select",
+                                "name": "price_delivery",
+                                "label": "ITN mass distribution campaign delivery cost per person ($USD)",
+                                "type": "number",
                                 "required": true,
-                                "value": "0",
-                                "helpText": "Mosquito survival in 24-hour WHO discriminatory dose bioassays.<br/>0% indicates all mosquitoes die and are susceptible to the pyrethroid insecticide in ITNs.<br/>100% indicates that no mosquitoes die or are susceptible to the pyrethroid insecticide in ITNs.<br/>Select the ranges that best represent the district. For example, if the district has susceptibility bioassay test estimates that range from 23% to 42% of mosquitoes being killed, then explore both 60% and 80% pyrethroid resistance scenarios.",
-                                "options": [
-                                    {"id": "0", "label": "0"},
-                                    {"id": "0.2", "label": "20%"},
-                                    {"id": "0.4", "label": "40%"},
-                                    {"id": "0.6", "label": "60%"},
-                                    {"id": "0.8", "label": "80%"},
-                                    {"id": "1", "label": "100%"}
-                                ]
+                                "value": 2.75
                             }
                         ]
                     },
@@ -110,38 +67,62 @@
                         "controls": [
                             {
                                 "name": "metabolic",
-                                "label": "Evidence of PBO synergy",
-                                "type": "select",
+                                "label": "Annual cost of IRS per person ($USD)",
+                                "type": "number",
                                 "required": true,
-                                "value": "yes",
-                                "helpText": "Yes: evidence that PBO (piperonyl butoxide) synergises pyrethroid insecticide.<br/>No: no evidence that PBO (piperonyl butoxide) synergises pyrethroid insecticide.",
-                                "options": [
-                                    {"id": "yes", "label": "Yes"},
-                                    {"id": "no", "label": "No"}
-                                ]
+                                "value": 2.5,
+                                "helpText": "Include the average cost for both the IRS product and implementation of IRS. If different IRS products are used in different years, please average the product costs and provide an annual cost per person protected by IRS (in $USD)"
+                            }
+                        ]
+                    },
+                    {
+                        "controls": [
+                            {
+                                "name": "budget_all_zones",
+                                "label": "Total available budget ($USD)",
+                                "type": "number",
+                                "required": true,
+                                "value": 2000000,
+                                "helpText": "Include the average cost for both the IRS product and implementation of IRS. If different IRS products are used in different years, please average the product costs and provide an annual cost per person protected by IRS (in $USD)"
+                            }
+                        ]
+                    },
+                    {
+                        "controls": [
+                            {
+                                "name": "zonal_budget",
+                                "label": "Zonal budget ($USD)",
+                                "type": "number",
+                                "required": true,
+                                "value": 500000.05
                             }
                         ]
                     }
                 ]
             },
             {
-                "label": "Past Vector Control",
+                "label": "Intervention coverage potential",
                 "controlGroups": [
                     {
                         "controls": [
                             {
-                                "name": "net",
-                                "label": "ITN population usage in last survey (%)",
+                                "name": "net_use",
+                                "label": "Expected ITN population use given access",
                                 "type": "select",
                                 "required": true,
-                                "value": "0",
-                                "helpText": "The current endemicity of a zone is partly determined by the performance and quantity of vector control leading up to now. This is required to approximate the efficacy of interventions moving forward.",
+                                "helpText": "Explore the impact of different ITNs given the expected use of nets by the community (the percentage of people sleeping under ITN). A single expected usage can be selected to represent expected ITN use immediately after a mass distribution campaign. The impact of standard pyrethroid only ITNs or PBO ITNs are show (only one net type is implemented for any single scenario).",
                                 "options": [
                                     {"id": "0", "label": "0% usage"},
+                                    {"id": "0.1", "label": "10% usage"},
                                     {"id": "0.2", "label": "20% usage"},
+                                    {"id": "0.3", "label": "30% usage"},
                                     {"id": "0.4", "label": "40% usage"},
+                                    {"id": "0.5", "label": "50% usage"},
                                     {"id": "0.6", "label": "60% usage"},
-                                    {"id": "0.8", "label": "80% usage"}
+                                    {"id": "0.7", "label": "70% usage"},
+                                    {"id": "0.8", "label": "80% usage"},
+                                    {"id": "0.9", "label": "90% usage"},
+                                    {"id": "1", "label": "100% usage"}
                                 ]
                             }
                         ]
@@ -149,15 +130,18 @@
                     {
                         "controls": [
                             {
-                                "name": "irs",
-                                "label": "What was the estimated coverage of spray campaign (last year)",
+                                "name": "irs_use",
+                                "label": "Expected IRS coverage",
                                 "type": "select",
                                 "required": true,
-                                "value": "0",
-                                "helpText": "If IRS was not used in the past year, select 0% coverage",
+                                "helpText": "Indoor residual spraying can be added to areas in addition of any ITN scenarios selected. Houses to receive IRS are selected at random (irrespective of ITN coverage) and coverage estimates represents the percentage of the population living in houses with IRS. Care should be taken interpreting results as IRS is often highly clustered within smaller geographical areas. The model predicts the impact of a long-lasting IRS product (for example Actellic 300CS or Sumishield) and is repeated annually prior to the peak of the transmission season (if 'seasonal' transmission setting selected).",
                                 "options": [
                                     {"id": "0", "label": "0% coverage"},
-                                    {"id": "0.8", "label": "80% coverage"}
+                                    {"id": "0.6", "label": "60% coverage"},
+                                    {"id": "0.7", "label": "70% coverage"},
+                                    {"id": "0.8", "label": "80% coverage"},
+                                    {"id": "0.9", "label": "90% coverage"},
+                                    {"id": "1", "label": "100% coverage"}
                                 ]
                             }
                         ]
