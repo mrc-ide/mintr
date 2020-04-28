@@ -11,7 +11,7 @@ api_build <- function() {
   pr$handle(endpoint_graph_prevalence_data())
   pr$handle(endpoint_table_impact_config())
   pr$handle(endpoint_table_impact_data())
-  pr$handle(endpoint_interventionoptions())
+  pr$handle(endpoint_intervention_options())
   pr
 }
 
