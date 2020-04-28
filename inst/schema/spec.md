@@ -1,14 +1,13 @@
 This is all highly uncertain and liable to change!
 
-# Baseline
+# Options/settings
 
 ## GET /baseline/options
 Returns an object defining baseline options, and how they should be presented to the user. The [DataOptions](./DataOptions.schema.json) objects provided in the request for other endpoints represent selected values of these options. 
 
-Return schema: [BaselineOptions.schema.json](./BaselineOptions.schema.json)
+Schema: [DynamicFormOptions.schema.json](./DynamicFormOptions.schema.json)
 
 ### Example
-#### Response
 ```json
 {
  "controlSections": [
@@ -34,6 +33,14 @@ Return schema: [BaselineOptions.schema.json](./BaselineOptions.schema.json)
  ]
 }                    
 ```
+
+## GET /interventions/options
+Returns an object defining intervention options and how they should be presented to the user.
+
+Schema: [DynamicFormOptions.schema.json](./DynamicFormOptions.schema.json)
+
+### Example
+The schema is the same as for [baseline options](https://github.com/mrc-ide/mintr/blob/master/inst/schema/spec.md#example)
 
 # Graphs
 

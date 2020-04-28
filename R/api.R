@@ -11,6 +11,7 @@ api_build <- function() {
   pr$handle(endpoint_graph_prevalence_data())
   pr$handle(endpoint_table_impact_config())
   pr$handle(endpoint_table_impact_data())
+  pr$handle(endpoint_interventionoptions())
   pr
 }
 
@@ -32,7 +33,7 @@ api_build <- function() {
 endpoint_baseline_options <- function() {
   pkgapi::pkgapi_endpoint$new(
     "GET", "/baseline/options", target_baseline_options,
-    returning = pkgapi::pkgapi_returning_json("BaselineOptions.schema",
+    returning = pkgapi::pkgapi_returning_json("DynamicFormOptions.schema",
                                               schema_root()))
 }
 
@@ -95,4 +96,16 @@ endpoint_table_impact_data <- function() {
 target_table_impact_data <- function(options) {
   force(options)
   read_json(mintr_path("json/table_impact_data.json"))
+}
+
+endpoint_intervention_options <- function() {
+  root <- schema_root()
+  pkgapi::pkgapi_endpoint$new(
+    "GET", "/intervention/options", target_intervention_options,
+    returning = pkgapi::pkgapi_returning_json("DynamicFormOptions.schema", root))
+}
+
+
+target_intervention_options <- function() {
+  read_json(mintr_path("json/intervention_options.json"))
 }
