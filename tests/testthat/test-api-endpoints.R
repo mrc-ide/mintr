@@ -108,7 +108,7 @@ test_that("graph cost data", {
                           "procure_people_per_net" = 1.8,
                           "procure_buffer" = 7)
   res <- target_graph_cost_data(options)
-  expect(res, "json")
+  expect_is(res, "json")
   expect_identical(res,
                    read_json(mintr_path("json/graph_cost_effectiveness_data.json")))
   

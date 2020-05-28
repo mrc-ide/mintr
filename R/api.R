@@ -104,7 +104,7 @@ target_table_impact_data <- function(options) {
 endpoint_graph_cost_data <- function() {
   root <- schema_root()
   pkgapi::pkgapi_endpoint$new(
-    "POST", "graph/cost/data", target_graph_cost_data,
+    "POST", "/graph/cost/data", target_graph_cost_data,
     pkgapi::pkgapi_input_body_json("options", "DataOptions.schema", root),
     returning = pkgapi::pkgapi_returning_json("Data.schema", root)
   )
