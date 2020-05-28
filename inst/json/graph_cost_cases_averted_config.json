@@ -34,7 +34,7 @@
                   "id": "PBO",
                   "name": "Switch to Pyrethoid-PBO ITN",
                   "type": "scatter",
-                  "marker": {"color": "aquamarine", "size": 10},
+                  "marker": {"color": "turquoise", "size": 10},
                   "error_x": {
                       "type": "data",
                       "width": 0,
@@ -96,7 +96,14 @@
                   "tickvals": [0, 10 , 20],
                   "autorange": false,
                   "zeroline": false
-              }
+              },
+              "hoverlabel": {
+                  "namelength": -1
+              },
+              "mintcustom": {
+                  "hoverposition": "below"
+              },
+              "hovermode": "closest"
           }
 }
             
