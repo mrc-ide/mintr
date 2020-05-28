@@ -113,7 +113,7 @@ endpoint_graph_cost_data <- function() {
 
 target_graph_cost_data <- function(options) {
   force(options)
-  read_json(mintr_path("graph_cost_effectiveness_data.json"))
+  read_json(mintr_path("json/graph_cost_effectiveness_data.json"))
 }
 
 
