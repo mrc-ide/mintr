@@ -1,0 +1,109 @@
+{
+         "metadata": {
+              "x_col": "cases_averted",
+              "y_col": "cost",
+              "id_col": "intervention",
+              "format": "long"
+          },
+          "series": [
+              {
+                  "id": "none",
+                  "name": "No intervention",
+                  "type": "scatter",
+                  "marker": {"color": "grey", "size": 10},
+                  "error_x": {
+                      "type": "data",
+                      "width": 0,
+                      "col": "cases_averted_error_plus",
+                      "colminus": "cases_averted_error_minus"
+                  }
+              },
+              {
+                  "id": "ITN",
+                  "name": "Pyrethoid ITN",
+                  "type": "scatter",
+                  "marker": {"color": "blue", "size": 10},
+                  "error_x": {
+                      "type": "data",
+                      "width": 0,
+                      "col": "cases_averted_error_plus",
+                      "colminus": "cases_averted_error_minus"
+                  }
+              },
+              {
+                  "id": "PBO",
+                  "name": "Switch to Pyrethoid-PBO ITN",
+                  "type": "scatter",
+                  "marker": {"color": "turquoise", "size": 10},
+                  "error_x": {
+                      "type": "data",
+                      "width": 0,
+                      "col": "cases_averted_error_plus",
+                      "colminus": "cases_averted_error_minus"
+                  }
+              },
+              {
+                  "id": "IRS",
+                  "name": "Only IRS",
+                  "type": "scatter",
+                  "marker": {"color": "purple", "size": 10},
+                  "error_x": {
+                      "type": "data",
+                      "width": 0,
+                      "col": "cases_averted_error_plus",
+                      "colminus": "cases_averted_error_minus"
+                  }
+              },
+              {
+                  "id": "ITN-IRS",
+                  "name": "Add IRS to Pyrethoid ITN",
+                  "type": "scatter",
+                  "marker": {"color": "darkred", "size": 10},
+                  "error_x": {
+                      "type": "data",
+                      "width": 0,
+                      "col": "cases_averted_error_plus",
+                      "colminus": "cases_averted_error_minus"
+                  }
+              },
+              {
+                  "id": "PBO-IRS",
+                  "name": "Add IRS to Pyrethoid-PBO ITN",
+                  "type": "scatter",
+                  "marker": {"color": "orange", "size": 10},
+                  "error_x": {
+                      "type": "data",
+                      "width": 0,
+                      "col": "cases_averted_error_plus",
+                      "colminus": "cases_averted_error_minus"
+                  }
+              }
+          ],
+          "layout": {
+              "title": "Strategy costs over 3 years",
+              "xaxis": {
+                  "title": "Cases averted per 1,000 people across 3-years",
+                  "showline": true,
+                  "range": [-10, 800],
+                  "tickvals": [0, 100, 200, 300, 400, 500, 600, 700],
+                  "autorange": false,
+                  "zeroline": false
+              },
+              "yaxis": {
+                  "title": "Total costs ($10,000 USD)",
+                  "showline": true,
+                  "range": [-2, 30],
+                  "tickvals": [0, 10 , 20],
+                  "autorange": false,
+                  "zeroline": false
+              },
+              "hoverlabel": {
+                  "namelength": -1
+              },
+              "mintcustom": {
+                  "hoverposition": "below"
+              },
+              "hovermode": "closest"
+          }
+}
+            
