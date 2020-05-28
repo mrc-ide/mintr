@@ -100,6 +100,31 @@ test_that("table impact data", {
   expect_equal(res_api$body, res_endpoint$body)
 })
 
+
+test_that("graph cost data", {
+  options <- list("irs_future" = "80%",
+                          "spray_input" = 1,
+                          "biting_indoors" = "high",
+                          "procure_people_per_net" = 1.8,
+                          "procure_buffer" = 7)
+  res <- target_graph_cost_data(options)
+  expect(res, "json")
+  expect_identical(res,
+                   read_json(mintr_path("json/graph_cost_effectiveness_data.json")))
+  
+  endpoint <- endpoint_graph_cost_data()
+  res_endpoint <- endpoint$run(options)
+  expect_equal(res_endpoint$status_code, 200)
+  expect_equal(res_endpoint$content_type, "application/json")
+  expect_equal(res_endpoint$data, res)
+  
+  body <- jsonlite::toJSON(lapply(options, jsonlite::unbox))
+  res_api <- api_build()$request("POST", "/graph/cost/data", body = body)
+  expect_equal(res_api$status, 200)
+  expect_equal(res_api$body, res_endpoint$body)
+})
+
+
 test_that("intervention options", {
   res <- target_intervention_options()
   expect_is(res, "json")

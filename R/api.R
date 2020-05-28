@@ -11,6 +11,8 @@ api_build <- function() {
   pr$handle(endpoint_graph_prevalence_data())
   pr$handle(endpoint_table_impact_config())
   pr$handle(endpoint_table_impact_data())
+  pr$handle(endpoint_graph_cost_data())
+  #pr$handle(endpoint_graph_cost_cases_averted_config())
   pr$handle(endpoint_intervention_options())
   pr
 }
@@ -97,6 +99,23 @@ target_table_impact_data <- function(options) {
   force(options)
   read_json(mintr_path("json/table_impact_data.json"))
 }
+
+
+endpoint_graph_cost_data <- function() {
+  root <- schema_root()
+  pkgapi::pkgapi_endpoint$new(
+    "POST", "graph/cost/data", target_graph_cost_data,
+    pkgapi::pkgapi_input_body_json("options", "DataOptions.schema", root),
+    returning = pkgapi::pkgapi_returning_json("Data.schema", root)
+  )
+}
+
+
+target_graph_cost_data <- function(options) {
+  force(options)
+  read_json(mintr_path("graph_cost_effectiveness_data.json"))
+}
+
 
 endpoint_intervention_options <- function() {
   root <- schema_root()
