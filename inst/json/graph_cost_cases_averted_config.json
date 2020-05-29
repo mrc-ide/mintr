@@ -80,7 +80,7 @@
               }
           ],
           "layout": {
-              "title": "Strategy costs over 3 years",
+              "title": "Strategy costs over 3 years vs Cases averted",
               "xaxis": {
                   "title": "Cases averted per 1,000 people across 3-years",
                   "showline": true,
