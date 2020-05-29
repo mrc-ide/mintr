@@ -100,7 +100,7 @@ test_that("table impact data", {
   expect_equal(res_api$body, res_endpoint$body)
 })
 
-test_that("graph cost cases averted data", {
+test_that("graph cost cases averted config", {
   res <- target_graph_cost_cases_averted_config()
   expect_is(res, "json")
   expect_identical(res,
@@ -113,6 +113,24 @@ test_that("graph cost cases averted data", {
   expect_equal(res_endpoint$data, res)
   
   res_api <- api_build()$request("GET", "/graph/cost/cases-averted/config")
+  expect_equal(res_api$status, 200)
+  expect_equal(res_api$body, res_endpoint$body)
+})
+
+
+test_that("graph cost efficacy config", {
+  res <- target_graph_cost_efficacy_config()
+  expect_is(res, "json")
+  expect_identical(res,
+                   read_json(mintr_path("json/graph_cost_efficacy_config.json")))
+  
+  endpoint <- endpoint_graph_cost_efficacy_config()
+  res_endpoint <- endpoint$run()
+  expect_equal(res_endpoint$status_code, 200)
+  expect_equal(res_endpoint$content_type, "application/json")
+  expect_equal(res_endpoint$data, res)
+  
+  res_api <- api_build()$request("GET", "/graph/cost/efficacy/config")
   expect_equal(res_api$status, 200)
   expect_equal(res_api$body, res_endpoint$body)
 })
