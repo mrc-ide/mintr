@@ -1,0 +1,16 @@
+[
+  {"intervention": "Do nothing","net_use": 0, "irs_use": 0, "mean_cases_averted": 0, "cost": 0.083, "cost_increment": 0, "cost_per_case_averted": "Reference"},
+  {"intervention": "Standard ITN","net_use": 0, "irs_use": 0, "mean_cases_averted": 0, "cost": 0.378, "cost_increment": 0.294, "cost_per_case_averted": "-"},
+  {"intervention": "PBO ITN","net_use": 0, "irs_use": 0, "mean_cases_averted": 0, "cost": 0.433, "cost_increment": 0.35, "cost_per_case_averted": "-"},
+  {"intervention": "Only IRS","net_use": 0, "irs_use": 0, "mean_cases_averted": 0, "cost": 0.833, "cost_increment": 0.75, "cost_per_case_averted": "-"},
+  {"intervention": "Standard ITN + IRS","net_use": 0, "irs_use": 0, "mean_cases_averted": 0, "cost": 1.128, "cost_increment": 1.044, "cost_per_case_averted": "-"},
+  {"intervention": "PBO ITN + IRS","net_use": 0, "irs_use": 0, "mean_cases_averted": 0, "cost": 1.183, "cost_increment": 1.1, "cost_per_case_averted": "-"},
+  
+  {"intervention": "Do nothing","net_use": 0.9, "irs_use": 0.9, "mean_cases_averted": 0, "cost": 0.083, "cost_increment": 0, "cost_per_case_averted": "Reference"},
+  {"intervention": "Standard ITN","net_use": 0.9, "irs_use": 0.9, "mean_cases_averted": 90, "cost": 0.378, "cost_increment": 0.294, "cost_per_case_averted": 40.99},
+  {"intervention": "PBO ITN","net_use": 0.9, "irs_use": 0.9, "mean_cases_averted": 90, "cost": 0.433, "cost_increment": 0.35, "cost_per_case_averted": 47.12},
+  {"intervention": "Only IRS","net_use": 0.9, "irs_use": 0.9, "mean_cases_averted": 90, "cost": 0.833, "cost_increment": 0.75, "cost_per_case_averted": 89.56},
+  {"intervention": "Standard ITN + IRS","net_use": 0.9, "irs_use": 0.9, "mean_cases_averted": 90, "cost": 1.128, "cost_increment": 1.044, "cost_per_case_averted": 120.48},
+  {"intervention": "PBO ITN + IRS","net_use": 0.9, "irs_use": 0.9, "mean_cases_averted": 90, "cost": 1.183, "cost_increment": 1.1, "cost_per_case_averted": 126.4}
+  
+]
