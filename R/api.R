@@ -15,6 +15,7 @@ api_build <- function() {
   pr$handle(endpoint_table_cost_data())
   pr$handle(endpoint_graph_cost_data())
   pr$handle(endpoint_graph_cost_cases_averted_config())
+  pr$handle(endpoint_graph_cost_efficacy_config())
   pr$handle(endpoint_intervention_options())
   pr
 }
@@ -143,6 +144,19 @@ target_graph_cost_cases_averted_config <- function() {
   read_json(mintr_path("json/graph_cost_cases_averted_config.json"))
 }
  
+
+endpoint_graph_cost_efficacy_config <- function() {
+  pkgapi::pkgapi_endpoint$new(
+    "GET", "/graph/cost/efficacy/config", target_graph_cost_efficacy_config,
+    returning = pkgapi::pkgapi_returning_json("Graph.schema",
+                                              schema_root()))
+}
+
+
+target_graph_cost_efficacy_config <- function() {
+  read_json(mintr_path("json/graph_cost_efficacy_config.json"))
+}
+
 
 endpoint_graph_cost_data <- function() {
   root <- schema_root()
