@@ -11,6 +11,8 @@ api_build <- function() {
   pr$handle(endpoint_graph_prevalence_data())
   pr$handle(endpoint_table_impact_config())
   pr$handle(endpoint_table_impact_data())
+  pr$handle(endpoint_table_cost_config())
+  pr$handle(endpoint_table_cost_data())
   pr$handle(endpoint_graph_cost_data())
   pr$handle(endpoint_graph_cost_cases_averted_config())
   pr$handle(endpoint_intervention_options())
@@ -86,6 +88,19 @@ target_table_impact_config <- function() {
 }
 
 
+endpoint_table_cost_config <- function() {
+  pkgapi::pkgapi_endpoint$new(
+    "GET", "/table/cost/config", target_table_cost_config,
+    returning = pkgapi::pkgapi_returning_json("TableDefinition.schema",
+                                              schema_root()))
+}
+
+
+target_table_cost_config <- function() {
+  read_json(mintr_path("json/table_cost_config.json"))
+}
+
+
 endpoint_table_impact_data <- function() {
   root <- schema_root()
   pkgapi::pkgapi_endpoint$new(
@@ -98,6 +113,21 @@ endpoint_table_impact_data <- function() {
 target_table_impact_data <- function(options) {
   force(options)
   read_json(mintr_path("json/table_impact_data.json"))
+}
+
+
+endpoint_table_cost_data <- function() {
+  root <- schema_root()
+  pkgapi::pkgapi_endpoint$new(
+    "POST", "/table/cost/data", target_table_cost_data,
+    pkgapi::pkgapi_input_body_json("options", "DataOptions.schema", root),
+    returning = pkgapi::pkgapi_returning_json("Data.schema", root))
+}
+
+
+target_table_cost_data <- function(options) {
+  force(options)
+  read_json(mintr_path("json/table_cost_data.json"))
 }
 
 
