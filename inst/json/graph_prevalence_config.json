@@ -21,25 +21,43 @@
            }
     },
     "series": [
-         {
-             "id": "none",
-             "name": "No intervention",
-             "type": "lines",
-             "marker": {"color": "grey"}
-         },
-         {
-             "id": "ITN",
-             "name": "Pyrethoid ITN",
-             "type": "lines",
-             "marker": {"color": "blue"}
-         },
-         {
-             "id": "PBO",
-             "name": "Switch to Pyrethoid-PBO ITN",
-             "type": "lines",
-             "marker": {"color": "aquamarine"}
-         },
-         {
+        {
+            "id": "none",
+            "name": "No intervention",
+            "type": "lines",
+            "marker": {"color": "grey"}
+        },
+        {
+            "id": "llin",
+            "name": "Pyrethroid LLIN only",
+            "type": "lines",
+            "marker": {"color": "grey"}
+        },
+        {
+            "id": "irs",
+            "name": "IRS only",
+            "type": "lines",
+            "marker": {"color": "grey"}
+        },
+        {
+            "id": "irs-llin",
+            "name": "Pyrethroid LLIN with IRS",
+            "type": "lines",
+            "marker": {"color": "grey"}
+        },
+        {
+            "id": "llin-pbo",
+            "name": "Pyrethroid-PBO LLIN only",
+            "type": "lines",
+            "marker": {"color": "grey"}
+        },
+        {
+            "id": "irs-llin-pbo",
+            "name": "Pyrethroid-PBO LLIN with IRS",
+            "type": "lines",
+            "marker": {"color": "grey"}
+        },
+        {
              "x": [12, 12],
              "y": [0, 1],
              "line": {
