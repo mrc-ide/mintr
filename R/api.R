@@ -3,12 +3,11 @@ api_run <- function(port) {
 }
 
 
-api_build <- function() {
+api_build <- function(db) {
   pr <- pkgapi::pkgapi$new()
   pr$handle(endpoint_baseline_options())
-  pr$handle(endpoint_graph_prevalence_data())
+  pr$handle(endpoint_graph_prevalence_data(db))
   pr$handle(endpoint_graph_prevalence_config())
-  pr$handle(endpoint_graph_prevalence_data())
   pr$handle(endpoint_table_impact_config())
   pr$handle(endpoint_table_impact_data())
   pr$handle(endpoint_table_cost_config())
@@ -61,18 +60,21 @@ target_graph_prevalence_config <- function() {
 }
 
 
-endpoint_graph_prevalence_data <- function() {
+endpoint_graph_prevalence_data <- function(db) {
   root <- schema_root()
   pkgapi::pkgapi_endpoint$new(
-    "POST", "/graph/prevalence/data", target_graph_prevalence_data,
+    "POST", "/graph/prevalence/data",
+    target_graph_prevalence_data(db),
     pkgapi::pkgapi_input_body_json("options", "DataOptions.schema", root),
     returning = pkgapi::pkgapi_returning_json("Data.schema", root))
 }
 
 
-target_graph_prevalence_data <- function(options) {
-  force(options)
-  read_json(mintr_path("json/graph_prevalence_data.json"))
+target_graph_prevalence_data <- function(db) {
+  force(db)
+  function(options) {
+    db$get_prevalence(jsonlite::fromJSON(options))
+  }
 }
 
 
