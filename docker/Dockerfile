@@ -12,7 +12,8 @@ RUN install2.r --error \
         jsonvalidate \
         plumber \
         remotes \
-        testthat
+        testthat \
+        thor
 
 RUN installGithub.r \
         ropensci/jsonvalidate \
