@@ -9,3 +9,5 @@
 ^docker$
 ^buildkite$
 ^LICENSE\.md$
+^tests/testthat/.*\.db$
+^tests/testthat/.*\.db-lock$
