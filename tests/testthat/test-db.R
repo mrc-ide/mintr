@@ -35,3 +35,33 @@ test_that("throw error if accessing impossible data", {
   expect_error(db$get_prevalence(options),
                "No matching value 'really-high' for option 'bitingPeople'")
 })
+
+
+test_that("baseline options", {
+  opt <- mint_baseline_options()
+  expect_type(opt, "list")
+  expect_setequal(
+    names(opt),
+    c("seasonalityOfTransmission", "currentPrevalence", "bitingIndoors",
+      "bitingPeople", "levelOfResistance", "itnUsage", "sprayInput"))
+})
+
+
+test_that("index must conform to baseline options", {
+  index <- mint_baseline_options()
+  expect_error(
+    mint_db_check_index(index),
+    "Invalid value for 'names(index)':\n  - Missing: index",
+    fixed = TRUE)
+  expect_error(
+    mint_db_check_index(index[names(index) != "itnUsage"]),
+    "Invalid value for 'names(index)':\n  - Missing: itnUsage, index",
+    fixed = TRUE)
+
+  idx <- do.call(expand.grid, c(index, list(stringsAsFactors = FALSE)))
+  idx$index <- seq_len(nrow(idx))
+  expect_error(
+    mint_db_check_index(idx[1, ]),
+    "Invalid value for 'index$seasonalityOfTransmission'",
+    fixed = TRUE)
+})
