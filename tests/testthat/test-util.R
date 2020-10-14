@@ -21,3 +21,25 @@ test_that("assert_setequal gives useful messages", {
   expect_error(assert_setequal(x, c("a", "b", "c", "d")),
                "Invalid value for 'x':.*- Missing: d")
 })
+
+
+test_that("downloader does not create file on failed download", {
+  dest <- tempfile()
+  expect_error(
+    suppressWarnings(download_file("https://httpbin.org/status/500", dest,
+                                   quiet = TRUE)))
+  expect_false(file.exists(dest))
+})
+
+
+test_that("downloader can download a file", {
+  first <- "Zmlyc3QK"
+  second <- "c2Vjb25kCg=="
+  dest <- tempfile()
+  download_file(paste0("https://httpbin.org/base64/", first), dest,
+                quiet = TRUE)
+  expect_equal(readLines(dest), "first")
+  download_file(paste0("https://httpbin.org/base64/", second), dest,
+                quiet = TRUE)
+  expect_equal(readLines(dest), "second")
+})

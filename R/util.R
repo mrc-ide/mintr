@@ -50,3 +50,10 @@ assert_setequal <- function(values, expected,
     stop(paste(msg, collapse = "\n"), call. = FALSE)
   }
 }
+
+
+download_file <- function(url, dest) {
+  withCallingHandlers(
+    download.file(url, dest, mode = "wb"),
+    error = function(e) unlink(dest))
+}
