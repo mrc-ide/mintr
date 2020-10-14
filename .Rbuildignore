@@ -10,3 +10,4 @@
 ^buildkite$
 ^LICENSE\.md$
 ^tests/testthat/data$
+^import$
