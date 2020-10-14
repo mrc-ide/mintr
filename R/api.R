@@ -1,5 +1,5 @@
-api_run <- function(port) {
-  api_build()$run("0.0.0.0", port) # nocov
+api_run <- function(port, db) {
+  api_build(db)$run("0.0.0.0", port) # nocov
 }
 
 

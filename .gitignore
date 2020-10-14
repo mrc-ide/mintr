@@ -7,5 +7,4 @@ vignettes/*.html
 vignettes/*.R
 .V8history
 import
-tests/testthat/*.db
-tests/testthat/*.db-lock
+tests/testthat/data

@@ -52,8 +52,8 @@ assert_setequal <- function(values, expected,
 }
 
 
-download_file <- function(url, dest) {
+download_file <- function(url, dest, ...) {
   withCallingHandlers(
-    download.file(url, dest, mode = "wb"),
+    download.file(url, dest, mode = "wb", ...),
     error = function(e) unlink(dest))
 }

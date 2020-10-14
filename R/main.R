@@ -3,16 +3,18 @@ main_args <- function(args = commandArgs(TRUE)) {
   mintr [options]
 
 Options:
-  --port=PORT   Port to run on [default: 8888]"
+  --port=PORT   Port to run on [default: 8888]
+  --data=PATH   Path to the mintr data [default: data]"
   dat <- docopt::docopt(usage, args)
-  list(port = as.integer(dat$port))
+  list(port = as.integer(dat$port), data = dat$data)
 }
 
 
 main <- function(args = commandArgs(TRUE)) {
   opts <- main_args(args)
   port <- opts$port
-  api_run(port)
+  db <- mintr_open_db(opts$data)
+  api_run(port, db)
 }
 
 

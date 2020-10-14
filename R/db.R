@@ -98,3 +98,34 @@ mint_intervention <- function(net_use, irs_use, net_type) {
   i <- (net_use > 0) + (irs_use > 0) * 2 + (net_type == "pto") * 4 + 1
   intervention[i]
 }
+
+
+## Organise collecing the real data for use within the app. See the
+## notes in import/README.md for shipping the files out to the server
+## where they can be found.
+mintr_open_db <- function(path) {
+  dest <- file.path(path, "mintr.db")
+  if (!file.exists(path)) {
+    message("Downloading the data")
+    download_mintr_data(path)
+    message("Importing the data into the db")
+    mint_db_import(dest,
+                   readRDS(file.path(path, "index.rds")),
+                   readRDS(file.path(path, "prevalence.rds")))
+    message("Database ready")
+  }
+  mint_db$new(dest)
+}
+
+
+download_mintr_data <- function(dest, overwrite = FALSE) {
+  dir.create(dest, FALSE, TRUE)
+  files <- c("index.rds", "prevalence.rds")
+  base <- "https://mrcdata.dide.ic.ac.uk/mint/"
+  for (f in files) {
+    if (overwrite || !file.exists(file.path(dest, f))) {
+      download_file(paste0(base, f), file.path(dest, f))
+    }
+  }
+  dest
+}
