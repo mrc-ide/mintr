@@ -5,6 +5,7 @@ api_run <- function(port, db) {
 
 api_build <- function(db) {
   pr <- pkgapi::pkgapi$new()
+  pr$handle(endpoint_root())
   pr$handle(endpoint_baseline_options())
   pr$handle(endpoint_graph_prevalence_data(db))
   pr$handle(endpoint_graph_prevalence_config())
@@ -30,6 +31,19 @@ api_build <- function(db) {
 ## automate the creation of the endpoint functions from some
 ## annotations around the target functions, but that's a way off
 ## still.
+
+endpoint_root <- function() {
+  pkgapi::pkgapi_endpoint$new("GET",
+                              "/",
+                              target_root,
+                              returning = pkgapi::pkgapi_returning_json())
+}
+
+
+target_root <- function() {
+  jsonlite::unbox("Welcome to mintr")
+}
+
 
 ## At present these endpoints just return some sample responses
 ## directly from from inst/json - however, it's possible that the

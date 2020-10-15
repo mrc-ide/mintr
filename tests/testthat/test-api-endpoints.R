@@ -1,6 +1,23 @@
 context("api: endpoints")
 
 
+test_that("root endpoint", {
+  res <- target_root()
+  expect_equal(res, jsonlite::unbox("Welcome to mintr"))
+
+  endpoint <- endpoint_root()
+  res_endpoint <- endpoint$run()
+  expect_equal(res_endpoint$status_code, 200)
+  expect_equal(res_endpoint$content_type, "application/json")
+  expect_equal(res_endpoint$data, res)
+
+  api <- api_build(mintr_test_db())
+  res_api <- api$request("GET", "/")
+  expect_equal(res_api$status, 200)
+  expect_equal(res_api$body, res_endpoint$body)
+})
+
+
 test_that("baseline_options", {
   res <- target_baseline_options()
   expect_is(res, "json")
