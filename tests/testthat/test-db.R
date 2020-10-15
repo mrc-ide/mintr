@@ -65,3 +65,28 @@ test_that("index must conform to baseline options", {
     "Invalid value for 'index$seasonalityOfTransmission'",
     fixed = TRUE)
 })
+
+
+test_that("prevelance must conform", {
+  index <- readRDS("data/index.rds")
+  prevalence <- readRDS("data/prevalence.rds")
+
+  expect_error(
+    mint_db_check_prevalence(index, prevalence[names(prevalence) != "irsUse"]),
+    "Invalid value for 'names(prevalence)':\n  - Missing: irsUse",
+    fixed = TRUE)
+
+  expect_silent(mint_db_check_prevalence(index, prevalence))
+
+  i <- which(prevalence$intervention == "IRS only")[10]
+
+  prevalence$intervention[i] <- "other"
+  expect_error(
+    mint_db_check_prevalence(index, prevalence),
+    "Interventions do not match expected values")
+
+  prevalence$intervention[i] <- "No intervention"
+  expect_error(
+    mint_db_check_prevalence(index, prevalence),
+    "Interventions do not match expected values")
+})

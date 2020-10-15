@@ -80,6 +80,12 @@ mint_db_check_prevalence <- function(index, prevalence) {
             "index")
   assert_setequal(names(prevalence), cols)
   assert_setequal(prevalence$index, index$index)
+
+  expected <- mint_intervention(
+    prevalence$netUse, prevalence$irsUse, prevalence$netType)
+  if (!identical(expected, prevalence$intervention)) {
+    stop("Interventions do not match expected values")
+  }
 }
 
 
