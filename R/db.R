@@ -105,7 +105,7 @@ mint_intervention <- function(net_use, irs_use, net_type) {
 ## where they can be found.
 mintr_open_db <- function(path) {
   dest <- file.path(path, "mintr.db")
-  if (!file.exists(path)) {
+  if (!file.exists(dest)) {
     message("Downloading the data")
     download_mintr_data(path)
     message("Importing the data into the db")
