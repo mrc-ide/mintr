@@ -19,9 +19,12 @@ RUN installGithub.r \
         ropensci/jsonvalidate \
         reside-ic/pkgapi
 
+WORKDIR /mintr
+
 COPY . /src
 RUN R CMD INSTALL /src && \
-    Rscript -e 'mintr:::write_script("/usr/bin")'
+        Rscript -e 'mintr:::write_script("/usr/bin")' && \
+        Rscript -e 'mintr:::download_mintr_data("data")'
 
 EXPOSE 8888
 
