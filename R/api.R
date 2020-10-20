@@ -1,14 +1,14 @@
-api_run <- function(port) {
-  api_build()$run("0.0.0.0", port) # nocov
+api_run <- function(port, db) {
+  api_build(db)$run("0.0.0.0", port) # nocov
 }
 
 
-api_build <- function() {
+api_build <- function(db) {
   pr <- pkgapi::pkgapi$new()
+  pr$handle(endpoint_root())
   pr$handle(endpoint_baseline_options())
-  pr$handle(endpoint_graph_prevalence_data())
+  pr$handle(endpoint_graph_prevalence_data(db))
   pr$handle(endpoint_graph_prevalence_config())
-  pr$handle(endpoint_graph_prevalence_data())
   pr$handle(endpoint_table_impact_config())
   pr$handle(endpoint_table_impact_data())
   pr$handle(endpoint_table_cost_config())
@@ -31,6 +31,19 @@ api_build <- function() {
 ## automate the creation of the endpoint functions from some
 ## annotations around the target functions, but that's a way off
 ## still.
+
+endpoint_root <- function() {
+  pkgapi::pkgapi_endpoint$new("GET",
+                              "/",
+                              target_root,
+                              returning = pkgapi::pkgapi_returning_json())
+}
+
+
+target_root <- function() {
+  jsonlite::unbox("Welcome to mintr")
+}
+
 
 ## At present these endpoints just return some sample responses
 ## directly from from inst/json - however, it's possible that the
@@ -61,18 +74,21 @@ target_graph_prevalence_config <- function() {
 }
 
 
-endpoint_graph_prevalence_data <- function() {
+endpoint_graph_prevalence_data <- function(db) {
   root <- schema_root()
   pkgapi::pkgapi_endpoint$new(
-    "POST", "/graph/prevalence/data", target_graph_prevalence_data,
+    "POST", "/graph/prevalence/data",
+    target_graph_prevalence_data(db),
     pkgapi::pkgapi_input_body_json("options", "DataOptions.schema", root),
     returning = pkgapi::pkgapi_returning_json("Data.schema", root))
 }
 
 
-target_graph_prevalence_data <- function(options) {
-  force(options)
-  read_json(mintr_path("json/graph_prevalence_data.json"))
+target_graph_prevalence_data <- function(db) {
+  force(db)
+  function(options) {
+    db$get_prevalence(jsonlite::fromJSON(options))
+  }
 }
 
 

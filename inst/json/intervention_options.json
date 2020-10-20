@@ -113,7 +113,6 @@
                             "helpText": "Explore the impact of different ITNs given the expected use of nets by the community (the percentage of people sleeping under ITN). A single expected usage can be selected to represent expected ITN use immediately after a mass distribution campaign. The impact of standard pyrethroid only ITNs or PBO ITNs are show (only one net type is implemented for any single scenario).",
                             "options": [
                                 {"id": "0", "label": "0% usage"},
-                                {"id": "0.1", "label": "10% usage"},
                                 {"id": "0.2", "label": "20% usage"},
                                 {"id": "0.3", "label": "30% usage"},
                                 {"id": "0.4", "label": "40% usage"},

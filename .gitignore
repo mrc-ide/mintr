@@ -6,3 +6,5 @@ inst/doc
 vignettes/*.html
 vignettes/*.R
 .V8history
+import
+tests/testthat/data

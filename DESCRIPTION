@@ -15,7 +15,8 @@ LazyData: true
 Imports:
     docopt,
     jsonlite,
-    pkgapi
+    pkgapi,
+    thor
 Suggests:
     mockery,
     testthat

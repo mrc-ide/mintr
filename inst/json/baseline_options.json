@@ -19,7 +19,7 @@
                     {
                         "controls": [
                             {
-                                "name": "seasonality",
+                                "name": "seasonalityOfTransmission",
                                 "label": "Seasonality of transmission",
                                 "type": "select",
                                 "required": true,
@@ -35,7 +35,7 @@
                     {
                         "controls": [
                             {
-                                "name": "prevalence",
+                                "name": "currentPrevalence",
                                 "label": "Current malaria prevalence",
                                 "type": "select",
                                 "required": true,
@@ -57,7 +57,7 @@
                     {
                         "controls": [
                             {
-                                "name": "biting_indoors",
+                                "name": "bitingIndoors",
                                 "label": "Preference for biting indoors",
                                 "type": "select",
                                 "required": true,
@@ -73,7 +73,7 @@
                     {
                         "controls": [
                             {
-                                "name": "anthrophilic",
+                                "name": "bitingPeople",
                                 "label": "Preference for biting people",
                                 "type": "select",
                                 "required": true,
@@ -89,19 +89,19 @@
                     {
                         "controls": [
                             {
-                                "name": "resistance",
+                                "name": "levelOfResistance",
                                 "label": "Level of pyrethoid resistance",
                                 "type": "select",
                                 "required": true,
-                                "value": "0",
+                                "value": "0%",
                                 "helpText": "Mosquito survival in 24-hour WHO discriminatory dose bioassays.<br/>0% indicates all mosquitoes die and are susceptible to the pyrethroid insecticide in ITNs.<br/>100% indicates that no mosquitoes die or are susceptible to the pyrethroid insecticide in ITNs.<br/>Select the ranges that best represent the district. For example, if the district has susceptibility bioassay test estimates that range from 23% to 42% of mosquitoes being killed, then explore both 60% and 80% pyrethroid resistance scenarios.",
                                 "options": [
-                                    {"id": "0", "label": "0"},
-                                    {"id": "0.2", "label": "20%"},
-                                    {"id": "0.4", "label": "40%"},
-                                    {"id": "0.6", "label": "60%"},
-                                    {"id": "0.8", "label": "80%"},
-                                    {"id": "1", "label": "100%"}
+                                    {"id": "0%", "label": "0%"},
+                                    {"id": "20%", "label": "20%"},
+                                    {"id": "40%", "label": "40%"},
+                                    {"id": "60%", "label": "60%"},
+                                    {"id": "80%", "label": "80%"},
+                                    {"id": "100%", "label": "100%"}
                                 ]
                             }
                         ]
@@ -130,18 +130,18 @@
                     {
                         "controls": [
                             {
-                                "name": "net",
+                                "name": "itnUsage",
                                 "label": "ITN population usage in last survey (%)",
                                 "type": "select",
                                 "required": true,
-                                "value": "0",
+                                "value": "0%",
                                 "helpText": "The current endemicity of a zone is partly determined by the performance and quantity of vector control leading up to now. This is required to approximate the efficacy of interventions moving forward.",
                                 "options": [
-                                    {"id": "0", "label": "0% usage"},
-                                    {"id": "0.2", "label": "20% usage"},
-                                    {"id": "0.4", "label": "40% usage"},
-                                    {"id": "0.6", "label": "60% usage"},
-                                    {"id": "0.8", "label": "80% usage"}
+                                    {"id": "0%", "label": "0% usage"},
+                                    {"id": "20%", "label": "20% usage"},
+                                    {"id": "40%", "label": "40% usage"},
+                                    {"id": "60%", "label": "60% usage"},
+                                    {"id": "80%", "label": "80% usage"}
                                 ]
                             }
                         ]
@@ -149,15 +149,15 @@
                     {
                         "controls": [
                             {
-                                "name": "irs",
+                                "name": "sprayInput",
                                 "label": "What was the estimated coverage of spray campaign (last year)",
                                 "type": "select",
                                 "required": true,
-                                "value": "0",
+                                "value": "0%",
                                 "helpText": "If IRS was not used in the past year, select 0% coverage",
                                 "options": [
-                                    {"id": "0", "label": "0% coverage"},
-                                    {"id": "0.8", "label": "80% coverage"}
+                                    {"id": "0%", "label": "0% coverage"},
+                                    {"id": "80%", "label": "80% coverage"}
                                 ]
                             }
                         ]

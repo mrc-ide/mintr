@@ -1,19 +1,54 @@
 context("api: endpoints")
 
 
+test_that("root endpoint", {
+  res <- target_root()
+  expect_equal(res, jsonlite::unbox("Welcome to mintr"))
+
+  endpoint <- endpoint_root()
+  res_endpoint <- endpoint$run()
+  expect_equal(res_endpoint$status_code, 200)
+  expect_equal(res_endpoint$content_type, "application/json")
+  expect_equal(res_endpoint$data, res)
+
+  api <- api_build(mintr_test_db())
+  res_api <- api$request("GET", "/")
+  expect_equal(res_api$status, 200)
+  expect_equal(res_api$body, res_endpoint$body)
+})
+
+
+test_that("baseline options have valid defaults", {
+  res <- target_baseline_options()
+  dat <- jsonlite::fromJSON(res, FALSE)
+
+  for (section in dat$controlSections) {
+    for (group in section$controlGroups) {
+      for (control in group$controls) {
+        if (control$type == "select") {
+          valid <- vcapply(control$options, "[[", "id")
+          expect_true(control$value %in% valid)
+        }
+      }
+    }
+  }
+})
+
+
 test_that("baseline_options", {
   res <- target_baseline_options()
   expect_is(res, "json")
   expect_identical(res,
                    read_json(mintr_path("json/baseline_options.json")))
-  
+
   endpoint <- endpoint_baseline_options()
   res_endpoint <- endpoint$run()
   expect_equal(res_endpoint$status_code, 200)
   expect_equal(res_endpoint$content_type, "application/json")
   expect_equal(res_endpoint$data, res)
-  
-  res_api <- api_build()$request("GET", "/baseline/options")
+
+  api <- api_build(mintr_test_db())
+  res_api <- api$request("GET", "/baseline/options")
   expect_equal(res_api$status, 200)
   expect_equal(res_api$body, res_endpoint$body)
 })
@@ -31,30 +66,38 @@ test_that("graph prevalence config", {
   expect_equal(res_endpoint$content_type, "application/json")
   expect_equal(res_endpoint$data, res)
 
-  res_api <- api_build()$request("GET", "/graph/prevalence/config")
+  api <- api_build(mintr_test_db())
+  res_api <- api$request("GET", "/graph/prevalence/config")
   expect_equal(res_api$status, 200)
   expect_equal(res_api$body, res_endpoint$body)
 })
 
 
 test_that("graph prevalence data", {
-  options <- list("irs_future" = "80%",
-                  "sprayInput" = 1,
-                  "biting_indoors" = "high",
-                  "population" = 1000)
-  res <- target_graph_prevalence_data(options)
-  expect_is(res, "json")
-  expect_identical(res,
-                   read_json(mintr_path("json/graph_prevalence_data.json")))
+  options <- list(population = 1000,
+                  metabolic = "yes",
+                  seasonalityOfTransmission = "seasonal",
+                  currentPrevalence = "med",
+                  bitingIndoors = "high",
+                  bitingPeople = "high",
+                  levelOfResistance = "80%",
+                  itnUsage = "20%",
+                  sprayInput = "0%")
+  json <- jsonlite::toJSON(lapply(options, jsonlite::unbox))
 
-  endpoint <- endpoint_graph_prevalence_data()
-  res_endpoint <- endpoint$run(options)
+  db <- mintr_test_db()
+  res <- target_graph_prevalence_data(db)(json)
+  expect_equal(res, db$get_prevalence(options))
+
+  endpoint <- endpoint_graph_prevalence_data(db)
+  res_endpoint <- endpoint$run(json)
   expect_equal(res_endpoint$status_code, 200)
   expect_equal(res_endpoint$content_type, "application/json")
   expect_equal(res_endpoint$data, res)
 
-  body <- jsonlite::toJSON(lapply(options, jsonlite::unbox))
-  res_api <- api_build()$request("POST", "/graph/prevalence/data", body = body)
+  api <- api_build(db)
+  res_api <- api$request("POST", "/graph/prevalence/data", body = json)
+
   expect_equal(res_api$status, 200)
   expect_equal(res_api$body, res_endpoint$body)
 })
@@ -72,7 +115,8 @@ test_that("table cost config", {
   expect_equal(res_endpoint$content_type, "application/json")
   expect_equal(res_endpoint$data, res)
 
-  res_api <- api_build()$request("GET", "/table/cost/config")
+  api <- api_build(mintr_test_db())
+  res_api <- api$request("GET", "/table/cost/config")
   expect_equal(res_api$status, 200)
   expect_equal(res_api$body, res_endpoint$body)
 })
@@ -83,14 +127,15 @@ test_that("table impact config", {
   expect_is(res, "json")
   expect_identical(res,
                    read_json(mintr_path("json/table_impact_config.json")))
-  
+
   endpoint <- endpoint_table_impact_config()
   res_endpoint <- endpoint$run()
   expect_equal(res_endpoint$status_code, 200)
   expect_equal(res_endpoint$content_type, "application/json")
   expect_equal(res_endpoint$data, res)
-  
-  res_api <- api_build()$request("GET", "/table/impact/config")
+
+  api <- api_build(mintr_test_db())
+  res_api <- api$request("GET", "/table/impact/config")
   expect_equal(res_api$status, 200)
   expect_equal(res_api$body, res_endpoint$body)
 })
@@ -113,7 +158,8 @@ test_that("table impact data", {
   expect_equal(res_endpoint$data, res)
 
   body <- jsonlite::toJSON(lapply(options, jsonlite::unbox))
-  res_api <- api_build()$request("POST", "/table/impact/data", body = body)
+  api <- api_build(mintr_test_db())
+  res_api <- api$request("POST", "/table/impact/data", body = body)
   expect_equal(res_api$status, 200)
   expect_equal(res_api$body, res_endpoint$body)
 })
@@ -127,15 +173,16 @@ test_that("table cost data", {
   expect_is(res, "json")
   expect_identical(res,
                    read_json(mintr_path("json/table_cost_data.json")))
-  
+
   endpoint <- endpoint_table_cost_data()
   res_endpoint <- endpoint$run(options)
   expect_equal(res_endpoint$status_code, 200)
   expect_equal(res_endpoint$content_type, "application/json")
   expect_equal(res_endpoint$data, res)
-  
+
   body <- jsonlite::toJSON(lapply(options, jsonlite::unbox))
-  res_api <- api_build()$request("POST", "/table/cost/data", body = body)
+  api <- api_build(mintr_test_db())
+  res_api <- api$request("POST", "/table/cost/data", body = body)
   expect_equal(res_api$status, 200)
   expect_equal(res_api$body, res_endpoint$body)
 })
@@ -146,14 +193,15 @@ test_that("graph cost cases averted config", {
   expect_is(res, "json")
   expect_identical(res,
                    read_json(mintr_path("json/graph_cost_cases_averted_config.json")))
-  
+
   endpoint <- endpoint_graph_cost_cases_averted_config()
   res_endpoint <- endpoint$run()
   expect_equal(res_endpoint$status_code, 200)
   expect_equal(res_endpoint$content_type, "application/json")
   expect_equal(res_endpoint$data, res)
-  
-  res_api <- api_build()$request("GET", "/graph/cost/cases-averted/config")
+
+  api <- api_build(mintr_test_db())
+  res_api <- api$request("GET", "/graph/cost/cases-averted/config")
   expect_equal(res_api$status, 200)
   expect_equal(res_api$body, res_endpoint$body)
 })
@@ -164,14 +212,15 @@ test_that("graph cost efficacy config", {
   expect_is(res, "json")
   expect_identical(res,
                    read_json(mintr_path("json/graph_cost_efficacy_config.json")))
-  
+
   endpoint <- endpoint_graph_cost_efficacy_config()
   res_endpoint <- endpoint$run()
   expect_equal(res_endpoint$status_code, 200)
   expect_equal(res_endpoint$content_type, "application/json")
   expect_equal(res_endpoint$data, res)
-  
-  res_api <- api_build()$request("GET", "/graph/cost/efficacy/config")
+
+  api <- api_build(mintr_test_db())
+  res_api <- api$request("GET", "/graph/cost/efficacy/config")
   expect_equal(res_api$status, 200)
   expect_equal(res_api$body, res_endpoint$body)
 })
@@ -187,15 +236,16 @@ test_that("graph cost data", {
   expect_is(res, "json")
   expect_identical(res,
                    read_json(mintr_path("json/graph_cost_effectiveness_data.json")))
-  
+
   endpoint <- endpoint_graph_cost_data()
   res_endpoint <- endpoint$run(options)
   expect_equal(res_endpoint$status_code, 200)
   expect_equal(res_endpoint$content_type, "application/json")
   expect_equal(res_endpoint$data, res)
-  
+
   body <- jsonlite::toJSON(lapply(options, jsonlite::unbox))
-  res_api <- api_build()$request("POST", "/graph/cost/data", body = body)
+  api <- api_build(mintr_test_db())
+  res_api <- api$request("POST", "/graph/cost/data", body = body)
   expect_equal(res_api$status, 200)
   expect_equal(res_api$body, res_endpoint$body)
 })
@@ -213,7 +263,8 @@ test_that("intervention options", {
   expect_equal(res_endpoint$content_type, "application/json")
   expect_equal(res_endpoint$data, res)
 
-  res_api <- api_build()$request("GET", "/intervention/options")
+  api <- api_build(mintr_test_db())
+  res_api <- api$request("GET", "/intervention/options")
   expect_equal(res_api$status, 200)
   expect_equal(res_api$body, res_endpoint$body)
 })
