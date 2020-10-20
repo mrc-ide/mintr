@@ -20,6 +20,27 @@ test_that("Can create db", {
 })
 
 
+test_that("can ignore some keys", {
+  options <- list(seasonalityOfTransmission = "seasonal",
+                  currentPrevalence = "med",
+                  bitingIndoors = "high",
+                  bitingPeople = "low",
+                  levelOfResistance = "80%",
+                  itnUsage = "20%",
+                  sprayInput = "0%")
+  db <- mintr_test_db()
+  expect_identical(
+    db$get_prevalence(c(options, population = 1000)),
+    db$get_prevalence(options))
+  expect_identical(
+    db$get_prevalence(c(options, population = 1000, metabolic = "yes")),
+    db$get_prevalence(options))
+  expect_error(
+    db$get_prevalence(c(options, population = 1000, meta = "yes")),
+    "Unexpected: meta")
+})
+
+
 test_that("throw error if accessing impossible data", {
   db <- mintr_test_db()
   expect_error(db$get_prevalence(list()),
@@ -40,15 +61,17 @@ test_that("throw error if accessing impossible data", {
 test_that("baseline options", {
   opt <- mint_baseline_options()
   expect_type(opt, "list")
+  expect_setequal(names(opt), c("index", "ignore"))
   expect_setequal(
-    names(opt),
+    names(opt$index),
     c("seasonalityOfTransmission", "currentPrevalence", "bitingIndoors",
       "bitingPeople", "levelOfResistance", "itnUsage", "sprayInput"))
+  expect_setequal(opt$ignore, c("population", "metabolic"))
 })
 
 
 test_that("index must conform to baseline options", {
-  index <- mint_baseline_options()
+  index <- mint_baseline_options()$index
   expect_error(
     mint_db_check_index(index),
     "Invalid value for 'names(index)':\n  - Missing: index",

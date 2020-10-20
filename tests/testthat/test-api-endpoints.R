@@ -74,7 +74,9 @@ test_that("graph prevalence config", {
 
 
 test_that("graph prevalence data", {
-  options <- list(seasonalityOfTransmission = "seasonal",
+  options <- list(population = 1000,
+                  metabolic = "yes",
+                  seasonalityOfTransmission = "seasonal",
                   currentPrevalence = "med",
                   bitingIndoors = "high",
                   bitingPeople = "high",

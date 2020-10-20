@@ -2,6 +2,7 @@ mint_db <- R6::R6Class(
   "mint_db",
   private = list(
     index = NULL,
+    ignore = NULL,
     db = NULL,
     baseline = NULL
   ),
@@ -11,12 +12,14 @@ mint_db <- R6::R6Class(
                                   subdir = FALSE)
       private$index <- unserialize(private$db$get("index"))
       private$baseline <- setdiff(names(private$index), "index")
+      private$ignore <- unserialize(private$db$get("ignore"))
     },
 
     get_prevalence = function(options) {
-      assert_setequal(names(options), private$baseline)
+      nms <- setdiff(names(options), private$ignore)
+      assert_setequal(nms, private$baseline, "names(options)")
       valid <- rep(TRUE, nrow(private$index))
-      for (i in names(options)) {
+      for (i in nms) {
         valid <- valid & options[[i]] == private$index[[i]]
         if (!any(valid)) {
           stop(sprintf("No matching value '%s' for option '%s'",
@@ -35,26 +38,30 @@ mint_baseline_options <- function() {
   path <- mintr_path("json/baseline_options.json")
   baseline <- jsonlite::fromJSON(path, FALSE)
   index <- list()
+  ignore <- character(0)
   for (section in baseline$controlSections) {
     for (group in section$controlGroups) {
       for (control in group$controls) {
         if (control$type == "select" && control$name != "metabolic") {
           index[[control$name]] <- vcapply(control$options, "[[", "id")
+        } else {
+          ignore <- c(ignore, control$name)
         }
       }
     }
   }
-  index
+  list(index = index, ignore = ignore)
 }
 
 
 mint_db_import <- function(path, index, prevalence) {
-  mint_db_check_index(index)
+  ignore <- mint_db_check_index(index)
   mint_db_check_prevalence(index, prevalence)
 
   unlink(path, recursive = TRUE)
   db <- thor::mdb_env(path, mapsize = 4e9, subdir = FALSE)
   db$put("index", object_to_bin(index))
+  db$put("ignore", object_to_bin(ignore))
 
   ## Prevalence:
   idx <- split(seq_len(nrow(prevalence)), prevalence$index)
@@ -68,10 +75,11 @@ mint_db_import <- function(path, index, prevalence) {
 
 mint_db_check_index <- function(index) {
   baseline <- mint_baseline_options()
-  assert_setequal(names(index), c(names(baseline), "index"))
-  for (i in names(baseline)) {
-    assert_setequal(index[[i]], baseline[[i]], sprintf("index$%s", i))
+  assert_setequal(names(index), c(names(baseline$index), "index"))
+  for (i in names(baseline$index)) {
+    assert_setequal(index[[i]], baseline$index[[i]], sprintf("index$%s", i))
   }
+  baseline$ignore
 }
 
 
