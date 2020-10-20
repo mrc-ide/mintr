@@ -93,7 +93,7 @@
                                 "label": "Level of pyrethoid resistance",
                                 "type": "select",
                                 "required": true,
-                                "value": "0",
+                                "value": "0%",
                                 "helpText": "Mosquito survival in 24-hour WHO discriminatory dose bioassays.<br/>0% indicates all mosquitoes die and are susceptible to the pyrethroid insecticide in ITNs.<br/>100% indicates that no mosquitoes die or are susceptible to the pyrethroid insecticide in ITNs.<br/>Select the ranges that best represent the district. For example, if the district has susceptibility bioassay test estimates that range from 23% to 42% of mosquitoes being killed, then explore both 60% and 80% pyrethroid resistance scenarios.",
                                 "options": [
                                     {"id": "0%", "label": "0%"},
@@ -134,7 +134,7 @@
                                 "label": "ITN population usage in last survey (%)",
                                 "type": "select",
                                 "required": true,
-                                "value": "0",
+                                "value": "0%",
                                 "helpText": "The current endemicity of a zone is partly determined by the performance and quantity of vector control leading up to now. This is required to approximate the efficacy of interventions moving forward.",
                                 "options": [
                                     {"id": "0%", "label": "0% usage"},
@@ -153,7 +153,7 @@
                                 "label": "What was the estimated coverage of spray campaign (last year)",
                                 "type": "select",
                                 "required": true,
-                                "value": "0",
+                                "value": "0%",
                                 "helpText": "If IRS was not used in the past year, select 0% coverage",
                                 "options": [
                                     {"id": "0%", "label": "0% coverage"},

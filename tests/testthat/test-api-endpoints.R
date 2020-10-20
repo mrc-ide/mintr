@@ -18,6 +18,23 @@ test_that("root endpoint", {
 })
 
 
+test_that("baseline options have valid defaults", {
+  res <- target_baseline_options()
+  dat <- jsonlite::fromJSON(res, FALSE)
+
+  for (section in dat$controlSections) {
+    for (group in section$controlGroups) {
+      for (control in group$controls) {
+        if (control$type == "select") {
+          valid <- vcapply(control$options, "[[", "id")
+          expect_true(control$value %in% valid)
+        }
+      }
+    }
+  }
+})
+
+
 test_that("baseline_options", {
   res <- target_baseline_options()
   expect_is(res, "json")
