@@ -16,8 +16,8 @@
            "yaxis": {
                "title": "prevalence (%)",
                "showline": true,
-               "range": [0, 1],
-               "autorange": false
+               "autorange": true,
+               "tickformat": ",.0%"
            }
     },
     "series": [
@@ -31,31 +31,31 @@
             "id": "llin",
             "name": "Pyrethroid LLIN only",
             "type": "lines",
-            "marker": {"color": "grey"}
+            "marker": {"color": "blue"}
         },
         {
             "id": "irs",
             "name": "IRS only",
             "type": "lines",
-            "marker": {"color": "grey"}
+            "marker": {"color": "purple"}
         },
         {
             "id": "irs-llin",
             "name": "Pyrethroid LLIN with IRS",
             "type": "lines",
-            "marker": {"color": "grey"}
+            "marker": {"color": "darkred"}
         },
         {
             "id": "llin-pbo",
             "name": "Pyrethroid-PBO LLIN only",
             "type": "lines",
-            "marker": {"color": "grey"}
+            "marker": {"color": "turquoise"}
         },
         {
             "id": "irs-llin-pbo",
             "name": "Pyrethroid-PBO LLIN with IRS",
             "type": "lines",
-            "marker": {"color": "grey"}
+            "marker": {"color": "orange"}
         },
         {
              "x": [12, 12],
