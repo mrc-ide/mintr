@@ -101,7 +101,7 @@ test_that("prevelance must conform", {
 
   expect_silent(mint_db_check_prevalence(index, prevalence))
 
-  i <- which(prevalence$intervention == "IRS only")[10]
+  i <- which(prevalence$intervention == "irs")[10]
 
   prevalence$intervention[i] <- "other"
   expect_error(
