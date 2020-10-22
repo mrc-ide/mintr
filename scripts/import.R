@@ -75,6 +75,17 @@ tr <- c(netUse = "switch_nets", irsUse = "switch_irs", netType = "NET_TYPE")
 prevalence <- rename(prevalence, unname(tr), names(tr))
 prevalence$netType <- relevel(prevalence$netType, c(std = 1, pto = 2))
 
+prevalence_config <-
+  jsonlite::read_json("inst/json/graph_prevalence_config.json")
+prevalence_map <- character()
+for (x in prevalence_config$series) {
+  if (!is.null(x$id)) {
+    prevalence_map[[x$id]] <- x$name
+  }
+}
+
+prevalence$intervention <- relevel(prevalence$intervention, prevalence_map)
+
 saveRDS(index, file.path(path_import, "index.rds"))
 saveRDS(prevalence, file.path(path_import, "prevalence.rds"))
 
