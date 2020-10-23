@@ -73,18 +73,18 @@ test_that("baseline options", {
 test_that("index must conform to baseline options", {
   index <- mint_baseline_options()$index
   expect_error(
-    mint_db_check_index(index),
+    mintr_db_check_index(index),
     "Invalid value for 'names(index)':\n  - Missing: index",
     fixed = TRUE)
   expect_error(
-    mint_db_check_index(index[names(index) != "itnUsage"]),
+    mintr_db_check_index(index[names(index) != "itnUsage"]),
     "Invalid value for 'names(index)':\n  - Missing: itnUsage, index",
     fixed = TRUE)
 
   idx <- do.call(expand.grid, c(index, list(stringsAsFactors = FALSE)))
   idx$index <- seq_len(nrow(idx))
   expect_error(
-    mint_db_check_index(idx[1, ]),
+    mintr_db_check_index(idx[1, ]),
     "Invalid value for 'index$seasonalityOfTransmission'",
     fixed = TRUE)
 })
@@ -95,21 +95,21 @@ test_that("prevelance must conform", {
   prevalence <- readRDS("data/prevalence.rds")
 
   expect_error(
-    mint_db_check_prevalence(index, prevalence[names(prevalence) != "irsUse"]),
+    mintr_db_check_prevalence(index, prevalence[names(prevalence) != "irsUse"]),
     "Invalid value for 'names(prevalence)':\n  - Missing: irsUse",
     fixed = TRUE)
 
-  expect_silent(mint_db_check_prevalence(index, prevalence))
+  expect_silent(mintr_db_check_prevalence(index, prevalence))
 
   i <- which(prevalence$intervention == "irs")[10]
 
   prevalence$intervention[i] <- "other"
   expect_error(
-    mint_db_check_prevalence(index, prevalence),
+    mintr_db_check_prevalence(index, prevalence),
     "Interventions do not match expected values")
 
   prevalence$intervention[i] <- "No intervention"
   expect_error(
-    mint_db_check_prevalence(index, prevalence),
+    mintr_db_check_prevalence(index, prevalence),
     "Interventions do not match expected values")
 })

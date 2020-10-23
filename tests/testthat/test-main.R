@@ -14,7 +14,7 @@ test_that("cli can call api", {
 
   mockery::expect_called(mock_api, 1)
   expect_equal(mockery::mock_args(mock_api)[[1]][[1]], 1234L)
-  expect_s3_class(mockery::mock_args(mock_api)[[1]][[2]], "mint_db")
+  expect_s3_class(mockery::mock_args(mock_api)[[1]][[2]], "mintr_db")
 })
 
 
