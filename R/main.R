@@ -13,7 +13,7 @@ Options:
 main <- function(args = commandArgs(TRUE)) {
   opts <- main_args(args)
   port <- opts$port
-  db <- mintr_open_db(opts$data)
+  db <- mintr_db_open(opts$data)
   api_run(port, db)
 }
 

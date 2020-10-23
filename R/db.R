@@ -112,8 +112,3 @@ mint_intervention <- function(net_use, irs_use, net_type) {
   i <- (net_use > 0) + (irs_use > 0) * 2 + (net_type == "pto") * 4 + 1
   intervention[i]
 }
-
-
-mintr_open_db <- function(path) {
-  mintr_db_init("mintr.db", path)
-}
