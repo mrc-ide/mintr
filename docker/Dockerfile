@@ -24,7 +24,7 @@ WORKDIR /mintr
 COPY . /src
 RUN R CMD INSTALL /src && \
         Rscript -e 'mintr:::write_script("/usr/bin")' && \
-        Rscript -e 'mintr:::download_mintr_data("data")'
+        Rscript -e 'mintr:::mintr_db_docker("data")'
 
 EXPOSE 8888
 

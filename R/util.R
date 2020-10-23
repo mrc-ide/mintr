@@ -26,6 +26,11 @@ vcapply <- function(x, fun, ...) {
 }
 
 
+vlapply <- function(x, fun, ...) {
+  vapply(x, fun, logical(1), ...)
+}
+
+
 object_to_bin <- function(x) {
   serialize(x, NULL, xdr = FALSE)
 }
@@ -53,7 +58,24 @@ assert_setequal <- function(values, expected,
 
 
 download_file <- function(url, dest, ...) {
+  oo <- options(timeout = 600) # 10 mins
+  on.exit(options(oo))
   withCallingHandlers(
-    utils::download.file(url, dest, mode = "wb", ...),
+    utils::download.file(url, dest, mode = "wb", ..., timeout = 10),
     error = function(e) unlink(dest))
+}
+
+
+relevel <- function(x, map) {
+  i <- match(x, map)
+  stopifnot(!any(is.na(i)))
+  names(map)[i]
+}
+
+
+rename <- function(x, from, to) {
+  i <- match(from, names(x))
+  stopifnot(!is.na(i))
+  names(x)[i] <- to
+  x
 }

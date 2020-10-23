@@ -1,5 +1,5 @@
-mint_db <- R6::R6Class(
-  "mint_db",
+mintr_db <- R6::R6Class(
+  "mintr_db",
   private = list(
     index = NULL,
     ignore = NULL,
@@ -54,9 +54,9 @@ mint_baseline_options <- function() {
 }
 
 
-mint_db_import <- function(path, index, prevalence) {
-  ignore <- mint_db_check_index(index)
-  mint_db_check_prevalence(index, prevalence)
+mintr_db_import <- function(path, index, prevalence) {
+  ignore <- mintr_db_check_index(index)
+  mintr_db_check_prevalence(index, prevalence)
 
   unlink(path, recursive = TRUE)
   db <- thor::mdb_env(path, mapsize = 4e9, subdir = FALSE)
@@ -73,7 +73,7 @@ mint_db_import <- function(path, index, prevalence) {
 }
 
 
-mint_db_check_index <- function(index) {
+mintr_db_check_index <- function(index) {
   baseline <- mint_baseline_options()
   assert_setequal(names(index), c(names(baseline$index), "index"))
   for (i in names(baseline$index)) {
@@ -83,7 +83,7 @@ mint_db_check_index <- function(index) {
 }
 
 
-mint_db_check_prevalence <- function(index, prevalence) {
+mintr_db_check_prevalence <- function(index, prevalence) {
   cols <- c("month", "value", "netUse", "irsUse", "netType", "intervention",
             "index")
   assert_setequal(names(prevalence), cols)
@@ -114,32 +114,6 @@ mint_intervention <- function(net_use, irs_use, net_type) {
 }
 
 
-## Organise collecing the real data for use within the app. See the
-## notes in import/README.md for shipping the files out to the server
-## where they can be found.
 mintr_open_db <- function(path) {
-  dest <- file.path(path, "mintr.db")
-  if (!file.exists(dest)) {
-    message("Downloading the data")
-    download_mintr_data(path)
-    message("Importing the data into the db")
-    mint_db_import(dest,
-                   readRDS(file.path(path, "index.rds")),
-                   readRDS(file.path(path, "prevalence.rds")))
-    message("Database ready")
-  }
-  mint_db$new(dest)
-}
-
-
-download_mintr_data <- function(dest, overwrite = FALSE) {
-  dir.create(dest, FALSE, TRUE)
-  files <- c("index.rds", "prevalence.rds")
-  base <- "https://mrcdata.dide.ic.ac.uk/mint/"
-  for (f in files) {
-    if (overwrite || !file.exists(file.path(dest, f))) {
-      download_file(paste0(base, f), file.path(dest, f))
-    }
-  }
-  dest
+  mintr_db_init("mintr.db", path)
 }

@@ -1,0 +1,8 @@
+{
+    "root": "https://mrcdata.dide.ic.ac.uk/mint",
+    "directory": "20201002",
+    "files": {
+        "index": "data_index_tool_data_reshuffle_20201002.rds",
+        "prevalence": "data_values_tool_data_reshuffle_20201002.rds"
+    }
+}
