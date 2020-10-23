@@ -61,7 +61,7 @@ download_file <- function(url, dest, ...) {
   oo <- options(timeout = 600) # 10 mins
   on.exit(options(oo))
   withCallingHandlers(
-    utils::download.file(url, dest, mode = "wb", ..., timeout = 10),
+    utils::download.file(url, dest, mode = "wb", ...),
     error = function(e) unlink(dest))
 }
 
