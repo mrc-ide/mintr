@@ -106,7 +106,7 @@
                 {
                     "controls": [
                         {
-                            "name": "net_use",
+                            "name": "netUse",
                             "label": "Expected ITN population use given access",
                             "type": "select",
                             "required": true,
@@ -130,7 +130,7 @@
                 {
                     "controls": [
                         {
-                            "name": "irs_use",
+                            "name": "irsUse",
                             "label": "Expected IRS coverage",
                             "type": "select",
                             "required": true,
