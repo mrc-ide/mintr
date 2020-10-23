@@ -20,3 +20,6 @@ Imports:
 Suggests:
     mockery,
     testthat
+Remotes:
+    reside-ic/pkgapi,
+    ropensci/jsonvalidate
