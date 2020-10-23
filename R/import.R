@@ -1,7 +1,7 @@
 ## See notes in import/README.md for how the files that this import
 ## should be setup.
-mintr_db_open <- function(path) {
-  mintr_db_init("mintr.db", path)
+mintr_db_open <- function(path, overwrite = FALSE) {
+  mintr_db_init("mintr.db", path, overwrite)
 }
 
 
@@ -25,37 +25,36 @@ mintr_db_init <- function(name, path, overwrite = FALSE) {
 mintr_db_process <- function(path, overwrite = FALSE) {
   files <- list(index = file.path(path, "index.rds"),
                 prevalence = file.path(path, "prevalence.rds"))
-  if (!all(vlapply(files, file.exists))) {
-    raw <- mintr_db_download(path, overwrite)
 
-    if (overwrite || !file.exists(files$index)) {
-      message("Processing index")
-      index <- import_translate_index(readRDS(raw$index))
-      saveRDS(index, files$index)
-    }
+  if (overwrite || !file.exists(files$index)) {
+    raw <- mintr_db_download(path)
+    message("Processing index")
+    index <- import_translate_index(readRDS(raw$index))
+    saveRDS(index, files$index)
+  }
 
-    if (overwrite || !file.exists(files$prevalence)) {
-      message("Processing prevalence")
-      prevalence <- readRDS(raw$prevalence)
-      ## The incoming raw data has *way* too much stuff in it; I've
-      ## asked Arran to remove it so that we get a lighter download.
-      prevalence <- prevalence[
-        prevalence$type == "prev" & prevalence$uncertainty == "mean",
-        !(names(prevalence) %in% c("type", "uncertainty"))]
-      i <- order(prevalence$index)
-      prevalence <- prevalence[i, ]
-      rownames(prevalence) <- NULL
+  if (overwrite || !file.exists(files$prevalence)) {
+    raw <- mintr_db_download(path)
+    message("Processing prevalence")
+    prevalence <- readRDS(raw$prevalence)
+    ## The incoming raw data has *way* too much stuff in it; I've
+    ## asked Arran to remove it so that we get a lighter download.
+    prevalence <- prevalence[
+      prevalence$type == "prev" & prevalence$uncertainty == "mean",
+      !(names(prevalence) %in% c("type", "uncertainty"))]
+    i <- order(prevalence$index)
+    prevalence <- prevalence[i, ]
+    rownames(prevalence) <- NULL
 
-      tr <- c(netUse = "switch_nets",
-              irsUse = "switch_irs",
-              netType = "NET_TYPE")
-      prevalence <- rename(prevalence, unname(tr), names(tr))
-      prevalence$netType <- relevel(prevalence$netType, c(std = 1, pto = 2))
-      prevalence$intervention <- relevel(prevalence$intervention,
-                                         import_intervention_map())
+    tr <- c(netUse = "switch_nets",
+            irsUse = "switch_irs",
+            netType = "NET_TYPE")
+    prevalence <- rename(prevalence, unname(tr), names(tr))
+    prevalence$netType <- relevel(prevalence$netType, c(std = 1, pto = 2))
+    prevalence$intervention <- relevel(prevalence$intervention,
+                                       import_intervention_map())
 
-      saveRDS(prevalence, files$prevalence)
-    }
+    saveRDS(prevalence, files$prevalence)
   }
 
   files
