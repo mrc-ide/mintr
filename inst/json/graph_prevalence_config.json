@@ -1,80 +1,68 @@
 {
-            "metadata": {
-                "x_col": "month",
-                "y_col": "value",
-                "id_col": "intervention",
-                "format": "long"
-            },
-            "layout": {
-                "title": "Projected prevalence in under 5 year olds",
-                "xaxis": {
-                    "title": "years of intervention",
-                    "showline": true,
-                    "tickvals": [12, 24, 36],
-                    "ticktext": [1, 2, 3]
-                },
-                "yaxis": {
-                    "title": "prevalence (%)",
-                    "showline": true,
-                    "autorange": false,
-                    "range": [0, 0.03],
-                    "tickformat": ".1%"
-                },
-                "mintcustom": {
-                    "hovertemplate": "%{y:.2%}",
-                }
-            },
-            "series": [
-                {
-                    "id": "none",
-                    "name": "No intervention",
-                    "type": "lines",
-                    "marker": {"color": "grey"}
-                },
-                {
-                    "id": "llin",
-                    "name": "Pyrethroid LLIN only",
-                    "type": "lines",
-                    "marker": {"color": "blue"}
-                },
-                {
-                    "id": "irs",
-                    "name": "IRS only",
-                    "type": "lines",
-                    "marker": {"color": "purple"}
-                },
-                {
-                    "id": "irs-llin",
-                    "name": "Pyrethroid LLIN with IRS",
-                    "type": "lines",
-                    "marker": {"color": "blue"}
-                },
-                {
-                    "id": "llin-pbo",
-                    "name": "Pyrethroid-PBO LLIN only",
-                    "type": "lines",
-                    "marker": {"color": "aquamarine"}
-                },
-                {
-                    "id": "irs-llin-pbo",
-                    "name": "Pyrethroid-PBO LLIN with IRS",
-                    "type": "lines",
-                    "marker": {"color": "aquamarine"}
-                },
-                {
-                    "x": [12, 12],
-                    "y": [0, 1],
-                    "line": {
-                        "dash": "dot",
-                        "width": 2,
-                        "color": "grey"
-                    },
-                    "name": "",
-                    "showlegend": false,
-                    "hoverinfo": "none"
-                }
-            ],
-            "config": {
-                "editable": true
-            }
+    "metadata": {
+        "x_col": "month",
+        "y_col": "value",
+        "id_col": "intervention",
+        "format": "long"
+    },
+    "layout": {
+        "title": "Projected prevalence in under 5 year olds",
+        "xaxis": {
+            "title": "years of intervention",
+            "showline": true,
+            "tickvals": [12, 24, 36],
+            "ticktext": [1, 2, 3]
+        },
+        "yaxis": {
+            "title": "prevalence (%)",
+            "showline": true,
+            "autorange": true,
+            "rangemode": "tozero",
+            "tickformat": ".1%"
+        },
+        "mintcustom": {
+            "hovertemplate": "%{y:.2%}"
         }
+    },
+    "series": [
+        {
+            "id": "none",
+            "name": "No intervention",
+            "type": "lines",
+            "marker": {"color": "grey"}
+        },
+        {
+            "id": "llin",
+            "name": "Pyrethroid LLIN only",
+            "type": "lines",
+            "marker": {"color": "blue"}
+        },
+        {
+            "id": "irs",
+            "name": "IRS only",
+            "type": "lines",
+            "marker": {"color": "purple"}
+        },
+        {
+            "id": "irs-llin",
+            "name": "Pyrethroid LLIN with IRS",
+            "type": "lines",
+            "marker": {"color": "blue"}
+        },
+        {
+            "id": "llin-pbo",
+            "name": "Pyrethroid-PBO LLIN only",
+            "type": "lines",
+            "marker": {"color": "aquamarine"}
+        },
+        {
+            "id": "irs-llin-pbo",
+            "name": "Pyrethroid-PBO LLIN with IRS",
+            "type": "lines",
+            "marker": {"color": "aquamarine"}
+        }
+    ],
+    "config": {
+        "editable": true
+    }
+}
