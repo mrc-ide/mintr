@@ -1,9 +1,9 @@
 {
     "intervention": "Interventions",
-    "net_use": "Net use",
-    "irs_use": "IRS cover (%)",
-    "mean_cases_averted": "Mean cases averted per 1,000 people per year (across 3 yrs since intervention)",
+    "netUse": "Net use",
+    "irsUse": "IRS cover (%)",
+    "meanCasesAverted": "Mean cases averted per 1,000 people per year (across 3 yrs since intervention)",
     "cost": "Total costs ($10,000  USD)",
-    "cost_increment": "Incremental increase in costs ($10,000 USD)",
-    "cost_per_case_averted": "Cost per case averted"
+    "costIncrement": "Incremental increase in costs ($10,000 USD)",
+    "costPerCaseAverted": "Cost per case averted"
 }

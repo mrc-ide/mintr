@@ -2,61 +2,61 @@
     {
         "intervention": "none",
         "cost": 0,
-        "cases_averted": 0,
-        "cases_averted_error_minus": 0,
-        "cases_averted_error_plus": 0,
+        "casesAverted": 0,
+        "casesAvertedErrorMinus": 0,
+        "casesAvertedErrorPlus": 0,
         "efficacy": 0,
-        "efficacy_error_minus": 0,
-        "efficacy_error_plus": 0
+        "efficacyErrorMinus": 0,
+        "efficacyErrorPlus": 0
     },
     {
         "intervention": "ITN",
         "cost": 8.132,
-        "cases_averted": 280,
-        "cases_averted_error_minus": 90,
-        "cases_averted_error_plus": 85,
+        "casesAverted": 280,
+        "casesAvertedErrorMinus": 90,
+        "casesAvertedErrorPlus": 85,
         "efficacy": 40,
-        "efficacy_error_minus": 3,
-        "efficacy_error_plus": 1
+        "efficacyErrorMinus": 3,
+        "efficacyErrorPlus": 1
     },
     {
         "intervention": "PBO",
         "cost": 9.264,
-        "cases_averted": 325,
-        "cases_averted_error_minus": 85,
-        "cases_averted_error_plus": 80,
+        "casesAverted": 325,
+        "casesAvertedErrorMinus": 85,
+        "casesAvertedErrorPlus": 80,
         "efficacy": 45,
-        "efficacy_error_minus": 4,
-        "efficacy_error_plus": 2
+        "efficacyErrorMinus": 4,
+        "efficacyErrorPlus": 2
     },
     {
         "intervention": "IRS",
         "cost": 17.591,
-        "cases_averted": 630,
-        "cases_averted_error_minus": 120,
-        "cases_averted_error_plus": 140,
+        "casesAverted": 630,
+        "casesAvertedErrorMinus": 120,
+        "casesAvertedErrorPlus": 140,
         "efficacy": 72,
-        "efficacy_error_minus": 8,
-        "efficacy_error_plus": 3
+        "efficacyErrorMinus": 8,
+        "efficacyErrorPlus": 3
     },
     {
         "intervention": "ITN-IRS",
         "cost": 22.211,
-        "cases_averted": 635,
-        "cases_averted_error_minus": 75,
-        "cases_averted_error_plus": 120,
+        "casesAverted": 635,
+        "casesAvertedErrorMinus": 75,
+        "casesAvertedErrorPlus": 120,
         "efficacy": 70,
-        "efficacy_error_minus": 6,
-        "efficacy_error_plus": 4
+        "efficacyErrorMinus": 6,
+        "efficacyErrorPlus": 4
     },
     {
         "intervention": "PBO-IRS",
         "cost": 23.842,
-        "cases_averted": 636,
-        "cases_averted_error_minus": 65,
-        "cases_averted_error_plus": 125,
+        "casesAverted": 636,
+        "casesAvertedErrorMinus": 65,
+        "casesAvertedErrorPlus": 125,
         "efficacy": 74,
-        "efficacy_error_minus": 2,
-        "efficacy_error_plus": 5
+        "efficacyErrorMinus": 2,
+        "efficacyErrorPlus": 5
     }
 ]

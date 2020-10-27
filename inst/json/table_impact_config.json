@@ -1,8 +1,8 @@
 {
     "intervention": "Interventions",
-    "net_use": "Net use",
-    "prev_year_1": "Prevalence Under 5 yrs: Yr 1 post intervention",
-    "prev_year_2": "Prevalence Under 5 yrs: Yr 2 post intervention",
-    "prev_year_3": "Prevalence Under 5 yrs: Yr 3 post intervention",
-    "cases_averted": "Cases averted across 3 yrs since intervention"
+    "netUse": "Net use",
+    "prevYear1": "Prevalence Under 5 yrs: Yr 1 post intervention",
+    "prevYear2": "Prevalence Under 5 yrs: Yr 2 post intervention",
+    "prevYear3": "Prevalence Under 5 yrs: Yr 3 post intervention",
+    "casesAverted": "Cases averted across 3 yrs since intervention"
 }

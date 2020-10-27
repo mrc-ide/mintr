@@ -1,6 +1,6 @@
 {
          "metadata": {
-              "x_col": "cases_averted",
+              "x_col": "casesAverted",
               "y_col": "cost",
               "id_col": "intervention",
               "format": "long"
@@ -14,8 +14,8 @@
                   "error_x": {
                       "type": "data",
                       "width": 0,
-                      "col": "cases_averted_error_plus",
-                      "colminus": "cases_averted_error_minus"
+                      "col": "casesAvertedErrorPlus",
+                      "colminus": "casesAvertedErrorMinus"
                   }
               },
               {
@@ -26,8 +26,8 @@
                   "error_x": {
                       "type": "data",
                       "width": 0,
-                      "col": "cases_averted_error_plus",
-                      "colminus": "cases_averted_error_minus"
+                      "col": "casesAvertedErrorPlus",
+                      "colminus": "casesAvertedErrorMinus"
                   }
               },
               {
@@ -38,8 +38,8 @@
                   "error_x": {
                       "type": "data",
                       "width": 0,
-                      "col": "cases_averted_error_plus",
-                      "colminus": "cases_averted_error_minus"
+                      "col": "casesAvertedErrorPlus",
+                      "colminus": "casesAvertedErrorMinus"
                   }
               },
               {
@@ -50,8 +50,8 @@
                   "error_x": {
                       "type": "data",
                       "width": 0,
-                      "col": "cases_averted_error_plus",
-                      "colminus": "cases_averted_error_minus"
+                      "col": "casesAvertedErrorPlus",
+                      "colminus": "casesAvertedErrorMinus"
                   }
               },
               {
@@ -62,8 +62,8 @@
                   "error_x": {
                       "type": "data",
                       "width": 0,
-                      "col": "cases_averted_error_plus",
-                      "colminus": "cases_averted_error_minus"
+                      "col": "casesAvertedErrorPlus",
+                      "colminus": "casesAvertedErrorMinus"
                   }
               },
               {
@@ -74,8 +74,8 @@
                   "error_x": {
                       "type": "data",
                       "width": 0,
-                      "col": "cases_averted_error_plus",
-                      "colminus": "cases_averted_error_minus"
+                      "col": "casesAvertedErrorPlus",
+                      "colminus": "casesAvertedErrorMinus"
                   }
               }
           ],
