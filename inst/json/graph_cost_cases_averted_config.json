@@ -59,7 +59,7 @@
                   }
               },
               {
-                  "id": "ITN-IRS",
+                  "id": "ITN+IRS",
                   "y_formula": ["({population} / {procurePeoplePerNet}) * {priceNetStandard} + ({priceDelivery} * {population} * (({procureBuffer} + 100) / 100)) + 3 * ({priceIRSPerPerson} * {population})"],
                   "name": "Add IRS to Pyrethoid ITN",
                   "type": "scatter",
@@ -72,7 +72,7 @@
                   }
               },
               {
-                  "id": "PBO-IRS",
+                  "id": "PBO+IRS",
                   "y_formula": ["({population} / {procurePeoplePerNet}) * {priceNetPBO} + ({priceDelivery} * {population} * (({procureBuffer} + 100) / 100)) + 3 * ({priceIRSPerPerson} * {population})"],
                   "name": "Add IRS to Pyrethoid-PBO ITN",
                   "type": "scatter",
