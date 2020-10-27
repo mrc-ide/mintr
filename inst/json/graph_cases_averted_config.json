@@ -1,0 +1,83 @@
+{
+    "metadata": {
+        "cols": ["casesAvertedPer1000"],
+        "id_col": "intervention",
+        "format": "wide"
+    },
+    "series": [
+        {
+            "x": ["ITN"],
+            "id": "ITN",
+            "type": "bar",
+            "name": "Pyrethoid ITN",
+            "marker": {
+                "color": "blue",
+                "opacity": 0.5
+            },
+            "error_y": {
+                "type": "data",
+                "cols": ["casesAvertedPer1000ErrorPlus"],
+                "colsminus": ["casesAvertedPer1000ErrorMinus"],
+                "visible": true,
+                "thickness": 1.5,
+                "width": 0,
+                "opacity": 1
+            }
+        },
+        {
+            "x": ["PBO"],
+            "id": "PBO",
+            "type": "bar",
+            "name": "Switch to Pyrethoid-PBO ITN",
+            "marker": {
+                "color": "aquamarine",
+                "opacity": 0.5
+            },
+            "error_y": {
+                "type": "data",
+                "cols": ["casesAvertedPer1000ErrorPlus"],
+                "colsminus": ["casesAvertedPer1000ErrorMinus"],
+                "visible": true,
+                "thickness": 1.5,
+                "width": 0,
+                "opacity": 1
+            }
+        },
+        {
+            "x": ["IRS"],
+            "id": "IRS",
+            "name": "Only IRS",
+            "type": "bar",
+            "marker": {
+                "color": "purple",
+                "opacity": 0.5
+            },
+            "error_y": {
+                "type": "data",
+                "cols": ["casesAvertedPer1000ErrorPlus"],
+                "colsminus": ["casesAvertedPer1000ErrorMinus"],
+                "visible": true,
+                "thickness": 1.5,
+                "width": 0,
+                "opacity": 1
+            }
+        }
+    ],
+    "layout": {
+        "title": "Clinical cases averted per 1,000 people per year",
+        "yaxis": {
+            "title": "cases averted",
+            "showline": true,
+            "range": [0, 300],
+            "autorange": false
+        },
+        "xaxis": {
+            "title": "intervention",
+            "showline": true,
+            "tickvals": ["ITN", "PBO", "IRS"],
+            "ticktext": ["ITN", "PBO", "IRS"],
+            "autorange": true
+        },
+        "showlegend": true
+    }
+}

@@ -17,6 +17,7 @@ api_build <- function(db) {
   pr$handle(endpoint_graph_cost_cases_averted_config())
   pr$handle(endpoint_graph_cost_efficacy_config())
   pr$handle(endpoint_intervention_options())
+  pr$handle(endpoint_graph_cases_averted_config())
   pr
 }
 
@@ -200,4 +201,17 @@ endpoint_intervention_options <- function() {
 
 target_intervention_options <- function() {
   read_json(mintr_path("json/intervention_options.json"))
+}
+
+
+endpoint_graph_cases_averted_config <- function() {
+  pkgapi::pkgapi_endpoint$new(
+    "GET", "/graph/impact/cases-averted/config", target_graph_cases_averted_config,
+    returning = pkgapi::pkgapi_returning_json("Graph.schema",
+                                              schema_root()))
+}
+
+
+target_graph_cases_averted_config <- function() {
+  read_json(mintr_path("json/graph_cases_averted_config.json"))
 }
