@@ -13,6 +13,7 @@ RUN install2.r --error \
         plumber \
         remotes \
         testthat \
+        stringr \
         thor
 
 RUN installGithub.r \
