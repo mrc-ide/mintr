@@ -14,8 +14,8 @@
                 "error_x": {
                     "type": "data",
                     "width": 0,
-                    "col": "efficacy_error_plus",
-                    "colminus": "efficacy_error_minus"
+                    "col": "efficacyErrorPlus",
+                    "colminus": "efficacyErrorMinus"
                 }
             },
             {
@@ -26,8 +26,8 @@
                 "error_x": {
                     "type": "data",
                     "width": 0,
-                    "col": "efficacy_error_plus",
-                    "colminus": "efficacy_error_minus"
+                    "col": "efficacyErrorPlus",
+                    "colminus": "efficacyErrorMinus"
                 }
             },
             {
@@ -38,8 +38,8 @@
                 "error_x": {
                     "type": "data",
                     "width": 0,
-                    "col": "efficacy_error_plus",
-                    "colminus": "efficacy_error_minus"
+                    "col": "efficacyErrorPlus",
+                    "colminus": "efficacyErrorMinus"
                 }
             },
             {
@@ -50,8 +50,8 @@
                 "error_x": {
                     "type": "data",
                     "width": 0,
-                    "col": "efficacy_error_plus",
-                    "colminus": "efficacy_error_minus"
+                    "col": "efficacyErrorPlus",
+                    "colminus": "efficacyErrorMinus"
                 }
             },
             {
@@ -62,8 +62,8 @@
                 "error_x": {
                     "type": "data",
                     "width": 0,
-                    "col": "efficacy_error_plus",
-                    "colminus": "efficacy_error_minus"
+                    "col": "efficacyErrorPlus",
+                    "colminus": "efficacyErrorMinus"
                 }
             },
             {
@@ -74,8 +74,8 @@
                 "error_x": {
                     "type": "data",
                     "width": 0,
-                    "col": "efficacy_error_plus",
-                    "colminus": "efficacy_error_minus"
+                    "col": "efficacyErrorPlus",
+                    "colminus": "efficacyErrorMinus"
                 }
             }
         ],
