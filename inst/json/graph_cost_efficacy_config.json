@@ -1,6 +1,6 @@
 {
         "metadata": {
-                "x_col": "efficacy",
+                "x_col": "reductionInCases",
                 "y_col": "cost",
                 "id_col": "intervention",
                 "format": "long"
@@ -14,8 +14,8 @@
                 "error_x": {
                     "type": "data",
                     "width": 0,
-                    "col": "efficacyErrorPlus",
-                    "colminus": "efficacyErrorMinus"
+                    "col": "reductionInCasesErrorPlus",
+                    "colminus": "reductionInCasesErrorMinus"
                 }
             },
             {
@@ -26,8 +26,8 @@
                 "error_x": {
                     "type": "data",
                     "width": 0,
-                    "col": "efficacyErrorPlus",
-                    "colminus": "efficacyErrorMinus"
+                    "col": "reductionInCasesErrorPlus",
+                    "colminus": "reductionInCasesErrorMinus"
                 }
             },
             {
@@ -38,8 +38,8 @@
                 "error_x": {
                     "type": "data",
                     "width": 0,
-                    "col": "efficacyErrorPlus",
-                    "colminus": "efficacyErrorMinus"
+                    "col": "reductionInCasesErrorPlus",
+                    "colminus": "reductionInCasesErrorMinus"
                 }
             },
             {
@@ -50,8 +50,8 @@
                 "error_x": {
                     "type": "data",
                     "width": 0,
-                    "col": "efficacyErrorPlus",
-                    "colminus": "efficacyErrorMinus"
+                    "col": "reductionInCasesErrorPlus",
+                    "colminus": "reductionInCasesErrorMinus"
                 }
             },
             {
@@ -62,8 +62,8 @@
                 "error_x": {
                     "type": "data",
                     "width": 0,
-                    "col": "efficacyErrorPlus",
-                    "colminus": "efficacyErrorMinus"
+                    "col": "reductionInCasesErrorPlus",
+                    "colminus": "reductionInCasesErrorMinus"
                 }
             },
             {
@@ -74,8 +74,8 @@
                 "error_x": {
                     "type": "data",
                     "width": 0,
-                    "col": "efficacyErrorPlus",
-                    "colminus": "efficacyErrorMinus"
+                    "col": "reductionInCasesErrorPlus",
+                    "colminus": "reductionInCasesErrorMinus"
                 }
             }
         ],

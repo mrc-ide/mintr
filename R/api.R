@@ -10,11 +10,8 @@ api_build <- function(db) {
   pr$handle(endpoint_graph_prevalence_data(db))
   pr$handle(endpoint_graph_prevalence_config())
   pr$handle(endpoint_table_impact_config())
-  pr$handle(endpoint_table_impact_data())
   pr$handle(endpoint_table_cost_config())
-  pr$handle(endpoint_table_cost_data())
-  pr$handle(endpoint_graph_cost_data())
-  pr$handle(endpoint_graph_cost_cases_averted_config())
+  pr$handle(endpoint_table_data())
   pr$handle(endpoint_graph_cost_efficacy_config())
   pr$handle(endpoint_intervention_options())
   pr
@@ -118,33 +115,18 @@ target_table_cost_config <- function() {
 }
 
 
-endpoint_table_impact_data <- function() {
+endpoint_table_data <- function() {
   root <- schema_root()
   pkgapi::pkgapi_endpoint$new(
-    "POST", "/table/impact/data", target_table_impact_data,
+    "POST", "/table/data", target_table_data,
     pkgapi::pkgapi_input_body_json("options", "DataOptions.schema", root),
     returning = pkgapi::pkgapi_returning_json("Data.schema", root))
 }
 
 
-target_table_impact_data <- function(options) {
+target_table_data <- function(options) {
   force(options)
-  read_json(mintr_path("json/table_impact_data.json"))
-}
-
-
-endpoint_table_cost_data <- function() {
-  root <- schema_root()
-  pkgapi::pkgapi_endpoint$new(
-    "POST", "/table/cost/data", target_table_cost_data,
-    pkgapi::pkgapi_input_body_json("options", "DataOptions.schema", root),
-    returning = pkgapi::pkgapi_returning_json("Data.schema", root))
-}
-
-
-target_table_cost_data <- function(options) {
-  force(options)
-  read_json(mintr_path("json/table_cost_data.json"))
+  read_json(mintr_path("json/table_data.json"))
 }
 
 
@@ -171,22 +153,6 @@ endpoint_graph_cost_efficacy_config <- function() {
 
 target_graph_cost_efficacy_config <- function() {
   read_json(mintr_path("json/graph_cost_efficacy_config.json"))
-}
-
-
-endpoint_graph_cost_data <- function() {
-  root <- schema_root()
-  pkgapi::pkgapi_endpoint$new(
-    "POST", "/graph/cost/data", target_graph_cost_data,
-    pkgapi::pkgapi_input_body_json("options", "DataOptions.schema", root),
-    returning = pkgapi::pkgapi_returning_json("Data.schema", root)
-  )
-}
-
-
-target_graph_cost_data <- function(options) {
-  force(options)
-  read_json(mintr_path("json/graph_cost_effectiveness_data.json"))
 }
 
 
