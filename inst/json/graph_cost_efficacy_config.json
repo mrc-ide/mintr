@@ -1,13 +1,14 @@
 {
         "metadata": {
                 "x_col": "reductionInCases",
-                "y_col": "cost",
                 "id_col": "intervention",
-                "format": "long"
+                "format": "long",
+                "settings": ["irsUse", "netUse"]
         },
         "series": [
             {
                 "id": "none",
+                "y_formula": ["({population} / {procurePeoplePerNet}) * {priceNetStandard}"],
                 "name": "No intervention",
                 "type": "scatter",
                 "marker": {"color": "grey", "size": 10},
@@ -20,6 +21,7 @@
             },
             {
                 "id": "ITN",
+                "y_formula": ["({population} / {procurePeoplePerNet}) * {priceNetStandard}  + ({priceDelivery} * {population} * (({procureBuffer} + 100)/ 100))"],
                 "name": "Pyrethoid ITN",
                 "type": "scatter",
                 "marker": {"color": "blue", "size": 10},
@@ -33,6 +35,7 @@
             {
                 "id": "PBO",
                 "name": "Switch to Pyrethoid-PBO ITN",
+                "y_formula": ["({population} / {procurePeoplePerNet}) * {priceNetPBO}  + ({priceDelivery} * {population} * (({procureBuffer} + 100)/ 100))"],
                 "type": "scatter",
                 "marker": {"color": "turquoise", "size": 10},
                 "error_x": {
@@ -44,6 +47,7 @@
             },
             {
                 "id": "IRS",
+                "y_formula": ["({population} / {procurePeoplePerNet}) * {priceNetStandard} + 3 * ({priceIRSPerPerson} * {population})"],
                 "name": "Only IRS",
                 "type": "scatter",
                 "marker": {"color": "purple", "size": 10},
@@ -56,6 +60,7 @@
             },
             {
                 "id": "ITN-IRS",
+                "y_formula": ["({population} / {procurePeoplePerNet}) * {priceNetStandard} + ({priceDelivery} * {population} * (({procureBuffer} + 100) / 100)) + 3 * ({priceIRSPerPerson} * {population})"],
                 "name": "Add IRS to Pyrethoid ITN",
                 "type": "scatter",
                 "marker": {"color": "darkred", "size": 10},
@@ -68,6 +73,7 @@
             },
             {
                 "id": "PBO-IRS",
+                "y_formula": ["({population} / {procurePeoplePerNet}) * {priceNetPBO} + ({priceDelivery} * {population} * (({procureBuffer} + 100) / 100)) + 3 * ({priceIRSPerPerson} * {population})"],
                 "name": "Add IRS to Pyrethoid-PBO ITN",
                 "type": "scatter",
                 "marker": {"color": "orange", "size": 10},
@@ -84,17 +90,13 @@
             "xaxis": {
                 "title": "Efficacy against cases (%)",
                 "showline": true,
-                "range": [-2, 100],
-                "tickvals": [0, 20, 40, 60, 80, 100],
-                "autorange": false,
+                "autorange": true,
                 "zeroline": false
             },
             "yaxis": {
                 "title": "Total costs ($10,000 USD)",
                 "showline": true,
-                "range": [-2, 30],
-                "tickvals": [0, 10 , 20],
-                "autorange": false,
+                "autorange": true,
                 "zeroline": false
         },
         "hoverlabel": {

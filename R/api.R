@@ -13,6 +13,7 @@ api_build <- function(db) {
   pr$handle(endpoint_table_cost_config())
   pr$handle(endpoint_table_data())
   pr$handle(endpoint_graph_cost_efficacy_config())
+  pr$handle(endpoint_graph_cost_cases_averted_config())
   pr$handle(endpoint_intervention_options())
   pr
 }
