@@ -8,7 +8,8 @@
         "x_col": { "type": "string" },
         "y_col": { "type": "string" },
         "id_col": {"type": "string" },
-        "format": { "enum": ["long"] }
+        "format": { "enum": ["long"] },
+        "settings": { "type": "array", "items": { "type": "string"}}
       },
       "additionalProperties": false,
       "required": ["x_col","y_col","id_col","format"]
@@ -18,7 +19,8 @@
       "properties": {
         "cols": { "type": "array", "items": { "type": "string"}},
         "id_col": {"type": "string" },
-        "format": { "enum": ["wide"] }
+        "format": { "enum": ["wide"] },
+        "settings": { "type": "array", "items": { "type": "string"}}
       },
       "additionalProperties": false,
       "required": ["cols","id_col","format"]
