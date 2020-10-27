@@ -2,7 +2,8 @@
     "metadata": {
         "cols": ["casesAvertedPer1000"],
         "id_col": "intervention",
-        "format": "wide"
+        "format": "wide",
+        "settings": ["netUse", "irsUse"]
     },
     "series": [
         {
@@ -28,7 +29,7 @@
             "x": ["PBO"],
             "id": "PBO",
             "type": "bar",
-            "name": "Switch to Pyrethoid-PBO ITN",
+            "name": "Switch to PBO ITN",
             "marker": {
                 "color": "aquamarine",
                 "opacity": 0.5
@@ -61,6 +62,44 @@
                 "width": 0,
                 "opacity": 1
             }
+        },
+        {
+            "x": ["ITN + IRS"],
+            "id": "ITN+IRS",
+            "name": "Add IRS to standard ITN",
+            "type": "bar",
+            "marker": {
+                "color": "darkred",
+                "opacity": 0.5
+            },
+            "error_y": {
+                "type": "data",
+                "cols": ["casesAvertedPer1000ErrorPlus"],
+                "colsminus": ["casesAvertedPer1000ErrorMinus"],
+                "visible": true,
+                "thickness": 1.5,
+                "width": 0,
+                "opacity": 1
+            }
+        },
+        {
+            "x": ["PBO + IRS"],
+            "id": "PBO+IRS",
+            "name": "Add IRS to PBO ITN",
+            "type": "bar",
+            "marker": {
+                "color": "orange",
+                "opacity": 0.5
+            },
+            "error_y": {
+                "type": "data",
+                "cols": ["casesAvertedPer1000ErrorPlus"],
+                "colsminus": ["casesAvertedPer1000ErrorMinus"],
+                "visible": true,
+                "thickness": 1.5,
+                "width": 0,
+                "opacity": 1
+            }
         }
     ],
     "layout": {
@@ -68,14 +107,13 @@
         "yaxis": {
             "title": "cases averted",
             "showline": true,
-            "range": [0, 300],
-            "autorange": false
+            "autorange": true
         },
         "xaxis": {
             "title": "intervention",
             "showline": true,
-            "tickvals": ["ITN", "PBO", "IRS"],
-            "ticktext": ["ITN", "PBO", "IRS"],
+            "tickvals": ["ITN", "PBO", "IRS", "ITN + IRS", "PBO + IRS"],
+            "ticktext": ["ITN", "PBO", "IRS", "ITN + IRS", "PBO + IRS"],
             "autorange": true
         },
         "showlegend": true
