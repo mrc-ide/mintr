@@ -8,12 +8,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 RUN install2.r --error \
         R6 \
+        glue \
         jsonlite \
         jsonvalidate \
         plumber \
         remotes \
         testthat \
-        stringr \
         thor
 
 RUN installGithub.r \

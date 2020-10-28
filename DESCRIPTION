@@ -18,6 +18,6 @@ Imports:
     pkgapi,
     thor
 Suggests:
+    glue,
     mockery,
-    testthat,
-    stringr
+    testthat
