@@ -40,6 +40,12 @@ The core data required to build the database, after passing through the import s
 
 ## Get going with local development
 
+After cloning the repository, ensure you have all R package dependencies with
+
+```
+./scripts/install_deps
+```
+
 You will need a copy of the data. Run `./scripts/import` which will download, process and import the mintr database in `tests/testthat/data`, which will then be available for tests.
 
 ## License
