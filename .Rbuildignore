@@ -11,3 +11,4 @@
 ^LICENSE\.md$
 ^tests/testthat/data$
 ^import$
+^\.github$

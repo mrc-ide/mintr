@@ -7,7 +7,7 @@
     },
     "series": [
         {
-            "x": ["ITN"],
+            "x": ["llin"],
             "id": "ITN",
             "type": "bar",
             "name": "Pyrethoid ITN",
@@ -26,7 +26,7 @@
             }
         },
         {
-            "x": ["PBO"],
+            "x": ["llin-pbo"],
             "id": "PBO",
             "type": "bar",
             "name": "Switch to PBO ITN",
@@ -45,7 +45,7 @@
             }
         },
         {
-            "x": ["IRS"],
+            "x": ["irs"],
             "id": "IRS",
             "name": "Only IRS",
             "type": "bar",
@@ -64,7 +64,7 @@
             }
         },
         {
-            "x": ["ITN + IRS"],
+            "x": ["irs-llin"],
             "id": "ITN+IRS",
             "name": "Add IRS to standard ITN",
             "type": "bar",
@@ -83,7 +83,7 @@
             }
         },
         {
-            "x": ["PBO + IRS"],
+            "x": ["irs-llin-pbo"],
             "id": "PBO+IRS",
             "name": "Add IRS to PBO ITN",
             "type": "bar",
@@ -112,7 +112,7 @@
         "xaxis": {
             "title": "intervention",
             "showline": true,
-            "tickvals": ["ITN", "PBO", "IRS", "ITN + IRS", "PBO + IRS"],
+            "tickvals": ["llin", "llin-pbo", "irs", "irs-llin", "irs-llin-pbo"],
             "ticktext": ["ITN", "PBO", "IRS", "ITN + IRS", "PBO + IRS"],
             "autorange": true
         },

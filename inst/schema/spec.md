@@ -1,5 +1,15 @@
 This is all highly uncertain and liable to change!
 
+# Intervention names
+This is a list of intervention ids represented in the app:
+
+* `none` - no intervention
+* `llin` - standard nets
+* `irs` - spray
+* `irs-llin` - standard nets plus spray
+* `llin-pbo` - PBO nets
+* `irs-llin-pbo` - PBO nets plus spray
+         
 # Options
 
 ## GET /baseline/options
@@ -40,7 +50,7 @@ Returns an object defining intervention options and how they should be presented
 Schema: [DynamicFormOptions.schema.json](./DynamicFormOptions.schema.json)
 
 ### Example
-The schema is the same as for [baseline options](https://github.com/mrc-ide/mintr/blob/master/inst/schema/spec.md#example)
+The schema is the same as for [baseline options](https://github.com/mrc-ide/mintr/blob/master/inst/schema/spec.md#get-baselineoptions)
 
 # Graphs
 
@@ -55,9 +65,9 @@ Return schema: [Data.schema.json](./Data.schema.json)
 #### Request
 ```json
 {
-  "irs_future": "80%",
+  "irsFuture": "80%",
   "sprayInput": 1,
-  "biting_indoors": "high",
+  "bitingIndoors": "high",
   "population": 1000
 }
 ```
@@ -68,57 +78,57 @@ Return schema: [Data.schema.json](./Data.schema.json)
   {
     "month": 0,
     "intervention": "none",
-    "net_use": 0,
-    "irs_use": 0,
+    "netUse": 0,
+    "irsUse": 0,
     "value": 0.4287
   },
   {
     "month": 0,
     "intervention": "none",
-    "net_use": 0,
-    "irs_use": 0,
+    "netUse": 0,
+    "irsUse": 0,
     "value": 0.4119
   },
   {
     "month": 0,
     "intervention": "none",
-    "net_use": 0,
-    "irs_use": 0,
+    "netUse": 0,
+    "irsUse": 0,
     "value": 0.6894
   },
   {
     "month": 0,
     "intervention": "none",
-    "net_use": 0,
-    "irs_use": 0,
+    "netUse": 0,
+    "irsUse": 0,
     "value": 0.6217
   },
   {
     "month": 0,
     "intervention": "none",
-    "net_use": 0,
-    "irs_use": 0,
+    "netUse": 0,
+    "irsUse": 0,
     "value": 0.4716
   },
   {
     "month": 0,
     "intervention": "none",
-    "net_use": 0,
-    "irs_use": 0,
+    "netUse": 0,
+    "irsUse": 0,
     "value": 0.8187
   },
   {
     "month": 0,
     "intervention": "none",
-    "net_use": 0,
-    "irs_use": 0,
+    "netUse": 0,
+    "irsUse": 0,
     "value": 0.0453
   },
   {
     "month": 0,
     "intervention": "none",
-    "net_use": 0,
-    "irs_use": 0,
+    "netUse": 0,
+    "irsUse": 0,
     "value": 0.1402
   },
   ...
@@ -164,7 +174,8 @@ Plotly documentation: https://plotly.com/javascript/plotly-fundamentals/
           "format": "long",
           "id_col": "intervention",
           "x_col": "month",
-          "y_col": "value"
+          "y_col": "value",
+          "settings": ["netUse", "IRSUse"] // which settings to use to filter the data
     },
     "series": [
          {
@@ -174,13 +185,13 @@ Plotly documentation: https://plotly.com/javascript/plotly-fundamentals/
              "marker": {"color": "grey"}
          },
          {           
-             "id": "ITN",
+             "id": "llin",
              "name": "Pyrethoid ITN",
              "type": "lines",
              "marker": {"color": "blue"}
          },
          {         
-             "id": "PBO",
+             "id": "llin-pbo",
              "name": "Switch to Pyrethoid-PBO ITN",
              "type": "lines",
              "marker": {"color": "aquamarine"}
@@ -192,11 +203,27 @@ Plotly documentation: https://plotly.com/javascript/plotly-fundamentals/
 }
 ```
 
+## GET /graph/cost/cases-averted/config
+Returns an array of graph configuration object for the cost vs cases-averted graph. 
+
+Schema: [Graph.schema.json](./Graph.schema.json)
+
+### Example
+The schema is the same as for the [prevalence graph config](https://github.com/mrc-ide/mintr/blob/master/inst/schema/spec.md#get-graphprevalenceconfig)
+
+## GET /graph/cost/efficacy/config
+Returns an array of graph configuration object for the cost vs efficacy graph. Schemas as for above.
+
+Schema: [Graph.schema.json](./Graph.schema.json)
+
+### Example
+The schema is the same as for the [prevalence graph config](https://github.com/mrc-ide/mintr/blob/master/inst/schema/spec.md#get-graphprevalenceconfig)
+
 # Tables
 
-## POST /table/impact/data
-Accepts a set of baseline options and generates a data set for the prevalence graph. 
-Each item in the array should have properties corresponding to table columns.
+## POST /table/data
+Accepts a set of baseline options and generates a data set that is used by the impact and cost effectiveness
+ tables, as well as both the cost effectiveness graphs.
 
 Request schema: [DataOptions.schema.json](./DataOptions.schema.json)
 
@@ -206,9 +233,9 @@ Return schema: [Data.schema.json](./Data.schema.json)
 #### Request
 ```json
 {
-  "irs_future": "80%",
+  "irsFuture": "80%",
   "sprayInput": 1,
-  "biting_indoors": "high",
+  "bitingIndoors": "high",
   "population": 1000
 }
 ```
@@ -219,47 +246,63 @@ Return schema: [Data.schema.json](./Data.schema.json)
 [
     {
         "intervention": "none",
-        "net_use": 20,
-        "irs_use": 0,
-        "prev_year_1": 7.32,
-        "prev_year_2": 7.34,
-        "prev_year_3": 7.48,
-        "cases_averted": 0
+        "netUse": 20,
+        "irsUse": 0,
+        "prevYear1": 7.32,
+        "prevYear2": 7.34,
+        "prevYear3": 7.48,
+        "casesAverted": 0
 
     },
     {
         "intervention": "none",
-        "net_use": 40,
-        "irs_use": 0,
-        "prev_year_1": 7.32,
-        "prev_year_2": 7.34,
-        "prev_year_3": 7.48,
-        "cases_averted": 0
+        "netUse": 40,
+        "irsUse": 0,
+        "prevYear1": 7.32,
+        "prevYear2": 7.34,
+        "prevYear3": 7.48,
+        "casesAverted": 0
     },
     {
         "intervention": "none",
-        "net_use": 60,
-        "irs_use": 0,
-        "prev_year_1": 7.32,
-        "prev_year_2": 7.34,
-        "prev_year_3": 7.48
+        "netUse": 60,
+        "irsUse": 0,
+        "prevYear1": 7.32,
+        "prevYear2": 7.34,
+        "prevYear3": 7.48
     },
     ...
 ]
 ```
 
 ## GET /table/impact/config
-Returns about the column display names
+Returns the list of columns to display in the impacy table, along with the column display names
 
 Schema: [TableDefinition.schema.json](./TableDefinition.schema.json)
 
+e.g.
 ```json
 {
     "intervention": "Interventions",
-    "net_use": "Net use",
-    "prev_year_1": "Prevalence Under 5 yrs: Yr 1 post intervention",
-    "prev_year_2": "Prevalence Under 5 yrs: Yr 2 post intervention",
-    "prev_year_3": "Prevalence Under 5 yrs: Yr 3 post intervention",
-    "cases_averted": "Cases averted across 3 yrs since intervention"
+    "netUse": "Net use",
+    "prevYear1": "Prevalence Under 5 yrs: Yr 1 post intervention",
+    "prevYear2": "Prevalence Under 5 yrs: Yr 2 post intervention",
+    "prevYear3": "Prevalence Under 5 yrs: Yr 3 post intervention",
+    "casesAverted": "Cases averted across 3 yrs since intervention"
+}
+```
+
+## GET /table/cost/config
+Returns the list of columns to display in the cost effectiveness table, along with the column display names
+
+Schema: [TableDefinition.schema.json](./TableDefinition.schema.json)
+
+e.g.
+```json
+{
+    "intervention": "Interventions",
+    "netUse": "Net use",
+    "irsUse": "IRS use",
+    "casesAverted": "Cases averted across 3 yrs since intervention"
 }
 ```
