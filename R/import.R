@@ -1,79 +1,80 @@
-## See notes in import/README.md for how the files that this import
-## should be setup.
-mintr_db_open <- function(path, overwrite = FALSE) {
-  mintr_db_init("mintr.db", path, overwrite)
+## Convert our processed data (index.rds and prevelance.rds) into a
+## mintr database; this will be called in the docker image on startup
+mintr_db_import <- function(path) {
+  message("Building database")
+  paths <- mintr_db_paths(path)
+
+  index <- readRDS(paths$index)
+  prevalence <- readRDS(paths$prevalence)
+
+  ignore <- mintr_db_check_index(index)
+  mintr_db_check_prevalence(index, prevalence)
+
+  unlink(paths$db, recursive = TRUE)
+  unlink(paths$db_lock, recursive = TRUE)
+  db <- thor::mdb_env(paths$db, mapsize = 4e9, subdir = FALSE)
+  db$put("index", object_to_bin(index))
+  db$put("ignore", object_to_bin(ignore))
+
+  ## Prevalence:
+  idx <- split(seq_len(nrow(prevalence)), prevalence$index)
+  for (i in index$index) {
+    d <- prevalence[idx[[i]], names(prevalence) != "index"]
+    rownames(d) <- NULL
+    db$put(sprintf("prevalence:%s", i), object_to_bin(d))
+  }
 }
 
 
-mintr_db_init <- function(name, path, overwrite = FALSE) {
-  path_db <- file.path(path, name)
+## Process raw data; this will be called during the docker image build
+mintr_db_process <- function(path) {
+  raw <- jsonlite::read_json(mintr_path("data.json"))
+  paths <- mintr_db_paths(path)
 
-  data <- mintr_db_process(path, overwrite)
-  if (overwrite) {
-    unlink(path_db)
-    unlink(paste0(path_db, "-lock"))
-  }
-  if (!file.exists(path_db)) {
-    message("Building database")
-    mintr_db_import(path_db, readRDS(data$index), readRDS(data$prevalence))
-  }
+  message("Processing index")
+  path_index_raw <- file.path(path, raw$directory, raw$files$index)
+  index <- import_translate_index(readRDS(path_index_raw))
+  saveRDS(index, paths$index)
 
-  mintr_db$new(path_db)
+  message("Processing prevalence")
+  path_prevalence_raw <- file.path(path, raw$directory, raw$files$prevalence)
+  prevalence <- readRDS(path_prevalence_raw)
+  ## The incoming raw data has *way* too much stuff in it; I've
+  ## asked Arran to remove it so that we get a lighter download.
+  prevalence <- prevalence[
+    prevalence$type == "prev" & prevalence$uncertainty == "mean",
+    !(names(prevalence) %in% c("type", "uncertainty"))]
+  i <- order(prevalence$index)
+  prevalence <- prevalence[i, ]
+  rownames(prevalence) <- NULL
+
+  tr <- c(netUse = "switch_nets",
+          irsUse = "switch_irs",
+          netType = "NET_TYPE")
+  prevalence <- rename(prevalence, unname(tr), names(tr))
+  prevalence$netType <- relevel(prevalence$netType, c(std = 1, pto = 2))
+  prevalence$intervention <- relevel(prevalence$intervention,
+                                     import_intervention_map())
+
+  saveRDS(prevalence, paths$prevalence)
 }
 
 
-mintr_db_process <- function(path, overwrite = FALSE) {
-  files <- list(index = file.path(path, "index.rds"),
-                prevalence = file.path(path, "prevalence.rds"))
-
-  if (overwrite || !file.exists(files$index)) {
-    raw <- mintr_db_download(path)
-    message("Processing index")
-    index <- import_translate_index(readRDS(raw$index))
-    saveRDS(index, files$index)
-  }
-
-  if (overwrite || !file.exists(files$prevalence)) {
-    raw <- mintr_db_download(path)
-    message("Processing prevalence")
-    prevalence <- readRDS(raw$prevalence)
-    ## The incoming raw data has *way* too much stuff in it; I've
-    ## asked Arran to remove it so that we get a lighter download.
-    prevalence <- prevalence[
-      prevalence$type == "prev" & prevalence$uncertainty == "mean",
-      !(names(prevalence) %in% c("type", "uncertainty"))]
-    i <- order(prevalence$index)
-    prevalence <- prevalence[i, ]
-    rownames(prevalence) <- NULL
-
-    tr <- c(netUse = "switch_nets",
-            irsUse = "switch_irs",
-            netType = "NET_TYPE")
-    prevalence <- rename(prevalence, unname(tr), names(tr))
-    prevalence$netType <- relevel(prevalence$netType, c(std = 1, pto = 2))
-    prevalence$intervention <- relevel(prevalence$intervention,
-                                       import_intervention_map())
-
-    saveRDS(prevalence, files$prevalence)
-  }
-
-  files
-}
-
-
-mintr_db_download <- function(path, overwrite = FALSE) {
+## Download raw data; will be called in the docker image build
+mintr_db_download <- function(path) {
   info <- jsonlite::read_json(mintr_path("data.json"))
 
   dest <- file.path(path, info$directory)
   dir.create(dest, FALSE, TRUE)
   for (f in info$files) {
-    if (overwrite || !file.exists(file.path(dest, f))) {
+    if (!file.exists(file.path(dest, f))) {
       message(sprintf("Downloading '%s'", f))
       download_file(file.path(info$root, info$directory, f),
                     file.path(dest, f))
     }
   }
   lapply(info$files, function(f) file.path(path, info$directory, f))
+  invisible(file.path(path, info$directory))
 }
 
 
@@ -134,11 +135,10 @@ import_intervention_map <- function() {
 
 
 mintr_db_docker <- function(path) {
-  raw <- jsonlite::read_json(mintr_path("data.json"))$directory
-  mintr_db_open(path)
+  path_downloads <- mintr_db_download(path)
+  mintr_db_process(path)
+
   ## Remove intermediate and derived files so that we get something
   ## nice and small to keep in the docker image:
-  unlink(file.path(path, "mintr.db"))
-  unlink(file.path(path, "mintr.db-lock"))
-  unlink(file.path(path, raw), recursive = TRUE)
+  unlink(path_downloads, recursive = TRUE)
 }

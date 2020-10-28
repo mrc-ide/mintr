@@ -13,7 +13,14 @@ Options:
 main <- function(args = commandArgs(TRUE)) {
   opts <- main_args(args)
   port <- opts$port
+  ## This is primarily run from the docker container, where we need to
+  ## import the data from the processed .rds files into the database,
+  ## ready for the API.
+  message("Importing data")
+  mintr_db_import(opts$data)
+  message("Opening database")
   db <- mintr_db_open(opts$data)
+  message("Starting API")
   api_run(port, db)
 }
 

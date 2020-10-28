@@ -20,6 +20,13 @@ test_that("Can create db", {
 })
 
 
+test_that("error if db not present", {
+  expect_error(
+    mintr_db_open(tempfile()),
+    "mintr database does not exist at '.+mintr.db'")
+})
+
+
 test_that("can ignore some keys", {
   options <- list(seasonalityOfTransmission = "seasonal",
                   currentPrevalence = "med",
@@ -115,35 +122,14 @@ test_that("prevelance must conform", {
 })
 
 
-test_that("building with overwrite replaces all files", {
-  mintr_db_open("data", overwrite = FALSE) # ensure everything here
-  files <- c("data/mintr.db", "data/index.rds", "data/prevalence.rds")
-  old_time <- file.info(files)$mtime
-  old_md5 <- tools::md5sum(files)
-
-  msg <- testthat::capture_messages(mintr_db_open("data", overwrite = TRUE))
-
-  expect_match(msg, "Processing index", all = FALSE)
-  expect_match(msg, "Processing prevalence", all = FALSE)
-  expect_match(msg, "Building database", all = FALSE)
-
-  expect_true(all(file.info(files)$mtime > old_time))
-  expect_equal(tools::md5sum(files), old_md5)
-})
-
-
 test_that("docker build filters files", {
-  mock_mintr_db_open <- mockery::mock()
-
   tmp <- tempfile()
-  dir.create(tmp)
-  files <- dir("data", all.files = TRUE, no.. = TRUE, full.names = TRUE)
-  file.copy(files, tmp, recursive = TRUE)
-  with_mock(
-    "mintr:::mintr_db_open" = mock_mintr_db_open,
-    mintr_db_docker(tmp))
+  path_raw <- jsonlite::read_json(mintr_path("data.json"))$directory
+
+  dir.create(tmp, FALSE, TRUE)
+  file.copy(file.path("data", path_raw), tmp, recursive = TRUE)
+
+  mintr_db_docker(tmp)
 
   expect_setequal(dir(tmp), c("index.rds", "prevalence.rds"))
-  mockery::expect_called(mock_mintr_db_open, 1)
-  expect_equal(mockery::mock_args(mock_mintr_db_open)[[1]], list(tmp))
 })

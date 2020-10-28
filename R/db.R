@@ -1,3 +1,12 @@
+mintr_db_open <- function(path) {
+  path_db <- mintr_db_paths(path)$db
+  if (!file.exists(path_db)) {
+    stop(sprintf("mintr database does not exist at '%s'", path_db))
+  }
+  mintr_db$new(path_db)
+}
+
+
 mintr_db <- R6::R6Class(
   "mintr_db",
   private = list(
@@ -33,6 +42,15 @@ mintr_db <- R6::R6Class(
   ))
 
 
+## Some constants that crop up everywhere
+mintr_db_paths <- function(path) {
+  list(db = file.path(path, "mintr.db"),
+       db_lock = file.path(path, "mintr.db-lock"),
+       index = file.path(path, "index.rds"),
+       prevalence = file.path(path, "prevalence.rds"))
+}
+
+
 ## We should do this both on writing to the db and on reading to it?
 mint_baseline_options <- function() {
   path <- mintr_path("json/baseline_options.json")
@@ -51,25 +69,6 @@ mint_baseline_options <- function() {
     }
   }
   list(index = index, ignore = ignore)
-}
-
-
-mintr_db_import <- function(path, index, prevalence) {
-  ignore <- mintr_db_check_index(index)
-  mintr_db_check_prevalence(index, prevalence)
-
-  unlink(path, recursive = TRUE)
-  db <- thor::mdb_env(path, mapsize = 4e9, subdir = FALSE)
-  db$put("index", object_to_bin(index))
-  db$put("ignore", object_to_bin(ignore))
-
-  ## Prevalence:
-  idx <- split(seq_len(nrow(prevalence)), prevalence$index)
-  for (i in index$index) {
-    d <- prevalence[idx[[i]], names(prevalence) != "index"]
-    rownames(d) <- NULL
-    db$put(sprintf("prevalence:%s", i), object_to_bin(d))
-  }
 }
 
 
