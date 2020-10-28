@@ -1,81 +1,87 @@
 {
          "metadata": {
-              "x_col": "casesAverted",
-              "y_col": "cost",
+              "x_col": "casesAvertedPer1000",
               "id_col": "intervention",
-              "format": "long"
+              "format": "long",
+              "settings": ["irsUse", "netUse"]
           },
           "series": [
               {
                   "id": "none",
+                  "y_formula": ["({population} / {procurePeoplePerNet}) * {priceNetStandard}"],
                   "name": "No intervention",
                   "type": "scatter",
                   "marker": {"color": "grey", "size": 10},
                   "error_x": {
                       "type": "data",
                       "width": 0,
-                      "col": "casesAvertedErrorPlus",
-                      "colminus": "casesAvertedErrorMinus"
+                      "col": "casesAvertedPer1000ErrorPlus",
+                      "colminus": "casesAvertedPer1000ErrorMinus"
                   }
               },
               {
-                  "id": "ITN",
+                  "id": "llin",
+                  "y_formula": ["({population} / {procurePeoplePerNet}) * {priceNetStandard}  + ({priceDelivery} * {population} * (({procureBuffer} + 100)/ 100))"],
                   "name": "Pyrethoid ITN",
                   "type": "scatter",
                   "marker": {"color": "blue", "size": 10},
                   "error_x": {
                       "type": "data",
                       "width": 0,
-                      "col": "casesAvertedErrorPlus",
-                      "colminus": "casesAvertedErrorMinus"
+                      "col": "casesAvertedPer1000ErrorPlus",
+                      "colminus": "casesAvertedPer1000ErrorMinus"
                   }
               },
               {
-                  "id": "PBO",
+                  "id": "llin-pbo",
+                  "y_formula": ["({population} / {procurePeoplePerNet}) * {priceNetPBO}  + ({priceDelivery} * {population} * (({procureBuffer} + 100)/ 100))"],
                   "name": "Switch to Pyrethoid-PBO ITN",
                   "type": "scatter",
                   "marker": {"color": "turquoise", "size": 10},
                   "error_x": {
                       "type": "data",
                       "width": 0,
-                      "col": "casesAvertedErrorPlus",
-                      "colminus": "casesAvertedErrorMinus"
+                      "col": "casesAvertedPer1000ErrorPlus",
+                      "colminus": "casesAvertedPer1000ErrorMinus"
                   }
               },
               {
-                  "id": "IRS",
+                  "id": "irs",
+                  "y_formula": ["({population} / {procurePeoplePerNet}) * {priceNetStandard} + 3 * ({priceIRSPerPerson} * {population})"],
                   "name": "Only IRS",
                   "type": "scatter",
                   "marker": {"color": "purple", "size": 10},
                   "error_x": {
                       "type": "data",
                       "width": 0,
-                      "col": "casesAvertedErrorPlus",
-                      "colminus": "casesAvertedErrorMinus"
+                      "col": "casesAvertedPer1000ErrorPlus",
+                      "colminus": "casesAvertedPer1000ErrorMinus"
                   }
               },
               {
-                  "id": "ITN-IRS",
+                  "id": "irs-llin",
+                  "y_formula": ["({population} / {procurePeoplePerNet}) * {priceNetStandard} + ({priceDelivery} * {population} * (({procureBuffer} + 100) / 100)) + 3 * ({priceIRSPerPerson} * {population})"],
                   "name": "Add IRS to Pyrethoid ITN",
                   "type": "scatter",
                   "marker": {"color": "darkred", "size": 10},
                   "error_x": {
                       "type": "data",
                       "width": 0,
-                      "col": "casesAvertedErrorPlus",
-                      "colminus": "casesAvertedErrorMinus"
+                      "col": "casesAvertedPer1000ErrorPlus",
+                      "colminus": "casesAvertedPer1000ErrorMinus"
                   }
               },
               {
-                  "id": "PBO-IRS",
+                  "id": "irs-llin-pbo",
+                  "y_formula": ["({population} / {procurePeoplePerNet}) * {priceNetPBO} + ({priceDelivery} * {population} * (({procureBuffer} + 100) / 100)) + 3 * ({priceIRSPerPerson} * {population})"],
                   "name": "Add IRS to Pyrethoid-PBO ITN",
                   "type": "scatter",
                   "marker": {"color": "orange", "size": 10},
                   "error_x": {
                       "type": "data",
                       "width": 0,
-                      "col": "casesAvertedErrorPlus",
-                      "colminus": "casesAvertedErrorMinus"
+                      "col": "casesAvertedPer1000ErrorPlus",
+                      "colminus": "casesAvertedPer1000ErrorMinus"
                   }
               }
           ],
@@ -84,17 +90,13 @@
               "xaxis": {
                   "title": "Cases averted per 1,000 people across 3-years",
                   "showline": true,
-                  "range": [-10, 800],
-                  "tickvals": [0, 100, 200, 300, 400, 500, 600, 700],
-                  "autorange": false,
+                  "autorange": true,
                   "zeroline": false
               },
               "yaxis": {
                   "title": "Total costs ($10,000 USD)",
                   "showline": true,
-                  "range": [-2, 30],
-                  "tickvals": [0, 10 , 20],
-                  "autorange": false,
+                  "autorange": true,
                   "zeroline": false
               },
               "hoverlabel": {
