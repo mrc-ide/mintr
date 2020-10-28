@@ -26,11 +26,6 @@ vcapply <- function(x, fun, ...) {
 }
 
 
-vlapply <- function(x, fun, ...) {
-  vapply(x, fun, logical(1), ...)
-}
-
-
 object_to_bin <- function(x) {
   serialize(x, NULL, xdr = FALSE)
 }
