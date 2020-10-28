@@ -1,5 +1,14 @@
-mint_db <- R6::R6Class(
-  "mint_db",
+mintr_db_open <- function(path) {
+  path_db <- mintr_db_paths(path)$db
+  if (!file.exists(path_db)) {
+    stop(sprintf("mintr database does not exist at '%s'", path_db))
+  }
+  mintr_db$new(path_db)
+}
+
+
+mintr_db <- R6::R6Class(
+  "mintr_db",
   private = list(
     index = NULL,
     ignore = NULL,
@@ -33,6 +42,15 @@ mint_db <- R6::R6Class(
   ))
 
 
+## Some constants that crop up everywhere
+mintr_db_paths <- function(path) {
+  list(db = file.path(path, "mintr.db"),
+       db_lock = file.path(path, "mintr.db-lock"),
+       index = file.path(path, "index.rds"),
+       prevalence = file.path(path, "prevalence.rds"))
+}
+
+
 ## We should do this both on writing to the db and on reading to it?
 mint_baseline_options <- function() {
   path <- mintr_path("json/baseline_options.json")
@@ -54,26 +72,7 @@ mint_baseline_options <- function() {
 }
 
 
-mint_db_import <- function(path, index, prevalence) {
-  ignore <- mint_db_check_index(index)
-  mint_db_check_prevalence(index, prevalence)
-
-  unlink(path, recursive = TRUE)
-  db <- thor::mdb_env(path, mapsize = 4e9, subdir = FALSE)
-  db$put("index", object_to_bin(index))
-  db$put("ignore", object_to_bin(ignore))
-
-  ## Prevalence:
-  idx <- split(seq_len(nrow(prevalence)), prevalence$index)
-  for (i in index$index) {
-    d <- prevalence[idx[[i]], names(prevalence) != "index"]
-    rownames(d) <- NULL
-    db$put(sprintf("prevalence:%s", i), object_to_bin(d))
-  }
-}
-
-
-mint_db_check_index <- function(index) {
+mintr_db_check_index <- function(index) {
   baseline <- mint_baseline_options()
   assert_setequal(names(index), c(names(baseline$index), "index"))
   for (i in names(baseline$index)) {
@@ -83,7 +82,7 @@ mint_db_check_index <- function(index) {
 }
 
 
-mint_db_check_prevalence <- function(index, prevalence) {
+mintr_db_check_prevalence <- function(index, prevalence) {
   cols <- c("month", "value", "netUse", "irsUse", "netType", "intervention",
             "index")
   assert_setequal(names(prevalence), cols)
@@ -111,35 +110,4 @@ mint_intervention <- function(net_use, irs_use, net_type) {
   ## Use bit packing to get the above relationship:
   i <- (net_use > 0) + (irs_use > 0) * 2 + (net_type == "pto") * 4 + 1
   intervention[i]
-}
-
-
-## Organise collecing the real data for use within the app. See the
-## notes in import/README.md for shipping the files out to the server
-## where they can be found.
-mintr_open_db <- function(path) {
-  dest <- file.path(path, "mintr.db")
-  if (!file.exists(dest)) {
-    message("Downloading the data")
-    download_mintr_data(path)
-    message("Importing the data into the db")
-    mint_db_import(dest,
-                   readRDS(file.path(path, "index.rds")),
-                   readRDS(file.path(path, "prevalence.rds")))
-    message("Database ready")
-  }
-  mint_db$new(dest)
-}
-
-
-download_mintr_data <- function(dest, overwrite = FALSE) {
-  dir.create(dest, FALSE, TRUE)
-  files <- c("index.rds", "prevalence.rds")
-  base <- "https://mrcdata.dide.ic.ac.uk/mint/"
-  for (f in files) {
-    if (overwrite || !file.exists(file.path(dest, f))) {
-      download_file(paste0(base, f), file.path(dest, f))
-    }
-  }
-  dest
 }

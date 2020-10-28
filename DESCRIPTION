@@ -18,5 +18,9 @@ Imports:
     pkgapi,
     thor
 Suggests:
+    jsonvalidate (>= 1.2.2),
     mockery,
     testthat
+Remotes:
+    reside-ic/pkgapi,
+    ropensci/jsonvalidate

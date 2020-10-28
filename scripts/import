@@ -1,0 +1,23 @@
+#!/usr/bin/env Rscript
+bootstrap <- function() {
+  if (!requireNamespace("pkgload", quietly = TRUE)) {
+    install.packages("pkgload")
+  }
+  root <- pkgload::pkg_path()
+  stopifnot(pkgload::pkg_name(root) == "mintr")
+  pkgload::load_all(root)
+  root
+}
+
+
+import <- function(root) {
+  path_data <- file.path(root, "tests/testthat/data")
+  mintr_db_download(path_data)
+  mintr_db_process(path_data)
+  mintr_db_import(path_data)
+}
+
+if (!interactive()) {
+  root <- bootstrap()
+  import(root)
+}
