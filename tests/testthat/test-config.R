@@ -157,3 +157,19 @@ test_that("cases averted graph config contains valid intervention ids", {
   expect_equal(tick_vals, c(ITN, PBO, IRS, ITN_IRS, PBO_IRS))
 
 })
+
+test_that("prevalence graph config containe valid intervention ids", {
+  json <- jsonlite::fromJSON(mintr_path("json/graph_prevalence_config.json"))
+  ids <- json$series$id
+  
+  ITN <- ids[[1]]
+  expect_equal(ITN, mint_intervention(1, 0, "std"))
+  PBO <- ids[[2]]
+  expect_equal(PBO, mint_intervention(1, 0, "pto"))
+  IRS <- ids[[3]]
+  expect_equal(IRS, mint_intervention(0, 1, "pto"))
+  ITN_IRS <- ids[[4]]
+  expect_equal(ITN_IRS,mint_intervention(1, 1, "std"))
+  PBO_IRS <- ids[[5]]
+  expect_equal(PBO_IRS, mint_intervention(1, 1, "pto"))
+})
