@@ -8,7 +8,7 @@
     "series": [
         {
             "x": ["llin"],
-            "id": "ITN",
+            "id": "llin",
             "type": "bar",
             "name": "Pyrethoid ITN",
             "marker": {
@@ -27,7 +27,7 @@
         },
         {
             "x": ["llin-pbo"],
-            "id": "PBO",
+            "id": "llin-pbo",
             "type": "bar",
             "name": "Switch to PBO ITN",
             "marker": {
@@ -46,7 +46,7 @@
         },
         {
             "x": ["irs"],
-            "id": "IRS",
+            "id": "irs",
             "name": "Only IRS",
             "type": "bar",
             "marker": {
@@ -65,7 +65,7 @@
         },
         {
             "x": ["irs-llin"],
-            "id": "ITN+IRS",
+            "id": "irs-llin",
             "name": "Add IRS to standard ITN",
             "type": "bar",
             "marker": {
@@ -84,7 +84,7 @@
         },
         {
             "x": ["irs-llin-pbo"],
-            "id": "PBO+IRS",
+            "id": "irs-llin-pbo",
             "name": "Add IRS to PBO ITN",
             "type": "bar",
             "marker": {
