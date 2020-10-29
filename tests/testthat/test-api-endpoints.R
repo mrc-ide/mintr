@@ -218,3 +218,22 @@ test_that("intervention options", {
   expect_equal(res_api$status, 200)
   expect_equal(res_api$body, res_endpoint$body)
 })
+
+
+test_that("graph cases averted config", {
+  res <- target_graph_cases_averted_config()
+  expect_is(res, "json")
+  expect_identical(res,
+                   read_json(mintr_path("json/graph_cases_averted_config.json")))
+
+  endpoint <- endpoint_graph_cases_averted_config()
+  res_endpoint <- endpoint$run()
+  expect_equal(res_endpoint$status_code, 200)
+  expect_equal(res_endpoint$content_type, "application/json")
+  expect_equal(res_endpoint$data, res)
+
+  api <- api_build(mintr_test_db())
+  res_api <- api$request("GET", "/graph/impact/cases-averted/config")
+  expect_equal(res_api$status, 200)
+  expect_equal(res_api$body, res_endpoint$body)
+})

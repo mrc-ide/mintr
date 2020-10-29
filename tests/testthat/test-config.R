@@ -2,12 +2,12 @@ context("config")
 
 get_input <- function() {
   list(population = 1000,
-                procurePeoplePerNet = 1.8,
-                priceNetStandard = 1.5,
-                priceNetPBO = 2.5,
-                priceDelivery = 2.75,
-                procureBuffer = 7,
-                priceIRSPerPerson = 2.5)
+       procurePeoplePerNet = 1.8,
+       priceNetStandard = 1.5,
+       priceNetPBO = 2.5,
+       priceDelivery = 2.75,
+       procureBuffer = 7,
+       priceIRSPerPerson = 2.5)
 }
 
 get_expected_costs <- function() {
@@ -90,7 +90,7 @@ test_that("cases averted vs costs graph config formulas give correct results", {
   expect_equal(evaluate(PBO_IRS), costs$costs_N2_S1)
 })
 
-test_that("efficacy vs costs graph config contain valid intervention ids", {
+test_that("efficacy vs costs graph config contains valid intervention ids", {
   json <- jsonlite::fromJSON(mintr_path("json/graph_cost_efficacy_config.json"))
   ids <- json$series$id
 
@@ -108,7 +108,7 @@ test_that("efficacy vs costs graph config contain valid intervention ids", {
   expect_equal(PBO_IRS, mint_intervention(1, 1, "pto"))
 })
 
-test_that("cases averted vs costs graph config contain valid intervention ids", {
+test_that("cases averted vs costs graph config contains valid intervention ids", {
   json <- jsonlite::fromJSON(mintr_path("json/graph_cost_cases_averted_config.json"))
   ids <- json$series$id
 
@@ -124,4 +124,24 @@ test_that("cases averted vs costs graph config contain valid intervention ids", 
   expect_equal(ITN_IRS,mint_intervention(1, 1, "std"))
   PBO_IRS <- ids[[6]]
   expect_equal(PBO_IRS, mint_intervention(1, 1, "pto"))
+})
+
+test_that("cases averted graph config contains valid intervention ids", {
+  json <- jsonlite::fromJSON(mintr_path("json/graph_cases_averted_config.json"))
+  ids <- json$series$x
+
+  ITN <- ids[[1]]
+  expect_equal(ITN, mint_intervention(1, 0, "std"))
+  PBO <- ids[[2]]
+  expect_equal(PBO, mint_intervention(1, 0, "pto"))
+  IRS <- ids[[3]]
+  expect_equal(IRS, mint_intervention(0, 1, "pto"))
+  ITN_IRS <- ids[[4]]
+  expect_equal(ITN_IRS,mint_intervention(1, 1, "std"))
+  PBO_IRS <- ids[[5]]
+  expect_equal(PBO_IRS, mint_intervention(1, 1, "pto"))
+
+  tick_vals <- json$layout$xaxis$tickvals
+  expect_equal(tick_vals, c(ITN, PBO, IRS, ITN_IRS, PBO_IRS))
+
 })

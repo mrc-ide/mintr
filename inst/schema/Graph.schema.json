@@ -9,7 +9,7 @@
         "y_col": { "type": "string" },
         "id_col": {"type": "string" },
         "format": { "enum": ["long"] },
-        "settings": { "type":  "array", "items":  {"type":  "string"}}
+        "settings": { "type": "array", "items": { "type": "string"}}
       },
       "additionalProperties": false,
       "required": ["x_col","id_col","format"]
@@ -20,7 +20,7 @@
         "cols": { "type": "array", "items": { "type": "string"}},
         "id_col": {"type": "string" },
         "format": { "enum": ["wide"] },
-        "settings": { "type":  "array", "items":  {"type":  "string"}}
+        "settings": { "type": "array", "items": { "type": "string"}}
       },
       "additionalProperties": false,
       "required": ["cols","id_col","format"]
