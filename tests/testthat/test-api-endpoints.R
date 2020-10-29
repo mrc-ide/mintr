@@ -141,17 +141,17 @@ test_that("table impact config", {
 })
 
 
-test_that("table impact data", {
+test_that("table data", {
   options <- list("irs_future" = "80%",
                   "sprayInput" = 1,
                   "biting_indoors" = "high",
                   "population" = 1000)
-  res <- target_table_impact_data(options)
+  res <- target_table_data(options)
   expect_is(res, "json")
   expect_identical(res,
-                   read_json(mintr_path("json/table_impact_data.json")))
+                   read_json(mintr_path("json/table_data.json")))
 
-  endpoint <- endpoint_table_impact_data()
+  endpoint <- endpoint_table_data()
   res_endpoint <- endpoint$run(options)
   expect_equal(res_endpoint$status_code, 200)
   expect_equal(res_endpoint$content_type, "application/json")
@@ -159,34 +159,10 @@ test_that("table impact data", {
 
   body <- jsonlite::toJSON(lapply(options, jsonlite::unbox))
   api <- api_build(mintr_test_db())
-  res_api <- api$request("POST", "/table/impact/data", body = body)
+  res_api <- api$request("POST", "/table/data", body = body)
   expect_equal(res_api$status, 200)
   expect_equal(res_api$body, res_endpoint$body)
 })
-
-test_that("table cost data", {
-  options <- list("irs_future" = "80%",
-                  "sprayInput" = 1,
-                  "biting_indoors" = "high",
-                  "population" = 1000)
-  res <- target_table_cost_data(options)
-  expect_is(res, "json")
-  expect_identical(res,
-                   read_json(mintr_path("json/table_cost_data.json")))
-
-  endpoint <- endpoint_table_cost_data()
-  res_endpoint <- endpoint$run(options)
-  expect_equal(res_endpoint$status_code, 200)
-  expect_equal(res_endpoint$content_type, "application/json")
-  expect_equal(res_endpoint$data, res)
-
-  body <- jsonlite::toJSON(lapply(options, jsonlite::unbox))
-  api <- api_build(mintr_test_db())
-  res_api <- api$request("POST", "/table/cost/data", body = body)
-  expect_equal(res_api$status, 200)
-  expect_equal(res_api$body, res_endpoint$body)
-})
-
 
 test_that("graph cost cases averted config", {
   res <- target_graph_cost_cases_averted_config()
@@ -225,32 +201,6 @@ test_that("graph cost efficacy config", {
   expect_equal(res_api$body, res_endpoint$body)
 })
 
-
-test_that("graph cost data", {
-  options <- list("irs_future" = "80%",
-                          "spray_input" = 1,
-                          "biting_indoors" = "high",
-                          "procure_people_per_net" = 1.8,
-                          "procure_buffer" = 7)
-  res <- target_graph_cost_data(options)
-  expect_is(res, "json")
-  expect_identical(res,
-                   read_json(mintr_path("json/graph_cost_effectiveness_data.json")))
-
-  endpoint <- endpoint_graph_cost_data()
-  res_endpoint <- endpoint$run(options)
-  expect_equal(res_endpoint$status_code, 200)
-  expect_equal(res_endpoint$content_type, "application/json")
-  expect_equal(res_endpoint$data, res)
-
-  body <- jsonlite::toJSON(lapply(options, jsonlite::unbox))
-  api <- api_build(mintr_test_db())
-  res_api <- api$request("POST", "/graph/cost/data", body = body)
-  expect_equal(res_api$status, 200)
-  expect_equal(res_api$body, res_endpoint$body)
-})
-
-
 test_that("intervention options", {
   res <- target_intervention_options()
   expect_is(res, "json")
@@ -265,6 +215,25 @@ test_that("intervention options", {
 
   api <- api_build(mintr_test_db())
   res_api <- api$request("GET", "/intervention/options")
+  expect_equal(res_api$status, 200)
+  expect_equal(res_api$body, res_endpoint$body)
+})
+
+
+test_that("graph cases averted config", {
+  res <- target_graph_cases_averted_config()
+  expect_is(res, "json")
+  expect_identical(res,
+                   read_json(mintr_path("json/graph_cases_averted_config.json")))
+
+  endpoint <- endpoint_graph_cases_averted_config()
+  res_endpoint <- endpoint$run()
+  expect_equal(res_endpoint$status_code, 200)
+  expect_equal(res_endpoint$content_type, "application/json")
+  expect_equal(res_endpoint$data, res)
+
+  api <- api_build(mintr_test_db())
+  res_api <- api$request("GET", "/graph/impact/cases-averted/config")
   expect_equal(res_api$status, 200)
   expect_equal(res_api$body, res_endpoint$body)
 })

@@ -6,7 +6,7 @@
                 {
                     "controls": [
                         {
-                            "name": "procure_people_per_net",
+                            "name": "procurePeoplePerNet",
                             "label": "When planning procurement, what number of people per net is used?",
                             "type": "number",
                             "required": true,
@@ -17,7 +17,7 @@
                 {
                     "controls": [
                         {
-                            "name": "procure_buffer",
+                            "name": "procureBuffer",
                             "label": "What percentage is your procurement buffer, if used? (%)",
                             "type": "number",
                             "required": true,
@@ -33,7 +33,7 @@
                 {
                     "controls": [
                         {
-                            "name": "price_net_standard",
+                            "name": "priceNetStandard",
                             "label": "Price of standard ITN ($USD)",
                             "type": "number",
                             "required": true,
@@ -44,7 +44,7 @@
                 {
                     "controls": [
                         {
-                            "name": "price_net_pbo",
+                            "name": "priceNetPBO",
                             "label": "Price of PBO ITN ($USD)",
                             "type": "number",
                             "required": true,
@@ -55,7 +55,7 @@
                 {
                     "controls": [
                         {
-                            "name": "price_delivery",
+                            "name": "priceDelivery",
                             "label": "ITN mass distribution campaign delivery cost per person ($USD)",
                             "type": "number",
                             "required": true,
@@ -66,7 +66,7 @@
                 {
                     "controls": [
                         {
-                            "name": "metabolic",
+                            "name": "priceIRSPerPerson",
                             "label": "Annual cost of IRS per person ($USD)",
                             "type": "number",
                             "required": true,
@@ -78,7 +78,7 @@
                 {
                     "controls": [
                         {
-                            "name": "budget_all_zones",
+                            "name": "budgetAllZones",
                             "label": "Total available budget ($USD)",
                             "type": "number",
                             "required": true,

@@ -1,9 +1,10 @@
 {
     "metadata": {
-        "x_col": "month",
-        "y_col": "value",
-        "id_col": "intervention",
-        "format": "long"
+          "x_col": "month",
+          "y_col": "value",
+          "id_col": "intervention",
+          "format": "long",
+          "settings": ["irsUse", "netUse"]
     },
     "layout": {
         "title": "Projected prevalence in under 5 year olds",

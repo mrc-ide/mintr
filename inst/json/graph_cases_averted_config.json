@@ -1,0 +1,121 @@
+{
+    "metadata": {
+        "cols": ["casesAvertedPer1000"],
+        "id_col": "intervention",
+        "format": "wide",
+        "settings": ["netUse", "irsUse"]
+    },
+    "series": [
+        {
+            "x": ["llin"],
+            "id": "llin",
+            "type": "bar",
+            "name": "Pyrethoid ITN",
+            "marker": {
+                "color": "blue",
+                "opacity": 0.5
+            },
+            "error_y": {
+                "type": "data",
+                "cols": ["casesAvertedPer1000ErrorPlus"],
+                "colsminus": ["casesAvertedPer1000ErrorMinus"],
+                "visible": true,
+                "thickness": 1.5,
+                "width": 0,
+                "opacity": 1
+            }
+        },
+        {
+            "x": ["llin-pbo"],
+            "id": "llin-pbo",
+            "type": "bar",
+            "name": "Switch to PBO ITN",
+            "marker": {
+                "color": "aquamarine",
+                "opacity": 0.5
+            },
+            "error_y": {
+                "type": "data",
+                "cols": ["casesAvertedPer1000ErrorPlus"],
+                "colsminus": ["casesAvertedPer1000ErrorMinus"],
+                "visible": true,
+                "thickness": 1.5,
+                "width": 0,
+                "opacity": 1
+            }
+        },
+        {
+            "x": ["irs"],
+            "id": "irs",
+            "name": "Only IRS",
+            "type": "bar",
+            "marker": {
+                "color": "purple",
+                "opacity": 0.5
+            },
+            "error_y": {
+                "type": "data",
+                "cols": ["casesAvertedPer1000ErrorPlus"],
+                "colsminus": ["casesAvertedPer1000ErrorMinus"],
+                "visible": true,
+                "thickness": 1.5,
+                "width": 0,
+                "opacity": 1
+            }
+        },
+        {
+            "x": ["irs-llin"],
+            "id": "irs-llin",
+            "name": "Add IRS to standard ITN",
+            "type": "bar",
+            "marker": {
+                "color": "darkred",
+                "opacity": 0.5
+            },
+            "error_y": {
+                "type": "data",
+                "cols": ["casesAvertedPer1000ErrorPlus"],
+                "colsminus": ["casesAvertedPer1000ErrorMinus"],
+                "visible": true,
+                "thickness": 1.5,
+                "width": 0,
+                "opacity": 1
+            }
+        },
+        {
+            "x": ["irs-llin-pbo"],
+            "id": "irs-llin-pbo",
+            "name": "Add IRS to PBO ITN",
+            "type": "bar",
+            "marker": {
+                "color": "orange",
+                "opacity": 0.5
+            },
+            "error_y": {
+                "type": "data",
+                "cols": ["casesAvertedPer1000ErrorPlus"],
+                "colsminus": ["casesAvertedPer1000ErrorMinus"],
+                "visible": true,
+                "thickness": 1.5,
+                "width": 0,
+                "opacity": 1
+            }
+        }
+    ],
+    "layout": {
+        "title": "Clinical cases averted per 1,000 people per year",
+        "yaxis": {
+            "title": "cases averted",
+            "showline": true,
+            "autorange": true
+        },
+        "xaxis": {
+            "title": "intervention",
+            "showline": true,
+            "tickvals": ["llin", "llin-pbo", "irs", "irs-llin", "irs-llin-pbo"],
+            "ticktext": ["ITN", "PBO", "IRS", "ITN + IRS", "PBO + IRS"],
+            "autorange": true
+        },
+        "showlegend": true
+    }
+}
