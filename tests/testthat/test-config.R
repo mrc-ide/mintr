@@ -128,7 +128,8 @@ test_that("cases averted vs costs graph config contains valid intervention ids",
 
 test_that("cases averted graph config contains valid intervention ids", {
   json <- jsonlite::fromJSON(mintr_path("json/graph_cases_averted_config.json"))
-  ids <- json$series$x
+  x <- json$series$x
+  ids <- json$series$id
 
   ITN <- ids[[1]]
   expect_equal(ITN, mint_intervention(1, 0, "std"))
@@ -139,6 +140,17 @@ test_that("cases averted graph config contains valid intervention ids", {
   ITN_IRS <- ids[[4]]
   expect_equal(ITN_IRS,mint_intervention(1, 1, "std"))
   PBO_IRS <- ids[[5]]
+  expect_equal(PBO_IRS, mint_intervention(1, 1, "pto"))
+
+  ITN <- x[[1]]
+  expect_equal(ITN, mint_intervention(1, 0, "std"))
+  PBO <- x[[2]]
+  expect_equal(PBO, mint_intervention(1, 0, "pto"))
+  IRS <- x[[3]]
+  expect_equal(IRS, mint_intervention(0, 1, "pto"))
+  ITN_IRS <- x[[4]]
+  expect_equal(ITN_IRS,mint_intervention(1, 1, "std"))
+  PBO_IRS <- x[[5]]
   expect_equal(PBO_IRS, mint_intervention(1, 1, "pto"))
 
   tick_vals <- json$layout$xaxis$tickvals
