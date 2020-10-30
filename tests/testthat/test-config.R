@@ -162,14 +162,16 @@ test_that("prevalence graph config containe valid intervention ids", {
   json <- jsonlite::fromJSON(mintr_path("json/graph_prevalence_config.json"))
   ids <- json$series$id
   
-  ITN <- ids[[1]]
+  none <- ids[[1]]
+  expect_equal(none, mint_intervention(0, 0, "std"))
+  ITN <- ids[[2]]
   expect_equal(ITN, mint_intervention(1, 0, "std"))
-  PBO <- ids[[2]]
+  PBO <- ids[[3]]
   expect_equal(PBO, mint_intervention(1, 0, "pto"))
-  IRS <- ids[[3]]
+  IRS <- ids[[4]]
   expect_equal(IRS, mint_intervention(0, 1, "pto"))
-  ITN_IRS <- ids[[4]]
+  ITN_IRS <- ids[[5]]
   expect_equal(ITN_IRS,mint_intervention(1, 1, "std"))
-  PBO_IRS <- ids[[5]]
+  PBO_IRS <- ids[[6]]
   expect_equal(PBO_IRS, mint_intervention(1, 1, "pto"))
 })
