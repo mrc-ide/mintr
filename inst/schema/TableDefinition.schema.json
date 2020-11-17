@@ -7,10 +7,7 @@
       "properties": {
         "valueCol": {"type": "string"},
         "displayName": {"type": "string"},
-        "valueTransform": {
-          "type": "array",
-          "items": {"type": "string"}
-        },
+        "valueTransform": {"type": "object"},
         "format": {"type": "string"}
       },
       "additionalProperties": false,
