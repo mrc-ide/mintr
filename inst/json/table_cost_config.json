@@ -1,6 +1,18 @@
-{
-    "intervention": "Interventions",
-    "netUse": "Net use (%)",
-    "irsUse": "IRS cover (%)",
-    "casesAvertedPer1000": "Mean cases averted per 1,000 people per year (across 3 yrs since intervention)"
-}
+[
+  {
+    "valueCol": "intervention",
+    "displayName": "Interventions"
+  },
+  {
+    "valueCol": "netUse",
+    "displayName": "Net use (%)"
+  },
+  {
+    "valueCol": "irsUse",
+    "displayName": "IRS cover (%)"
+  },
+  {
+    "valueCol": "casesAvertedPer1000",
+    "displayName": "Mean cases averted per 1,000 people per year (across 3 yrs since intervention)"
+  }
+]
