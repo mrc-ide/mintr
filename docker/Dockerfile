@@ -18,7 +18,7 @@ RUN install2.r --error \
 
 RUN installGithub.r \
         ropensci/jsonvalidate \
-        reside-ic/pkgapi
+        reside-ic/porcelain
 
 WORKDIR /mintr
 

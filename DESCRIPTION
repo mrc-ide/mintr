@@ -1,6 +1,6 @@
 Package: mintr
 Title: API for 'MINT'
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: c(person("Rich", "FitzJohn", role = c("aut", "cre"),
                     email = "rich.fitzjohn@gmail.com"),
              person("Alex", "Hill", role = "aut"),
@@ -15,7 +15,7 @@ LazyData: true
 Imports:
     docopt,
     jsonlite,
-    pkgapi,
+    porcelain,
     thor
 Suggests:
     glue,
@@ -23,5 +23,5 @@ Suggests:
     mockery,
     testthat
 Remotes:
-    reside-ic/pkgapi,
+    reside-ic/porcelain,
     ropensci/jsonvalidate
