@@ -4,7 +4,7 @@ api_run <- function(port, db) {
 
 
 api_build <- function(db) {
-  pr <- pkgapi::pkgapi$new()
+  pr <- porcelain::porcelain$new()
   pr$handle(endpoint_root())
   pr$handle(endpoint_baseline_options())
   pr$handle(endpoint_graph_prevalence_data(db))
@@ -22,7 +22,7 @@ api_build <- function(db) {
 
 ## Every endpoint comes as a pair of functions:
 ##
-## * an endpoint generator function, which returns a pkgapi_endpoint
+## * an endpoint generator function, which returns a porcelain_endpoint
 ##   object
 ## * a target function, which carries out the request
 ##
@@ -32,10 +32,10 @@ api_build <- function(db) {
 ## still.
 
 endpoint_root <- function() {
-  pkgapi::pkgapi_endpoint$new("GET",
-                              "/",
-                              target_root,
-                              returning = pkgapi::pkgapi_returning_json())
+  porcelain::porcelain_endpoint$new("GET",
+                                    "/",
+                                    target_root,
+                                    returning = porcelain::porcelain_returning_json())
 }
 
 
@@ -48,10 +48,10 @@ target_root <- function() {
 ## directly from from inst/json - however, it's possible that the
 ## /config endpoints will stay like this as it's not terrible to edit.
 endpoint_baseline_options <- function() {
-  pkgapi::pkgapi_endpoint$new(
+  porcelain::porcelain_endpoint$new(
     "GET", "/baseline/options", target_baseline_options,
-    returning = pkgapi::pkgapi_returning_json("DynamicFormOptions.schema",
-                                              schema_root()))
+    returning = porcelain::porcelain_returning_json("DynamicFormOptions.schema",
+                                                    schema_root()))
 }
 
 
@@ -61,10 +61,10 @@ target_baseline_options <- function() {
 
 
 endpoint_graph_prevalence_config <- function() {
-  pkgapi::pkgapi_endpoint$new(
+  porcelain::porcelain_endpoint$new(
     "GET", "/graph/prevalence/config", target_graph_prevalence_config,
-    returning = pkgapi::pkgapi_returning_json("Graph.schema",
-                                              schema_root()))
+    returning = porcelain::porcelain_returning_json("Graph.schema",
+                                                    schema_root()))
 }
 
 
@@ -75,11 +75,11 @@ target_graph_prevalence_config <- function() {
 
 endpoint_graph_prevalence_data <- function(db) {
   root <- schema_root()
-  pkgapi::pkgapi_endpoint$new(
+  porcelain::porcelain_endpoint$new(
     "POST", "/graph/prevalence/data",
     target_graph_prevalence_data(db),
-    pkgapi::pkgapi_input_body_json("options", "DataOptions.schema", root),
-    returning = pkgapi::pkgapi_returning_json("Data.schema", root))
+    porcelain::porcelain_input_body_json("options", "DataOptions.schema", root),
+    returning = porcelain::porcelain_returning_json("Data.schema", root))
 }
 
 
@@ -92,10 +92,10 @@ target_graph_prevalence_data <- function(db) {
 
 
 endpoint_table_impact_config <- function() {
-  pkgapi::pkgapi_endpoint$new(
+  porcelain::porcelain_endpoint$new(
     "GET", "/table/impact/config", target_table_impact_config,
-    returning = pkgapi::pkgapi_returning_json("TableDefinition.schema",
-                                              schema_root()))
+    returning = porcelain::porcelain_returning_json("TableDefinition.schema",
+                                                    schema_root()))
 }
 
 
@@ -105,10 +105,10 @@ target_table_impact_config <- function() {
 
 
 endpoint_table_cost_config <- function() {
-  pkgapi::pkgapi_endpoint$new(
+  porcelain::porcelain_endpoint$new(
     "GET", "/table/cost/config", target_table_cost_config,
-    returning = pkgapi::pkgapi_returning_json("TableDefinition.schema",
-                                              schema_root()))
+    returning = porcelain::porcelain_returning_json("TableDefinition.schema",
+                                                    schema_root()))
 }
 
 
@@ -119,10 +119,10 @@ target_table_cost_config <- function() {
 
 endpoint_table_data <- function() {
   root <- schema_root()
-  pkgapi::pkgapi_endpoint$new(
+  porcelain::porcelain_endpoint$new(
     "POST", "/table/data", target_table_data,
-    pkgapi::pkgapi_input_body_json("options", "DataOptions.schema", root),
-    returning = pkgapi::pkgapi_returning_json("Data.schema", root))
+    porcelain::porcelain_input_body_json("options", "DataOptions.schema", root),
+    returning = porcelain::porcelain_returning_json("Data.schema", root))
 }
 
 
@@ -133,23 +133,23 @@ target_table_data <- function(options) {
 
 
 endpoint_graph_cost_cases_averted_config <- function() {
-  pkgapi::pkgapi_endpoint$new(
+  porcelain::porcelain_endpoint$new(
     "GET", "/graph/cost/cases-averted/config", target_graph_cost_cases_averted_config,
-    returning = pkgapi::pkgapi_returning_json("Graph.schema",
-                                              schema_root()))
+    returning = porcelain::porcelain_returning_json("Graph.schema",
+                                                    schema_root()))
 }
 
 
 target_graph_cost_cases_averted_config <- function() {
   read_json(mintr_path("json/graph_cost_cases_averted_config.json"))
 }
- 
+
 
 endpoint_graph_cost_efficacy_config <- function() {
-  pkgapi::pkgapi_endpoint$new(
+  porcelain::porcelain_endpoint$new(
     "GET", "/graph/cost/efficacy/config", target_graph_cost_efficacy_config,
-    returning = pkgapi::pkgapi_returning_json("Graph.schema",
-                                              schema_root()))
+    returning = porcelain::porcelain_returning_json("Graph.schema",
+                                                    schema_root()))
 }
 
 
@@ -160,9 +160,9 @@ target_graph_cost_efficacy_config <- function() {
 
 endpoint_intervention_options <- function() {
   root <- schema_root()
-  pkgapi::pkgapi_endpoint$new(
+  porcelain::porcelain_endpoint$new(
     "GET", "/intervention/options", target_intervention_options,
-    returning = pkgapi::pkgapi_returning_json("DynamicFormOptions.schema", root))
+    returning = porcelain::porcelain_returning_json("DynamicFormOptions.schema", root))
 }
 
 
@@ -172,10 +172,10 @@ target_intervention_options <- function() {
 
 
 endpoint_graph_cases_averted_config <- function() {
-  pkgapi::pkgapi_endpoint$new(
+  porcelain::porcelain_endpoint$new(
     "GET", "/graph/impact/cases-averted/config", target_graph_cases_averted_config,
-    returning = pkgapi::pkgapi_returning_json("Graph.schema",
-                                              schema_root()))
+    returning = porcelain::porcelain_returning_json("Graph.schema",
+                                                    schema_root()))
 }
 
 
