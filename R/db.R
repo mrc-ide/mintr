@@ -57,7 +57,8 @@ mintr_db_paths <- function(path) {
   list(db = file.path(path, "mintr.db"),
        db_lock = file.path(path, "mintr.db-lock"),
        index = file.path(path, "index.rds"),
-       prevalence = file.path(path, "prevalence.rds"))
+       prevalence = file.path(path, "prevalence.rds"),
+       table = file.path(path, "table.rds"))
 }
 
 
