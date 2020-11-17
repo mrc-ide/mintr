@@ -28,6 +28,27 @@ test_that("Can create db", {
 })
 
 
+test_that("Can read table data", {
+  db <- mintr_test_db()
+  options <- list(seasonalityOfTransmission = "seasonal",
+                  currentPrevalence = "med",
+                  bitingIndoors = "high",
+                  bitingPeople = "low",
+                  levelOfResistance = "80%",
+                  itnUsage = "20%",
+                  sprayInput = "0%")
+  d <- db$get_table(options)
+  expect_s3_class(d, "data.frame")
+  expect_equal(nrow(d), 120)
+  ## TODO: this will be fixed once we have the real data
+  expect_setequal(
+    names(d),
+    c("netUse", "irsUse", "netType", "intervention", "prev_1_yr_pre",
+      "prevYear1", "prevYear2", "prevYear3", "cases_per_person_3_year",
+      "reductionInPrevalence", "casesAverted", "casesAvertedPer1000"))
+})
+
+
 test_that("error if db not present", {
   expect_error(
     mintr_db_open(tempfile()),

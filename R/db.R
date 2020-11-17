@@ -26,7 +26,7 @@ mintr_db <- R6::R6Class(
       private$docs <- docs
     },
 
-    get_prevalence = function(options) {
+    get_index = function(options) {
       nms <- setdiff(names(options), private$ignore)
       assert_setequal(nms, private$baseline, "names(options)")
       valid <- rep(TRUE, nrow(private$index))
@@ -38,7 +38,11 @@ mintr_db <- R6::R6Class(
         }
       }
       stopifnot(sum(valid) == 1L) # this will always be true
-      key <- private$index$index[valid]
+      private$index$index[valid]
+    },
+
+    get_prevalence = function(options) {
+      key <- self$get_index(options)
       unserialize(private$db$get(sprintf("prevalence:%s", key)))
     },
 
@@ -48,6 +52,11 @@ mintr_db <- R6::R6Class(
 
     get_cost_docs = function() {
       private$docs$cost
+    },
+
+    get_table = function(options) {
+      key <- self$get_index(options)
+      unserialize(private$db$get(sprintf("table:%s", key)))
     }
   ))
 

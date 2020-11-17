@@ -73,7 +73,23 @@ mintr_db_process <- function(path) {
 
   tr <- c(netUse = "switch_nets",
           irsUse = "switch_irs",
-          netType = "NET_type")
+          netType = "NET_type",
+          casesAverted = "cases_averted",
+          casesAvertedPer1000 = "cases_averted_relative",
+          ## casesAvertedPer1000ErrorPlus = "??",
+          ## casesAvertedPer1000ErrorMinus = "??",
+          prevYear1 = "prev_1_yr_post",
+          prevYear2 = "prev_2_yr_post",
+          prevYear3 = "prev_3_yr_post",
+          reductionInPrevalence = "relative_reduction_prev"
+          ## reductionInCases = "??",
+          ## reductionInCasesErrorPlus = "??",
+          ## reductionInCasesErrorMinus = "??",
+          ## meanCases = "??",
+          ## ?? = "prev_1_yr_pre",
+          ## ?? = "cases_per_person_3_year"
+          )
+
   table <- rename(table, unname(tr), names(tr))
   table$netType <- relevel(table$netType, c(std = 1, pto = 2))
   table$intervention <- relevel(table$intervention,
