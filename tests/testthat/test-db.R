@@ -16,7 +16,7 @@ test_that("Can create db", {
   expect_equal(nrow(d), 120 * 61)
   expect_setequal(
     names(d),
-    c("month", "netUse", "irsUse", "netType", "intervention", "value"))
+    c("month", "netUse", "irsUse", "intervention", "value"))
 })
 
 
