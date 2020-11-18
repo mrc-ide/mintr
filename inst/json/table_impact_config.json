@@ -1,13 +1,46 @@
-{
-    "intervention": "Interventions",
-    "netUse": "Net use (%)",
-    "irsUse": "IRS cover (%)",
-    "prevYear1": "Prevalence Under 10 yrs: Yr 1 post intervention",
-    "prevYear2": "Prevalence Under 10 yrs: Yr 2 post intervention",
-    "prevYear3": "Prevalence Under 10 yrs: Yr 3 post intervention",
-    "reductionInPrevalence": "Relative reduction in prevalence in under 10 years (%)",
-    "casesAverted": "Mean cases averted across 3 yrs since intervention",
-    "casesAvertedPer1000": "Mean cases averted per 1000 people across 3 yrs since intervention",
-    "reductionInCases": "Relative reduction in clinical cases across 3 yrs since intervention (%)",
-    "meanCases": "Mean cases per person per year across 3 yrs"
-}
+[
+  {
+    "valueCol": "intervention",
+    "displayName": "Interventions"
+  },
+  {
+    "valueCol": "netUse",
+    "displayName": "Net use (%)"
+  },
+  {
+    "valueCol": "irsUse",
+    "displayName": "IRS cover (%)"
+  },
+  {
+    "valueCol": "prevYear1",
+    "displayName": "Prevalence Under 10 yrs: Yr 1 post intervention"
+  },
+  {
+    "valueCol": "prevYear2",
+    "displayName": "Prevalence Under 10 yrs: Yr 2 post intervention"
+  },
+  {
+    "valueCol": "prevYear3",
+    "displayName": "Prevalence Under 10 yrs: Yr 3 post intervention"
+  },
+  {
+    "valueCol": "reductionInPrevalence",
+    "displayName": "Relative reduction in prevalence in under 10 years (%)"
+  },
+  {
+    "valueCol": "casesAverted",
+    "displayName": "Mean cases averted across 3 yrs since intervention"
+  },
+  {
+    "valueCol": "casesAvertedPer1000",
+    "displayName": "Mean cases averted per 1000 people across 3 yrs since intervention"
+  },
+  {
+    "valueCol": "reductionInCases",
+    "displayName": "Relative reduction in clinical cases across 3 yrs since intervention (%)"
+  },
+  {
+    "valueCol": "meanCases",
+    "displayName": "Mean cases per person per year across 3 yrs"
+  }
+]

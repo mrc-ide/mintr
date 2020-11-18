@@ -1,5 +1,23 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "type": "object",
-  "additionalProperties": true
+  "type": "array",
+  "definitions": {
+    "columnDefinition": {
+      "type": "object",
+      "properties": {
+        "valueCol": {"type": "string"},
+        "displayName": {"type": "string"},
+        "valueTransform": {"type": "object"},
+        "format": {"type": "string"}
+      },
+      "additionalProperties": false,
+      "required": [
+        "valueCol",
+        "displayName"
+      ]
+    }
+  },
+  "items": {
+    "$ref": "#/definitions/columnDefinition"
+  }
 }
