@@ -20,7 +20,7 @@
     "displayName": "IRS cover (%)"
   },
   {
-    "valueCol": "casesAverted",
+    "valueCol": "casesAvertedPer1000",
     "displayName": "Mean cases averted per 1,000 people per year (across 3 yrs since intervention)"
   },
   {
