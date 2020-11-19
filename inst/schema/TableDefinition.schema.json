@@ -8,7 +8,8 @@
         "valueCol": {"type": "string"},
         "displayName": {"type": "string"},
         "valueTransform": {"type": "object"},
-        "format": {"type": "string"}
+        "format": {"type": "string"},
+        "precision": {"type":  "number"}
       },
       "additionalProperties": false,
       "required": [
