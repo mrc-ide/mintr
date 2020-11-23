@@ -1,6 +1,58 @@
 {
     "controlSections": [
         {
+            "label": "Intervention coverage potential",
+            "controlGroups": [
+                {
+                    "controls": [
+                        {
+                            "name": "netUse",
+                            "label": "Expected ITN population use given access",
+                            "type": "select",
+                            "explicitOptionsOnly": true,
+                            "required": true,
+                            "helpText": "Explore the impact of different ITNs given the expected use of nets by the community (the percentage of people sleeping under ITN). A single expected usage can be selected to represent expected ITN use immediately after a mass distribution campaign. The impact of standard pyrethroid only ITNs or PBO ITNs are show (only one net type is implemented for any single scenario).",
+                            "options": [
+                                {"id": "0", "label": "0% usage"},
+                                {"id": "0.2", "label": "20% usage"},
+                                {"id": "0.3", "label": "30% usage"},
+                                {"id": "0.4", "label": "40% usage"},
+                                {"id": "0.5", "label": "50% usage"},
+                                {"id": "0.6", "label": "60% usage"},
+                                {"id": "0.7", "label": "70% usage"},
+                                {"id": "0.8", "label": "80% usage"},
+                                {"id": "0.9", "label": "90% usage"},
+                                {"id": "1", "label": "100% usage"}
+                            ],
+                            "value": "0"
+                        }
+                    ]
+                },
+                {
+                    "controls": [
+                        {
+                            "name": "irsUse",
+                            "label": "Expected IRS coverage",
+                            "type": "select",
+                            "explicitOptionsOnly": true,
+                            "required": true,
+                            "helpText": "Indoor residual spraying can be added to areas in addition of any ITN scenarios selected. Houses to receive IRS are selected at random (irrespective of ITN coverage) and coverage estimates represents the percentage of the population living in houses with IRS. Care should be taken interpreting results as IRS is often highly clustered within smaller geographical areas. The model predicts the impact of a long-lasting IRS product (for example Actellic 300CS or Sumishield) and is repeated annually prior to the peak of the transmission season (if 'seasonal' transmission setting selected).",
+                            "options": [
+                                {"id": "0", "label": "0% coverage"},
+                                {"id": "0.6", "label": "60% coverage"},
+                                {"id": "0.7", "label": "70% coverage"},
+                                {"id": "0.8", "label": "80% coverage"},
+                                {"id": "0.9", "label": "90% coverage"},
+                                {"id": "1", "label": "100% coverage"}
+                            ],
+                            "value": "0"
+                        }
+                    ]
+                }
+            ],
+            "collapsible": true
+        },
+        {
             "label": "Procurement and distribution",
             "controlGroups": [
                 {
@@ -25,7 +77,8 @@
                         }
                     ]
                 }
-            ]
+            ],
+            "collapsible": true
         },
         {
             "label": "Price of interventions",
@@ -98,56 +151,8 @@
                         }
                     ]
                 }
-            ]
-        },
-        {
-            "label": "Intervention coverage potential",
-            "controlGroups": [
-                {
-                    "controls": [
-                        {
-                            "name": "netUse",
-                            "label": "Expected ITN population use given access",
-                            "type": "select",
-                            "required": true,
-                            "helpText": "Explore the impact of different ITNs given the expected use of nets by the community (the percentage of people sleeping under ITN). A single expected usage can be selected to represent expected ITN use immediately after a mass distribution campaign. The impact of standard pyrethroid only ITNs or PBO ITNs are show (only one net type is implemented for any single scenario).",
-                            "options": [
-                                {"id": "0", "label": "0% usage"},
-                                {"id": "0.2", "label": "20% usage"},
-                                {"id": "0.3", "label": "30% usage"},
-                                {"id": "0.4", "label": "40% usage"},
-                                {"id": "0.5", "label": "50% usage"},
-                                {"id": "0.6", "label": "60% usage"},
-                                {"id": "0.7", "label": "70% usage"},
-                                {"id": "0.8", "label": "80% usage"},
-                                {"id": "0.9", "label": "90% usage"},
-                                {"id": "1", "label": "100% usage"}
-                            ],
-                            "value": "0"
-                        }
-                    ]
-                },
-                {
-                    "controls": [
-                        {
-                            "name": "irsUse",
-                            "label": "Expected IRS coverage",
-                            "type": "select",
-                            "required": true,
-                            "helpText": "Indoor residual spraying can be added to areas in addition of any ITN scenarios selected. Houses to receive IRS are selected at random (irrespective of ITN coverage) and coverage estimates represents the percentage of the population living in houses with IRS. Care should be taken interpreting results as IRS is often highly clustered within smaller geographical areas. The model predicts the impact of a long-lasting IRS product (for example Actellic 300CS or Sumishield) and is repeated annually prior to the peak of the transmission season (if 'seasonal' transmission setting selected).",
-                            "options": [
-                                {"id": "0", "label": "0% coverage"},
-                                {"id": "0.6", "label": "60% coverage"},
-                                {"id": "0.7", "label": "70% coverage"},
-                                {"id": "0.8", "label": "80% coverage"},
-                                {"id": "0.9", "label": "90% coverage"},
-                                {"id": "1", "label": "100% coverage"}
-                            ],
-                            "value": "0"
-                        }
-                    ]
-                }
-            ]
+            ],
+            "collapsible": true
         }
     ]
 }
