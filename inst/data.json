@@ -1,9 +1,9 @@
 {
     "root": "https://mrcdata.dide.ic.ac.uk/mint",
-    "directory": "20201021",
+    "directory": "20201123",
     "files": {
-        "index": "data_index_tool_3rd_rds_v2_20201021.rds",
-        "prevalence": "data_values_tool_3rd_rds_v2_20201021.rds",
-        "table": "aggregate_data_tool_3rd_rds_v2_20201021.rds"
+        "index": "data_index_agg_uncertainty_rerun_20201123.rds",
+        "prevalence": "data_values_agg_uncertainty_rerun_20201123.rds",
+        "table": "data_aggregate_agg_uncertainty_rerun_20201123.rds"
     }
 }

@@ -76,24 +76,37 @@ mintr_db_process <- function(path) {
           netType = "NET_type",
           casesAverted = "cases_averted",
           casesAvertedPer1000 = "cases_averted_relative",
-          ## casesAvertedPer1000ErrorPlus = "??",
-          ## casesAvertedPer1000ErrorMinus = "??",
           prevYear1 = "prev_1_yr_post",
           prevYear2 = "prev_2_yr_post",
           prevYear3 = "prev_3_yr_post",
-          reductionInPrevalence = "relative_reduction_prev"
-          ## reductionInCases = "??",
-          ## reductionInCasesErrorPlus = "??",
-          ## reductionInCasesErrorMinus = "??",
-          ## meanCases = "??",
-          ## ?? = "prev_1_yr_pre",
-          ## ?? = "cases_per_person_3_year"
-          )
-
+          reductionInPrevalence = "relative_reduction_prev",
+          reductionInCases = "reduction_in_cases_all_3_years",
+          meanCases = "cases_per_person_3_year")
   table <- rename(table, unname(tr), names(tr))
+
+  t_low <- table[table$uncertainty == "low", ]
+  t_high <- table[table$uncertainty == "high", ]
+  table <- table[table$uncertainty == "mean", ]
+  ## Check that our tables align so that the uncertainty calculations
+  ## can be added:
+  rownames(table) <- rownames(t_low) <- rownames(t_high) <- NULL
+  v_index <- c("index", "netUse", "irsUse", "netType", "intervention")
+  stopifnot(identical(table[v_index], t_low[v_index]),
+            identical(table[v_index], t_high[v_index]))
+
+  v_uncertainty <- c("casesAvertedPer1000", "reductionInCases")
+  for (v in v_uncertainty) {
+    table[[paste0(v, "ErrorMinus")]] <- t_low[[v]]
+    table[[paste0(v, "ErrorPlus")]] <- t_high[[v]]
+  }
+
   table$netType <- relevel(table$netType, c(std = 1, pto = 2))
   table$intervention <- relevel(table$intervention,
                                 import_intervention_map())
+
+  drop <- c("uncertainty", grep("_", names(table), value = TRUE))
+  table <- table[setdiff(names(table), drop)]
+
   saveRDS(table, paths$table)
 }
 
