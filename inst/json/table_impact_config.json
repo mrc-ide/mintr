@@ -1,7 +1,15 @@
 [
   {
     "valueCol": "intervention",
-    "displayName": "Interventions"
+    "displayName": "Interventions",
+    "valueTransform": {
+      "none": "'none'",
+      "llin": "'Standard ITN'",
+      "llin-pbo": "'PBO ITN'",
+      "irs": "'Only IRS'",
+      "irs-llin": "'Standard ITN + IRS'",
+      "irs-llin-pbo": "'PBO ITN + IRS'"
+    }
   },
   {
     "valueCol": "netUse",
