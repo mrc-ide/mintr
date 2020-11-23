@@ -43,9 +43,12 @@ test_that("Can read table data", {
   ## TODO: this will be fixed once we have the real data
   expect_setequal(
     names(d),
-    c("netUse", "irsUse", "netType", "intervention", "prev_1_yr_pre",
-      "prevYear1", "prevYear2", "prevYear3", "cases_per_person_3_year",
-      "reductionInPrevalence", "casesAverted", "casesAvertedPer1000"))
+    c("netUse", "irsUse", "netType", "intervention", "prevYear1",
+      "prevYear2", "prevYear3", "meanCases", "reductionInCases",
+      "reductionInPrevalence", "casesAverted",
+      "casesAvertedPer1000", "casesAvertedPer1000ErrorMinus",
+      "casesAvertedPer1000ErrorPlus", "reductionInCasesErrorMinus",
+      "reductionInCasesErrorPlus"))
 })
 
 
@@ -160,5 +163,5 @@ test_that("docker build filters files", {
 
   mintr_db_docker(tmp)
 
-  expect_setequal(dir(tmp), c("index.rds", "prevalence.rds"))
+  expect_setequal(dir(tmp), c("index.rds", "prevalence.rds", "table.rds"))
 })
