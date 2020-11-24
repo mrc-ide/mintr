@@ -1,7 +1,15 @@
 [
   {
     "valueCol": "intervention",
-    "displayName": "Interventions"
+    "displayName": "Interventions",
+    "valueTransform": {
+      "none": "'none'",
+      "llin": "'Standard ITN'",
+      "llin-pbo": "'PBO ITN'",
+      "irs": "'Only IRS'",
+      "irs-llin": "'Standard ITN + IRS'",
+      "irs-llin-pbo": "'PBO ITN + IRS'"
+    }
   },
   {
     "valueCol": "netUse",
@@ -29,7 +37,7 @@
   },
   {
     "valueCol": "casesAverted",
-    "displayName": "Mean cases averted across 3 yrs since intervention"
+    "displayName": "Mean cases averted per population per year across 3 yrs since intervention"
   },
   {
     "valueCol": "casesAvertedPer1000",
