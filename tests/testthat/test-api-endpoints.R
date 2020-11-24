@@ -243,7 +243,7 @@ test_that("impact docs", {
   res <- target_impact_intepretation()
   expect_is(res, "json")
   expect_identical(res,
-                   read_json(mintr_path("json/impact_docs.json")))
+                   read_string_as_json(mintr_path("json/impact_docs.html")))
 
   endpoint <- endpoint_impact_intepretation()
   res_endpoint <- endpoint$run()
@@ -253,6 +253,25 @@ test_that("impact docs", {
 
   api <- api_build(mintr_test_db())
   res_api <- api$request("GET", "/docs/impact")
+  expect_equal(res_api$status, 200)
+  expect_equal(res_api$body, res_endpoint$body)
+})
+
+
+test_that("cost docs", {
+  res <- target_cost_intepretation()
+  expect_is(res, "json")
+  expect_identical(res,
+                   read_string_as_json(mintr_path("json/cost_docs.html")))
+
+  endpoint <- endpoint_cost_intepretation()
+  res_endpoint <- endpoint$run()
+  expect_equal(res_endpoint$status_code, 200)
+  expect_equal(res_endpoint$content_type, "application/json")
+  expect_equal(res_endpoint$data, res)
+
+  api <- api_build(mintr_test_db())
+  res_api <- api$request("GET", "/docs/cost")
   expect_equal(res_api$status, 200)
   expect_equal(res_api$body, res_endpoint$body)
 })

@@ -21,6 +21,14 @@ read_json <- function(path) {
 }
 
 
+read_string_as_json <- function(path) {
+  str <- paste(readLines(path), collapse = "\n")
+  str <- paste0("\"", str, "\"")
+  class(str) <- "json"
+  str
+}
+
+
 vcapply <- function(x, fun, ...) {
   vapply(x, fun, character(1), ...)
 }

@@ -17,6 +17,7 @@ api_build <- function(db) {
   pr$handle(endpoint_intervention_options())
   pr$handle(endpoint_graph_cases_averted_config())
   pr$handle(endpoint_impact_intepretation())
+  pr$handle(endpoint_cost_intepretation())
   pr
 }
 
@@ -194,5 +195,18 @@ endpoint_impact_intepretation <- function() {
 
 
 target_impact_intepretation <- function() {
-  read_json(mintr_path("json/impact_docs.json"))
+  read_string_as_json(mintr_path("json/impact_docs.html"))
+}
+
+
+endpoint_cost_intepretation <- function() {
+  porcelain::porcelain_endpoint$new(
+    "GET", "/docs/cost", target_cost_intepretation,
+    returning = porcelain::porcelain_returning_json("Docs.schema",
+                                                    schema_root()))
+}
+
+
+target_cost_intepretation <- function() {
+  read_string_as_json(mintr_path("json/cost_docs.html"))
 }
