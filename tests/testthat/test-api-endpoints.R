@@ -240,6 +240,7 @@ test_that("graph cases averted config", {
 
 
 test_that("impact docs", {
+  knitr::pandoc(mintr_path("json/impact_docs.md"))
   res <- target_impact_intepretation()
   expect_is(res, "json")
   expect_identical(res,
@@ -259,6 +260,7 @@ test_that("impact docs", {
 
 
 test_that("cost docs", {
+  knitr::pandoc(mintr_path("json/cost_docs.md"))
   res <- target_cost_intepretation()
   expect_is(res, "json")
   expect_identical(res,
