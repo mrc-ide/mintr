@@ -26,7 +26,7 @@
             "required": [ "id", "label" ] 
           }
         },
-        "explicitOptionsOnly": { "type": "boolean" }
+        "excludeNullOption": { "type": "boolean" }
       },
       "additionalProperties": false,
       "required": [ "name", "type", "required" ]
