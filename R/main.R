@@ -18,10 +18,21 @@ main <- function(args = commandArgs(TRUE)) {
   ## ready for the API.
   message("Importing data")
   mintr_db_import(opts$data)
+  message("Compiling docs")
+  docs <- get_compiled_docs()
   message("Opening database")
-  db <- mintr_db_open(opts$data)
+  db <- mintr_db_open(opts$data, docs)
   message("Starting API")
   api_run(port, db)
+}
+
+
+get_compiled_docs <- function() {
+  impact <- readLines(mintr_path("json/impact_docs.md"))
+  impact_compiled <- commonmark::markdown_html(impact)
+  cost <- readLines(mintr_path("json/cost_docs.md"))
+  cost_compiled <- commonmark::markdown_html(cost)
+  docs <- list(impact = html_string_as_json(impact_compiled), cost = html_string_as_json(cost_compiled))
 }
 
 

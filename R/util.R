@@ -21,9 +21,8 @@ read_json <- function(path) {
 }
 
 
-read_string_as_json <- function(path) {
-  str <- paste(readLines(path), collapse = " ")
-  str <- gsub('"', '\'', str)
+html_string_as_json <- function(str) {
+  str <- gsub('\n', ' ', str)
   str <- paste0("\"", str, "\"")
   class(str) <- "json"
   str

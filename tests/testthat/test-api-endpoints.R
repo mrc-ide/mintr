@@ -240,19 +240,18 @@ test_that("graph cases averted config", {
 
 
 test_that("impact docs", {
-  knitr::pandoc(mintr_path("json/impact_docs.md"))
-  res <- target_impact_intepretation()
+  db <- mintr_test_db()
+  res <- target_impact_interpretation(db)()
   expect_is(res, "json")
-  expect_identical(res,
-                   read_string_as_json(mintr_path("json/impact_docs.html")))
+  expect_equal(res, db$get_impact_docs())
 
-  endpoint <- endpoint_impact_intepretation()
+  endpoint <- endpoint_impact_intepretation(db)
   res_endpoint <- endpoint$run()
   expect_equal(res_endpoint$status_code, 200)
   expect_equal(res_endpoint$content_type, "application/json")
   expect_equal(res_endpoint$data, res)
 
-  api <- api_build(mintr_test_db())
+  api <- api_build(db)
   res_api <- api$request("GET", "/docs/impact")
   expect_equal(res_api$status, 200)
   expect_equal(res_api$body, res_endpoint$body)
@@ -260,19 +259,18 @@ test_that("impact docs", {
 
 
 test_that("cost docs", {
-  knitr::pandoc(mintr_path("json/cost_docs.md"))
-  res <- target_cost_intepretation()
+  db <- mintr_test_db()
+  res <- target_cost_interpretation(db)()
   expect_is(res, "json")
-  expect_identical(res,
-                   read_string_as_json(mintr_path("json/cost_docs.html")))
+  expect_equal(res, db$get_cost_docs())
 
-  endpoint <- endpoint_cost_intepretation()
+  endpoint <- endpoint_cost_intepretation(db)
   res_endpoint <- endpoint$run()
   expect_equal(res_endpoint$status_code, 200)
   expect_equal(res_endpoint$content_type, "application/json")
   expect_equal(res_endpoint$data, res)
 
-  api <- api_build(mintr_test_db())
+  api <- api_build(db)
   res_api <- api$request("GET", "/docs/cost")
   expect_equal(res_api$status, 200)
   expect_equal(res_api$body, res_endpoint$body)

@@ -1,9 +1,9 @@
-mintr_db_open <- function(path) {
+mintr_db_open <- function(path, docs) {
   path_db <- mintr_db_paths(path)$db
   if (!file.exists(path_db)) {
     stop(sprintf("mintr database does not exist at '%s'", path_db))
   }
-  mintr_db$new(path_db)
+  mintr_db$new(path_db, docs)
 }
 
 
@@ -13,15 +13,17 @@ mintr_db <- R6::R6Class(
     index = NULL,
     ignore = NULL,
     db = NULL,
-    baseline = NULL
+    baseline = NULL,
+    docs = NULL
   ),
   public = list(
-    initialize = function(path) {
+    initialize = function(path, docs) {
       private$db <- thor::mdb_env(path, readonly = TRUE, lock = FALSE,
                                   subdir = FALSE)
       private$index <- unserialize(private$db$get("index"))
       private$baseline <- setdiff(names(private$index), "index")
       private$ignore <- unserialize(private$db$get("ignore"))
+      private$docs <- docs
     },
 
     get_prevalence = function(options) {
@@ -38,6 +40,14 @@ mintr_db <- R6::R6Class(
       stopifnot(sum(valid) == 1L) # this will always be true
       key <- private$index$index[valid]
       unserialize(private$db$get(sprintf("prevalence:%s", key)))
+    },
+
+    get_impact_docs = function() {
+      private$docs$impact
+    },
+
+    get_cost_docs = function() {
+      private$docs$cost
     }
   ))
 
