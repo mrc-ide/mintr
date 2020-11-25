@@ -43,7 +43,8 @@ mintr_db <- R6::R6Class(
 
     get_prevalence = function(options) {
       key <- self$get_index(options)
-      unserialize(private$db$get(sprintf("prevalence:%s", key)))
+      ret <- unserialize(private$db$get(sprintf("prevalence:%s", key)))
+      mintr_db_transform_metabolic(ret, options$metabolic)
     },
 
     get_impact_docs = function() {
@@ -58,7 +59,7 @@ mintr_db <- R6::R6Class(
       key <- self$get_index(options)
       ret <- unserialize(private$db$get(sprintf("table:%s", key)))
       ret$casesAverted <- ret$casesAverted * options$population
-      ret
+      mintr_db_transform_metabolic(ret, options$metabolic)
     }
   ))
 
@@ -132,4 +133,23 @@ mint_intervention <- function(net_use, irs_use, net_type) {
   ## Use bit packing to get the above relationship:
   i <- (net_use > 0) + (irs_use > 0) * 2 + (net_type == "pto") * 4 + 1
   intervention[i]
+}
+
+
+## The metabolic switch controls the effect of the pbo net
+## synergy. When not used (metabolic as "no"), then we basically just
+## over-write the values for PBO interventions with non-PBO
+## interventions. This means that `llin-pbo` is set the same as for
+## `llin` (and similarly for `irs-llin-pbo`/`irs-llin`).
+mintr_db_transform_metabolic <- function(d, metabolic) {
+  if (metabolic == "no") {
+    cols <- setdiff(names(d), "intervention")
+    for (intervention in c("llin-pbo", "irs-llin-pbo")) {
+      i_dest <- d$intervention == intervention
+      i_src <- d$intervention == sub("-pbo$", "", intervention)
+      stopifnot(sum(i_dest) == sum(i_src))
+      d[i_dest, cols] <- d[i_src, cols]
+    }
+  }
+  d
 }

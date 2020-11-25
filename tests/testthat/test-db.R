@@ -11,6 +11,7 @@ test_that("Can create db", {
                   levelOfResistance = "80%",
                   itnUsage = "20%",
                   sprayInput = "0%",
+                  metabolic = "yes",
                   population = 1000)
   d <- db$get_prevalence(options)
   expect_s3_class(d, "data.frame")
@@ -38,6 +39,7 @@ test_that("Can read table data", {
                   levelOfResistance = "80%",
                   itnUsage = "20%",
                   sprayInput = "0%",
+                  metabolic = "yes",
                   population = 1000)
   d <- db$get_table(options)
   expect_s3_class(d, "data.frame")
@@ -61,27 +63,6 @@ test_that("error if db not present", {
 })
 
 
-test_that("can ignore some keys", {
-  options <- list(seasonalityOfTransmission = "seasonal",
-                  currentPrevalence = "med",
-                  bitingIndoors = "high",
-                  bitingPeople = "low",
-                  levelOfResistance = "80%",
-                  itnUsage = "20%",
-                  sprayInput = "0%")
-  db <- mintr_test_db()
-  expect_identical(
-    db$get_prevalence(c(options, population = 1000)),
-    db$get_prevalence(options))
-  expect_identical(
-    db$get_prevalence(c(options, population = 1000, metabolic = "yes")),
-    db$get_prevalence(options))
-  expect_error(
-    db$get_prevalence(c(options, population = 1000, meta = "yes")),
-    "Unexpected: meta")
-})
-
-
 test_that("throw error if accessing impossible data", {
   db <- mintr_test_db()
   expect_error(db$get_prevalence(list()),
@@ -93,7 +74,9 @@ test_that("throw error if accessing impossible data", {
                   bitingPeople = "really-high",
                   levelOfResistance = "80%",
                   itnUsage = "20%",
-                  sprayInput = "0%")
+                  sprayInput = "0%",
+                  population = 1000,
+                  metabolic = "yes")
   expect_error(db$get_prevalence(options),
                "No matching value 'really-high' for option 'bitingPeople'")
 })
@@ -178,6 +161,7 @@ test_that("Can scale table results by population", {
                   levelOfResistance = "80%",
                   itnUsage = "20%",
                   sprayInput = "0%",
+                  metabolic = "yes"
                   population = 1)
   d1 <- db$get_table(options)
   d1000 <- db$get_table(modifyList(options, list(population = 1000)))
@@ -185,4 +169,58 @@ test_that("Can scale table results by population", {
   v <- setdiff(names(d1), "casesAverted")
   expect_equal(d1000[v], d1[v])
   expect_equal(d1000$casesAverted, d1$casesAverted * 1000)
+})
+
+
+test_that("Can get non-metabolic table data", {
+  db <- mintr_test_db()
+  options <- list(seasonalityOfTransmission = "seasonal",
+                  currentPrevalence = "med",
+                  bitingIndoors = "high",
+                  bitingPeople = "low",
+                  levelOfResistance = "80%",
+                  itnUsage = "20%",
+                  sprayInput = "0%",
+                  metabolic = "yes",
+                  population = 1)
+
+  cmp <- db$get_table(options)
+  res <- db$get_table(modifyList(options, list(metabolic = "no")))
+  expect_equal(dim(cmp), dim(res))
+  expect_equal(names(cmp), names(res))
+  expect_equal(res, mintr_db_transform_metabolic(cmp, "no"))
+  cols <- setdiff(names(res), "intervention")
+  expect_equal(res[res$intervention == "llin-pbo", cols],
+               res[res$intervention == "llin", cols],
+               check.attributes = FALSE)
+  expect_equal(res[res$intervention == "irs-llin-pbo", cols],
+               res[res$intervention == "irs-llin", cols],
+               check.attributes = FALSE)
+})
+
+
+test_that("Can get non-metabolic prevalence data", {
+  db <- mintr_test_db()
+  options <- list(seasonalityOfTransmission = "seasonal",
+                  currentPrevalence = "med",
+                  bitingIndoors = "high",
+                  bitingPeople = "low",
+                  levelOfResistance = "80%",
+                  itnUsage = "20%",
+                  sprayInput = "0%",
+                  metabolic = "yes",
+                  population = 1)
+
+  cmp <- db$get_prevalence(options)
+  res <- db$get_prevalence(modifyList(options, list(metabolic = "no")))
+  expect_equal(dim(cmp), dim(res))
+  expect_equal(names(cmp), names(res))
+  expect_equal(res, mintr_db_transform_metabolic(cmp, "no"))
+  cols <- setdiff(names(res), "intervention")
+  expect_equal(res[res$intervention == "llin-pbo", cols],
+               res[res$intervention == "llin", cols],
+               check.attributes = FALSE)
+  expect_equal(res[res$intervention == "irs-llin-pbo", cols],
+               res[res$intervention == "irs-llin", cols],
+               check.attributes = FALSE)
 })
