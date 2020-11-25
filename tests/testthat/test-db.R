@@ -161,7 +161,7 @@ test_that("Can scale table results by population", {
                   levelOfResistance = "80%",
                   itnUsage = "20%",
                   sprayInput = "0%",
-                  metabolic = "yes"
+                  metabolic = "yes",
                   population = 1)
   d1 <- db$get_table(options)
   d1000 <- db$get_table(modifyList(options, list(population = 1000)))
