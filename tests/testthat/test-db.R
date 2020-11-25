@@ -14,7 +14,7 @@ test_that("Can create db", {
                   population = 1000)
   d <- db$get_prevalence(options)
   expect_s3_class(d, "data.frame")
-  expect_equal(nrow(d), 120 * 61)
+  expect_equal(nrow(d), 119 * 61)
   expect_setequal(
     names(d),
     c("month", "netUse", "irsUse", "netType", "intervention", "value"))
@@ -41,7 +41,7 @@ test_that("Can read table data", {
                   population = 1000)
   d <- db$get_table(options)
   expect_s3_class(d, "data.frame")
-  expect_equal(nrow(d), 120)
+  expect_equal(nrow(d), 119)
   ## TODO: this will be fixed once we have the real data
   expect_setequal(
     names(d),
