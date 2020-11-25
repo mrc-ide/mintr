@@ -25,7 +25,8 @@
             "additionalProperties": false,
             "required": [ "id", "label" ] 
           }
-        }
+        },
+        "excludeNullOption": { "type": "boolean" }
       },
       "additionalProperties": false,
       "required": [ "name", "type", "required" ]
@@ -70,7 +71,9 @@
         "controlGroups": { 
           "type": "array", 
           "items": { "$ref": "#/definitions/controlGroup" }
-        }
+        },
+        "documentation": { "type":  "string"} ,
+        "collapsible": { "type":  "boolean"}
       },
       "additionalProperties": false,
       "required": [ "label", "controlGroups" ]

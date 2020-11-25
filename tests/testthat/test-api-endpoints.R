@@ -237,3 +237,41 @@ test_that("graph cases averted config", {
   expect_equal(res_api$status, 200)
   expect_equal(res_api$body, res_endpoint$body)
 })
+
+
+test_that("impact docs", {
+  db <- mintr_test_db()
+  res <- target_impact_interpretation(db)()
+  expect_is(res, "json")
+  expect_equal(res, db$get_impact_docs())
+
+  endpoint <- endpoint_impact_intepretation(db)
+  res_endpoint <- endpoint$run()
+  expect_equal(res_endpoint$status_code, 200)
+  expect_equal(res_endpoint$content_type, "application/json")
+  expect_equal(res_endpoint$data, res)
+
+  api <- api_build(db)
+  res_api <- api$request("GET", "/docs/impact")
+  expect_equal(res_api$status, 200)
+  expect_equal(res_api$body, res_endpoint$body)
+})
+
+
+test_that("cost docs", {
+  db <- mintr_test_db()
+  res <- target_cost_interpretation(db)()
+  expect_is(res, "json")
+  expect_equal(res, db$get_cost_docs())
+
+  endpoint <- endpoint_cost_intepretation(db)
+  res_endpoint <- endpoint$run()
+  expect_equal(res_endpoint$status_code, 200)
+  expect_equal(res_endpoint$content_type, "application/json")
+  expect_equal(res_endpoint$data, res)
+
+  api <- api_build(db)
+  res_api <- api$request("GET", "/docs/cost")
+  expect_equal(res_api$status, 200)
+  expect_equal(res_api$body, res_endpoint$body)
+})

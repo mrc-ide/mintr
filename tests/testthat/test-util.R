@@ -43,3 +43,4 @@ test_that("downloader can download a file", {
                 quiet = TRUE)
   expect_equal(readLines(dest), "second")
 })
+

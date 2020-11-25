@@ -7,6 +7,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         && rm -rf /var/lib/apt/lists/*
 
 RUN install2.r --error \
+        commonmark \
         R6 \
         glue \
         jsonlite \
@@ -23,6 +24,7 @@ RUN installGithub.r \
 WORKDIR /mintr
 
 COPY . /src
+
 RUN R CMD INSTALL /src && \
         Rscript -e 'mintr:::write_script("/usr/bin")' && \
         Rscript -e 'mintr:::mintr_db_docker("data")'

@@ -3,6 +3,7 @@ docs
 js/node_modules
 js/bundle*js
 inst/doc
+inst/*.html
 vignettes/*.html
 vignettes/*.R
 .V8history
