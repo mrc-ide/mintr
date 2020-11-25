@@ -10,7 +10,8 @@ test_that("Can create db", {
                   bitingPeople = "low",
                   levelOfResistance = "80%",
                   itnUsage = "20%",
-                  sprayInput = "0%")
+                  sprayInput = "0%",
+                  population = 1000)
   d <- db$get_prevalence(options)
   expect_s3_class(d, "data.frame")
   expect_equal(nrow(d), 120 * 61)
@@ -36,7 +37,8 @@ test_that("Can read table data", {
                   bitingPeople = "low",
                   levelOfResistance = "80%",
                   itnUsage = "20%",
-                  sprayInput = "0%")
+                  sprayInput = "0%",
+                  population = 1000)
   d <- db$get_table(options)
   expect_s3_class(d, "data.frame")
   expect_equal(nrow(d), 120)
@@ -164,4 +166,23 @@ test_that("docker build filters files", {
   mintr_db_docker(tmp)
 
   expect_setequal(dir(tmp), c("index.rds", "prevalence.rds", "table.rds"))
+})
+
+
+test_that("Can scale table results by population", {
+  db <- mintr_test_db()
+  options <- list(seasonalityOfTransmission = "seasonal",
+                  currentPrevalence = "med",
+                  bitingIndoors = "high",
+                  bitingPeople = "low",
+                  levelOfResistance = "80%",
+                  itnUsage = "20%",
+                  sprayInput = "0%",
+                  population = 1)
+  d1 <- db$get_table(options)
+  d1000 <- db$get_table(modifyList(options, list(population = 1000)))
+
+  v <- setdiff(names(d1), "casesAverted")
+  expect_equal(d1000[v], d1[v])
+  expect_equal(d1000$casesAverted, d1$casesAverted * 1000)
 })
