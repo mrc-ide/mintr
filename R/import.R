@@ -75,14 +75,22 @@ mintr_db_process <- function(path) {
           irsUse = "switch_irs",
           netType = "NET_type",
           casesAverted = "cases_averted",
-          casesAvertedPer1000 = "cases_averted_relative",
           prevYear1 = "prev_1_yr_post",
           prevYear2 = "prev_2_yr_post",
           prevYear3 = "prev_3_yr_post",
-          reductionInPrevalence = "relative_reduction_prev",
-          reductionInCases = "reduction_in_cases_all_3_years",
-          meanCases = "cases_per_person_3_year")
+          reductionInPrevalence = "relative_reduction_in_prevalence",
+          reductionInCases = "relative_reduction_in_cases",
+          meanCases = "cases_per_person_3_years")
   table <- rename(table, unname(tr), names(tr))
+
+  ## At this point casesAverted is really over 3 years and is cases
+  ## averted per person. This number can be greater than one as a
+  ## person can have more than one case per year. We remove the year
+  ## effect first:
+  table$casesAverted <- table$casesAverted / 3
+
+  ## Then compute the "per 1000" case before the uncertainty calculation:
+  table$casesAvertedPer1000 <- table$casesAverted * 1000
 
   t_low <- table[table$uncertainty == "low", ]
   t_high <- table[table$uncertainty == "high", ]
