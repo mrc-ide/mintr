@@ -22,6 +22,7 @@
               "name": "seasonalityOfTransmission",
               "label": "Seasonality of transmission",
               "type": "select",
+              "excludeNullOption": true,
               "required": true,
               "value": "seasonal",
               "helpText": "Seasonal: a district with a transmission season.<br/>Perennial: a district with transmission throughout the year.",
@@ -44,6 +45,7 @@
               "name": "currentPrevalence",
               "label": "Current malaria prevalence",
               "type": "select",
+              "excludeNullOption": true,
               "required": true,
               "value": "low",
               "helpText": "Low = less than 10% of children under 5-years have malaria<br/>Medium = approximately 30% of children under 5-years have malaria<br/>High = approximately 65% of children  under 5-years have malaria",
@@ -65,7 +67,7 @@
           ]
         }
       ],
-      "documentation": "<strong>Population size</strong><p>Enter the approximate population size of the district or sub-district to which vector control will be applied to enable incremental cost estimates of any change in vector control.</p><strong>Seasonality of transmission<strong><p>Select seasonal settings if the region of interest has a distinct transmission season or perennial if transmission is throughout the year.</p><strong>Current malaria prevalence<strong><p>Define the current endemicity of your setting as measured by the percentage of children 2-10 years of age who are diagnosed with falciparum malaria by microscopy. Available options are low (less than 10% of children have malaria), medium (approximately 30% of children have malaria), or high (approximately 65% of children have malaria) as measured during the transmission season.</p>"
+      "documentation": "<strong>Population size</strong><p>Enter the approximate population size of the district or sub-district to which vector control will be applied to enable incremental cost estimates of any change in vector control.</p><strong>Seasonality of transmission</strong><p>Select seasonal settings if the region of interest has a distinct transmission season or perennial if transmission is throughout the year.</p><strong>Current malaria prevalence<strong><p>Define the current endemicity of your setting as measured by the percentage of children 2-10 years of age who are diagnosed with falciparum malaria by microscopy. Available options are low (less than 10% of children have malaria), medium (approximately 30% of children have malaria), or high (approximately 65% of children have malaria) as measured during the transmission season.</p>"
     },
     {
       "label": "Mosquito Inputs",
@@ -76,6 +78,7 @@
               "name": "bitingIndoors",
               "label": "Preference for biting indoors",
               "type": "select",
+              "excludeNullOption": true,
               "required": true,
               "value": "high",
               "helpText": "High: indicates ~97% bites taken when people are indoors.<br/>Low: indicates ~78% bites taken when people are indoors.",
@@ -98,6 +101,7 @@
               "name": "bitingPeople",
               "label": "Preference for biting people",
               "type": "select",
+              "excludeNullOption": true,
               "required": true,
               "value": "low",
               "helpText": "High: ~92% of mosquito bites taken on humans.<br/>Low: ~74% of mosquito bites taken on humans.",
@@ -120,6 +124,7 @@
               "name": "levelOfResistance",
               "label": "Level of pyrethoid resistance",
               "type": "select",
+              "excludeNullOption": true,
               "required": true,
               "value": "0%",
               "helpText": "Mosquito survival in 24-hour WHO discriminatory dose bioassays.<br/>0% indicates all mosquitoes die and are susceptible to the pyrethroid insecticide in ITNs.<br/>100% indicates that no mosquitoes die or are susceptible to the pyrethroid insecticide in ITNs.<br/>Select the ranges that best represent the district. For example, if the district has susceptibility bioassay test estimates that range from 23% to 42% of mosquitoes being killed, then explore both 60% and 80% pyrethroid resistance scenarios.",
@@ -158,6 +163,7 @@
               "name": "metabolic",
               "label": "Evidence of PBO synergy",
               "type": "select",
+              "excludeNullOption": true,
               "required": true,
               "value": "yes",
               "helpText": "Yes: evidence that PBO (piperonyl butoxide) synergises pyrethroid insecticide.<br/>No: no evidence that PBO (piperonyl butoxide) synergises pyrethroid insecticide.",
@@ -186,6 +192,7 @@
               "name": "itnUsage",
               "label": "ITN population usage in last survey (%)",
               "type": "select",
+              "excludeNullOption": true,
               "required": true,
               "value": "0%",
               "helpText": "The current endemicity of a zone is partly determined by the performance and quantity of vector control leading up to now. This is required to approximate the efficacy of interventions moving forward.",
@@ -220,6 +227,7 @@
               "name": "sprayInput",
               "label": "What was the estimated coverage of spray campaign (last year)",
               "type": "select",
+              "excludeNullOption": true,
               "required": true,
               "value": "0%",
               "helpText": "If IRS was not used in the past year, select 0% coverage",

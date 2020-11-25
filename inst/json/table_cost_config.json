@@ -13,11 +13,13 @@
   },
   {
     "valueCol": "netUse",
-    "displayName": "Net use (%)"
+    "displayName": "Net use (%)",
+    "format": "0%"
   },
   {
     "valueCol": "irsUse",
-    "displayName": "IRS cover (%)"
+    "displayName": "IRS cover (%)",
+    "format": "0%"
   },
   {
     "valueCol": "casesAvertedPer1000",
