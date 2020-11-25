@@ -92,6 +92,10 @@ mintr_db_process <- function(path) {
   ## Then compute the "per 1000" case before the uncertainty calculation:
   table$casesAvertedPer1000 <- table$casesAverted * 1000
 
+  ## Convert these into as percentages, rounded to the nearest d.p.
+  table$reductionInCases <- round(table$reductionInCases * 100, 1)
+  table$reductionInPrevalence <- round(table$reductionInPrevalence * 100, 1)
+
   t_low <- table[table$uncertainty == "low", ]
   t_high <- table[table$uncertainty == "high", ]
   table <- table[table$uncertainty == "mean", ]
