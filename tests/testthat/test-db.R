@@ -162,13 +162,15 @@ test_that("Can scale table results by population", {
                   itnUsage = "20%",
                   sprayInput = "0%",
                   metabolic = "yes",
-                  population = 1)
+                  population = 10000)
   d1 <- db$get_table(options)
-  d1000 <- db$get_table(modifyList(options, list(population = 1000)))
+  d2 <- db$get_table(modifyList(options, list(population = 1000)))
 
   v <- setdiff(names(d1), "casesAverted")
-  expect_equal(d1000[v], d1[v])
-  expect_equal(d1000$casesAverted, d1$casesAverted * 1000)
+  expect_equal(d2[v], d1[v])
+  ## Due to rounding error, this is only approximate
+  expect_equal(d2$casesAverted, d1$casesAverted / 10,
+               tolerance = 0.001)
 })
 
 
