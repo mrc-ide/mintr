@@ -47,7 +47,7 @@ test_that("downloader can download a file", {
 
 test_that("read_string_as_json wraps string in quotes and escapes inner quotes", {
   result <- read_string_as_json("testDocs.html")
-  expected <- "\"Some test docs with 'quotes' and<span>html tags</span>\""
+  expected <- "\"Some test docs with 'quotes' and <span>html tags</span>\""
   class(expected) <- "json"
   expect_equal(result, expected)
 })

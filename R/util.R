@@ -22,7 +22,7 @@ read_json <- function(path) {
 
 
 read_string_as_json <- function(path) {
-  str <- paste(readLines(path), collapse = "")
+  str <- paste(readLines(path), collapse = " ")
   str <- gsub('"', '\'', str)
   str <- paste0("\"", str, "\"")
   class(str) <- "json"
