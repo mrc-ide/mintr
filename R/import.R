@@ -6,6 +6,7 @@ mintr_db_import <- function(path) {
 
   index <- readRDS(paths$index)
   prevalence <- readRDS(paths$prevalence)
+  table <- readRDS(paths$table)
 
   ignore <- mintr_db_check_index(index)
   mintr_db_check_prevalence(index, prevalence)
@@ -15,6 +16,14 @@ mintr_db_import <- function(path) {
   db <- thor::mdb_env(paths$db, mapsize = 4e9, subdir = FALSE)
   db$put("index", object_to_bin(index))
   db$put("ignore", object_to_bin(ignore))
+
+  ## Table:
+  idx <- split(seq_len(nrow(table)), table$index)
+  for (i in index$index) {
+    d <- table[idx[[i]], names(table) != "index"]
+    rownames(d) <- NULL
+    db$put(sprintf("table:%s", i), object_to_bin(d))
+  }
 
   ## Prevalence:
   idx <- split(seq_len(nrow(prevalence)), prevalence$index)
@@ -55,8 +64,62 @@ mintr_db_process <- function(path) {
   prevalence$netType <- relevel(prevalence$netType, c(std = 1, pto = 2))
   prevalence$intervention <- relevel(prevalence$intervention,
                                      import_intervention_map())
-
+  prevalence$year <- NULL
   saveRDS(prevalence, paths$prevalence)
+
+  message("Processing table")
+  path_table_raw <- file.path(path, raw$directory, raw$files$table)
+  table <- readRDS(path_table_raw)
+
+  tr <- c(netUse = "switch_nets",
+          irsUse = "switch_irs",
+          netType = "NET_type",
+          casesAverted = "cases_averted",
+          prevYear1 = "prev_1_yr_post",
+          prevYear2 = "prev_2_yr_post",
+          prevYear3 = "prev_3_yr_post",
+          reductionInPrevalence = "relative_reduction_in_prevalence",
+          reductionInCases = "relative_reduction_in_cases",
+          meanCases = "cases_per_person_3_years")
+  table <- rename(table, unname(tr), names(tr))
+
+  ## At this point casesAverted is really over 3 years and is cases
+  ## averted per person. This number can be greater than one as a
+  ## person can have more than one case per year. We remove the year
+  ## effect first:
+  table$casesAverted <- table$casesAverted / 3
+
+  ## Then compute the "per 1000" case before the uncertainty calculation:
+  table$casesAvertedPer1000 <- round(table$casesAverted * 1000)
+
+  ## Convert these into as percentages, rounded to the nearest d.p.
+  table$reductionInCases <- round(table$reductionInCases * 100, 1)
+  table$reductionInPrevalence <- round(table$reductionInPrevalence * 100, 1)
+
+  t_low <- table[table$uncertainty == "low", ]
+  t_high <- table[table$uncertainty == "high", ]
+  table <- table[table$uncertainty == "mean", ]
+  ## Check that our tables align so that the uncertainty calculations
+  ## can be added:
+  rownames(table) <- rownames(t_low) <- rownames(t_high) <- NULL
+  v_index <- c("index", "netUse", "irsUse", "netType", "intervention")
+  stopifnot(identical(table[v_index], t_low[v_index]),
+            identical(table[v_index], t_high[v_index]))
+
+  v_uncertainty <- c("casesAvertedPer1000", "reductionInCases")
+  for (v in v_uncertainty) {
+    table[[paste0(v, "ErrorMinus")]] <- t_low[[v]]
+    table[[paste0(v, "ErrorPlus")]] <- t_high[[v]]
+  }
+
+  table$netType <- relevel(table$netType, c(std = 1, pto = 2))
+  table$intervention <- relevel(table$intervention,
+                                import_intervention_map())
+
+  drop <- c("uncertainty", grep("_", names(table), value = TRUE))
+  table <- table[setdiff(names(table), drop)]
+
+  saveRDS(table, paths$table)
 }
 
 

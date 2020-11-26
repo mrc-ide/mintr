@@ -1,9 +1,9 @@
-mintr_db_open <- function(path) {
+mintr_db_open <- function(path, docs) {
   path_db <- mintr_db_paths(path)$db
   if (!file.exists(path_db)) {
     stop(sprintf("mintr database does not exist at '%s'", path_db))
   }
-  mintr_db$new(path_db)
+  mintr_db$new(path_db, docs)
 }
 
 
@@ -13,18 +13,20 @@ mintr_db <- R6::R6Class(
     index = NULL,
     ignore = NULL,
     db = NULL,
-    baseline = NULL
+    baseline = NULL,
+    docs = NULL
   ),
   public = list(
-    initialize = function(path) {
+    initialize = function(path, docs) {
       private$db <- thor::mdb_env(path, readonly = TRUE, lock = FALSE,
                                   subdir = FALSE)
       private$index <- unserialize(private$db$get("index"))
       private$baseline <- setdiff(names(private$index), "index")
       private$ignore <- unserialize(private$db$get("ignore"))
+      private$docs <- docs
     },
 
-    get_prevalence = function(options) {
+    get_index = function(options) {
       nms <- setdiff(names(options), private$ignore)
       assert_setequal(nms, private$baseline, "names(options)")
       valid <- rep(TRUE, nrow(private$index))
@@ -36,8 +38,28 @@ mintr_db <- R6::R6Class(
         }
       }
       stopifnot(sum(valid) == 1L) # this will always be true
-      key <- private$index$index[valid]
-      unserialize(private$db$get(sprintf("prevalence:%s", key)))
+      private$index$index[valid]
+    },
+
+    get_prevalence = function(options) {
+      key <- self$get_index(options)
+      ret <- unserialize(private$db$get(sprintf("prevalence:%s", key)))
+      mintr_db_transform_metabolic(ret, options$metabolic)
+    },
+
+    get_impact_docs = function() {
+      private$docs$impact
+    },
+
+    get_cost_docs = function() {
+      private$docs$cost
+    },
+
+    get_table = function(options) {
+      key <- self$get_index(options)
+      ret <- unserialize(private$db$get(sprintf("table:%s", key)))
+      ret$casesAverted <- round(ret$casesAverted * options$population)
+      mintr_db_transform_metabolic(ret, options$metabolic)
     }
   ))
 
@@ -47,7 +69,8 @@ mintr_db_paths <- function(path) {
   list(db = file.path(path, "mintr.db"),
        db_lock = file.path(path, "mintr.db-lock"),
        index = file.path(path, "index.rds"),
-       prevalence = file.path(path, "prevalence.rds"))
+       prevalence = file.path(path, "prevalence.rds"),
+       table = file.path(path, "table.rds"))
 }
 
 
@@ -110,4 +133,23 @@ mint_intervention <- function(net_use, irs_use, net_type) {
   ## Use bit packing to get the above relationship:
   i <- (net_use > 0) + (irs_use > 0) * 2 + (net_type == "pto") * 4 + 1
   intervention[i]
+}
+
+
+## The metabolic switch controls the effect of the pbo net
+## synergy. When not used (metabolic as "no"), then we basically just
+## over-write the values for PBO interventions with non-PBO
+## interventions. This means that `llin-pbo` is set the same as for
+## `llin` (and similarly for `irs-llin-pbo`/`irs-llin`).
+mintr_db_transform_metabolic <- function(d, metabolic) {
+  if (metabolic == "no") {
+    cols <- setdiff(names(d), "intervention")
+    for (intervention in c("llin-pbo", "irs-llin-pbo")) {
+      i_dest <- d$intervention == intervention
+      i_src <- d$intervention == sub("-pbo$", "", intervention)
+      stopifnot(sum(i_dest) == sum(i_src))
+      d[i_dest, cols] <- d[i_src, cols]
+    }
+  }
+  d
 }

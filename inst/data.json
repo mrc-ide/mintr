@@ -1,8 +1,9 @@
 {
     "root": "https://mrcdata.dide.ic.ac.uk/mint",
-    "directory": "20201002",
+    "directory": "20201125",
     "files": {
-        "index": "data_index_tool_data_reshuffle_20201002.rds",
-        "prevalence": "data_values_tool_data_reshuffle_20201002.rds"
+        "index": "data_index_remove_IRS_PBO_20201125.rds",
+        "prevalence": "data_values_remove_IRS_PBO_20201125.rds",
+        "table": "data_aggregate_remove_IRS_PBO_20201125.rds"
     }
 }

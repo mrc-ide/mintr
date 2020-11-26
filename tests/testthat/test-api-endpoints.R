@@ -142,24 +142,29 @@ test_that("table impact config", {
 
 
 test_that("table data", {
-  options <- list("irs_future" = "80%",
-                  "sprayInput" = 1,
-                  "biting_indoors" = "high",
-                  "population" = 1000)
-  res <- target_table_data(options)
-  expect_is(res, "json")
-  expect_identical(res,
-                   read_json(mintr_path("json/table_data.json")))
+  options <- list(population = 1000,
+                  metabolic = "yes",
+                  seasonalityOfTransmission = "seasonal",
+                  currentPrevalence = "med",
+                  bitingIndoors = "high",
+                  bitingPeople = "high",
+                  levelOfResistance = "80%",
+                  itnUsage = "20%",
+                  sprayInput = "0%")
+  json <- jsonlite::toJSON(lapply(options, jsonlite::unbox))
 
-  endpoint <- endpoint_table_data()
-  res_endpoint <- endpoint$run(options)
+  db <- mintr_test_db()
+  res <- target_table_data(db)(json)
+  expect_equal(res, db$get_table(options))
+
+  endpoint <- endpoint_table_data(db)
+  res_endpoint <- endpoint$run(json)
   expect_equal(res_endpoint$status_code, 200)
   expect_equal(res_endpoint$content_type, "application/json")
   expect_equal(res_endpoint$data, res)
 
-  body <- jsonlite::toJSON(lapply(options, jsonlite::unbox))
   api <- api_build(mintr_test_db())
-  res_api <- api$request("POST", "/table/data", body = body)
+  res_api <- api$request("POST", "/table/data", body = json)
   expect_equal(res_api$status, 200)
   expect_equal(res_api$body, res_endpoint$body)
 })
@@ -234,6 +239,44 @@ test_that("graph cases averted config", {
 
   api <- api_build(mintr_test_db())
   res_api <- api$request("GET", "/graph/impact/cases-averted/config")
+  expect_equal(res_api$status, 200)
+  expect_equal(res_api$body, res_endpoint$body)
+})
+
+
+test_that("impact docs", {
+  db <- mintr_test_db()
+  res <- target_impact_interpretation(db)()
+  expect_is(res, "json")
+  expect_equal(res, db$get_impact_docs())
+
+  endpoint <- endpoint_impact_intepretation(db)
+  res_endpoint <- endpoint$run()
+  expect_equal(res_endpoint$status_code, 200)
+  expect_equal(res_endpoint$content_type, "application/json")
+  expect_equal(res_endpoint$data, res)
+
+  api <- api_build(db)
+  res_api <- api$request("GET", "/docs/impact")
+  expect_equal(res_api$status, 200)
+  expect_equal(res_api$body, res_endpoint$body)
+})
+
+
+test_that("cost docs", {
+  db <- mintr_test_db()
+  res <- target_cost_interpretation(db)()
+  expect_is(res, "json")
+  expect_equal(res, db$get_cost_docs())
+
+  endpoint <- endpoint_cost_intepretation(db)
+  res_endpoint <- endpoint$run()
+  expect_equal(res_endpoint$status_code, 200)
+  expect_equal(res_endpoint$content_type, "application/json")
+  expect_equal(res_endpoint$data, res)
+
+  api <- api_build(db)
+  res_api <- api$request("GET", "/docs/cost")
   expect_equal(res_api$status, 200)
   expect_equal(res_api$body, res_endpoint$body)
 })
