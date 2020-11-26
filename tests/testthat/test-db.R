@@ -44,7 +44,6 @@ test_that("Can read table data", {
   d <- db$get_table(options)
   expect_s3_class(d, "data.frame")
   expect_equal(nrow(d), 114)
-  ## TODO: this will be fixed once we have the real data
   expect_setequal(
     names(d),
     c("netUse", "irsUse", "netType", "intervention", "prevYear1",
