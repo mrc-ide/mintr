@@ -18,7 +18,7 @@ test_that("Can create db", {
   expect_equal(nrow(d), 114 * 61)
   expect_setequal(
     names(d),
-    c("month", "netUse", "irsUse", "netType", "intervention", "value"))
+    c("month", "netUse", "irsUse", "intervention", "value"))
 
   impact <- db$get_impact_docs()
   cost <- db$get_cost_docs()
@@ -46,7 +46,7 @@ test_that("Can read table data", {
   expect_equal(nrow(d), 114)
   expect_setequal(
     names(d),
-    c("netUse", "irsUse", "netType", "intervention", "prevYear1",
+    c("netUse", "irsUse", "intervention", "prevYear1",
       "prevYear2", "prevYear3", "meanCases", "reductionInCases",
       "reductionInPrevalence", "casesAverted",
       "casesAvertedPer1000", "casesAvertedPer1000ErrorMinus",

@@ -20,7 +20,7 @@ mintr_db_import <- function(path) {
   ## Table:
   idx <- split(seq_len(nrow(table)), table$index)
   for (i in index$index) {
-    d <- table[idx[[i]], names(table) != "index"]
+    d <- table[idx[[i]], !(names(table) %in% c("index", "netType"))]
     rownames(d) <- NULL
     db$put(sprintf("table:%s", i), object_to_bin(d))
   }
@@ -28,7 +28,7 @@ mintr_db_import <- function(path) {
   ## Prevalence:
   idx <- split(seq_len(nrow(prevalence)), prevalence$index)
   for (i in index$index) {
-    d <- prevalence[idx[[i]], names(prevalence) != "index"]
+    d <- prevalence[idx[[i]], !(names(prevalence) %in% c("index", "netType"))]
     rownames(d) <- NULL
     db$put(sprintf("prevalence:%s", i), object_to_bin(d))
   }
