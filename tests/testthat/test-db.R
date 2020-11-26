@@ -10,10 +10,12 @@ test_that("Can create db", {
                   bitingPeople = "low",
                   levelOfResistance = "80%",
                   itnUsage = "20%",
-                  sprayInput = "0%")
+                  sprayInput = "0%",
+                  metabolic = "yes",
+                  population = 1000)
   d <- db$get_prevalence(options)
   expect_s3_class(d, "data.frame")
-  expect_equal(nrow(d), 120 * 61)
+  expect_equal(nrow(d), 114 * 61)
   expect_setequal(
     names(d),
     c("month", "netUse", "irsUse", "netType", "intervention", "value"))
@@ -28,31 +30,35 @@ test_that("Can create db", {
 })
 
 
-test_that("error if db not present", {
-  expect_error(
-    mintr_db_open(tempfile()),
-    "mintr database does not exist at '.+mintr.db'")
-})
-
-
-test_that("can ignore some keys", {
+test_that("Can read table data", {
+  db <- mintr_test_db()
   options <- list(seasonalityOfTransmission = "seasonal",
                   currentPrevalence = "med",
                   bitingIndoors = "high",
                   bitingPeople = "low",
                   levelOfResistance = "80%",
                   itnUsage = "20%",
-                  sprayInput = "0%")
-  db <- mintr_test_db()
-  expect_identical(
-    db$get_prevalence(c(options, population = 1000)),
-    db$get_prevalence(options))
-  expect_identical(
-    db$get_prevalence(c(options, population = 1000, metabolic = "yes")),
-    db$get_prevalence(options))
+                  sprayInput = "0%",
+                  metabolic = "yes",
+                  population = 1000)
+  d <- db$get_table(options)
+  expect_s3_class(d, "data.frame")
+  expect_equal(nrow(d), 114)
+  expect_setequal(
+    names(d),
+    c("netUse", "irsUse", "netType", "intervention", "prevYear1",
+      "prevYear2", "prevYear3", "meanCases", "reductionInCases",
+      "reductionInPrevalence", "casesAverted",
+      "casesAvertedPer1000", "casesAvertedPer1000ErrorMinus",
+      "casesAvertedPer1000ErrorPlus", "reductionInCasesErrorMinus",
+      "reductionInCasesErrorPlus"))
+})
+
+
+test_that("error if db not present", {
   expect_error(
-    db$get_prevalence(c(options, population = 1000, meta = "yes")),
-    "Unexpected: meta")
+    mintr_db_open(tempfile()),
+    "mintr database does not exist at '.+mintr.db'")
 })
 
 
@@ -67,7 +73,9 @@ test_that("throw error if accessing impossible data", {
                   bitingPeople = "really-high",
                   levelOfResistance = "80%",
                   itnUsage = "20%",
-                  sprayInput = "0%")
+                  sprayInput = "0%",
+                  population = 1000,
+                  metabolic = "yes")
   expect_error(db$get_prevalence(options),
                "No matching value 'really-high' for option 'bitingPeople'")
 })
@@ -139,5 +147,81 @@ test_that("docker build filters files", {
 
   mintr_db_docker(tmp)
 
-  expect_setequal(dir(tmp), c("index.rds", "prevalence.rds"))
+  expect_setequal(dir(tmp), c("index.rds", "prevalence.rds", "table.rds"))
+})
+
+
+test_that("Can scale table results by population", {
+  db <- mintr_test_db()
+  options <- list(seasonalityOfTransmission = "seasonal",
+                  currentPrevalence = "med",
+                  bitingIndoors = "high",
+                  bitingPeople = "low",
+                  levelOfResistance = "80%",
+                  itnUsage = "20%",
+                  sprayInput = "0%",
+                  metabolic = "yes",
+                  population = 10000)
+  d1 <- db$get_table(options)
+  d2 <- db$get_table(modifyList(options, list(population = 1000)))
+
+  v <- setdiff(names(d1), "casesAverted")
+  expect_equal(d2[v], d1[v])
+  ## Due to rounding error, this is only approximate
+  expect_equal(d2$casesAverted, d1$casesAverted / 10,
+               tolerance = 0.001)
+})
+
+
+test_that("Can get non-metabolic table data", {
+  db <- mintr_test_db()
+  options <- list(seasonalityOfTransmission = "seasonal",
+                  currentPrevalence = "med",
+                  bitingIndoors = "high",
+                  bitingPeople = "low",
+                  levelOfResistance = "80%",
+                  itnUsage = "20%",
+                  sprayInput = "0%",
+                  metabolic = "yes",
+                  population = 1)
+
+  cmp <- db$get_table(options)
+  res <- db$get_table(modifyList(options, list(metabolic = "no")))
+  expect_equal(dim(cmp), dim(res))
+  expect_equal(names(cmp), names(res))
+  expect_equal(res, mintr_db_transform_metabolic(cmp, "no"))
+  cols <- setdiff(names(res), "intervention")
+  expect_equal(res[res$intervention == "llin-pbo", cols],
+               res[res$intervention == "llin", cols],
+               check.attributes = FALSE)
+  expect_equal(res[res$intervention == "irs-llin-pbo", cols],
+               res[res$intervention == "irs-llin", cols],
+               check.attributes = FALSE)
+})
+
+
+test_that("Can get non-metabolic prevalence data", {
+  db <- mintr_test_db()
+  options <- list(seasonalityOfTransmission = "seasonal",
+                  currentPrevalence = "med",
+                  bitingIndoors = "high",
+                  bitingPeople = "low",
+                  levelOfResistance = "80%",
+                  itnUsage = "20%",
+                  sprayInput = "0%",
+                  metabolic = "yes",
+                  population = 1)
+
+  cmp <- db$get_prevalence(options)
+  res <- db$get_prevalence(modifyList(options, list(metabolic = "no")))
+  expect_equal(dim(cmp), dim(res))
+  expect_equal(names(cmp), names(res))
+  expect_equal(res, mintr_db_transform_metabolic(cmp, "no"))
+  cols <- setdiff(names(res), "intervention")
+  expect_equal(res[res$intervention == "llin-pbo", cols],
+               res[res$intervention == "llin", cols],
+               check.attributes = FALSE)
+  expect_equal(res[res$intervention == "irs-llin-pbo", cols],
+               res[res$intervention == "irs-llin", cols],
+               check.attributes = FALSE)
 })
