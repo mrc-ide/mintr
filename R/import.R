@@ -28,7 +28,7 @@ mintr_db_import <- function(path) {
   ## Prevalence:
   idx <- split(seq_len(nrow(prevalence)), prevalence$index)
   for (i in index$index) {
-    d <- unique(prevalence[idx[[i]], !(names(prevalence) %in% c("index", "netType"))])
+    d <- prevalence[idx[[i]], !(names(prevalence) %in% c("index", "netType"))]
     rownames(d) <- NULL
     db$put(sprintf("prevalence:%s", i), object_to_bin(d))
   }
