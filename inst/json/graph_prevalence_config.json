@@ -48,6 +48,9 @@
             "id": "irs",
             "name": "IRS only",
             "type": "lines",
+            "line": {
+                "dash": "dot"
+            },
             "marker": {"color": "purple"},
             "hovertemplate": "%{y:.2%}"
         },
@@ -55,6 +58,9 @@
             "id": "irs-llin",
             "name": "Pyrethroid LLIN with IRS",
             "type": "lines",
+            "line": {
+                "dash": "dash"
+            },
             "marker": {"color": "darkred"},
             "hovertemplate": "%{y:.2%}"
         },
@@ -62,6 +68,9 @@
             "id": "irs-llin-pbo",
             "name": "Pyrethroid-PBO LLIN with IRS",
             "type": "lines",
+            "line": {
+                "dash": "dash"
+            },
             "marker": {"color": "orange"},
             "hovertemplate": "%{y:.2%}"
         }
