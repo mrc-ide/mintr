@@ -9,7 +9,7 @@ mintr_db_import <- function(path) {
   table <- readRDS(paths$table)
 
   ignore <- mintr_db_check_index(index)
-  #mintr_db_check_prevalence(index, prevalence)
+  mintr_db_check_prevalence(index, prevalence)
 
   unlink(paths$db, recursive = TRUE)
   unlink(paths$db_lock, recursive = TRUE)
@@ -48,8 +48,8 @@ mintr_db_process <- function(path) {
   message("Processing prevalence")
   path_prevalence_raw <- file.path(path, raw$directory, raw$files$prevalence)
   prevalence <- readRDS(path_prevalence_raw)
-  ### The incoming raw data has *way* too much stuff in it; I've
-  ### asked Arran to remove it so that we get a lighter download.
+  ## The incoming raw data has *way* too much stuff in it; I've
+  ## asked Arran to remove it so that we get a lighter download.
   prevalence <- prevalence[
     prevalence$type == "prev" & prevalence$uncertainty == "mean",
     !(names(prevalence) %in% c("type", "uncertainty"))]
@@ -65,8 +65,6 @@ mintr_db_process <- function(path) {
   prevalence$intervention <- relevel(prevalence$intervention,
                                      import_intervention_map())
   prevalence$year <- NULL
-  prevalence <- add_zero_series(prevalence)
-
   saveRDS(prevalence, paths$prevalence)
 
   message("Processing table")
@@ -84,10 +82,6 @@ mintr_db_process <- function(path) {
           reductionInCases = "relative_reduction_in_cases",
           meanCases = "cases_per_person_3_years")
   table <- rename(table, unname(tr), names(tr))
-  table$intervention <- relevel(table$intervention,
-                                import_intervention_map())
-
-  table <- add_zero_series(table)
 
   ## At this point casesAverted is really over 3 years and is cases
   ## averted per person. This number can be greater than one as a
@@ -119,56 +113,13 @@ mintr_db_process <- function(path) {
   }
 
   table$netType <- relevel(table$netType, c(std = 1, pto = 2))
+  table$intervention <- relevel(table$intervention,
+                                import_intervention_map())
 
   drop <- c("uncertainty", grep("_", names(table), value = TRUE))
   table <- table[setdiff(names(table), drop)]
 
   saveRDS(table, paths$table)
-}
-
-
-add_zero_series <- function(data) {
-  cols <- setdiff(names(data), "intervention")
-
-  intervention <- "irs"
-  # add values for irsUse = 0
-  # irs = none in this case
-  i_src <- data$intervention == "none"
-  d <- data[i_src & data$irsUse == 0, cols]
-  d$intervention <- intervention
-  data <- rbind(data, d)
-
-  for (intervention in c("irs-llin", "irs-llin-pbo")) {
-    # add values for irsUse = 0
-    # irs-llin = llin, irs-llin-pbo = llin-pbo in this case
-    src <- sub("irs-", "", intervention)
-    i_src <- data$intervention == src
-    d <- data[i_src & data$irsUse == 0, cols]
-    d$intervention <- intervention
-    data <- rbind(data, d)
-
-    # add values for netUse = 0
-    # irs-llin = irs-llin-pbo = pbo in this case
-    i_src <- data$intervention == "irs"
-    d <- data[i_src & data$netUse == 0, cols]
-    d$intervention <- intervention
-    data <- rbind(data, d)
-  }
-
-  for (intervention in c("llin", "llin-pbo")) {
-    # add values for netUse = 0
-    # llin = llin-pbo = none in this case
-    i_src <- data$intervention == "none"
-    d <- data[i_src & data$netUse == 0, cols]
-    d$intervention <- intervention
-    data <- rbind(data, d)
-  }
-
-  data[data$intervention %in% c("llin", "llin-pbo"), ]$irsUse <- "n/a"
-  data[data$intervention =="irs", ]$netUse <- "n/a"
-  data[data$intervention =="none", ]$netUse <- "n/a"
-  data[data$intervention =="none", ]$irsUse <- "n/a"
-  data
 }
 
 
