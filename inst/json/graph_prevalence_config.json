@@ -39,7 +39,7 @@
         },
         {
             "id": "llin-pbo",
-            "name": "Pyrethroid-PBO LLIN only",
+            "name": "Pyrethroid-PBO ITN only",
             "type": "lines",
             "marker": {"color": "turquoise"},
             "hovertemplate": "%{y:.2%}"
@@ -66,7 +66,7 @@
         },
         {
             "id": "irs-llin-pbo",
-            "name": "Pyrethroid-PBO LLIN with IRS",
+            "name": "Pyrethroid-PBO ITN with IRS",
             "type": "lines",
             "line": {
                 "dash": "dash"
