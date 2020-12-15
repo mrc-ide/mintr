@@ -170,39 +170,40 @@ mintr_db_transform_metabolic <- function(d, metabolic) {
 mintr_db_add_redundant_series <- function(data) {
   cols <- setdiff(names(data), "intervention")
 
-  intervention <- "irs"
+  #intervention <- "irs"
   # add values for irsUse = 0
   # irs = none in this case
-  i_src <- data$intervention == "none"
-  d <- data[i_src & data$irsUse == 0, cols]
-  d$intervention <- intervention
-  data <- rbind(data, d)
+  #intervention <= "none"
+  #i_src <- data$intervention == intervention
+  #d <- data[i_src & (data$irsUse > 0 || data$netUse > 0), cols]
+  #d$intervention <- intervention
+  #data <- rbind(data, d)
 
-  for (intervention in c("irs-llin", "irs-llin-pbo")) {
+  #for (intervention in c("irs-llin", "irs-llin-pbo")) {
     # add values for irsUse = 0
     # irs-llin = llin, irs-llin-pbo = llin-pbo in this case
-    src <- sub("irs-", "", intervention)
-    i_src <- data$intervention == src
-    d <- data[i_src & data$irsUse == 0, cols]
-    d$intervention <- intervention
-    data <- rbind(data, d)
+  #  src <- sub("irs-", "", intervention)
+  #  i_src <- data$intervention == src
+  #  d <- data[i_src & data$irsUse == 0, cols]
+  #  d$intervention <- intervention
+  #  data <- rbind(data, d)
 
     # add values for netUse = 0
     # irs-llin = irs-llin-pbo = pbo in this case
-    i_src <- data$intervention == "irs"
-    d <- data[i_src & data$netUse == 0, cols]
-    d$intervention <- intervention
-    data <- rbind(data, d)
-  }
+  #  i_src <- data$intervention == "irs"
+  #  d <- data[i_src & data$netUse == 0, cols]
+  #  d$intervention <- intervention
+  #  data <- rbind(data, d)
+  #}
 
-  for (intervention in c("llin", "llin-pbo")) {
-    # add values for netUse = 0
+  #for (intervention in c("llin", "llin-pbo")) {
+  #  # add values for netUse = 0
     # llin = llin-pbo = none in this case
-    i_src <- data$intervention == "none"
-    d <- data[i_src & data$netUse == 0, cols]
-    d$intervention <- intervention
-    data <- rbind(data, d)
-  }
+  #  i_src <- data$intervention == "none"
+  #  d <- data[i_src & data$netUse == 0, cols]
+  #  d$intervention <- intervention
+  #  data <- rbind(data, d)
+  #}
 
   # this special value is used by the front-end to display
   # series for which a chosen setting doesn't apply but the user
