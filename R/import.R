@@ -39,6 +39,7 @@ mintr_db_import <- function(path) {
 mintr_db_process <- function(path) {
   raw <- jsonlite::read_json(mintr_path("data.json"))
   paths <- mintr_db_paths(path)
+  interventions <- raw$interventions
 
   message("Processing index")
   path_index_raw <- file.path(path, raw$directory, raw$files$index)
@@ -62,8 +63,7 @@ mintr_db_process <- function(path) {
           netType = "NET_TYPE")
   prevalence <- rename(prevalence, unname(tr), names(tr))
   prevalence$netType <- relevel(prevalence$netType, c(std = 1, pto = 2))
-  prevalence$intervention <- relevel(prevalence$intervention,
-                                     import_intervention_map())
+  prevalence$intervention <- relevel(prevalence$intervention, interventions)
   prevalence$year <- NULL
   saveRDS(prevalence, paths$prevalence)
 
@@ -113,8 +113,7 @@ mintr_db_process <- function(path) {
   }
 
   table$netType <- relevel(table$netType, c(std = 1, pto = 2))
-  table$intervention <- relevel(table$intervention,
-                                import_intervention_map())
+  table$intervention <- relevel(table$intervention, interventions)
 
   drop <- c("uncertainty", grep("_", names(table), value = TRUE))
   table <- table[setdiff(names(table), drop)]
@@ -182,20 +181,6 @@ import_translate_index <- function(index) {
 
   index
 }
-
-
-## Intervention mappings come from our metadata
-import_intervention_map <- function() {
-  config <- jsonlite::read_json(mintr_path("json/graph_prevalence_config.json"))
-  map <- character()
-  for (x in config$series) {
-    if (!is.null(x$id)) {
-      map[[x$id]] <- x$name
-    }
-  }
-  map
-}
-
 
 mintr_db_docker <- function(path) {
   path_downloads <- mintr_db_download(path)
