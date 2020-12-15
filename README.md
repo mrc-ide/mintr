@@ -48,6 +48,11 @@ After cloning the repository, ensure you have all R package dependencies with
 
 You will need a copy of the data. Run `./scripts/import` which will download, process and import the mintr database in `tests/testthat/data`, which will then be available for tests.
 
+## Deployment
+
+Deployment on the DIDE network is descrbed in the [Knowledge Base article](https://mrc-ide.myjetbrains.com/youtrack/articles/mrc-A-10/MINT---mintr#server)
+
+
 ## License
 
 MIT © Imperial College of Science, Technology and Medicine

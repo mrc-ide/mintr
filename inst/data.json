@@ -5,5 +5,13 @@
         "index": "data_index_remove_IRS_PBO_20201125.rds",
         "prevalence": "data_values_remove_IRS_PBO_20201125.rds",
         "table": "data_aggregate_remove_IRS_PBO_20201125.rds"
+    },
+    "interventions": {
+        "none": "No intervention",
+        "llin": "Pyrethroid LLIN only",
+        "llin-pbo": "Pyrethroid-PBO LLIN only",
+        "irs": "IRS only",
+        "irs-llin": "Pyrethroid LLIN with IRS",
+        "irs-llin-pbo": "Pyrethroid-PBO LLIN with IRS"
     }
 }
