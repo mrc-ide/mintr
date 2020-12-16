@@ -15,13 +15,7 @@ test_that("Can create db", {
                   population = 1000)
   d <- db$get_prevalence(options)
   expect_s3_class(d, "data.frame")
-  expected_months <- 61
-  expected_none_rows <- 1
-  expected_llin_rows <- 10 # 10 possible netUse values
-  expected_irs_rows <- 6 # 6 possible irsUse values
-  expected_llin_irs_rows <- 60
-  expected_rows <- expected_none_rows + expected_irs_rows + 2 * expected_llin_rows + 2 * expected_llin_irs_rows
-  expect_equal(nrow(d), expected_rows * expected_months)
+  expect_equal(nrow(d), 114 * 48)
   expect_setequal(
     names(d),
     c("month", "netUse", "irsUse", "intervention", "value"))
@@ -49,12 +43,7 @@ test_that("Can read table data", {
                   population = 1000)
   d <- db$get_table(options)
   expect_s3_class(d, "data.frame")
-  expected_none_rows <- 1
-  expected_llin_rows <- 10 # 10 possible netUse values
-  expected_irs_rows <- 6 # 6 possible irsUse values
-  expected_llin_irs_rows <- 60
-  expected_rows <- expected_none_rows + expected_irs_rows + 2 * expected_llin_rows + 2 * expected_llin_irs_rows
-  expect_equal(nrow(d), expected_rows)
+  expect_equal(nrow(d), 114)
   expect_setequal(
     names(d),
     c("netUse", "irsUse", "intervention", "prevYear1",
@@ -238,30 +227,7 @@ test_that("Can get non-metabolic prevalence data", {
 })
 
 
-check_redundant_series <- function(res) {
-  cols <- setdiff(names(res), c("intervention", "netUse", "irsUse"))
-  expect_equal(res[res$intervention == "llin" & res$netUse == 0, cols],
-               res[res$intervention == "none", cols],
-               check.attributes = FALSE)
-  expect_equal(res[res$intervention == "llin-pbo" & res$netUse == 0, cols],
-               res[res$intervention == "none", cols],
-               check.attributes = FALSE)
-  expect_equal(res[res$intervention == "irs" & res$irsUse == 0, cols],
-               res[res$intervention == "none", cols],
-               check.attributes = FALSE)
-  expect_equal(res[res$intervention == "irs-llin" & res$netUse == 0, cols],
-               res[res$intervention == "irs", cols],
-               check.attributes = FALSE)
-  expect_equal(res[res$intervention == "irs-llin-pbo" & res$netUse == 0, cols],
-               res[res$intervention == "irs", cols],
-               check.attributes = FALSE)
-  expect_equal(res[res$intervention == "irs-llin" & res$irsUse == 0, cols],
-               res[res$intervention == "llin", cols],
-               check.attributes = FALSE)
-  expect_equal(res[res$intervention == "irs-llin-pbo" & res$irsUse == 0, cols],
-               res[res$intervention == "llin-pbo", cols],
-               check.attributes = FALSE)
-
+check_not_applicable_values <- function(res) {
   expect_true(all(res[res$intervention == "none", "netUse"] == "n/a"))
   expect_true(all(res[res$intervention == "none", "irsUse"] == "n/a"))
   expect_true(all(res[res$intervention == "irs", "netUse"] == "n/a"))
@@ -270,7 +236,7 @@ check_redundant_series <- function(res) {
 }
 
 
-test_that("Reduntant series are added correctly", {
+test_that("Not applicable values are set correctly", {
   db <- mintr_test_db()
   options <- list(seasonalityOfTransmission = "seasonal",
                   currentPrevalence = "med",
@@ -283,8 +249,8 @@ test_that("Reduntant series are added correctly", {
                   population = 1)
 
   prev <- db$get_prevalence(options)
-  check_redundant_series(prev)
+  check_not_applicable_values(prev)
 
   table <- db$get_table(options)
-  check_redundant_series(table)
+  check_not_applicable_values(table)
 })

@@ -1,10 +1,10 @@
 {
     "root": "https://mrcdata.dide.ic.ac.uk/mint",
-    "directory": "20201125",
+    "directory": "20201216",
     "files": {
-        "index": "data_index_remove_IRS_PBO_20201125.rds",
-        "prevalence": "data_values_remove_IRS_PBO_20201125.rds",
-        "table": "data_aggregate_remove_IRS_PBO_20201125.rds"
+        "index": "data_index_Vector_tool_updated_params_20201216.rds",
+        "prevalence": "data_values_Vector_tool_updated_params_20201216.rds",
+        "table": "data_aggregate_Vector_tool_updated_params_20201216.rds"
     },
     "interventions": {
         "none": "No intervention",

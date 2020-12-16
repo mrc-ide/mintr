@@ -45,7 +45,7 @@ mintr_db <- R6::R6Class(
       key <- self$get_index(options)
       ret <- unserialize(private$db$get(sprintf("prevalence:%s", key)))
       prev <- mintr_db_transform_metabolic(ret, options$metabolic)
-      mintr_db_add_redundant_series(prev)
+      mintr_db_set_not_applicable_values(prev)
     },
 
     get_impact_docs = function() {
@@ -61,7 +61,7 @@ mintr_db <- R6::R6Class(
       ret <- unserialize(private$db$get(sprintf("table:%s", key)))
       ret$casesAverted <- round(ret$casesAverted * options$population)
       table <- mintr_db_transform_metabolic(ret, options$metabolic)
-      mintr_db_add_redundant_series(table)
+      mintr_db_set_not_applicable_values(table)
     }
   ))
 
@@ -167,43 +167,7 @@ mintr_db_transform_metabolic <- function(d, metabolic) {
 #  "llin-pbo"     >= 0      == n/a
 #  "irs"          == n/a    >= 0
 #  "irs-llin-pbo" >= 0      >= 0
-mintr_db_add_redundant_series <- function(data) {
-  cols <- setdiff(names(data), "intervention")
-
-  intervention <- "irs"
-  # add values for irsUse = 0
-  # irs = none in this case
-  i_src <- data$intervention == "none"
-  d <- data[i_src & data$irsUse == 0, cols]
-  d$intervention <- intervention
-  data <- rbind(data, d)
-
-  for (intervention in c("irs-llin", "irs-llin-pbo")) {
-    # add values for irsUse = 0
-    # irs-llin = llin, irs-llin-pbo = llin-pbo in this case
-    src <- sub("irs-", "", intervention)
-    i_src <- data$intervention == src
-    d <- data[i_src & data$irsUse == 0, cols]
-    d$intervention <- intervention
-    data <- rbind(data, d)
-
-    # add values for netUse = 0
-    # irs-llin = irs-llin-pbo = pbo in this case
-    i_src <- data$intervention == "irs"
-    d <- data[i_src & data$netUse == 0, cols]
-    d$intervention <- intervention
-    data <- rbind(data, d)
-  }
-
-  for (intervention in c("llin", "llin-pbo")) {
-    # add values for netUse = 0
-    # llin = llin-pbo = none in this case
-    i_src <- data$intervention == "none"
-    d <- data[i_src & data$netUse == 0, cols]
-    d$intervention <- intervention
-    data <- rbind(data, d)
-  }
-
+mintr_db_set_not_applicable_values <- function(data) {
   # this special value is used by the front-end to display
   # series for which a chosen setting doesn't apply but the user
   # nevertheless wants to see a comparison against
