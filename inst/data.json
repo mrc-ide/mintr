@@ -1,6 +1,6 @@
 {
     "root": "https://mrcdata.dide.ic.ac.uk/mint",
-    "directory": "20201125",
+    "directory": "20201216",
     "files": {
         "index": "data_index_Vector_tool_updated_params_20201216",
         "prevalence": "data_values_Vector_tool_updated_params_20201216.rds",
