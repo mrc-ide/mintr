@@ -10,7 +10,7 @@
             "x": ["llin"],
             "id": "llin",
             "type": "bar",
-            "name": "Pyrethoid ITN",
+            "name": "Pyrethroid LLIN only",
             "marker": {
                 "color": "blue",
                 "opacity": 0.5
@@ -29,7 +29,7 @@
             "x": ["llin-pbo"],
             "id": "llin-pbo",
             "type": "bar",
-            "name": "Switch to PBO ITN",
+            "name": "Pyrethroid-PBO ITN only",
             "marker": {
                 "color": "aquamarine",
                 "opacity": 0.5
@@ -47,7 +47,7 @@
         {
             "x": ["irs"],
             "id": "irs",
-            "name": "Only IRS",
+            "name": "IRS only",
             "type": "bar",
             "marker": {
                 "color": "purple",
@@ -66,7 +66,7 @@
         {
             "x": ["irs-llin"],
             "id": "irs-llin",
-            "name": "Add IRS to standard ITN",
+            "name": "Pyrethroid LLIN with IRS",
             "type": "bar",
             "marker": {
                 "color": "darkred",
@@ -85,7 +85,7 @@
         {
             "x": ["irs-llin-pbo"],
             "id": "irs-llin-pbo",
-            "name": "Add IRS to PBO ITN",
+            "name": "Pyrethroid-PBO ITN with IRS",
             "type": "bar",
             "marker": {
                 "color": "orange",
