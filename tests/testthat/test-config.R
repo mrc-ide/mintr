@@ -274,14 +274,14 @@ test_that("cost table config formulas give correct results for costs per cases a
   none <- formulas[[1]]
   expect_equal(evaluate(none), "reference")
   ITN <- formulas[[2]]
-  expect_equal(evaluate(ITN), costs$costs_N1)
+  expect_equal(evaluate(ITN), costs$costs_N1, tolerance=0.05)
   PBO <- formulas[[3]]
-  expect_equal(evaluate(PBO), costs$costs_N2)
+  expect_equal(evaluate(PBO), costs$costs_N2, tolerance=0.05)
   IRS <- formulas[[4]]
-  expect_equal(evaluate(IRS), costs$costs_S1)
+  expect_equal(evaluate(IRS), costs$costs_S1, tolerance=0.05)
   ITN_IRS <- formulas[[5]]
-  expect_equal(evaluate(ITN_IRS), costs$costs_N1_S1)
+  expect_equal(evaluate(ITN_IRS), costs$costs_N1_S1, tolerance=0.05)
   PBO_IRS <- formulas[[6]]
-  expect_equal(evaluate(PBO_IRS), costs$costs_N2_S1)
+  expect_equal(evaluate(PBO_IRS), costs$costs_N2_S1, tolerance=0.05)
 
 })
