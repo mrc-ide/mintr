@@ -22,7 +22,7 @@
             {
                 "id": "llin",
                 "y_formula": ["({population} / {procurePeoplePerNet}) * {priceNetStandard}  + ({priceDelivery} * {population} * (({procureBuffer} + 100)/ 100))"],
-                "name": "Pyrethoid ITN",
+                "name": "Pyrethroid LLIN only",
                 "type": "scatter",
                 "marker": {"color": "blue", "size": 10},
                 "error_x": {
@@ -34,7 +34,7 @@
             },
             {
                 "id": "llin-pbo",
-                "name": "Switch to Pyrethoid-PBO ITN",
+                "name": "Pyrethroid-PBO ITN only",
                 "y_formula": ["({population} / {procurePeoplePerNet}) * {priceNetPBO}  + ({priceDelivery} * {population} * (({procureBuffer} + 100)/ 100))"],
                 "type": "scatter",
                 "marker": {"color": "turquoise", "size": 10},
@@ -48,7 +48,7 @@
             {
                 "id": "irs",
                 "y_formula": ["({population} / {procurePeoplePerNet}) * {priceNetStandard} + 3 * ({priceIRSPerPerson} * {population})"],
-                "name": "Only IRS",
+                "name": "IRS only",
                 "type": "scatter",
                 "marker": {"color": "purple", "size": 10},
                 "error_x": {
@@ -61,7 +61,7 @@
             {
                 "id": "irs-llin",
                 "y_formula": ["({population} / {procurePeoplePerNet}) * {priceNetStandard} + ({priceDelivery} * {population} * (({procureBuffer} + 100) / 100)) + 3 * ({priceIRSPerPerson} * {population})"],
-                "name": "Add IRS to Pyrethoid ITN",
+                "name": "Pyrethroid LLIN with IRS",
                 "type": "scatter",
                 "marker": {"color": "darkred", "size": 10},
                 "error_x": {
@@ -74,7 +74,7 @@
             {
                 "id": "irs-llin-pbo",
                 "y_formula": ["({population} / {procurePeoplePerNet}) * {priceNetPBO} + ({priceDelivery} * {population} * (({procureBuffer} + 100) / 100)) + 3 * ({priceIRSPerPerson} * {population})"],
-                "name": "Add IRS to Pyrethoid-PBO ITN",
+                "name": "Pyrethroid-PBO ITN with IRS",
                 "type": "scatter",
                 "marker": {"color": "orange", "size": 10},
                 "error_x": {
