@@ -38,12 +38,18 @@
     "displayName": "Relative reduction in prevalence in under 10 years (%)"
   },
   {
-    "valueCol": "casesAverted",
-    "displayName": "Mean cases averted per population per year across 3 yrs since intervention"
+    "valueCol": "",
+    "displayName": "Mean cases averted per population per year across 3 yrs since intervention",
+    "valueTransform": {
+      "undefined": "round({casesAverted} / 10) * 10"
+    }
   },
   {
-    "valueCol": "casesAvertedPer1000",
-    "displayName": "Mean cases averted per 1000 people across 3 yrs since intervention"
+    "valueCol": "",
+    "displayName": "Mean cases averted per 1000 people across 3 yrs since intervention",
+    "valueTransform": {
+      "undefined": "round({casesAvertedPer1000} / 10) * 10"
+    }
   },
   {
     "valueCol": "reductionInCases",
