@@ -94,7 +94,7 @@
                   "zeroline": false
               },
               "yaxis": {
-                  "title": "Total costs ($10,000 USD)",
+                  "title": "Total costs (USD)",
                   "showline": true,
                   "autorange": true,
                   "zeroline": false
@@ -105,7 +105,7 @@
                   "xref": "paper",
                   "x0": 0,
                   "x1": 1,
-                  "y_formula": "zonal_budget",
+                  "y_formula": "{zonal_budget}",
                   "line":{
                       "color": "red",
                       "width": 1,
