@@ -104,9 +104,8 @@
                 "type": "line",
                 "xref": "paper",
                 "x0": 0,
-                "y0": 5000,
                 "x1": 1,
-                "y1": 5000,
+                "y_formula": "zonal_budget",
                 "line":{
                     "color": "red",
                     "width": 1,

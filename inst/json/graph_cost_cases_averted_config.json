@@ -99,6 +99,19 @@
                   "autorange": true,
                   "zeroline": false
               },
+              "shapes": [
+              {
+                  "type": "line",
+                  "xref": "paper",
+                  "x0": 0,
+                  "x1": 1,
+                  "y_formula": "zonal_budget",
+                  "line":{
+                      "color": "red",
+                      "width": 1,
+                      "dash": "dash"
+                  }
+              }],
               "hoverlabel": {
                   "namelength": -1
               },
