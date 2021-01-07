@@ -211,8 +211,8 @@ Schema: [Graph.schema.json](./Graph.schema.json)
 ### Example
 The schema is the same as for the [prevalence graph config](https://github.com/mrc-ide/mintr/blob/master/inst/schema/spec.md#get-graphprevalenceconfig)
 
-## GET /graph/cost/efficacy/config
-Returns an array of graph configuration object for the cost vs efficacy graph. Schemas as for above.
+## GET /graph/cost/per-case/config
+Returns an array of graph configuration object for the cost per case averted graph. Schemas as for above.
 
 Schema: [Graph.schema.json](./Graph.schema.json)
 

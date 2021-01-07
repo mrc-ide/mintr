@@ -23,7 +23,7 @@
         "settings": { "type": "array", "items": { "type": "string"}}
       },
       "additionalProperties": false,
-      "required": ["cols","id_col","format"]
+      "required": ["id_col","format"]
     },
     "seriesDefinition": {
       "type": "object",
@@ -46,8 +46,8 @@
             "type": "string"
           }
         },
-        "id": {"type:" :"string"},
-        "name": {"type":  "string"},
+        "id": {"type": "string"},
+        "name": {"type": "string"},
         "type": {"type": "string"}
       },
       "additionalProperties": true
