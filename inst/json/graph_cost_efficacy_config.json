@@ -98,13 +98,27 @@
                 "showline": true,
                 "autorange": true,
                 "zeroline": false
-        },
-        "hoverlabel": {
-            "namelength": -1
-        },
-        "mintcustom": {
-            "hoverposition": "below"
-        },
-        "hovermode": "closest"
+            },
+            "shapes": [
+            {
+                "type": "line",
+                "xref": "paper",
+                "x0": 0,
+                "y0": 5000,
+                "x1": 1,
+                "y1": 12.0,
+                "line":{
+                    "color": "red",
+                    "width": 1,
+                    "dash": "dash"
+                }
+            }],
+            "hoverlabel": {
+                "namelength": -1
+            },
+            "mintcustom": {
+                "hoverposition": "below"
+            },
+            "hovermode": "closest"
     }
 }
