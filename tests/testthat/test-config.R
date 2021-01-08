@@ -8,7 +8,8 @@ get_input <- function() {
        priceDelivery = 2.75,
        procureBuffer = 7,
        priceIRSPerPerson = 2.5,
-       casesAverted = 10)
+       casesAverted = 10,
+       zonal_budget = 1000)
 }
 
 get_expected_total_costs <- function() {
@@ -66,7 +67,7 @@ evaluate <- function(formula) {
   eval(parse(text = glue::glue(formula, .envir = input)))
 }
 
-test_that("efficacy vs costs graph config formulas give correct results", {
+test_that("efficacy vs costs graph config series formulas give correct results", {
   json <- jsonlite::fromJSON(mintr_path("json/graph_cost_efficacy_config.json"))
   formulas <- json$series$y_formula
   costs <- get_expected_total_costs()
@@ -85,7 +86,7 @@ test_that("efficacy vs costs graph config formulas give correct results", {
   expect_equal(evaluate(PBO_IRS), costs$costs_N2_S1)
 })
 
-test_that("cases averted vs costs graph config formulas give correct results", {
+test_that("cases averted vs costs graph config series formulas give correct results", {
   json <- jsonlite::fromJSON(mintr_path("json/graph_cost_cases_averted_config.json"))
   formulas <- json$series$y_formula
   costs <- get_expected_total_costs()
@@ -102,6 +103,22 @@ test_that("cases averted vs costs graph config formulas give correct results", {
   expect_equal(evaluate(ITN_IRS), costs$costs_N1_S1)
   PBO_IRS <- formulas[[6]]
   expect_equal(evaluate(PBO_IRS), costs$costs_N2_S1)
+})
+
+test_that("efficacy vs costs graph config shape formula gives correct results", {
+  json <- jsonlite::fromJSON(mintr_path("json/graph_cost_efficacy_config.json"))
+  zonal_budget <- json$layout$shapes$y_formula
+  
+  inputs <- get_input()
+  expect_equal(evaluate(zonal_budget), inputs$zonal_budget)
+})
+
+test_that("cases averted vs costs graph config shape formula gives correct results", {
+  json <- jsonlite::fromJSON(mintr_path("json/graph_cost_cases_averted_config.json"))
+  zonal_budget <- json$layout$shapes$y_formula
+  
+  inputs <- get_input()
+  expect_equal(evaluate(zonal_budget), inputs$zonal_budget)
 })
 
 test_that("efficacy vs costs graph config contains valid intervention ids", {
