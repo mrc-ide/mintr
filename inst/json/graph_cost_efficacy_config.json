@@ -97,7 +97,8 @@
                 "title": "Total costs (USD)",
                 "showline": true,
                 "autorange": true,
-                "zeroline": false
+                "zeroline": false,
+                "rangemode": "series"
             },
             "shapes": [
             {
