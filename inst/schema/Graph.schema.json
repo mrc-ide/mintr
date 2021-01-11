@@ -46,7 +46,7 @@
             "type": "string"
           }
         },
-        "id": {"type:" :"string"},
+        "id": {"type":"string"},
         "name": {"type":  "string"},
         "type": {"type": "string"}
       },
