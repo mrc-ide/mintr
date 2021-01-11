@@ -22,4 +22,4 @@ clinical cases per 1,000 people averted by the intervention package relaive to t
  intervention package to cover a 3-year period of protection.
 *   Incremental increase in costs: The absolute increase in cost (USD) required for the intervention package relative 
 to the cost spent to achieve the 'do-nothing' scenario.
-*   Cost per case averted: The cost in USD per case averted relative to the 'do-nothing' scenario.
+*   Cost per case averted per 3-year campaign: The cost in USD per case averted relative to the 'do-nothing' scenario.
