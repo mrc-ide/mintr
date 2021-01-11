@@ -56,7 +56,7 @@
   },
   {
     "valueCol": "intervention",
-    "displayName": "Costs per case averted",
+    "displayName": "Cost per case averted per 3-year campaign",
     "valueTransform": {
       "none": "'reference'",
       "llin": "(({population} / {procurePeoplePerNet}) * {priceNetStandard}  + ({priceDelivery} * {population} * (({procureBuffer} + 100)/ 100)))/{casesAverted}",
