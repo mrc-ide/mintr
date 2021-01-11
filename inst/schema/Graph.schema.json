@@ -62,16 +62,19 @@
           "$ref": "#/definitions/axis"
         },
         "shapes" : {
-          "type": "object",
-          "properties": {
-            "type": {"type": "string"},
-            "y_formula": {"type": "string"},
-            "x0": {"type": "number"},
-            "x1": {"type": "number"},
-            "y0": {"type": "number"},
-            "y1": {"type": "number"}
-          },
-          "additionalProperties": true
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "type": {"type": "string"},
+              "y_formula": {"type": "string"},
+              "x0": {"type": "number"},
+              "x1": {"type": "number"},
+              "y0": {"type": "number"},
+              "y1": {"type": "number"}
+            },
+            "additionalProperties": true
+          }    
         }  
       },
       "additionalProperties": true
