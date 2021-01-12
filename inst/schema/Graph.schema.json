@@ -77,11 +77,13 @@
           }    
         }  
       },
-      "additionalProperties": true
+      "additionalProperties": true,
+      "required": ["xaxis", "yaxis"]
     },
     "axis": {
       "type": "object",
       "properties": {
+        "title": {"type": "string"},
         "autorange": {"type": "boolean"},
         "rangemode": {"type": "string"},
         "range": {
