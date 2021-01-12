@@ -12,7 +12,7 @@ api_build <- function(db) {
   pr$handle(endpoint_table_impact_config())
   pr$handle(endpoint_table_cost_config())
   pr$handle(endpoint_table_data(db))
-  pr$handle(endpoint_graph_cost_efficacy_config())
+  pr$handle(endpoint_graph_cost_per_case_config())
   pr$handle(endpoint_graph_cost_cases_averted_config())
   pr$handle(endpoint_intervention_options())
   pr$handle(endpoint_graph_cases_averted_config())
@@ -149,16 +149,16 @@ target_graph_cost_cases_averted_config <- function() {
 }
 
 
-endpoint_graph_cost_efficacy_config <- function() {
+endpoint_graph_cost_per_case_config <- function() {
   porcelain::porcelain_endpoint$new(
-    "GET", "/graph/cost/efficacy/config", target_graph_cost_efficacy_config,
+    "GET", "/graph/cost/per-case/config", target_graph_cost_per_case_config,
     returning = porcelain::porcelain_returning_json("Graph.schema",
                                                     schema_root()))
 }
 
 
-target_graph_cost_efficacy_config <- function() {
-  read_json(mintr_path("json/graph_cost_efficacy_config.json"))
+target_graph_cost_per_case_config <- function() {
+  read_json(mintr_path("json/graph_cost_per_case_config.json"))
 }
 
 

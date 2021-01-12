@@ -188,20 +188,20 @@ test_that("graph cost cases averted config", {
 })
 
 
-test_that("graph cost efficacy config", {
-  res <- target_graph_cost_efficacy_config()
+test_that("graph cost per case config", {
+  res <- target_graph_cost_per_case_config()
   expect_is(res, "json")
   expect_identical(res,
-                   read_json(mintr_path("json/graph_cost_efficacy_config.json")))
+                   read_json(mintr_path("json/graph_cost_per_case_config.json")))
 
-  endpoint <- endpoint_graph_cost_efficacy_config()
+  endpoint <- endpoint_graph_cost_per_case_config()
   res_endpoint <- endpoint$run()
   expect_equal(res_endpoint$status_code, 200)
   expect_equal(res_endpoint$content_type, "application/json")
   expect_equal(res_endpoint$data, res)
 
   api <- api_build(mintr_test_db())
-  res_api <- api$request("GET", "/graph/cost/efficacy/config")
+  res_api <- api$request("GET", "/graph/cost/per-case/config")
   expect_equal(res_api$status, 200)
   expect_equal(res_api$body, res_endpoint$body)
 })
