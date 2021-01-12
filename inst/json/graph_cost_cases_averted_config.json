@@ -8,7 +8,7 @@
           "series": [
               {
                   "id": "none",
-                  "y_formula": ["({population} / {procurePeoplePerNet}) * {priceNetStandard}"],
+                  "y_formula": ["0"],
                   "name": "No intervention",
                   "type": "scatter",
                   "marker": {"color": "grey", "size": 10},
@@ -21,7 +21,7 @@
               },
               {
                   "id": "llin",
-                  "y_formula": ["({population} / {procurePeoplePerNet}) * {priceNetStandard}  + ({priceDelivery} * {population} * (({procureBuffer} + 100)/ 100))"],
+                  "y_formula": ["({priceDelivery} + {priceNetStandard}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100"],
                   "name": "Pyrethroid LLIN only",
                   "type": "scatter",
                   "marker": {"color": "blue", "size": 10},
@@ -34,7 +34,7 @@
               },
               {
                   "id": "llin-pbo",
-                  "y_formula": ["({population} / {procurePeoplePerNet}) * {priceNetPBO}  + ({priceDelivery} * {population} * (({procureBuffer} + 100)/ 100))"],
+                  "y_formula": ["({priceDelivery} + {priceNetPBO}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100"],
                   "name": "Pyrethroid-PBO ITN only",
                   "type": "scatter",
                   "marker": {"color": "turquoise", "size": 10},
@@ -47,7 +47,7 @@
               },
               {
                   "id": "irs",
-                  "y_formula": ["({population} / {procurePeoplePerNet}) * {priceNetStandard} + 3 * ({priceIRSPerPerson} * {population})"],
+                  "y_formula": ["3 * {priceIRSPerPerson} * {population}"],
                   "name": "IRS only",
                   "type": "scatter",
                   "marker": {"color": "purple", "size": 10},
@@ -60,7 +60,7 @@
               },
               {
                   "id": "irs-llin",
-                  "y_formula": ["({population} / {procurePeoplePerNet}) * {priceNetStandard} + ({priceDelivery} * {population} * (({procureBuffer} + 100) / 100)) + 3 * ({priceIRSPerPerson} * {population})"],
+                  "y_formula": ["({priceDelivery} + {priceNetStandard}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100 + 3 * {priceIRSPerPerson} * {population}"],
                   "name": "Pyrethroid LLIN with IRS",
                   "type": "scatter",
                   "marker": {"color": "darkred", "size": 10},
@@ -73,7 +73,7 @@
               },
               {
                   "id": "irs-llin-pbo",
-                  "y_formula": ["({population} / {procurePeoplePerNet}) * {priceNetPBO} + ({priceDelivery} * {population} * (({procureBuffer} + 100) / 100)) + 3 * ({priceIRSPerPerson} * {population})"],
+                  "y_formula": ["({priceDelivery} + {priceNetPBO}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100 + 3 * {priceIRSPerPerson} * {population}"],
                   "name": "Pyrethroid-PBO ITN with IRS",
                   "type": "scatter",
                   "marker": {"color": "orange", "size": 10},
