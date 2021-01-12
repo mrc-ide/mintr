@@ -1,0 +1,80 @@
+{
+    "metadata": {
+        "id_col": "intervention",
+        "format": "wide",
+        "settings": ["netUse", "irsUse"]
+    },
+    "series": [
+        {
+            "x": ["llin"],
+            "id": "llin",
+            "y_formula": ["(({population} / {procurePeoplePerNet}) * {priceNetStandard} + ({priceDelivery} * {population} * (({procureBuffer} + 100) / 100))) / {casesAverted}"],
+            "type": "bar",
+            "name": "Pyrethroid LLIN only",
+            "marker": {
+                "color": "blue",
+                "opacity": 0.5
+            }
+        },
+        {
+            "x": ["llin-pbo"],
+            "id": "llin-pbo",
+            "y_formula": ["(({population} / {procurePeoplePerNet}) * {priceNetPBO} + ({priceDelivery} * {population} * (({procureBuffer} + 100) / 100))) / {casesAverted}"],
+            "type": "bar",
+            "name": "Pyrethroid-PBO ITN only",
+            "marker": {
+                "color": "aquamarine",
+                "opacity": 0.5
+            }
+        },
+        {
+            "x": ["irs"],
+            "id": "irs",
+            "y_formula": ["(({population} / {procurePeoplePerNet}) * {priceNetStandard} + 3 * ({priceIRSPerPerson} * {population})) / {casesAverted}"],
+            "name": "IRS only",
+            "type": "bar",
+            "marker": {
+                "color": "purple",
+                "opacity": 0.5
+            }
+        },
+        {
+            "x": ["irs-llin"],
+            "id": "irs-llin",
+            "y_formula": ["(({population} / {procurePeoplePerNet}) * {priceNetStandard} + ({priceDelivery} * {population} * (({procureBuffer} + 100) / 100)) + 3 * ({priceIRSPerPerson} * {population})) / {casesAverted}"],
+            "name": "Pyrethroid LLIN with IRS",
+            "type": "bar",
+            "marker": {
+                "color": "darkred",
+                "opacity": 0.5
+            }
+        },
+        {
+            "x": ["irs-llin-pbo"],
+            "id": "irs-llin-pbo",
+            "y_formula": ["(({population} / {procurePeoplePerNet}) * {priceNetPBO} + ({priceDelivery} * {population} * (({procureBuffer} + 100) / 100)) + 3 * ({priceIRSPerPerson} * {population})) / {casesAverted}"],
+            "name": "Pyrethroid-PBO ITN with IRS",
+            "type": "bar",
+            "marker": {
+                "color": "orange",
+                "opacity": 0.5
+            }
+        }
+    ],
+    "layout": {
+        "title": "Strategy costs per case averted",
+        "yaxis": {
+            "title": "cost per case averted ($)",
+            "showline": true,
+            "autorange": true
+        },
+        "xaxis": {
+            "title": "intervention",
+            "showline": true,
+            "tickvals": ["llin", "llin-pbo", "irs", "irs-llin", "irs-llin-pbo"],
+            "ticktext": ["ITN", "PBO", "IRS", "ITN + IRS", "PBO + IRS"],
+            "autorange": true
+        },
+        "showlegend": true
+    }
+}

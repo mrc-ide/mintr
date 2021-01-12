@@ -67,22 +67,20 @@ evaluate <- function(formula) {
   eval(parse(text = glue::glue(formula, .envir = input)))
 }
 
-test_that("efficacy vs costs graph config series formulas give correct results", {
-  json <- jsonlite::fromJSON(mintr_path("json/graph_cost_efficacy_config.json"))
+test_that("cost per case graph config formulas give correct results", {
+  json <- jsonlite::fromJSON(mintr_path("json/graph_cost_per_case_config.json"))
   formulas <- json$series$y_formula
-  costs <- get_expected_total_costs()
+  costs <- get_costs_per_cases_averted()
 
-  none <- formulas[[1]]
-  expect_equal(evaluate(none), costs$costs_N0)
-  ITN <- formulas[[2]]
+  ITN <- formulas[[1]]
   expect_equal(evaluate(ITN), costs$costs_N1)
-  PBO <- formulas[[3]]
+  PBO <- formulas[[2]]
   expect_equal(evaluate(PBO), costs$costs_N2)
-  IRS <- formulas[[4]]
+  IRS <- formulas[[3]]
   expect_equal(evaluate(IRS), costs$costs_S1)
-  ITN_IRS <- formulas[[5]]
+  ITN_IRS <- formulas[[4]]
   expect_equal(evaluate(ITN_IRS), costs$costs_N1_S1)
-  PBO_IRS <- formulas[[6]]
+  PBO_IRS <- formulas[[5]]
   expect_equal(evaluate(PBO_IRS), costs$costs_N2_S1)
 })
 
@@ -105,14 +103,6 @@ test_that("cases averted vs costs graph config series formulas give correct resu
   expect_equal(evaluate(PBO_IRS), costs$costs_N2_S1)
 })
 
-test_that("efficacy vs costs graph config shape formula gives correct results", {
-  json <- jsonlite::fromJSON(mintr_path("json/graph_cost_efficacy_config.json"))
-  zonal_budget <- json$layout$shapes$y_formula
-  
-  inputs <- get_input()
-  expect_equal(evaluate(zonal_budget), inputs$zonal_budget)
-})
-
 test_that("cases averted vs costs graph config shape formula gives correct results", {
   json <- jsonlite::fromJSON(mintr_path("json/graph_cost_cases_averted_config.json"))
   zonal_budget <- json$layout$shapes$y_formula
@@ -121,21 +111,19 @@ test_that("cases averted vs costs graph config shape formula gives correct resul
   expect_equal(evaluate(zonal_budget), inputs$zonal_budget)
 })
 
-test_that("efficacy vs costs graph config contains valid intervention ids", {
-  json <- jsonlite::fromJSON(mintr_path("json/graph_cost_efficacy_config.json"))
+test_that("cost per case graph config contains valid intervention ids", {
+  json <- jsonlite::fromJSON(mintr_path("json/graph_cost_per_case_config.json"))
   ids <- json$series$id
 
-  none <- ids[[1]]
-  expect_equal(none, mint_intervention(0, 0, "std"))
-  ITN <- ids[[2]]
+  ITN <- ids[[1]]
   expect_equal(ITN, mint_intervention(1, 0, "std"))
-  PBO <- ids[[3]]
+  PBO <- ids[[2]]
   expect_equal(PBO, mint_intervention(1, 0, "pto"))
-  IRS <- ids[[4]]
+  IRS <- ids[[3]]
   expect_equal(IRS, mint_intervention(0, 1, "pto"))
-  ITN_IRS <- ids[[5]]
+  ITN_IRS <- ids[[4]]
   expect_equal(ITN_IRS, mint_intervention(1, 1, "std"))
-  PBO_IRS <- ids[[6]]
+  PBO_IRS <- ids[[5]]
   expect_equal(PBO_IRS, mint_intervention(1, 1, "pto"))
 })
 
@@ -291,14 +279,14 @@ test_that("cost table config formulas give correct results for costs per cases a
   none <- formulas[[1]]
   expect_equal(evaluate(none), "reference")
   ITN <- formulas[[2]]
-  expect_equal(evaluate(ITN), costs$costs_N1, tolerance=0.05)
+  expect_equal(evaluate(ITN), costs$costs_N1)
   PBO <- formulas[[3]]
-  expect_equal(evaluate(PBO), costs$costs_N2, tolerance=0.05)
+  expect_equal(evaluate(PBO), costs$costs_N2)
   IRS <- formulas[[4]]
-  expect_equal(evaluate(IRS), costs$costs_S1, tolerance=0.05)
+  expect_equal(evaluate(IRS), costs$costs_S1)
   ITN_IRS <- formulas[[5]]
-  expect_equal(evaluate(ITN_IRS), costs$costs_N1_S1, tolerance=0.05)
+  expect_equal(evaluate(ITN_IRS), costs$costs_N1_S1)
   PBO_IRS <- formulas[[6]]
-  expect_equal(evaluate(PBO_IRS), costs$costs_N2_S1, tolerance=0.05)
+  expect_equal(evaluate(PBO_IRS), costs$costs_N2_S1)
 
 })
