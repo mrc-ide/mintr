@@ -51,6 +51,49 @@
         "type": {"type": "string"}
       },
       "additionalProperties": true
+    },
+    "layout": {
+      "type": "object",
+      "properties": {
+        "xaxis": {
+          "$ref": "#/definitions/axis"
+        },
+        "yaxis": {
+          "$ref": "#/definitions/axis"
+        },
+        "shapes" : {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "type": {"type": "string"},
+              "y_formula": {"type": "string"},
+              "x0": {"type": "number"},
+              "x1": {"type": "number"},
+              "y0": {"type": "number"},
+              "y1": {"type": "number"}
+            },
+            "additionalProperties": true
+          }    
+        }  
+      },
+      "additionalProperties": true,
+      "required": ["xaxis", "yaxis"]
+    },
+    "axis": {
+      "type": "object",
+      "properties": {
+        "title": {"type": "string"},
+        "autorange": {"type": "boolean"},
+        "rangemode": {"type": "string"},
+        "range": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        }
+      },
+      "additionalProperties": true
     }
   },
   "properties": {
@@ -71,7 +114,7 @@
       }
     },
     "layout": {
-      "type": "object"
+      "$ref": "#/definitions/layout"
     },
     "config": {
       "type": "object"
