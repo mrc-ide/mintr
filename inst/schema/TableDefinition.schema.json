@@ -7,6 +7,15 @@
       "properties": {
         "valueCol": {"type": "string"},
         "displayName": {"type": "string"},
+        "error": {
+          "type": "object",
+          "properties": {
+            "minus": {"type": "object"},
+            "plus": {"type": "object"}
+          },
+          "additionalProperties": false,
+          "required": ["minus", "plus"]
+        },
         "valueTransform": {"type": "object"},
         "transform": {"type": "string"},
         "format": {"type": "string"},

@@ -9,6 +9,8 @@ get_input <- function() {
        procureBuffer = 7,
        priceIRSPerPerson = 2.5,
        casesAverted = 10,
+       casesAvertedErrorPlus = 11,
+       casesAvertedErrorMinus = 8,
        zonal_budget = 1000)
 }
 
@@ -46,10 +48,10 @@ get_incremental_increase_in_costs <- function() {
   increase_in_costs
 }
 
-get_costs_per_cases_averted <- function() {
+get_costs_per_cases_averted <- function(casesAvertedField = "casesAverted") {
   input <- get_input()
   total_costs <- get_expected_total_costs()
-  lapply(total_costs, function(x) x/input$casesAverted)
+  lapply(total_costs, function(x) x/input[[casesAvertedField]])
 }
 
 evaluate <- function(formula) {
@@ -261,11 +263,7 @@ test_that("cost table config formulas give correct results for incremental incre
   expect_equal(evaluate(PBO_IRS), costs$costs_N2_S1)
 })
 
-test_that("cost table config formulas give correct results for costs per cases averted", {
-  json <- jsonlite::fromJSON(mintr_path("json/table_cost_config.json"))
-  formulas <- json$valueTransform[7,]
-  costs <- get_costs_per_cases_averted()
-
+validate_costs_per_cases_averted <- function(formulas, costs) {
   none <- formulas[[1]]
   expect_equal(evaluate(none), "reference")
   ITN <- formulas[[2]]
@@ -278,5 +276,11 @@ test_that("cost table config formulas give correct results for costs per cases a
   expect_equal(evaluate(ITN_IRS), costs$costs_N1_S1)
   PBO_IRS <- formulas[[6]]
   expect_equal(evaluate(PBO_IRS), costs$costs_N2_S1)
+}
 
+test_that("cost table config formulas give correct results for costs per cases averted", {
+  json <- jsonlite::fromJSON(mintr_path("json/table_cost_config.json"))
+  validate_costs_per_cases_averted(json$valueTransform[7,], get_costs_per_cases_averted("casesAverted"))
+  validate_costs_per_cases_averted(json$error$plus$valueTransform[7,], get_costs_per_cases_averted("casesAvertedErrorMinus"))
+  validate_costs_per_cases_averted(json$error$minus$valueTransform[7,], get_costs_per_cases_averted("casesAvertedErrorPlus"))
 })

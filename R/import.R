@@ -106,7 +106,14 @@ mintr_db_process <- function(path) {
   stopifnot(identical(table[v_index], t_low[v_index]),
             identical(table[v_index], t_high[v_index]))
 
-  v_uncertainty <- c("casesAvertedPer1000", "reductionInCases")
+  v_uncertainty <- c("casesAverted",
+                     "casesAvertedPer1000",
+                     "prevYear1",
+                     "prevYear2",
+                     "prevYear3",
+                     "reductionInPrevalence",
+                     "reductionInCases",
+                     "meanCases")
   for (v in v_uncertainty) {
     table[[paste0(v, "ErrorMinus")]] <- t_low[[v]]
     table[[paste0(v, "ErrorPlus")]] <- t_high[[v]]

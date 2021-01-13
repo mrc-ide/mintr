@@ -46,12 +46,15 @@ test_that("Can read table data", {
   expect_equal(nrow(d), 114)
   expect_setequal(
     names(d),
-    c("netUse", "irsUse", "intervention", "prevYear1",
-      "prevYear2", "prevYear3", "meanCases", "reductionInCases",
-      "reductionInPrevalence", "casesAverted",
-      "casesAvertedPer1000", "casesAvertedPer1000ErrorMinus",
-      "casesAvertedPer1000ErrorPlus", "reductionInCasesErrorMinus",
-      "reductionInCasesErrorPlus"))
+    c("netUse", "irsUse", "intervention",
+      "casesAverted", "casesAvertedErrorMinus", "casesAvertedErrorPlus",
+      "casesAvertedPer1000", "casesAvertedPer1000ErrorMinus", "casesAvertedPer1000ErrorPlus",
+      "prevYear1", "prevYear1ErrorMinus", "prevYear1ErrorPlus",
+      "prevYear2", "prevYear2ErrorMinus", "prevYear2ErrorPlus",
+      "prevYear3", "prevYear3ErrorMinus", "prevYear3ErrorPlus",
+      "reductionInPrevalence", "reductionInPrevalenceErrorMinus", "reductionInPrevalenceErrorPlus",
+      "reductionInCases", "reductionInCasesErrorMinus", "reductionInCasesErrorPlus",
+      "meanCases", "meanCasesErrorMinus", "meanCasesErrorPlus"))
 })
 
 
@@ -165,7 +168,7 @@ test_that("Can scale table results by population", {
   d1 <- db$get_table(options)
   d2 <- db$get_table(modifyList(options, list(population = 1000)))
 
-  v <- setdiff(names(d1), "casesAverted")
+  v <- setdiff(names(d1), c("casesAverted", "casesAvertedErrorMinus", "casesAvertedErrorPlus"))
   expect_equal(d2[v], d1[v])
   ## Due to rounding error, this is only approximate
   expect_equal(d2$casesAverted, d1$casesAverted / 10,
