@@ -59,7 +59,9 @@ mintr_db <- R6::R6Class(
     get_table = function(options) {
       key <- self$get_index(options)
       ret <- unserialize(private$db$get(sprintf("table:%s", key)))
-      ret$casesAverted <- round(ret$casesAverted * options$population)
+      for (v in c("casesAverted", "casesAvertedErrorMinus", "casesAvertedErrorPlus")) {
+        ret[[v]] <- round(ret[[v]] * options$population)
+      }
       table <- mintr_db_transform_metabolic(ret, options$metabolic)
       mintr_db_set_not_applicable_values(table)
     }

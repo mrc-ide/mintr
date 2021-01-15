@@ -14,6 +14,15 @@
             "marker": {
                 "color": "blue",
                 "opacity": 0.5
+            },
+            "error_y": {
+                "type": "data",
+                "cols": ["(({priceDelivery} + {priceNetStandard}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100) / {casesAvertedErrorMinus}"],
+                "colsminus": ["(({priceDelivery} + {priceNetStandard}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100) / {casesAvertedErrorPlus}"],
+                "visible": true,
+                "thickness": 1.5,
+                "width": 0,
+                "opacity": 1
             }
         },
         {
@@ -25,6 +34,15 @@
             "marker": {
                 "color": "aquamarine",
                 "opacity": 0.5
+            },
+            "error_y": {
+                "type": "data",
+                "cols": ["(({priceDelivery} + {priceNetPBO}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100) / {casesAvertedErrorMinus}"],
+                "colsminus": ["(({priceDelivery} + {priceNetPBO}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100) / {casesAvertedErrorPlus}"],
+                "visible": true,
+                "thickness": 1.5,
+                "width": 0,
+                "opacity": 1
             }
         },
         {
@@ -36,6 +54,15 @@
             "marker": {
                 "color": "purple",
                 "opacity": 0.5
+            },
+            "error_y": {
+                "type": "data",
+                "cols": ["(3 * {priceIRSPerPerson} * {population}) / {casesAvertedErrorMinus}"],
+                "colsminus": ["(3 * {priceIRSPerPerson} * {population}) / {casesAvertedErrorPlus}"],
+                "visible": true,
+                "thickness": 1.5,
+                "width": 0,
+                "opacity": 1
             }
         },
         {
@@ -47,6 +74,15 @@
             "marker": {
                 "color": "darkred",
                 "opacity": 0.5
+            },
+            "error_y": {
+                "type": "data",
+                "cols": ["(({priceDelivery} + {priceNetStandard}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100 + 3 * {priceIRSPerPerson} * {population}) / {casesAvertedErrorMinus}"],
+                "colsminus": ["(({priceDelivery} + {priceNetStandard}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100 + 3 * {priceIRSPerPerson} * {population}) / {casesAvertedErrorPlus}"],
+                "visible": true,
+                "thickness": 1.5,
+                "width": 0,
+                "opacity": 1
             }
         },
         {
@@ -58,6 +94,15 @@
             "marker": {
                 "color": "orange",
                 "opacity": 0.5
+            },
+            "error_y": {
+                "type": "data",
+                "cols": ["(({priceDelivery} + {priceNetPBO}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100 + 3 * {priceIRSPerPerson} * {population}) / {casesAvertedErrorMinus}"],
+                "colsminus": ["(({priceDelivery} + {priceNetPBO}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100 + 3 * {priceIRSPerPerson} * {population}) / {casesAvertedErrorPlus}"],
+                "visible": true,
+                "thickness": 1.5,
+                "width": 0,
+                "opacity": 1
             }
         }
     ],
