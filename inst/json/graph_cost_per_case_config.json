@@ -8,7 +8,7 @@
         {
             "x": ["llin"],
             "id": "llin",
-            "y_formula": ["(({population} / {procurePeoplePerNet}) * {priceNetStandard} + ({priceDelivery} * {population} * (({procureBuffer} + 100) / 100))) / {casesAverted}"],
+            "y_formula": ["(({priceDelivery} + {priceNetStandard}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100) / {casesAverted}"],
             "type": "bar",
             "name": "Pyrethroid LLIN only",
             "marker": {
@@ -28,7 +28,7 @@
         {
             "x": ["llin-pbo"],
             "id": "llin-pbo",
-            "y_formula": ["(({population} / {procurePeoplePerNet}) * {priceNetPBO} + ({priceDelivery} * {population} * (({procureBuffer} + 100) / 100))) / {casesAverted}"],
+            "y_formula": ["(({priceDelivery} + {priceNetPBO}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100) / {casesAverted}"],
             "type": "bar",
             "name": "Pyrethroid-PBO ITN only",
             "marker": {
@@ -48,7 +48,7 @@
         {
             "x": ["irs"],
             "id": "irs",
-            "y_formula": ["(({population} / {procurePeoplePerNet}) * {priceNetStandard} + 3 * ({priceIRSPerPerson} * {population})) / {casesAverted}"],
+            "y_formula": ["(3 * {priceIRSPerPerson} * {population}) / {casesAverted}"],
             "name": "IRS only",
             "type": "bar",
             "marker": {
@@ -68,7 +68,7 @@
         {
             "x": ["irs-llin"],
             "id": "irs-llin",
-            "y_formula": ["(({population} / {procurePeoplePerNet}) * {priceNetStandard} + ({priceDelivery} * {population} * (({procureBuffer} + 100) / 100)) + 3 * ({priceIRSPerPerson} * {population})) / {casesAverted}"],
+            "y_formula": ["(({priceDelivery} + {priceNetStandard}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100 + 3 * {priceIRSPerPerson} * {population}) / {casesAverted}"],
             "name": "Pyrethroid LLIN with IRS",
             "type": "bar",
             "marker": {
@@ -88,7 +88,7 @@
         {
             "x": ["irs-llin-pbo"],
             "id": "irs-llin-pbo",
-            "y_formula": ["(({population} / {procurePeoplePerNet}) * {priceNetPBO} + ({priceDelivery} * {population} * (({procureBuffer} + 100) / 100)) + 3 * ({priceIRSPerPerson} * {population})) / {casesAverted}"],
+            "y_formula": ["(({priceDelivery} + {priceNetPBO}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100 + 3 * {priceIRSPerPerson} * {population}) / {casesAverted}"],
             "name": "Pyrethroid-PBO ITN with IRS",
             "type": "bar",
             "marker": {
