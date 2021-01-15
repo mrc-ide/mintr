@@ -59,11 +59,7 @@ evaluate <- function(formula) {
   eval(parse(text = glue::glue(formula, .envir = input)))
 }
 
-test_that("cost per case graph config formulas give correct results", {
-  json <- jsonlite::fromJSON(mintr_path("json/graph_cost_per_case_config.json"))
-  formulas <- json$series$y_formula
-  costs <- get_costs_per_cases_averted()
-
+validate_costs_per_case <- function(formulas, costs) {
   ITN <- formulas[[1]]
   expect_equal(evaluate(ITN), costs$costs_N1)
   PBO <- formulas[[2]]
@@ -74,6 +70,14 @@ test_that("cost per case graph config formulas give correct results", {
   expect_equal(evaluate(ITN_IRS), costs$costs_N1_S1)
   PBO_IRS <- formulas[[5]]
   expect_equal(evaluate(PBO_IRS), costs$costs_N2_S1)
+}
+
+test_that("cost per case graph config formulas give correct results", {
+  json <- jsonlite::fromJSON(mintr_path("json/graph_cost_per_case_config.json"))
+  validate_costs_per_case(json$series$y_formula,         get_costs_per_cases_averted("casesAverted"))
+  # cost per case is inversely proportional to cases averted
+  validate_costs_per_case(json$series$error_y$cols,      get_costs_per_cases_averted("casesAvertedErrorMinus"))
+  validate_costs_per_case(json$series$error_y$colsminus, get_costs_per_cases_averted("casesAvertedErrorPlus"))
 })
 
 test_that("cases averted vs costs graph config series formulas give correct results", {
