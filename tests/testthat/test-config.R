@@ -210,6 +210,14 @@ test_that("impact table config contains valid intervention ids", {
 
 })
 
+test_that("impact table config formulas give correct results for cases averted", {
+  json <- jsonlite::fromJSON(mintr_path("json/table_impact_config.json"))
+  input <- get_input()
+  expect_equal(input$casesAverted, input[[json$valueCol[8]]])
+  expect_equal(input$casesAvertedErrorPlus, input[[json$error$plus$valueCol[8]]])
+  expect_equal(input$casesAvertedErrorMinus, input[[json$error$minus$valueCol[8]]])
+})
+
 test_that("cost table config contains valid intervention ids", {
   json <- jsonlite::fromJSON(mintr_path("json/table_cost_config.json"))
 
