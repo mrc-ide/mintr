@@ -2,6 +2,30 @@
   "$schema": "http://json-schema.org/draft-04/schema#",
   "type": "array",
   "definitions": {
+    "errorValue": {
+      "type": "object",
+      "properties": {
+        "valueTransform": {
+          "type": "object"
+        },
+        "valueCol": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "oneOf": [
+        {
+          "required": [
+            "valueTransform"
+          ]
+        },
+        {
+          "required": [
+            "valueCol"
+          ]
+        }
+      ]
+    },
     "columnDefinition": {
       "type": "object",
       "properties": {
@@ -10,8 +34,12 @@
         "error": {
           "type": "object",
           "properties": {
-            "minus": {"type": "object"},
-            "plus": {"type": "object"}
+            "minus": {
+              "$ref": "#/definitions/errorValue"
+            },
+            "plus": {
+              "$ref": "#/definitions/errorValue"
+            }
           },
           "additionalProperties": false,
           "required": ["minus", "plus"]
