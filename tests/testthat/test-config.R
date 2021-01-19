@@ -248,28 +248,9 @@ test_that("cost table config formulas give correct results for total costs", {
   expect_equal(evaluate(PBO_IRS), costs$costs_N2_S1)
 })
 
-test_that("cost table config formulas give correct results for incremental increase in costs", {
-  json <- jsonlite::fromJSON(mintr_path("json/table_cost_config.json"))
-  formulas <- json$valueTransform[6,]
-  costs <- get_incremental_increase_in_costs()
-
-  none <- formulas[[1]]
-  expect_equal(evaluate(none), costs$costs_N0)
-  ITN <- formulas[[2]]
-  expect_equal(evaluate(ITN), costs$costs_N1)
-  PBO <- formulas[[3]]
-  expect_equal(evaluate(PBO), costs$costs_N2)
-  IRS <- formulas[[4]]
-  expect_equal(evaluate(IRS), costs$costs_S1)
-  ITN_IRS <- formulas[[5]]
-  expect_equal(evaluate(ITN_IRS), costs$costs_N1_S1)
-  PBO_IRS <- formulas[[6]]
-  expect_equal(evaluate(PBO_IRS), costs$costs_N2_S1)
-})
-
 test_that("cost table config formulas give correct results for costs per cases averted", {
   json <- jsonlite::fromJSON(mintr_path("json/table_cost_config.json"))
-  formulas <- json$valueTransform[7,]
+  formulas <- json$valueTransform[6,]
   costs <- get_costs_per_cases_averted()
 
   none <- formulas[[1]]
