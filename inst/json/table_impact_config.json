@@ -70,7 +70,8 @@
       "plus": {
         "valueCol": "reductionInPrevalenceErrorPlus"
       }
-    }
+    },
+    "format": "0.0"
   },
   {
     "valueCol": "casesAverted",
@@ -108,7 +109,8 @@
       "plus": {
         "valueCol": "reductionInCasesErrorPlus"
       }
-    }
+    },
+    "format": "0.0"
   },
   {
     "valueCol": "meanCases",
@@ -120,6 +122,7 @@
       "plus": {
         "valueCol": "meanCasesErrorPlus"
       }
-    }
+    },
+    "format": "0.0000"
   }
 ]
