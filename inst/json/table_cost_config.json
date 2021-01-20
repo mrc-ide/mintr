@@ -23,7 +23,7 @@
   },
   {
     "valueCol": "casesAvertedPer1000",
-    "displayName": "Mean cases averted per 1,000 people per year (across 3 yrs since intervention)",
+    "displayName": "Mean cases averted per 1,000 people per year across 3 years",
     "transform": "round({} / 10) * 10"
   },
   {
@@ -56,7 +56,7 @@
   },
   {
     "valueCol": "intervention",
-    "displayName": "Cost per case averted per 3-year campaign",
+    "displayName": "Cost per case averted across 3 years",
     "valueTransform": {
       "none": "'reference'",
       "llin": "(({priceDelivery} + {priceNetStandard}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100) / {casesAverted}",

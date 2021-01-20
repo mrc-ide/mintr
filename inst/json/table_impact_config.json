@@ -23,39 +23,39 @@
   },
   {
     "valueCol": "prevYear1",
-    "displayName": "Prevalence Under 10 yrs: Yr 1 post intervention",
+    "displayName": "Prevalence under 10 years: Year 1 post intervention",
     "format": "0"
   },
   {
     "valueCol": "prevYear2",
-    "displayName": "Prevalence Under 10 yrs: Yr 2 post intervention",
+    "displayName": "Prevalence under 10 years: Year 2 post intervention",
     "format": "0"
   },
   {
     "valueCol": "prevYear3",
-    "displayName": "Prevalence Under 10 yrs: Yr 3 post intervention",
+    "displayName": "Prevalence under 10 years: Year 3 post intervention",
     "format": "0"
   },
   {
     "valueCol": "reductionInPrevalence",
-    "displayName": "Relative reduction in prevalence in under 10 years (%)"
+    "displayName": "Relative reduction in prevalence under 10 years (%)"
   },
   {
     "valueCol": "casesAverted",
-    "displayName": "Mean cases averted per population per year across 3 yrs since intervention",
+    "displayName": "Mean cases averted per population per year across 3 years since intervention",
     "transform": "round({} / 10) * 10"
   },
   {
     "valueCol": "casesAvertedPer1000",
-    "displayName": "Mean cases averted per 1000 people across 3 yrs since intervention",
+    "displayName": "Mean cases averted per 1,000 people across 3 years since intervention",
     "transform": "round({} / 10) * 10"
   },
   {
     "valueCol": "reductionInCases",
-    "displayName": "Relative reduction in clinical cases across 3 yrs since intervention (%)"
+    "displayName": "Relative reduction in clinical cases across 3 years since intervention (%)"
   },
   {
     "valueCol": "meanCases",
-    "displayName": "Mean cases per person per year across 3 yrs"
+    "displayName": "Mean cases per person per year across 3 years"
   }
 ]
