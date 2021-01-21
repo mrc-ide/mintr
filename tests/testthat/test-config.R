@@ -273,7 +273,7 @@ validate_costs_per_cases_averted <- function(formulas, costs) {
 
 test_that("cost table config formulas give correct results for costs per cases averted", {
   json <- jsonlite::fromJSON(mintr_path("json/table_cost_config.json"))
-  validate_costs_per_cases_averted(json$valueTransform[7,], get_costs_per_cases_averted("casesAverted"))
-  validate_costs_per_cases_averted(json$error$plus$valueTransform[7,], get_costs_per_cases_averted("casesAvertedErrorMinus"))
-  validate_costs_per_cases_averted(json$error$minus$valueTransform[7,], get_costs_per_cases_averted("casesAvertedErrorPlus"))
+  validate_costs_per_cases_averted(json$valueTransform[6,], get_costs_per_cases_averted("casesAverted"))
+  validate_costs_per_cases_averted(json$error$plus$valueTransform[6,], get_costs_per_cases_averted("casesAvertedErrorMinus"))
+  validate_costs_per_cases_averted(json$error$minus$valueTransform[6,], get_costs_per_cases_averted("casesAvertedErrorPlus"))
 })
