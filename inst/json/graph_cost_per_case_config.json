@@ -117,7 +117,7 @@
             "title": "intervention",
             "showline": true,
             "tickvals": ["llin", "llin-pbo", "irs", "irs-llin", "irs-llin-pbo"],
-            "ticktext": ["ITN", "PBO", "IRS", "ITN + IRS", "PBO + IRS"],
+            "ticktext": ["pyr-LLIN", "PBO ITN", "IRS", "pyr-LLIN + IRS", "PBO ITN + IRS"],
             "autorange": true
         },
         "showlegend": true

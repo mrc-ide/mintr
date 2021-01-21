@@ -50,20 +50,6 @@
   },
   {
     "valueCol": "intervention",
-    "displayName": "Incremental increase in costs",
-    "valueTransform": {
-      "none": "0",
-      "llin": "(({priceDelivery} + {priceNetStandard}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100) - 0",
-      "llin-pbo": "(({priceDelivery} + {priceNetPBO}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100) - 0",
-      "irs": "(3 * {priceIRSPerPerson} * {population}) - 0",
-      "irs-llin": "(({priceDelivery} + {priceNetStandard}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100 + 3 * {priceIRSPerPerson} * {population}) - 0",
-      "irs-llin-pbo": "(({priceDelivery} + {priceNetPBO}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100 + 3 * {priceIRSPerPerson} * {population}) - 0"
-    },
-    "format": "$0[.][00]a",
-    "precision": 4
-  },
-  {
-    "valueCol": "intervention",
     "displayName": "Cost per case averted per 3-year campaign",
     "valueTransform": {
       "none": "'reference'",
