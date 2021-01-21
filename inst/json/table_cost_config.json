@@ -24,6 +24,14 @@
   {
     "valueCol": "casesAvertedPer1000",
     "displayName": "Mean cases averted per 1,000 people per year (across 3 yrs since intervention)",
+    "error": {
+      "minus": {
+        "valueCol": "casesAvertedPer1000ErrorMinus"
+      },
+      "plus": {
+        "valueCol": "casesAvertedPer1000ErrorPlus"
+      }
+    },
     "transform": "round({} / 10) * 10"
   },
   {
@@ -50,6 +58,28 @@
       "irs": "(3 * {priceIRSPerPerson} * {population}) / {casesAverted}",
       "irs-llin": "(({priceDelivery} + {priceNetStandard}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100 + 3 * {priceIRSPerPerson} * {population}) / {casesAverted}",
       "irs-llin-pbo": "(({priceDelivery} + {priceNetPBO}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100 + 3 * {priceIRSPerPerson} * {population}) / {casesAverted}"
+    },
+    "error": {
+      "minus": {
+        "valueTransform": {
+          "none": "'reference'",
+          "llin": "(({priceDelivery} + {priceNetStandard}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100) / {casesAvertedErrorPlus}",
+          "llin-pbo": "(({priceDelivery} + {priceNetPBO}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100) / {casesAvertedErrorPlus}",
+          "irs": "(3 * {priceIRSPerPerson} * {population}) / {casesAvertedErrorPlus}",
+          "irs-llin": "(({priceDelivery} + {priceNetStandard}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100 + 3 * {priceIRSPerPerson} * {population}) / {casesAvertedErrorPlus}",
+          "irs-llin-pbo": "(({priceDelivery} + {priceNetPBO}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100 + 3 * {priceIRSPerPerson} * {population}) / {casesAvertedErrorPlus}"
+        }
+      },
+      "plus": {
+        "valueTransform": {
+          "none": "'reference'",
+          "llin": "(({priceDelivery} + {priceNetStandard}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100) / {casesAvertedErrorMinus}",
+          "llin-pbo": "(({priceDelivery} + {priceNetPBO}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100) / {casesAvertedErrorMinus}",
+          "irs": "(3 * {priceIRSPerPerson} * {population}) / {casesAvertedErrorMinus}",
+          "irs-llin": "(({priceDelivery} + {priceNetStandard}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100 + 3 * {priceIRSPerPerson} * {population}) / {casesAvertedErrorMinus}",
+          "irs-llin-pbo": "(({priceDelivery} + {priceNetPBO}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100 + 3 * {priceIRSPerPerson} * {population}) / {casesAvertedErrorMinus}"
+        }
+      }
     },
     "transform": "round({} * 10) / 10",
     "format": "$0.00"

@@ -2,11 +2,48 @@
   "$schema": "http://json-schema.org/draft-04/schema#",
   "type": "array",
   "definitions": {
+    "errorValue": {
+      "type": "object",
+      "properties": {
+        "valueTransform": {
+          "type": "object"
+        },
+        "valueCol": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "oneOf": [
+        {
+          "required": [
+            "valueTransform"
+          ]
+        },
+        {
+          "required": [
+            "valueCol"
+          ]
+        }
+      ]
+    },
     "columnDefinition": {
       "type": "object",
       "properties": {
         "valueCol": {"type": "string"},
         "displayName": {"type": "string"},
+        "error": {
+          "type": "object",
+          "properties": {
+            "minus": {
+              "$ref": "#/definitions/errorValue"
+            },
+            "plus": {
+              "$ref": "#/definitions/errorValue"
+            }
+          },
+          "additionalProperties": false,
+          "required": ["minus", "plus"]
+        },
         "valueTransform": {"type": "object"},
         "transform": {"type": "string"},
         "format": {"type": "string"},
