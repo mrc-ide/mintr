@@ -203,6 +203,14 @@ test_that("impact table config contains valid intervention ids", {
 
 })
 
+test_that("impact table config formulas give correct results for cases averted", {
+  json <- jsonlite::fromJSON(mintr_path("json/table_impact_config.json"))
+  input <- get_input()
+  expect_equal(input$casesAverted, input[[json$valueCol[8]]])
+  expect_equal(input$casesAvertedErrorPlus, input[[json$error$plus$valueCol[8]]])
+  expect_equal(input$casesAvertedErrorMinus, input[[json$error$minus$valueCol[8]]])
+})
+
 test_that("cost table config contains valid intervention ids", {
   json <- jsonlite::fromJSON(mintr_path("json/table_cost_config.json"))
 
@@ -241,11 +249,7 @@ test_that("cost table config formulas give correct results for total costs", {
   expect_equal(evaluate(PBO_IRS), costs$costs_N2_S1)
 })
 
-test_that("cost table config formulas give correct results for costs per cases averted", {
-  json <- jsonlite::fromJSON(mintr_path("json/table_cost_config.json"))
-  formulas <- json$valueTransform[6,]
-  costs <- get_costs_per_cases_averted()
-
+validate_costs_per_cases_averted <- function(formulas, costs) {
   none <- formulas[[1]]
   expect_equal(evaluate(none), "reference")
   ITN <- formulas[[2]]
@@ -258,5 +262,11 @@ test_that("cost table config formulas give correct results for costs per cases a
   expect_equal(evaluate(ITN_IRS), costs$costs_N1_S1)
   PBO_IRS <- formulas[[6]]
   expect_equal(evaluate(PBO_IRS), costs$costs_N2_S1)
+}
 
+test_that("cost table config formulas give correct results for costs per cases averted", {
+  json <- jsonlite::fromJSON(mintr_path("json/table_cost_config.json"))
+  validate_costs_per_cases_averted(json$valueTransform[6,], get_costs_per_cases_averted("casesAverted"))
+  validate_costs_per_cases_averted(json$error$plus$valueTransform[6,], get_costs_per_cases_averted("casesAvertedErrorMinus"))
+  validate_costs_per_cases_averted(json$error$minus$valueTransform[6,], get_costs_per_cases_averted("casesAvertedErrorPlus"))
 })
