@@ -23,22 +23,22 @@
   },
   {
     "valueCol": "prevYear1",
-    "displayName": "Prevalence under 10 years: Year 1 post intervention",
+    "displayName": "Prevalence under 5 years: Year 1 post intervention",
     "format": "0"
   },
   {
     "valueCol": "prevYear2",
-    "displayName": "Prevalence under 10 years: Year 2 post intervention",
+    "displayName": "Prevalence under 5 years: Year 2 post intervention",
     "format": "0"
   },
   {
     "valueCol": "prevYear3",
-    "displayName": "Prevalence under 10 years: Year 3 post intervention",
+    "displayName": "Prevalence under 5 years: Year 3 post intervention",
     "format": "0"
   },
   {
     "valueCol": "reductionInPrevalence",
-    "displayName": "Relative reduction in prevalence under 10 years (%)"
+    "displayName": "Relative reduction in prevalence under 5 years (%)"
   },
   {
     "valueCol": "casesAverted",

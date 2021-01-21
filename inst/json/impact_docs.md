@@ -26,10 +26,10 @@ The impact figures present the best achievable option for the zones without cons
 *   Interventions: The ITN and IRS combination used for the scenario.
 *   Net use (%): The percentage of people using a ITN the previous night.
 *   IRS cover (%): The percentage of people sleeping in an IRS protected home.
-*   Prevalence under 10 years: Year 1 post intervention: The prevalence in children under 5 years old one year after the intervention package is implemented.
-*   Prevalence under 10 years: Year 2 post intervention: The prevalence in children under 5 years old two years after the intervention package is implemented.
-*   Prevalence under 10 years: Year 3 post intervention: The prevalence in children under 5 years old three years after the intervention package is implemented.
-*   Relative reduction in prevalence in under 10 years (%): The relative efficacy of the investigated intervention package against the 'do-nothing' scenario at 3-years post switching to the alternative interventions.
+*   Prevalence under 5 years: Year 1 post intervention: The prevalence in children under 5 years old one year after the intervention package is implemented.
+*   Prevalence under 5 years: Year 2 post intervention: The prevalence in children under 5 years old two years after the intervention package is implemented.
+*   Prevalence under 5 years: Year 3 post intervention: The prevalence in children under 5 years old three years after the intervention package is implemented.
+*   Relative reduction in prevalence in under 5 years (%): The relative efficacy of the investigated intervention package against the 'do-nothing' scenario at 3-years post switching to the alternative interventions.
 *   Mean cases averted per population per year across 3 years since intervention: The absolute number of clinical cases averted given the population size inputed and relative to the 'do-nothing' scenario.
 *   Mean cases averted per 1,000 people per year across 3 years since intervention: The mean number of clinical cases averted annually per 1,000 people per year given the population size inputed and relative to the 'do-nothing' scenario.
 *   Relative reduction in clinical cases across 3 years since intervention (%): The percentage-efficacy of the investigated intervention package against clinical cases relative to the 'do-nothing' scenario.
