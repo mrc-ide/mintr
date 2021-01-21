@@ -24,17 +24,17 @@
   {
     "valueCol": "prevYear1",
     "displayName": "Prevalence Under 10 yrs: Yr 1 post intervention",
-    "format": "0"
+    "format": "0.0"
   },
   {
     "valueCol": "prevYear2",
     "displayName": "Prevalence Under 10 yrs: Yr 2 post intervention",
-    "format": "0"
+    "format": "0.0"
   },
   {
     "valueCol": "prevYear3",
     "displayName": "Prevalence Under 10 yrs: Yr 3 post intervention",
-    "format": "0"
+    "format": "0.0"
   },
   {
     "valueCol": "reductionInPrevalence",
