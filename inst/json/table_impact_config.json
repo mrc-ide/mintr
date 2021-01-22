@@ -23,7 +23,7 @@
   },
   {
     "valueCol": "prevYear1",
-    "displayName": "Prevalence Under 10 yrs: Yr 1 post intervention",
+    "displayName": "Prevalence under 5 years: Year 1 post intervention",
     "error": {
       "minus": {
         "valueCol": "prevYear1ErrorMinus"
@@ -36,7 +36,7 @@
   },
   {
     "valueCol": "prevYear2",
-    "displayName": "Prevalence Under 10 yrs: Yr 2 post intervention",
+    "displayName": "Prevalence under 5 years: Year 2 post intervention",
     "error": {
       "minus": {
         "valueCol": "prevYear2ErrorMinus"
@@ -49,7 +49,7 @@
   },
   {
     "valueCol": "prevYear3",
-    "displayName": "Prevalence Under 10 yrs: Yr 3 post intervention",
+    "displayName": "Prevalence under 5 years: Year 3 post intervention",
     "error": {
       "minus": {
         "valueCol": "prevYear3ErrorMinus"
@@ -62,7 +62,7 @@
   },
   {
     "valueCol": "reductionInPrevalence",
-    "displayName": "Relative reduction in prevalence in under 10 years (%)",
+    "displayName": "Relative reduction in prevalence under 5 years (%)",
     "error": {
       "minus": {
         "valueCol": "reductionInPrevalenceErrorMinus"
@@ -75,7 +75,7 @@
   },
   {
     "valueCol": "casesAverted",
-    "displayName": "Mean cases averted per population per year across 3 yrs since intervention",
+    "displayName": "Mean cases averted per population per year across 3 years since intervention",
     "error": {
       "minus": {
         "valueCol": "casesAvertedErrorMinus"
@@ -88,7 +88,7 @@
   },
   {
     "valueCol": "casesAvertedPer1000",
-    "displayName": "Mean cases averted per 1000 people across 3 yrs since intervention",
+    "displayName": "Mean cases averted per 1,000 people across 3 years since intervention",
     "error": {
       "minus": {
         "valueCol": "casesAvertedPer1000ErrorMinus"
@@ -101,7 +101,7 @@
   },
   {
     "valueCol": "reductionInCases",
-    "displayName": "Relative reduction in clinical cases across 3 yrs since intervention (%)",
+    "displayName": "Relative reduction in clinical cases across 3 years since intervention (%)",
     "error": {
       "minus": {
         "valueCol": "reductionInCasesErrorMinus"
@@ -114,7 +114,7 @@
   },
   {
     "valueCol": "meanCases",
-    "displayName": "Mean cases per person per year across 3 yrs",
+    "displayName": "Mean cases per person per year across 3 years",
     "error": {
       "minus": {
         "valueCol": "meanCasesErrorMinus"

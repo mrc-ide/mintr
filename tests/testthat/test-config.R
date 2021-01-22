@@ -41,13 +41,6 @@ get_expected_total_costs <- function() {
        costs_N2_S1 = costs_N2_S1)
 }
 
-get_incremental_increase_in_costs <- function() {
-  total_costs <- get_expected_total_costs()
-  baseline_cost <- as.list(rep(total_costs$costs_N0, 6))
-  increase_in_costs <- mapply("-", total_costs, baseline_cost, SIMPLIFY = FALSE)
-  increase_in_costs
-}
-
 get_costs_per_cases_averted <- function(casesAvertedField = "casesAverted") {
   input <- get_input()
   total_costs <- get_expected_total_costs()
