@@ -28,21 +28,21 @@
             "name": "No intervention",
             "type": "lines",
             "marker": {"color": "grey"},
-            "hovertemplate": "%{y:.2%}"
+            "hovertemplate": "%{y:.1%}"
         },
         {
             "id": "llin",
             "name": "Pyrethroid LLIN only",
             "type": "lines",
             "marker": {"color": "blue"},
-            "hovertemplate": "%{y:.2%}"
+            "hovertemplate": "%{y:.1%}"
         },
         {
             "id": "llin-pbo",
             "name": "Pyrethroid-PBO ITN only",
             "type": "lines",
             "marker": {"color": "turquoise"},
-            "hovertemplate": "%{y:.2%}"
+            "hovertemplate": "%{y:.1%}"
         },
         {
             "id": "irs",
@@ -52,7 +52,7 @@
                 "dash": "dot"
             },
             "marker": {"color": "purple"},
-            "hovertemplate": "%{y:.2%}"
+            "hovertemplate": "%{y:.1%}"
         },
         {
             "id": "irs-llin",
@@ -62,7 +62,7 @@
                 "dash": "dash"
             },
             "marker": {"color": "darkred"},
-            "hovertemplate": "%{y:.2%}"
+            "hovertemplate": "%{y:.1%}"
         },
         {
             "id": "irs-llin-pbo",
@@ -72,7 +72,7 @@
                 "dash": "dash"
             },
             "marker": {"color": "orange"},
-            "hovertemplate": "%{y:.2%}"
+            "hovertemplate": "%{y:.1%}"
         }
     ],
     "config": {

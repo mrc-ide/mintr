@@ -15,6 +15,7 @@
                 "color": "blue",
                 "opacity": 0.5
             },
+            "hovertemplate": "$%{y:.1f}0 +$%{error_y.array:.1f}0 / -$%{error_y.arrayminus:.1f}0",
             "error_y": {
                 "type": "data",
                 "cols": ["(({priceDelivery} + {priceNetStandard}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100) / {casesAvertedErrorMinus}"],
@@ -35,6 +36,7 @@
                 "color": "aquamarine",
                 "opacity": 0.5
             },
+            "hovertemplate": "$%{y:.1f}0 +$%{error_y.array:.1f}0 / -$%{error_y.arrayminus:.1f}0",
             "error_y": {
                 "type": "data",
                 "cols": ["(({priceDelivery} + {priceNetPBO}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100) / {casesAvertedErrorMinus}"],
@@ -55,6 +57,7 @@
                 "color": "purple",
                 "opacity": 0.5
             },
+            "hovertemplate": "$%{y:.1f}0 +$%{error_y.array:.1f}0 / -$%{error_y.arrayminus:.1f}0",
             "error_y": {
                 "type": "data",
                 "cols": ["(3 * {priceIRSPerPerson} * {population}) / {casesAvertedErrorMinus}"],
@@ -75,6 +78,7 @@
                 "color": "darkred",
                 "opacity": 0.5
             },
+            "hovertemplate": "$%{y:.1f}0 +$%{error_y.array:.1f}0 / -$%{error_y.arrayminus:.1f}0",
             "error_y": {
                 "type": "data",
                 "cols": ["(({priceDelivery} + {priceNetStandard}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100 + 3 * {priceIRSPerPerson} * {population}) / {casesAvertedErrorMinus}"],
@@ -95,6 +99,7 @@
                 "color": "orange",
                 "opacity": 0.5
             },
+            "hovertemplate": "$%{y:.1f}0 +$%{error_y.array:.1f}0 / -$%{error_y.arrayminus:.1f}0",
             "error_y": {
                 "type": "data",
                 "cols": ["(({priceDelivery} + {priceNetPBO}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100 + 3 * {priceIRSPerPerson} * {population}) / {casesAvertedErrorMinus}"],
