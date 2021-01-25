@@ -122,7 +122,7 @@
           "controls": [
             {
               "name": "levelOfResistance",
-              "label": "Level of pyrethoid resistance",
+              "label": "Level of pyrethroid resistance",
               "type": "select",
               "excludeNullOption": true,
               "required": true,
