@@ -28,4 +28,6 @@ to the cost spent to achieve the 'do-nothing' scenario.
 *   Cost per case averted across 3 years: The cost in USD per case averted per 3-year campaign relative to the
 'do-nothing' scenario.
 
+You can hover the cursor above a value in the graph or table to observe the uncertainty. Here uncertainty is restricted to effects from ITN or IRS interventions.
+
 *\*IRS refers to a long-lasting non-pyrethroid IRS product (impact reflects recent Actellic 300CS and SumiShield products).*
