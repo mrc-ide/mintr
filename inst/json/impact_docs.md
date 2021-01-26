@@ -8,10 +8,10 @@ The first figure shows how prevalence is predicted to change given an interventi
 Lines show either:
 
 *   a 'do-nothing' scenario where interventions are not replaced (grey)
-*   continuation of Pyrethroid ITNs (blue)
+*   continuation of Pyrethroid LLINs (blue)
 *   a switch to Pyrethroid-PBO ITNs (green)
 *   a switch to IRS only at a user-defined coverage (purple)
-*   continuation with Pyrethroid ITNs plus additional IRS at a coverage determined by the user (darkred)
+*   continuation with Pyrethroid LLINs plus additional IRS at a coverage determined by the user (darkred)
 *   or a switch to Pyrethroid-PBO ITNs plus additional IRS at a coverage determined by the user (orange)
 
 In the second figure, the bars indicate the same intervention packages as above relative to the 'do-nothing' scenario.
