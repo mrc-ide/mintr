@@ -90,7 +90,7 @@
                     "controls": [
                         {
                             "name": "priceNetStandard",
-                            "label": "Price of standard ITN ($USD)",
+                            "label": "Price of pyrethroid LLIN ($USD)",
                             "type": "number",
                             "required": true,
                             "value": 1.5
