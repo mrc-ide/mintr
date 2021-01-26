@@ -20,6 +20,9 @@ The impact figures present the best achievable option for the zones without cons
  presents the estimated numbers for these estimates. Please note that these are not necessarily accurate but the degree
   of change should provide intuitive insight into the potential of each impact package and the direction of change is 
   reflective of reality according to model checks and validations (a review paper is in preparation).
+  
+At any time, you can compare and contrast the effects of parameters that are less certain for the region, to explore which interventions 
+may perform well when different assumptions are made.
 
 **Table**
 
