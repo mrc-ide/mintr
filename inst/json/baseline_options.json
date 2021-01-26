@@ -47,7 +47,7 @@
               "type": "select",
               "excludeNullOption": true,
               "required": true,
-              "value": "low",
+              "value": "med",
               "helpText": "Low = less than 10% of children under 5-years have malaria<br/>Medium = approximately 30% of children under 5-years have malaria<br/>High = approximately 65% of children  under 5-years have malaria",
               "options": [
                 {
