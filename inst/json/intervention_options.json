@@ -126,7 +126,7 @@
                             "label": "Annual cost of IRS* per person ($USD)",
                             "type": "number",
                             "required": true,
-                            "value": 2.5,
+                            "value": 5.73,
                             "helpText": "Include the average cost for both the IRS product and implementation of IRS. If different IRS products are used in different years, please average the product costs and provide an annual cost per person protected by IRS (in $USD)"
                         }
                     ]
