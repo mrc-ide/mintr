@@ -27,3 +27,5 @@ averted by the intervention package, averaged across 3 years, relative to the co
 to the cost spent to achieve the 'do-nothing' scenario.
 *   Cost per case averted across 3 years: The cost in USD per case averted per 3-year campaign relative to the
 'do-nothing' scenario.
+
+*\*IRS refers to a long-lasting non-pyrethroid IRS product (impact reflects recent Actellic 300CS and SumiShield products).*
