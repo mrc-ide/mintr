@@ -50,7 +50,7 @@
             "x": ["irs"],
             "id": "irs",
             "y_formula": ["round({casesAvertedPer1000} / 10) * 10"],
-            "name": "IRS only",
+            "name": "IRS* only",
             "type": "bar",
             "marker": {
                 "color": "purple",
@@ -70,7 +70,7 @@
             "x": ["irs-llin"],
             "id": "irs-llin",
             "y_formula": ["round({casesAvertedPer1000} / 10) * 10"],
-            "name": "Pyrethroid LLIN with IRS",
+            "name": "Pyrethroid LLIN with IRS*",
             "type": "bar",
             "marker": {
                 "color": "darkred",
@@ -90,7 +90,7 @@
             "x": ["irs-llin-pbo"],
             "id": "irs-llin-pbo",
             "y_formula": ["round({casesAvertedPer1000} / 10) * 10"],
-            "name": "Pyrethroid-PBO ITN with IRS",
+            "name": "Pyrethroid-PBO ITN with IRS*",
             "type": "bar",
             "marker": {
                 "color": "orange",

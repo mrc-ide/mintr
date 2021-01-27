@@ -6,9 +6,9 @@
       "none": "'No intervention'",
       "llin": "'Pyrethroid LLIN only'",
       "llin-pbo": "'Pyrethroid-PBO ITN only'",
-      "irs": "'IRS only'",
-      "irs-llin": "'Pyrethroid LLIN with IRS'",
-      "irs-llin-pbo": "'Pyrethroid-PBO ITN with IRS'"
+      "irs": "'IRS* only'",
+      "irs-llin": "'Pyrethroid LLIN with IRS*'",
+      "irs-llin-pbo": "'Pyrethroid-PBO ITN with IRS*'"
     }
   },
   {
@@ -18,7 +18,7 @@
   },
   {
     "valueCol": "irsUse",
-    "displayName": "IRS cover (%)",
+    "displayName": "IRS* cover (%)",
     "format": "0%"
   },
   {
