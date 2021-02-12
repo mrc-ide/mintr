@@ -16,8 +16,8 @@
                   "error_x": {
                       "type": "data",
                       "width": 0,
-                      "col": "casesAvertedPer1000ErrorPlus",
-                      "colminus": "casesAvertedPer1000ErrorMinus"
+                      "col": "max(0, {casesAvertedPer1000ErrorPlus})",
+                      "colminus": "max(0, {casesAvertedPer1000ErrorMinus})"
                   }
               },
               {
@@ -30,8 +30,8 @@
                   "error_x": {
                       "type": "data",
                       "width": 0,
-                      "col": "casesAvertedPer1000ErrorPlus",
-                      "colminus": "casesAvertedPer1000ErrorMinus"
+                      "col": "max(0, {casesAvertedPer1000ErrorPlus})",
+                      "colminus": "max(0, {casesAvertedPer1000ErrorMinus})"
                   }
               },
               {
@@ -44,8 +44,8 @@
                   "error_x": {
                       "type": "data",
                       "width": 0,
-                      "col": "casesAvertedPer1000ErrorPlus",
-                      "colminus": "casesAvertedPer1000ErrorMinus"
+                      "col": "max(0, {casesAvertedPer1000ErrorPlus})",
+                      "colminus": "max(0, {casesAvertedPer1000ErrorMinus})"
                   }
               },
               {
@@ -58,8 +58,8 @@
                   "error_x": {
                       "type": "data",
                       "width": 0,
-                      "col": "casesAvertedPer1000ErrorPlus",
-                      "colminus": "casesAvertedPer1000ErrorMinus"
+                      "col": "max(0, {casesAvertedPer1000ErrorPlus})",
+                      "colminus": "max(0, {casesAvertedPer1000ErrorMinus})"
                   }
               },
               {
@@ -72,8 +72,8 @@
                   "error_x": {
                       "type": "data",
                       "width": 0,
-                      "col": "casesAvertedPer1000ErrorPlus",
-                      "colminus": "casesAvertedPer1000ErrorMinus"
+                      "col": "max(0, {casesAvertedPer1000ErrorPlus})",
+                      "colminus": "max(0, {casesAvertedPer1000ErrorMinus})"
                   }
               },
               {
@@ -86,8 +86,8 @@
                   "error_x": {
                       "type": "data",
                       "width": 0,
-                      "col": "casesAvertedPer1000ErrorPlus",
-                      "colminus": "casesAvertedPer1000ErrorMinus"
+                      "col": "max(0, {casesAvertedPer1000ErrorPlus})",
+                      "colminus": "max(0, {casesAvertedPer1000ErrorMinus})"
                   }
               }
           ],
