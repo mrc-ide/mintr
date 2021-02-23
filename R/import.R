@@ -115,8 +115,10 @@ mintr_db_process <- function(path) {
                      "reductionInCases",
                      "meanCases")
   for (v in v_uncertainty) {
-    table[[paste0(v, "ErrorMinus")]] <- t_low[[v]]
-    table[[paste0(v, "ErrorPlus")]] <- t_high[[v]]
+    ## Re-order confidence values and extend bounds to include mean if necessary (mrc-2193)
+    low_high_mean <- cbind(t_low[[v]], t_high[[v]], table[[v]])
+    table[[paste0(v, "ErrorMinus")]] <- apply(low_high_mean, 1, min)
+    table[[paste0(v, "ErrorPlus")]]  <- apply(low_high_mean, 1, max)
   }
 
   table$netType <- relevel(table$netType, c(std = 1, pto = 2))
