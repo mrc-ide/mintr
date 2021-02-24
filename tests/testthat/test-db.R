@@ -176,6 +176,24 @@ test_that("Can scale table results by population", {
 })
 
 
+test_that("Confidence bounds are ordered and include the mean", {
+  db <- mintr_test_db()
+  ## This is a scenario where low > high > mean in the 20201217 dataset
+  options <- list(seasonalityOfTransmission = "seasonal",
+                  currentPrevalence = "low",
+                  bitingIndoors = "high",
+                  bitingPeople = "low",
+                  levelOfResistance = "0%",
+                  itnUsage = "0%",
+                  sprayInput = "0%",
+                  metabolic = "yes",
+                  population = 1000)
+  d <- db$get_table(options)
+  expect_setequal(d$casesAvertedErrorPlus >= d$casesAverted, TRUE)
+  expect_setequal(d$casesAverted >= d$casesAvertedErrorMinus, TRUE)
+})
+
+
 test_that("Can get non-metabolic table data", {
   db <- mintr_test_db()
   options <- list(seasonalityOfTransmission = "seasonal",
