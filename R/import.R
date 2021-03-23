@@ -83,6 +83,9 @@ mintr_db_process <- function(path) {
           meanCases = "cases_per_person_3_years")
   table <- rename(table, unname(tr), names(tr))
 
+  ## Check that all cases_averted values are non-negative (see mrc-2206)
+  stopifnot(table$casesAverted >= 0)
+
   ## At this point casesAverted is really over 3 years and is cases
   ## averted per person. This number can be greater than one as a
   ## person can have more than one case per year. We remove the year
