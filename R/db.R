@@ -14,7 +14,15 @@ mintr_db <- R6::R6Class(
     ignore = NULL,
     db = NULL,
     baseline = NULL,
-    docs = NULL
+    docs = NULL,
+    transform_options = function(options) {
+      options$currentPrevalence <- switch(options$currentPrevalence,
+                                          low = "5%",
+                                          med = "30%",
+                                          high = "60%",
+                                          options$currentPrevalence)
+      options
+    }
   ),
   public = list(
     initialize = function(path, docs) {
@@ -42,6 +50,7 @@ mintr_db <- R6::R6Class(
     },
 
     get_prevalence = function(options) {
+      options <- private$transform_options(options)
       key <- self$get_index(options)
       ret <- unserialize(private$db$get(sprintf("prevalence:%s", key)))
       prev <- mintr_db_transform_metabolic(ret, options$metabolic)
@@ -57,6 +66,7 @@ mintr_db <- R6::R6Class(
     },
 
     get_table = function(options) {
+      options <- private$transform_options(options)
       key <- self$get_index(options)
       ret <- unserialize(private$db$get(sprintf("table:%s", key)))
       for (v in c("casesAverted", "casesAvertedErrorMinus", "casesAvertedErrorPlus")) {
@@ -66,7 +76,6 @@ mintr_db <- R6::R6Class(
       mintr_db_set_not_applicable_values(table)
     }
   ))
-
 
 ## Some constants that crop up everywhere
 mintr_db_paths <- function(path) {

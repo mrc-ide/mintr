@@ -275,3 +275,24 @@ test_that("Not applicable values are set correctly", {
   table <- db$get_table(options)
   check_not_applicable_values(table)
 })
+
+test_that("Legacy prevalence values are mapped appropriately", {
+  db <- mintr_test_db()
+  prevalences <- list(low = "5%", med = "30%", high = "60%")
+  for (prevalence in names(prevalences)) {
+    options <- list(seasonalityOfTransmission = "seasonal",
+                    currentPrevalence = prevalence,
+                    bitingIndoors = "high",
+                    bitingPeople = "low",
+                    levelOfResistance = "80%",
+                    itnUsage = "20%",
+                    sprayInput = "0%",
+                    metabolic = "yes",
+                    population = 1000)
+
+    cmp <- db$get_prevalence(options)
+    res <- db$get_prevalence(
+      modifyList(options, list(currentPrevalence = prevalences[[prevalence]])))
+    expect_equal(cmp, res)
+  }
+})
