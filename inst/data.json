@@ -1,10 +1,10 @@
 {
     "root": "https://mrcdata.dide.ic.ac.uk/mint",
-    "directory": "20210313",
+    "directory": "20210512",
     "files": {
-        "index": "data_index_Vector_tool_updated_params_uncertainty_no_zero_20210313.rds",
-        "prevalence": "data_values_Vector_tool_updated_params_uncertainty_no_zero_20210313.rds",
-        "table": "data_aggregate_Vector_tool_updated_params_uncertainty_no_zero_20210313.rds"
+        "index": "data_index_Vector_tool3_20210512.rds",
+        "prevalence": "data_values_Vector_tool3_20210512_filtered.rds",
+        "table": "data_aggregate_Vector_tool3_20210512.rds"
     },
     "interventions": {
         "none": "No intervention",

@@ -5,7 +5,7 @@ test_that("Can create db", {
   expect_error(db$get_prevalence(list()),
                "Invalid value for 'names(options)'", fixed = TRUE)
   options <- list(seasonalityOfTransmission = "seasonal",
-                  currentPrevalence = "med",
+                  currentPrevalence = "30%",
                   bitingIndoors = "high",
                   bitingPeople = "low",
                   levelOfResistance = "80%",
@@ -33,7 +33,7 @@ test_that("Can create db", {
 test_that("Can read table data", {
   db <- mintr_test_db()
   options <- list(seasonalityOfTransmission = "seasonal",
-                  currentPrevalence = "med",
+                  currentPrevalence = "30%",
                   bitingIndoors = "high",
                   bitingPeople = "low",
                   levelOfResistance = "80%",
@@ -71,7 +71,7 @@ test_that("throw error if accessing impossible data", {
                "Invalid value for 'names(options)'", fixed = TRUE)
 
   options <- list(seasonalityOfTransmission = "seasonal",
-                  currentPrevalence = "med",
+                  currentPrevalence = "30%",
                   bitingIndoors = "high",
                   bitingPeople = "really-high",
                   levelOfResistance = "80%",
@@ -157,7 +157,7 @@ test_that("docker build filters files", {
 test_that("Can scale table results by population", {
   db <- mintr_test_db()
   options <- list(seasonalityOfTransmission = "seasonal",
-                  currentPrevalence = "med",
+                  currentPrevalence = "30%",
                   bitingIndoors = "high",
                   bitingPeople = "low",
                   levelOfResistance = "80%",
@@ -180,7 +180,7 @@ test_that("Confidence bounds are ordered and include the mean", {
   db <- mintr_test_db()
   ## This is a scenario where low > high > mean in the 20201217 dataset
   options <- list(seasonalityOfTransmission = "seasonal",
-                  currentPrevalence = "low",
+                  currentPrevalence = "5%",
                   bitingIndoors = "high",
                   bitingPeople = "low",
                   levelOfResistance = "0%",
@@ -197,7 +197,7 @@ test_that("Confidence bounds are ordered and include the mean", {
 test_that("Can get non-metabolic table data", {
   db <- mintr_test_db()
   options <- list(seasonalityOfTransmission = "seasonal",
-                  currentPrevalence = "med",
+                  currentPrevalence = "30%",
                   bitingIndoors = "high",
                   bitingPeople = "low",
                   levelOfResistance = "80%",
@@ -224,7 +224,7 @@ test_that("Can get non-metabolic table data", {
 test_that("Can get non-metabolic prevalence data", {
   db <- mintr_test_db()
   options <- list(seasonalityOfTransmission = "seasonal",
-                  currentPrevalence = "med",
+                  currentPrevalence = "30%",
                   bitingIndoors = "high",
                   bitingPeople = "low",
                   levelOfResistance = "80%",
@@ -260,7 +260,7 @@ check_not_applicable_values <- function(res) {
 test_that("Not applicable values are set correctly", {
   db <- mintr_test_db()
   options <- list(seasonalityOfTransmission = "seasonal",
-                  currentPrevalence = "med",
+                  currentPrevalence = "30%",
                   bitingIndoors = "high",
                   bitingPeople = "low",
                   levelOfResistance = "80%",
