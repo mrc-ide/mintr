@@ -3,7 +3,7 @@
     "directory": "20210512",
     "files": {
         "index": "data_index_Vector_tool3_20210512.rds",
-        "prevalence": "data_values_Vector_tool3_20210512.rds",
+        "prevalence": "data_values_Vector_tool3_20210512_filtered.rds",
         "table": "data_aggregate_Vector_tool3_20210512.rds"
     },
     "interventions": {

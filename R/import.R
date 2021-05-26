@@ -49,11 +49,6 @@ mintr_db_process <- function(path) {
   message("Processing prevalence")
   path_prevalence_raw <- file.path(path, raw$directory, raw$files$prevalence)
   prevalence <- readRDS(path_prevalence_raw)
-  ## The incoming raw data has *way* too much stuff in it; I've
-  ## asked Arran to remove it so that we get a lighter download.
-  prevalence <- prevalence[
-    prevalence$type == "prev" & prevalence$uncertainty == "mean",
-    !(names(prevalence) %in% c("type", "uncertainty"))]
   i <- order(prevalence$index)
   prevalence <- prevalence[i, ]
   rownames(prevalence) <- NULL
