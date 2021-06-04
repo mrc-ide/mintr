@@ -17,7 +17,12 @@ Imports:
     docopt,
     jsonlite,
     porcelain,
-    thor
+    thor,
+    dplyr,
+    tibble,
+    ROI.plugin.glpk,
+    rmpk,
+    ROIoptimzer
 Suggests:
     glue,
     jsonvalidate (>= 1.2.2),
@@ -26,4 +31,7 @@ Suggests:
     testthat
 Remotes:
     reside-ic/porcelain,
-    ropensci/jsonvalidate
+    ropensci/jsonvalidate,
+    r-opt/rmpk,
+    r-opt/ROIoptimizer
+RoxygenNote: 7.1.1

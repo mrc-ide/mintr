@@ -12,3 +12,4 @@
 ^tests/testthat/data$
 ^import$
 ^\.github$
+^\.idea$
