@@ -1,9 +1,6 @@
-library(dplyr, warn.conflicts = FALSE)
-
-utils::globalVariables(c("zone", "intervention", "total_costs", "total_cases_averted", "value", "i", "j"))
-
 #' @import dplyr
 do_optimise <- function(data, budget) {
+  zone <- intervention <- total_costs <- total_cases_averted <- i <- j <- NULL # used by dplyr
   cost_df <- distinct(data, zone, intervention, total_costs) %>%
     group_by(intervention) %>%
     mutate(j = cur_group_id()) %>%
@@ -25,7 +22,9 @@ do_optimise <- function(data, budget) {
   n_zones <- n_distinct(data$zone)
   n_interventions <- n_distinct(data$intervention)
 
+  ##' @import ROI.plugin.glpk
   optimise <- function(budget) {
+    value <- NULL # used by dplyr
     model <- rmpk::optimization_model(rmpk::ROI_optimizer("glpk"))
     y <- model$add_variable("y", i = 1:n_zones, j = 1:n_interventions, type = "integer", lb = 0, ub = 1)
     model$set_objective(rmpk::sum_expr(y[i, j] * cases_av(i, j), i = 1:n_zones, j = 1:n_interventions), sense = "max")

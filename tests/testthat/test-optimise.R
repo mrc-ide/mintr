@@ -1,5 +1,3 @@
-library(ROI.plugin.glpk)
-
 get_data <- function() {
   tibble::tribble(
     ~zone, ~intervention,                  ~total_costs,     ~total_cases_averted,
