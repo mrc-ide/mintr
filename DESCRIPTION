@@ -15,15 +15,23 @@ LazyData: true
 Imports:
     commonmark,
     docopt,
+    dplyr,
     jsonlite,
     porcelain,
+    rmpk,
+    ROIoptimzer,
+    ROI.plugin.glpk,
     thor
 Suggests:
     glue,
     jsonvalidate (>= 1.2.2),
     knitr,
     mockery,
-    testthat
+    testthat,
+    tibble
 Remotes:
     reside-ic/porcelain,
-    ropensci/jsonvalidate
+    ropensci/jsonvalidate,
+    r-opt/rmpk,
+    r-opt/ROIoptimizer
+RoxygenNote: 7.1.1

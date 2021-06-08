@@ -2,7 +2,8 @@ FROM rocker/r-ver:latest
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
         libcurl4-openssl-dev \
-        libv8-dev  \
+        libv8-dev \
+        libglpk-dev \
         && apt-get clean \
         && rm -rf /var/lib/apt/lists/*
 
@@ -15,11 +16,15 @@ RUN install2.r --error \
         plumber \
         remotes \
         testthat \
-        thor
+        thor \
+        dplyr \
+        ROI.plugin.glpk
 
 RUN installGithub.r \
         ropensci/jsonvalidate \
-        reside-ic/porcelain
+        reside-ic/porcelain \
+        r-opt/rmpk \
+        r-opt/ROIoptimizer
 
 WORKDIR /mintr
 
