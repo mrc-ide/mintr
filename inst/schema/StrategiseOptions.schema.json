@@ -1,0 +1,111 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "budget": {
+      "type": "number"
+    },
+    "zones": {
+      "type": "array",
+      "minItems": 1,
+      "items": [
+        {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "baselineSettings": {
+              "type": "object",
+              "properties": {
+                "population": {
+                  "type": "integer"
+                },
+                "seasonalityOfTransmission": {
+                  "type": "string"
+                },
+                "currentPrevalence": {
+                  "type": "string"
+                },
+                "bitingIndoors": {
+                  "type": "string"
+                },
+                "bitingPeople": {
+                  "type": "string"
+                },
+                "levelOfResistance": {
+                  "type": "string"
+                },
+                "metabolic": {
+                  "type": "string"
+                },
+                "itnUsage": {
+                  "type": "string"
+                },
+                "sprayInput": {
+                  "type": "string"
+                }
+              },
+              "additionalProperties": false,
+              "required": [
+                "population",
+                "seasonalityOfTransmission",
+                "currentPrevalence",
+                "bitingIndoors",
+                "bitingPeople",
+                "levelOfResistance",
+                "metabolic",
+                "itnUsage",
+                "sprayInput"
+              ]
+            },
+            "interventionSettings": {
+              "type": "object",
+              "properties": {
+                "procurePeoplePerNet": {
+                  "type": "number"
+                },
+                "procureBuffer": {
+                  "type": "number"
+                },
+                "priceDelivery": {
+                  "type": "number"
+                },
+                "priceNetPBO": {
+                  "type": "number"
+                },
+                "priceNetStandard": {
+                  "type": "number"
+                },
+                "priceIRSPerPerson": {
+                  "type": "number"
+                },
+                "netUse": {
+                  "type": "string"
+                },
+                "irsUse": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "procurePeoplePerNet",
+                "procureBuffer",
+                "priceDelivery",
+                "priceNetPBO",
+                "priceNetStandard",
+                "priceIRSPerPerson",
+                "netUse",
+                "irsUse"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "budget",
+    "zones"
+  ]
+}

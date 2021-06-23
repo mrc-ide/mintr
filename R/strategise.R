@@ -1,0 +1,120 @@
+strategise <- function(options, db) {
+  cost <- function(baseline_settings, intervention_settings, intervention) {
+    population <- baseline_settings$population
+    procurement_buffer <- (intervention_settings$procureBuffer + 100) / 100
+    cost_per_N1 <- intervention_settings$priceNetStandard
+    cost_per_N2 <- intervention_settings$priceNetPBO
+    price_NET_delivery <- intervention_settings$priceDelivery
+    price_IRS_delivery <- intervention_settings$priceIRSPerPerson * population
+
+    costs_N0 <- 0
+    costs_N1 <- (price_NET_delivery + cost_per_N1) * (population / intervention_settings$procurePeoplePerNet * procurement_buffer)
+    costs_N2 <- (price_NET_delivery + cost_per_N2) * (population / intervention_settings$procurePeoplePerNet * procurement_buffer)
+    costs_S1 <- 3 * price_IRS_delivery
+    costs_N1_S1 <- costs_N1 + costs_S1
+    costs_N2_S1 <- costs_N2 + costs_S1
+
+    switch(
+      intervention,
+      "none" = costs_N0,
+      "llin" = costs_N1,
+      "llin-pbo" = costs_N2,
+      "irs" = costs_S1,
+      "irs-llin" = costs_N1_S1,
+      "irs-llin-pbo" = costs_N2_S1
+    )
+  }
+
+  cases_averted <- function(baseline_settings, intervention_settings, intervention) {
+    table <- db$get_table(baseline_settings)
+    switch(
+      intervention,
+      "none" = subset(
+        table,
+        intervention == "none"
+      ),
+      "llin" = subset(
+        table,
+        intervention == "llin"
+          & netUse == intervention_settings$netUse
+          & irsUse == "n/a"
+      ),
+      "llin-pbo" =
+        subset(
+          table,
+          intervention == "llin-pbo"
+            & netUse == intervention_settings$netUse
+            & irsUse == "n/a"
+        ),
+      "irs" = subset(
+        table,
+        intervention == "irs"
+          & netUse == "n/a"
+          & irsUse == intervention_settings$irsUse
+      ),
+      "irs-llin" = subset(
+        table,
+        intervention == "irs-llin"
+          & netUse == intervention_settings$netUse
+          & irsUse == intervention_settings$irsUse
+      ),
+      "irs-llin-pbo" = subset(
+        table,
+        intervention == "irs-llin-pbo"
+          & netUse == intervention_settings$netUse
+          & irsUse == intervention_settings$irsUse
+      )
+    )$casesAverted
+  }
+
+  data <- data.frame(
+    zone=character(),
+    intervention=character(),
+    cost=numeric(),
+    cases_averted=numeric()
+  )
+  for (zone in options$zones) {
+    interventions <- c("none")
+    if (zone$interventionSettings$netUse != "0") {
+      interventions <- append(interventions, c("llin", "llin-pbo"))
+    }
+    if (zone$interventionSettings$irsUse != "0") {
+      interventions <- append(interventions, c("irs"))
+    }
+    if (zone$interventionSettings$netUse != "0"
+      && zone$interventionSettings$irsUse != "0") {
+      interventions <- append(interventions, c("irs-llin", "irs-llin-pbo"))
+    }
+    for (intervention in interventions) {
+      data <- rbind(data, data.frame(
+        zone = zone$name,
+        intervention = intervention,
+        cost = cost(
+          zone$baselineSettings,
+          zone$interventionSettings,
+          intervention
+        ),
+        cases_averted = cases_averted(
+          zone$baselineSettings,
+          zone$interventionSettings,
+          intervention
+        )
+      ))
+    }
+  }
+  Map(
+    function(cost_threshold) {
+      budget <- options$budget * cost_threshold
+      res <- do_optimise(data, budget)
+      list(
+        costThreshold = cost_threshold,
+        strategy = list(
+          cost = sum(res$cost),
+          casesAverted = sum(res$cases_averted),
+          interventions = res[c("zone", "intervention")]
+        )
+      )
+    },
+    c(1, 0.95, 0.9, 0.85, 0.8)
+  )
+}
