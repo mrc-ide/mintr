@@ -9,7 +9,7 @@ get_input <- function() {
        casesAverted = 10,
        casesAvertedErrorPlus = 11,
        casesAvertedErrorMinus = 8,
-       zonal_budget = 1000)
+       budgetAllZones = 1000)
 }
 
 get_expected_total_costs <- function() {
