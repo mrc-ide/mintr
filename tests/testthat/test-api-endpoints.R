@@ -281,6 +281,14 @@ test_that("cost docs", {
   expect_equal(res_api$body, res_endpoint$body)
 })
 
+test_that("cost", {
+  expected_costs <- get_expected_total_costs()
+  interventions <- c("none", "llin", "llin-pbo", "irs", "irs-llin", "irs-llin-pbo")
+  for (i in seq_along(expected_costs)) {
+    expect_equal(cost(get_input(), get_input(), interventions[i]), expected_costs[[i]])
+  }
+})
+
 test_that("strategise", {
   json <- jsonlite::toJSON(list(
     budget = 20000,

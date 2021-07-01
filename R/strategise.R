@@ -1,23 +1,23 @@
-strategise <- function(options, db) {
-  cost <- function(baseline_settings, intervention_settings, intervention) {
-    population <- baseline_settings$population
-    procurement_buffer <- (intervention_settings$procureBuffer + 100) / 100
-    cost_per_net_llin <- intervention_settings$priceNetStandard
-    cost_per_net_pbo <- intervention_settings$priceNetPBO
-    cost_delivery_per_net <- intervention_settings$priceDelivery
-    people_per_net <- intervention_settings$procurePeoplePerNet
-    cost_irs_per_person <- intervention_settings$priceIRSPerPerson
-    switch(
-      intervention,
-      "none" = 0,
-      "llin" = (cost_delivery_per_net + cost_per_net_llin) * (population / people_per_net * procurement_buffer),
-      "llin-pbo" = (cost_delivery_per_net + cost_per_net_pbo) * (population / people_per_net * procurement_buffer),
-      "irs" = 3 * cost_irs_per_person * population,
-      "irs-llin" = (cost_delivery_per_net + cost_per_net_llin) * (population / people_per_net * procurement_buffer) + 3 * cost_irs_per_person * population,
-      "irs-llin-pbo" = (cost_delivery_per_net + cost_per_net_pbo) * (population / people_per_net * procurement_buffer) + 3 * cost_irs_per_person * population
-    )
-  }
+cost <- function(baseline_settings, intervention_settings, intervention) {
+  population <- baseline_settings$population
+  procurement_buffer <- (intervention_settings$procureBuffer + 100) / 100
+  cost_per_net_llin <- intervention_settings$priceNetStandard
+  cost_per_net_pbo <- intervention_settings$priceNetPBO
+  cost_delivery_per_net <- intervention_settings$priceDelivery
+  people_per_net <- intervention_settings$procurePeoplePerNet
+  cost_irs_per_person <- intervention_settings$priceIRSPerPerson
+  switch(
+    intervention,
+    "none" = 0,
+    "llin" = (cost_delivery_per_net + cost_per_net_llin) * (population / people_per_net * procurement_buffer),
+    "llin-pbo" = (cost_delivery_per_net + cost_per_net_pbo) * (population / people_per_net * procurement_buffer),
+    "irs" = 3 * cost_irs_per_person * population,
+    "irs-llin" = (cost_delivery_per_net + cost_per_net_llin) * (population / people_per_net * procurement_buffer) + 3 * cost_irs_per_person * population,
+    "irs-llin-pbo" = (cost_delivery_per_net + cost_per_net_pbo) * (population / people_per_net * procurement_buffer) + 3 * cost_irs_per_person * population
+  )
+}
 
+strategise <- function(options, db) {
   cases_averted <- function(baseline_settings, intervention_settings, intervention) {
     table <- db$get_table(baseline_settings)
     switch(
