@@ -2,26 +2,19 @@ strategise <- function(options, db) {
   cost <- function(baseline_settings, intervention_settings, intervention) {
     population <- baseline_settings$population
     procurement_buffer <- (intervention_settings$procureBuffer + 100) / 100
-    cost_per_N1 <- intervention_settings$priceNetStandard
-    cost_per_N2 <- intervention_settings$priceNetPBO
-    price_NET_delivery <- intervention_settings$priceDelivery
-    price_IRS_delivery <- intervention_settings$priceIRSPerPerson * population
-
-    costs_N0 <- 0
-    costs_N1 <- (price_NET_delivery + cost_per_N1) * (population / intervention_settings$procurePeoplePerNet * procurement_buffer)
-    costs_N2 <- (price_NET_delivery + cost_per_N2) * (population / intervention_settings$procurePeoplePerNet * procurement_buffer)
-    costs_S1 <- 3 * price_IRS_delivery
-    costs_N1_S1 <- costs_N1 + costs_S1
-    costs_N2_S1 <- costs_N2 + costs_S1
-
+    cost_per_net_llin <- intervention_settings$priceNetStandard
+    cost_per_net_pbo <- intervention_settings$priceNetPBO
+    cost_delivery_per_net <- intervention_settings$priceDelivery
+    people_per_net <- intervention_settings$procurePeoplePerNet
+    cost_irs_per_person <- intervention_settings$priceIRSPerPerson
     switch(
       intervention,
-      "none" = costs_N0,
-      "llin" = costs_N1,
-      "llin-pbo" = costs_N2,
-      "irs" = costs_S1,
-      "irs-llin" = costs_N1_S1,
-      "irs-llin-pbo" = costs_N2_S1
+      "none" = 0,
+      "llin" = (cost_delivery_per_net + cost_per_net_llin) * (population / people_per_net * procurement_buffer),
+      "llin-pbo" = (cost_delivery_per_net + cost_per_net_pbo) * (population / people_per_net * procurement_buffer),
+      "irs" = 3 * cost_irs_per_person * population,
+      "irs-llin" = (cost_delivery_per_net + cost_per_net_llin) * (population / people_per_net * procurement_buffer) + 3 * cost_irs_per_person * population,
+      "irs-llin-pbo" = (cost_delivery_per_net + cost_per_net_pbo) * (population / people_per_net * procurement_buffer) + 3 * cost_irs_per_person * population
     )
   }
 
