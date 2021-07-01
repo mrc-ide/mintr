@@ -18,7 +18,6 @@ RUN install2.r --error \
         testthat \
         thor \
         dplyr \
-        tidyr \
         ROI.plugin.glpk
 
 RUN installGithub.r \

@@ -1,5 +1,4 @@
 #' @import dplyr
-#' @import tidyr
 do_optimise <- function(data, budget) {
   zone <- intervention <- cost <- cases_averted <- i <- j <- NULL # used by dplyr
   cost_df <- distinct(data, zone, intervention, cost) %>%
