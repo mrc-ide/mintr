@@ -1,5 +1,9 @@
+#' @import tidyr
 #' @import dplyr
 do_optimise <- function(data, budget) {
+  # rmpk requires an equal number of scenarios for each zone, so we add missing
+  # combinations ensuring that they are less attractive than no intervention
+  data <- complete(data, zone, intervention, fill = list(cost = max(data$cost), cases_averted = 0))
   zone <- intervention <- cost <- cases_averted <- i <- j <- NULL # used by dplyr
   cost_df <- distinct(data, zone, intervention, cost) %>%
     group_by(intervention) %>%
