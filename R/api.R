@@ -18,6 +18,7 @@ api_build <- function(db) {
   pr$handle(endpoint_graph_cases_averted_config())
   pr$handle(endpoint_impact_intepretation(db))
   pr$handle(endpoint_cost_intepretation(db))
+  pr$handle(endpoint_strategise(db))
   pr
 }
 
@@ -218,3 +219,21 @@ target_cost_interpretation <- function(db) {
   }
 }
 
+endpoint_strategise <- function(db) {
+  root <- schema_root()
+  porcelain::porcelain_endpoint$new(
+    "POST", "/strategise",
+    target_strategise(db),
+    porcelain::porcelain_input_body_json("json", "StrategiseOptions.schema", root),
+    returning = porcelain::porcelain_returning_json("Strategise.schema", root))
+}
+
+target_strategise <- function(db) {
+  force(db)
+  function(json) {
+    jsonlite::toJSON(
+      strategise(jsonlite::fromJSON(json, simplifyVector=FALSE), db),
+      auto_unbox=TRUE
+    )
+  }
+}

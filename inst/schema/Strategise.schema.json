@@ -1,0 +1,57 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "array",
+  "items": [
+    {
+      "type": "object",
+      "properties": {
+        "costThreshold": {
+          "type": "number"
+        },
+        "strategy": {
+          "type": "object",
+          "properties": {
+            "cost": {
+              "type": "number"
+            },
+            "casesAverted": {
+              "type": "number"
+            },
+            "interventions": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "zone": {
+                      "type": "string"
+                    },
+                    "intervention": {
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": false,
+                  "required": [
+                    "zone",
+                    "intervention"
+                  ]
+                }
+              ]
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "cost",
+            "casesAverted",
+            "interventions"
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "costThreshold",
+        "strategy"
+      ]
+    }
+  ]
+}

@@ -21,7 +21,8 @@ Imports:
     rmpk,
     ROIoptimzer,
     ROI.plugin.glpk,
-    thor
+    thor,
+    tidyr
 Suggests:
     glue,
     jsonvalidate (>= 1.2.2),

@@ -280,3 +280,104 @@ test_that("cost docs", {
   expect_equal(res_api$status, 200)
   expect_equal(res_api$body, res_endpoint$body)
 })
+
+test_that("cost", {
+  expected_costs <- get_expected_total_costs()
+  interventions <- c("none", "llin", "llin-pbo", "irs", "irs-llin", "irs-llin-pbo")
+  for (i in seq_along(expected_costs)) {
+    expect_equal(get_cost(get_input(), get_input(), interventions[i]), expected_costs[[i]])
+  }
+})
+
+test_that("strategise", {
+  baseline_settings <- list(
+    population = 1000,
+    seasonalityOfTransmission = "seasonal",
+    currentPrevalence = "30%",
+    bitingIndoors = "high",
+    bitingPeople = "low",
+    levelOfResistance = "0%",
+    metabolic = "yes",
+    itnUsage = "0%",
+    sprayInput = "0%"
+  )
+  intervention_settings <- list(
+    netUse = "0",
+    irsUse = "0",
+    procurePeoplePerNet = 1,
+    procureBuffer = 2,
+    priceDelivery = 3,
+    priceNetStandard = 4,
+    priceNetPBO = 5,
+    priceIRSPerPerson = 6
+  )
+  json <- jsonlite::toJSON(list(
+    budget = 52500,
+    zones = list(
+      list(name = "Region A", baselineSettings = baseline_settings,
+           interventionSettings = intervention_settings),
+      list(name = "Region B", baselineSettings = baseline_settings,
+           interventionSettings = modifyList(intervention_settings,
+                                             list(irsUse = 0.8))),
+      list(name = "Region C", baselineSettings = baseline_settings,
+           interventionSettings = modifyList(intervention_settings,
+                                             list(netUse = 0.4))),
+      list(name = "Region D", baselineSettings = baseline_settings,
+           interventionSettings = modifyList(intervention_settings,
+                                             list(irsUse = 0.8, netUse = 0.4)))
+    )
+  ), auto_unbox=TRUE)
+
+  db <- mintr_test_db()
+  res <- target_strategise(db)(json)
+  expect_is(res, "json")
+  expect_equal(res, jsonlite::toJSON(
+    list(
+      list(
+        costThreshold = 1,
+        strategy = list(cost = 52320, casesAverted = 1551, interventions = list(
+          list(zone = "Region A", intervention = "none"),
+          list(zone = "Region B", intervention = "irs"),
+          list(zone = "Region C", intervention = "llin-pbo"),
+          list(zone = "Region D", intervention = "irs-llin-pbo")))),
+      list(
+        costThreshold = 0.95,
+        strategy = list(cost = 44160, casesAverted = 1547, interventions = list(
+          list(zone = "Region A", intervention = "none"),
+          list(zone = "Region B", intervention = "irs"),
+          list(zone = "Region C", intervention = "llin-pbo"),
+          list(zone = "Region D", intervention = "irs")))),
+      list(
+        costThreshold = 0.9,
+        strategy = list(cost = 44160, casesAverted = 1547, interventions = list(
+          list(zone = "Region A", intervention = "none"),
+          list(zone = "Region B", intervention = "irs"),
+          list(zone = "Region C", intervention = "llin-pbo"),
+          list(zone = "Region D", intervention = "irs")))),
+      list(
+        costThreshold = 0.85,
+        strategy = list(cost = 44160, casesAverted = 1547, interventions = list(
+          list(zone = "Region A", intervention = "none"),
+          list(zone = "Region B", intervention = "irs"),
+          list(zone = "Region C", intervention = "llin-pbo"),
+          list(zone = "Region D", intervention = "irs")))),
+      list(
+        costThreshold = 0.8,
+        strategy = list(cost = 34320, casesAverted = 1300, interventions = list(
+          list(zone = "Region A", intervention = "none"),
+          list(zone = "Region B", intervention = "irs"),
+          list(zone = "Region C", intervention = "llin-pbo"),
+          list(zone = "Region D", intervention = "llin-pbo"))))
+    ), auto_unbox=TRUE))
+
+  endpoint <- endpoint_strategise(db)
+  res_endpoint <- endpoint$run(json)
+  expect_equal(res_endpoint$status_code, 200)
+  expect_equal(res_endpoint$content_type, "application/json")
+  expect_equal(res_endpoint$data, res)
+
+  api <- api_build(db)
+  res_api <- api$request("POST", "/strategise", body = json)
+  expect_equal(res_api$status, 200)
+  expect_equal(res_api$body, res_endpoint$body)
+})

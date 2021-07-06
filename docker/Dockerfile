@@ -17,6 +17,7 @@ RUN install2.r --error \
         remotes \
         testthat \
         thor \
+        tidyr \
         dplyr \
         ROI.plugin.glpk
 

@@ -140,8 +140,8 @@ Returns an array of graph configuration object for the prevalence graph.
 
 Properties:
 * `layout` - a plotly layout object
-* `series` -  object containing the plotly metadata for the data series 
-* `metadata` - object containg the information about the data format and how to derive the 
+* `series` - object containing the plotly metadata for the data series
+* `metadata` - object containing the information about the data format and how to derive the
 series from the data
 
 and optionally:
@@ -276,7 +276,7 @@ Return schema: [Data.schema.json](./Data.schema.json)
 ```
 
 ## GET /table/impact/config
-Returns the list of columns to display in the impacy table, along with the column display names
+Returns the list of columns to display in the impact table, along with the column display names
 
 Schema: [TableDefinition.schema.json](./TableDefinition.schema.json)
 
@@ -305,4 +305,96 @@ e.g.
     "irsUse": "IRS use",
     "casesAverted": "Cases averted across 3 yrs since intervention"
 }
+```
+
+# Strategising
+
+## POST /strategise
+Accepts a maximum budget and a list of regions with parameters and returns a
+list of costed strategies (i.e. an optimal set of interventions/regions) for
+the maximum budget and 4 other budgets corresponding to 95%, 90%, 85% and 80%
+of the maximum.
+
+Request schema: [StrategiseOptions.schema.json](StrategiseOptions.schema.json)
+
+Return schema: [Strategise.schema.json](./Strategise.schema.json)
+
+### Example
+#### Request
+```json
+{
+  "budget": 20000,
+  "zones": [
+    {
+      "name": "Region A",
+      "baselineSettings": {
+        "population": 1000,
+        "seasonalityOfTransmission": "seasonal",
+        "currentPrevalence": "30%",
+        "bitingIndoors": "high",
+        "bitingPeople": "low",
+        "levelOfResistance": "0%",
+        "metabolic": "yes",
+        "itnUsage": "0%",
+        "sprayInput": "0%"
+      },
+      "interventionSettings": {
+        "netUse": "0.8",
+        "irsUse": "0.6",
+        "procurePeoplePerNet": 1.8,
+        "procureBuffer": 7,
+        "priceNetStandard": 1.5,
+        "priceNetPBO": 2.5,
+        "priceDelivery": 2.75,
+        "priceIRSPerPerson": 5.73,
+        "budgetAllZones": 2000000,
+        "zonal_budget": 500000.05
+      }
+    }
+  ]
+}
+```
+
+#### Response
+```json
+[
+  {
+    "costThreshold": 1,
+    "strategy": {
+      "cost": 19716.3889,
+      "casesAverted": 595,
+      "interventions": [
+        {
+          "zone": "Region A",
+          "intervention": "irs-llin"
+        }
+      ]
+    }
+  },
+  {
+    "costThreshold": 0.95,
+    "strategy": {
+      "cost": 17190,
+      "casesAverted": 570,
+      "interventions": [
+        {
+          "zone": "Region A",
+          "intervention": "irs"
+        }
+      ]
+    }
+  },
+  {
+    "costThreshold": 0.9,
+    …
+  },
+  {
+    "costThreshold": 0.85,
+    …
+  },
+  {
+    "costThreshold": 0.8,
+    …
+  }
+]
 ```
