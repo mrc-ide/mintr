@@ -112,7 +112,7 @@
                   "xref": "paper",
                   "x0": 0,
                   "x1": 1,
-                  "y_formula": "{zonal_budget}",
+                  "y_formula": "{budgetAllZones}",
                   "line":{
                       "color": "red",
                       "width": 1,

@@ -53,10 +53,10 @@ test_that("cases averted vs costs graph config series formulas give correct resu
 
 test_that("cases averted vs costs graph config shape formula gives correct results", {
   json <- jsonlite::fromJSON(mintr_path("json/graph_cost_cases_averted_config.json"))
-  zonal_budget <- json$layout$shapes$y_formula
+  budgetAllZones <- json$layout$shapes$y_formula
   
   inputs <- get_input()
-  expect_equal(evaluate(zonal_budget), inputs$zonal_budget)
+  expect_equal(evaluate(budgetAllZones), inputs$budgetAllZones)
 })
 
 test_that("cost per case graph config contains valid intervention ids", {
