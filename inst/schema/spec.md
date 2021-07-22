@@ -346,9 +346,7 @@ Return schema: [Strategise.schema.json](./Strategise.schema.json)
         "priceNetStandard": 1.5,
         "priceNetPBO": 2.5,
         "priceDelivery": 2.75,
-        "priceIRSPerPerson": 5.73,
-        "budgetAllZones": 2000000,
-        "zonal_budget": 500000.05
+        "priceIRSPerPerson": 5.73
       }
     }
   ]
