@@ -8,49 +8,40 @@
         "costThreshold": {
           "type": "number"
         },
-        "strategy": {
-          "type": "object",
-          "properties": {
-            "cost": {
-              "type": "number"
-            },
-            "casesAverted": {
-              "type": "number"
-            },
-            "interventions": {
-              "type": "array",
-              "items": [
-                {
-                  "type": "object",
-                  "properties": {
-                    "zone": {
-                      "type": "string"
-                    },
-                    "intervention": {
-                      "type": "string"
-                    }
-                  },
-                  "additionalProperties": false,
-                  "required": [
-                    "zone",
-                    "intervention"
-                  ]
+        "interventions": {
+          "type": "array",
+          "items": [
+            {
+              "type": "object",
+              "properties": {
+                "zone": {
+                  "type": "string"
+                },
+                "intervention": {
+                  "type": "string"
+                },
+                "cost": {
+                  "type": "number"
+                },
+                "casesAverted": {
+                  "type": "number"
                 }
+              },
+              "additionalProperties": false,
+              "required": [
+                "zone",
+                "intervention",
+                "cost",
+                "casesAverted"
               ]
             }
-          },
-          "additionalProperties": false,
-          "required": [
-            "cost",
-            "casesAverted",
-            "interventions"
           ]
         }
       },
       "additionalProperties": false,
       "required": [
         "costThreshold",
-        "strategy"
+        "interventions"
       ]
     }
   ]

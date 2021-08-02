@@ -69,13 +69,10 @@ strategise <- function(options, db) {
   lapply(c(1, 0.95, 0.9, 0.85, 0.8), function(cost_threshold) {
     budget <- options$budget * cost_threshold
     res <- do_optimise(data, budget)
+    names(res)[names(res) == "cases_averted"] <- "casesAverted"
     list(
       costThreshold = cost_threshold,
-      strategy = list(
-        cost = sum(res$cost),
-        casesAverted = sum(res$cases_averted),
-        interventions = res[c("zone", "intervention")]
-      )
+      interventions = res[c("zone", "intervention", "cost", "casesAverted")]
     )
   })
 }
