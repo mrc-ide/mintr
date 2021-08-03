@@ -358,29 +358,25 @@ Return schema: [Strategise.schema.json](./Strategise.schema.json)
 [
   {
     "costThreshold": 1,
-    "strategy": {
-      "cost": 19716.3889,
-      "casesAverted": 595,
-      "interventions": [
-        {
-          "zone": "Region A",
-          "intervention": "irs-llin"
-        }
-      ]
-    }
+    "interventions": [
+      {
+        "zone": "Region A",
+        "intervention": "irs-llin",
+         "cost": 19716.3889,
+         "casesAverted": 595
+      }
+    ]
   },
   {
     "costThreshold": 0.95,
-    "strategy": {
-      "cost": 17190,
-      "casesAverted": 570,
-      "interventions": [
-        {
-          "zone": "Region A",
-          "intervention": "irs"
-        }
-      ]
-    }
+    "interventions": [
+      {
+        "zone": "Region A",
+        "intervention": "irs",
+        "cost": 17190,
+        "casesAverted": 595
+      }
+    ]
   },
   {
     "costThreshold": 0.9,
