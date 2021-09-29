@@ -48,7 +48,7 @@
               "excludeNullOption": true,
               "required": true,
               "value": "30%",
-              "helpText": "Malaria prevalence for children under 5 years of age is used to establish the burden of infections in the region, prior to a decision being made on what to implement going forward. Please indicate the level of malaria by choosing the nearest estimate (5% prevalence in 6-month to 59-month old children, up to 60% prevalence in this cohort). If the site is seasonal, this estimate is at or just after peak transmission. On the prevalence graphic below, the vertical sold line (at time 0 on the x-axis) will indicate the timing that this estimate matches to.",
+              "helpText": "Malaria prevalence for children under 5 years of age is used to establish the burden of infections in the region, prior to a decision being made on what to implement going forward. Please indicate the level of malaria by choosing the relevant prevalence interval for 6-month to 59-month old children in this cohort. If the site is seasonal, this estimate is at or just after peak transmission. On the prevalence graphic below, the vertical sold line (at time 0 on the x-axis) will indicate the timing that this estimate matches to.",
               "options": [
                 {
                   "id": "5%",
@@ -83,7 +83,7 @@
           ]
         }
       ],
-      "documentation": "<strong>Population size</strong><p>Enter the approximate population size of the district or sub-district to which vector control will be applied to enable incremental cost estimates of any change in vector control.</p><strong>Seasonality of transmission</strong><p>Select seasonal settings if the region of interest has a distinct transmission season or perennial if transmission is throughout the year.</p><strong>Current malaria prevalence</strong><p>Define the current endemicity of your setting as measured by the prevalence of children 6-month to 59-months of age who are diagnosed with falciparum malaria by microscopy. Available options are 5%, 10%, 20%, 30%, 40%, 50% and 60% as measured toward the end of the transmission season.</p>"
+      "documentation": "<strong>Population size</strong><p>Enter the approximate population size of the district or sub-district to which vector control will be applied to enable incremental cost estimates of any change in vector control.</p><strong>Seasonality of transmission</strong><p>Select seasonal settings if the region of interest has a distinct transmission season or perennial if transmission is throughout the year.</p><strong>Current malaria prevalence</strong><p>Define the current endemicity of your setting as measured by the prevalence of children 6-month to 59-months of age who are diagnosed with falciparum malaria by microscopy. Available options are <=7%, 8-15%, 16-25%, 26-35%, 36-45%, 46-55% and >=56% as measured toward the end of the transmission season.</p>"
     },
     {
       "label": "Mosquito Inputs",
