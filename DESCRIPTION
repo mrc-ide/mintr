@@ -19,7 +19,7 @@ Imports:
     jsonlite,
     porcelain,
     rmpk,
-    ROIoptimzer,
+    ROIoptimizer,
     ROI.plugin.glpk,
     thor,
     tidyr
