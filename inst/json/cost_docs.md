@@ -4,8 +4,8 @@
 
 The first figure shows total costs and cases averted following a 3-year intervention package introduced at year 0.
 
-The red dashed line is showing the maximum zonal budget determined by the user for the zone. 
-If no red line is show the y-axis scale does not intercept this value. The absolute costs are predicted and shown for
+The red dashed line is showing the maximum global budget determined by the user.
+If no red line is shown the y-axis scale does not intercept this value. The absolute costs are predicted and shown for
 each intervention package. The summary information provided by the user is shown to indicate the ITN usage expected in
 the zone and the expected IRS coverage to be achieved in the zone.
 
