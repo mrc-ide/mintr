@@ -362,8 +362,10 @@ Return schema: [Strategise.schema.json](./Strategise.schema.json)
       {
         "zone": "Region A",
         "intervention": "irs-llin",
-         "cost": 19716.3889,
-         "casesAverted": 595
+        "cost": 19716.3889,
+        "casesAverted": 595,
+        "casesAvertedErrorMinus": 559,
+        "casesAvertedErrorPlus": 608
       }
     ]
   },
@@ -374,7 +376,9 @@ Return schema: [Strategise.schema.json](./Strategise.schema.json)
         "zone": "Region A",
         "intervention": "irs",
         "cost": 17190,
-        "casesAverted": 595
+        "casesAverted": 570,
+        "casesAvertedErrorMinus": 466,
+        "casesAvertedErrorPlus": 602
       }
     ]
   },

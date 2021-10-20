@@ -25,6 +25,12 @@
                 },
                 "casesAverted": {
                   "type": "number"
+                },
+                "casesAvertedErrorMinus": {
+                  "type": "number"
+                },
+                "casesAvertedErrorPlus": {
+                  "type": "number"
                 }
               },
               "additionalProperties": false,
@@ -32,7 +38,9 @@
                 "zone",
                 "intervention",
                 "cost",
-                "casesAverted"
+                "casesAverted",
+                "casesAvertedErrorMinus",
+                "casesAvertedErrorPlus"
               ]
             }
           ]
