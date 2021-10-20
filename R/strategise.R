@@ -42,8 +42,8 @@ get_intervention_data <- function(baseline_settings, intervention_settings, db) 
       table$irsUse == intervention_settings$irsUse
     )
   }
-  table <- table[rows, c("intervention", "casesAverted")]
-  colnames(table) <- c("intervention", "cases_averted")
+  table <- table[rows, c("intervention", "casesAverted", "casesAvertedErrorMinus", "casesAvertedErrorPlus")]
+  colnames(table) <- c("intervention", "cases_averted", "cases_averted_error_minus", "cases_averted_error_plus")
   table
 }
 
@@ -66,13 +66,19 @@ strategise <- function(options, db) {
     data
   })
   data <- do.call(rbind, data)
+  # The optimiser doesn't preserve extraneous columns so we save them here
+  # and merge them back into its output
+  errors <- data[c("zone", "intervention", "cases_averted_error_minus", "cases_averted_error_plus")]
   lapply(c(1, 0.95, 0.9, 0.85, 0.8), function(cost_threshold) {
     budget <- options$budget * cost_threshold
     res <- do_optimise(data, budget)
+    res <- merge(res, errors, by = c("zone", "intervention"), sort = FALSE)
     names(res)[names(res) == "cases_averted"] <- "casesAverted"
+    names(res)[names(res) == "cases_averted_error_minus"] <- "casesAvertedErrorMinus"
+    names(res)[names(res) == "cases_averted_error_plus"] <- "casesAvertedErrorPlus"
     list(
       costThreshold = cost_threshold,
-      interventions = res[c("zone", "intervention", "cost", "casesAverted")]
+      interventions = res[c("zone", "intervention", "cost", "casesAverted", "casesAvertedErrorMinus", "casesAvertedErrorPlus")]
     )
   })
 }

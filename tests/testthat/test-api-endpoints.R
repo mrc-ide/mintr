@@ -336,38 +336,38 @@ test_that("strategise", {
       list(
         costThreshold = 1,
         interventions = list(
-          list(zone = "Region A", intervention = "none", cost = 0, casesAverted = 0),
-          list(zone = "Region B", intervention = "irs", cost = 18000, casesAverted = 598),
-          list(zone = "Region C", intervention = "llin-pbo", cost = 8160, casesAverted = 351),
-          list(zone = "Region D", intervention = "irs-llin-pbo", cost = 26160, casesAverted = 602))),
+          list(zone = "Region A", intervention = "none", cost = 0, casesAverted = 0, casesAvertedErrorMinus = 0, casesAvertedErrorPlus = 0),
+          list(zone = "Region B", intervention = "irs", cost = 18000, casesAverted = 598, casesAvertedErrorMinus = 527, casesAvertedErrorPlus = 607),
+          list(zone = "Region C", intervention = "llin-pbo", cost = 8160, casesAverted = 351, casesAvertedErrorMinus = 303, casesAvertedErrorPlus = 384),
+          list(zone = "Region D", intervention = "irs-llin-pbo", cost = 26160, casesAverted = 602, casesAvertedErrorMinus = 566, casesAvertedErrorPlus = 609))),
       list(
         costThreshold = 0.95,
         interventions = list(
-          list(zone = "Region A", intervention = "none", cost = 0, casesAverted = 0),
-          list(zone = "Region B", intervention = "irs", cost = 18000, casesAverted = 598),
-          list(zone = "Region C", intervention = "llin-pbo", cost = 8160, casesAverted = 351),
-          list(zone = "Region D", intervention = "irs", cost = 18000, casesAverted = 598))),
+          list(zone = "Region A", intervention = "none", cost = 0, casesAverted = 0, casesAvertedErrorMinus = 0, casesAvertedErrorPlus = 0),
+          list(zone = "Region B", intervention = "irs", cost = 18000, casesAverted = 598, casesAvertedErrorMinus = 527, casesAvertedErrorPlus = 607),
+          list(zone = "Region C", intervention = "llin-pbo", cost = 8160, casesAverted = 351, casesAvertedErrorMinus = 303, casesAvertedErrorPlus = 384),
+          list(zone = "Region D", intervention = "irs", cost = 18000, casesAverted = 598, casesAvertedErrorMinus = 527, casesAvertedErrorPlus = 607))),
       list(
         costThreshold = 0.9,
         interventions = list(
-          list(zone = "Region A", intervention = "none", cost = 0, casesAverted = 0),
-          list(zone = "Region B", intervention = "irs", cost = 18000, casesAverted = 598),
-          list(zone = "Region C", intervention = "llin-pbo", cost = 8160, casesAverted = 351),
-          list(zone = "Region D", intervention = "irs", cost = 18000, casesAverted = 598))),
+          list(zone = "Region A", intervention = "none", cost = 0, casesAverted = 0, casesAvertedErrorMinus = 0, casesAvertedErrorPlus = 0),
+          list(zone = "Region B", intervention = "irs", cost = 18000, casesAverted = 598, casesAvertedErrorMinus = 527, casesAvertedErrorPlus = 607),
+          list(zone = "Region C", intervention = "llin-pbo", cost = 8160, casesAverted = 351, casesAvertedErrorMinus = 303, casesAvertedErrorPlus = 384),
+          list(zone = "Region D", intervention = "irs", cost = 18000, casesAverted = 598, casesAvertedErrorMinus = 527, casesAvertedErrorPlus = 607))),
       list(
         costThreshold = 0.85,
         interventions = list(
-          list(zone = "Region A", intervention = "none", cost = 0, casesAverted = 0),
-          list(zone = "Region B", intervention = "irs", cost = 18000, casesAverted = 598),
-          list(zone = "Region C", intervention = "llin-pbo", cost = 8160, casesAverted = 351),
-          list(zone = "Region D", intervention = "irs", cost = 18000, casesAverted = 598))),
+          list(zone = "Region A", intervention = "none", cost = 0, casesAverted = 0, casesAvertedErrorMinus = 0, casesAvertedErrorPlus = 0),
+          list(zone = "Region B", intervention = "irs", cost = 18000, casesAverted = 598, casesAvertedErrorMinus = 527, casesAvertedErrorPlus = 607),
+          list(zone = "Region C", intervention = "llin-pbo", cost = 8160, casesAverted = 351, casesAvertedErrorMinus = 303, casesAvertedErrorPlus = 384),
+          list(zone = "Region D", intervention = "irs", cost = 18000, casesAverted = 598, casesAvertedErrorMinus = 527, casesAvertedErrorPlus = 607))),
       list(
         costThreshold = 0.8,
         interventions = list(
-          list(zone = "Region A", intervention = "none", cost = 0, casesAverted = 0),
-          list(zone = "Region B", intervention = "irs", cost = 18000, casesAverted = 598),
-          list(zone = "Region C", intervention = "llin-pbo", cost = 8160, casesAverted = 351),
-          list(zone = "Region D", intervention = "llin-pbo", cost = 8160, casesAverted = 351)))
+          list(zone = "Region A", intervention = "none", cost = 0, casesAverted = 0, casesAvertedErrorMinus = 0, casesAvertedErrorPlus = 0),
+          list(zone = "Region B", intervention = "irs", cost = 18000, casesAverted = 598, casesAvertedErrorMinus = 527, casesAvertedErrorPlus = 607),
+          list(zone = "Region C", intervention = "llin-pbo", cost = 8160, casesAverted = 351, casesAvertedErrorMinus = 303, casesAvertedErrorPlus = 384),
+          list(zone = "Region D", intervention = "llin-pbo", cost = 8160, casesAverted = 351, casesAvertedErrorMinus = 303, casesAvertedErrorPlus = 384)))
     ), auto_unbox=TRUE))
 
   endpoint <- endpoint_strategise(db)
