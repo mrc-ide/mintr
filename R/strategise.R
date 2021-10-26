@@ -44,6 +44,10 @@ get_intervention_data <- function(baseline_settings, intervention_settings, db) 
   }
   table <- table[rows, c("intervention", "casesAverted", "casesAvertedErrorMinus", "casesAvertedErrorPlus")]
   colnames(table) <- c("intervention", "cases_averted", "cases_averted_error_minus", "cases_averted_error_plus")
+  # costs are calculated across 3 years in `get_cost` so do the same for cases averted here
+  table$cases_averted <- table$cases_averted * 3
+  table$cases_averted_error_minus <- table$cases_averted_error_minus * 3
+  table$cases_averted_error_plus <- table$cases_averted_error_plus * 3
   table
 }
 
