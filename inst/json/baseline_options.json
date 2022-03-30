@@ -232,25 +232,6 @@
               ]
             }
           ]
-        }, 
-        {
-          "controls": [
-            {
-              "name": "sprayInput",
-              "label": "What was the estimated coverage of spray campaign (last year)",
-              "type": "select",
-              "excludeNullOption": true,
-              "required": true,
-              "value": "0%",
-              "helpText": "If IRS was not used in the past year, select 0% coverage",
-              "options": [
-                {
-                  "id": "0%",
-                  "label": "0% coverage"
-                }
-              ]
-            }
-          ]
         }
       ],
       "documentation": "<p>The endemicity of a setting is determined by the mosquito ecology, community activities and environment but also the historic pressure from interventions that are controlling malaria transmission. Therefore, please answer the following questions to put the zone into context.</p><strong>ITN population usage in last survey (%)</strong><p>This can be found from Demographic Health Surveys or other surveys on net use completed in this zone</p>"
