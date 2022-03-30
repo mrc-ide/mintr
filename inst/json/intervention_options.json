@@ -7,7 +7,7 @@
                     "controls": [
                         {
                             "name": "netUse",
-                            "label": "Expected ITN population use given access",
+                            "label": "Expected ITN population use",
                             "type": "select",
                             "excludeNullOption": true,
                             "required": true,
