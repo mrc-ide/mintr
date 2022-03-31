@@ -228,13 +228,40 @@
                 {
                   "id": "60%",
                   "label": "60% usage"
+                },
+                {
+                  "id": "80%",
+                  "label": "80% usage"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "controls": [
+            {
+              "name": "sprayInput",
+              "label": "What was the estimated coverage of spray campaign (last year)",
+              "type": "select",
+              "excludeNullOption": true,
+              "required": true,
+              "value": "0%",
+              "helpText": "If IRS was not used in the past year, select 0% coverage",
+              "options": [
+                {
+                  "id": "0%",
+                  "label": "0% coverage"
+                },
+                {
+                  "id": "80%",
+                  "label": "80% coverage"
                 }
               ]
             }
           ]
         }
       ],
-      "documentation": "<p>The endemicity of a setting is determined by the mosquito ecology, community activities and environment but also the historic pressure from interventions that are controlling malaria transmission. Therefore, please answer the following questions to put the zone into context.</p><strong>ITN population usage in last survey (%)</strong><p>This can be found from Demographic Health Surveys or other surveys on net use completed in this zone</p>"
+      "documentation": "<p>The endemicity of a setting is determined by the mosquito ecology, community activities and environment but also the historic pressure from interventions that are controlling malaria transmission. Therefore, please answer the following questions to put the zone into context.</p><strong>ITN population usage in last survey (%)</strong><p>This can be found from Demographic Health Surveys or other surveys on net use completed in this zone</p><strong>Recent spray campaign</strong><p>Please choose an option from the drop down tab. If there was a spray campaign in the last year please select 80%, otherwise select 0%.</p>"
     }
   ]
 }

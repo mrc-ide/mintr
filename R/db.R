@@ -96,13 +96,6 @@ mint_baseline_options <- function() {
     }
   }
   
-  # mrc-3053 - we have temporarily removed sprayInput and the 80% option from
-  # itnUsage from available controls, but they are still present in the dataset
-  # - so add them here manually as allowed values. This can be removed when 
-  # controls are reinstated
-  index[["itnUsage"]] <- append(index[["itnUsage"]], "80%")
-  index[["sprayInput"]] <- c("0%", "80%")
-  
   list(index = index, ignore = ignore)
 }
 
