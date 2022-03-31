@@ -95,7 +95,6 @@ mint_baseline_options <- function() {
       }
     }
   }
-  
   list(index = index, ignore = ignore)
 }
 
