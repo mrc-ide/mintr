@@ -7,7 +7,7 @@
                     "controls": [
                         {
                             "name": "netUse",
-                            "label": "Expected ITN population use given access",
+                            "label": "Expected ITN population use",
                             "type": "select",
                             "excludeNullOption": true,
                             "required": true,
@@ -51,7 +51,7 @@
                 }
             ],
             "collapsible": true,
-            "documentation": "<strong>Expected ITN population use given access</strong><p>User enters the expected optimal ITN usage among people in the community after the mass distribution campaign. This will determine the intervention efficacy and cost-effectiveness of the campaign. Only one net type is implemented for an intervention zone. We compare which will be most cost effective within budget.</p><strong>Expected IRS* coverage</strong><p>Indoor residual spraying can be added to zones instead, or in addition to, ITNs (of any type). Houses to receive IRS are selected at random (irrespective of ITN ownership) and IRS coverage estimates represent the percentage of the population living in houses with IRS. Care should be taken interpreting results as IRS is often highly clustered within a small geographical areas. The model predicts the impact of a long-lasting IRS product (for example Actellic 300CS or Sumishield) where spraying is repeated annually prior to the peak of the transmission season (if seasonal setting selected in baseline inputs).</p><p><i>*IRS refers to a long-lasting non-pyrethroid IRS product (impact reflects recent Actellic 300CS and SumiShield products).</i></p>"
+            "documentation": "<strong>Expected ITN population use</strong><p>User enters the expected optimal ITN usage among people in the community after the mass distribution campaign. This will determine the intervention efficacy and cost-effectiveness of the campaign. Only one net type is implemented for an intervention zone. We compare which will be most cost effective within budget.</p><strong>Expected IRS* coverage</strong><p>Indoor residual spraying can be added to zones instead, or in addition to, ITNs (of any type). Houses to receive IRS are selected at random (irrespective of ITN ownership) and IRS coverage estimates represent the percentage of the population living in houses with IRS. Care should be taken interpreting results as IRS is often highly clustered within a small geographical areas. The model predicts the impact of a long-lasting IRS product (for example Actellic 300CS or Sumishield) where spraying is repeated annually prior to the peak of the transmission season (if seasonal setting selected in baseline inputs).</p><p><i>*IRS refers to a long-lasting non-pyrethroid IRS product (impact reflects recent Actellic 300CS and SumiShield products).</i></p>"
 
         },
         {
