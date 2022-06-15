@@ -1,6 +1,6 @@
 {
     "root": "https://mrcdata.dide.ic.ac.uk/mint",
-    "directory": "20210615",
+    "directory": "20220615",
     "files": {
         "index": "data_index_monthly_run_for_real_20220615.rds",
         "prevalence": "data_values_monthly_run_for_real_20220615.rds",
