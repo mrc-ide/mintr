@@ -59,7 +59,12 @@ mintr_db_process <- function(path) {
   prevalence <- rename(prevalence, unname(tr), names(tr))
   prevalence$netType <- relevel(prevalence$netType, c(std = 1, pto = 2))
   prevalence$intervention <- relevel(prevalence$intervention, interventions)
+  prevalence <- prevalence[prevalence$type == "prev", ]
   prevalence$year <- NULL
+  prevalence$type <- NULL
+  prevalence$uncertainty <- NULL
+  row.names(prevalence) <- NULL
+
   saveRDS(prevalence, paths$prevalence)
 
   message("Processing table")
@@ -100,11 +105,14 @@ mintr_db_process <- function(path) {
 
   t_low <- table[table$uncertainty == "low", ]
   t_high <- table[table$uncertainty == "high", ]
-  table <- table[table$uncertainty == "mean", ]
+  table <- table[table$uncertainty == "median", ]
   ## Check that our tables align so that the uncertainty calculations
   ## can be added:
   rownames(table) <- rownames(t_low) <- rownames(t_high) <- NULL
   v_index <- c("index", "netUse", "irsUse", "netType", "intervention")
+
+  ## Workaround for now, just so we can see if anything else is broken:
+  t_low <- t_high <- table
   stopifnot(identical(table[v_index], t_low[v_index]),
             identical(table[v_index], t_high[v_index]))
 
@@ -190,6 +198,9 @@ import_translate_index <- function(index) {
     index <- rename(index, x$from, x$to)
     index[[x$to]] <- relevel(index[[x$to]], x$map)
   }
+
+  index$net_type_use <- NULL
+  index$uncertainty_draw <- NULL
 
   index
 }
