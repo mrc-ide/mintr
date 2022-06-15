@@ -8,8 +8,14 @@ mintr_db_import <- function(path) {
   prevalence <- readRDS(paths$prevalence)
   table <- readRDS(paths$table)
 
+  ## In processing
+  index$index <- as.character(index$index)
+
   ignore <- mintr_db_check_index(index)
   mintr_db_check_prevalence(index, prevalence)
+  stopifnot(
+    setequal(table$index, index$index),
+    setequal(prevalence$index, index$index))
 
   unlink(paths$db, recursive = TRUE)
   unlink(paths$db_lock, recursive = TRUE)
