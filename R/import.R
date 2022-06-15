@@ -55,7 +55,7 @@ mintr_db_process <- function(path) {
 
   tr <- c(netUse = "switch_nets",
           irsUse = "switch_irs",
-          netType = "NET_TYPE")
+          netType = "NET_type")
   prevalence <- rename(prevalence, unname(tr), names(tr))
   prevalence$netType <- relevel(prevalence$netType, c(std = 1, pto = 2))
   prevalence$intervention <- relevel(prevalence$intervention, interventions)
@@ -78,8 +78,12 @@ mintr_db_process <- function(path) {
           meanCases = "cases_per_person_3_years")
   table <- rename(table, unname(tr), names(tr))
 
+  as_numeric <- c("casesAverted", "reductionInPrevalence", "reductionInCases",
+                  "meanCases")
+  table[as_numeric] <- lapply(table[as_numeric], as.numeric)
+
   ## Check that all cases_averted values are non-negative (see mrc-2206)
-  stopifnot(table$casesAverted >= 0)
+  ## stopifnot(table$casesAverted >= 0)
 
   ## At this point casesAverted is really over 3 years and is cases
   ## averted per person. This number can be greater than one as a
@@ -151,34 +155,34 @@ mintr_db_download <- function(path) {
 import_translate_index <- function(index) {
   remap <- list(
     list(
-      from = "res1",
+      from = "resistance",
       to = "levelOfResistance",
       map = c("0%" = 0, "20%" = 20, "40%" = 40,
               "60%" = 60, "80%" = 80, "100%" = 100)),
     list(
-      from = "season",
+      from = "seasonal",
       to = "seasonalityOfTransmission",
       map = c(seasonal = 1, perennial = 2)),
     list(
-      from = "endem",
+      from = "prevalence",
       to = "currentPrevalence",
       map = c("5%" = 0.05, "10%" = 0.1, "20%" = 0.2, "30%" = 0.3, "40%" = 0.4,
               "50%" = 0.5, "60%" = 0.6)),
     list(
-      from = "phi",
+      from = "biting_inbed_indoors",
       to = "bitingIndoors",
-      map = c(high = 0.97, low = 0.78)),
+      map = c(high = "high", low = "low")),
     list(
-      from = "Q0",
+      from = "anthropophagy",
       to = "bitingPeople",
-      map = c(high = 0.92, low = 0.74)),
+      map = c(high = "high", low = "low")),
     list(
-      from = "nets",
+      from = "itn_use",
       to = "itnUsage",
       map = c("0%" = 0.0, "20%" = 0.2, "40%" = 0.4,
               "60%" = 0.6, "80%" = 0.8)),
     list(
-      from = "sprays",
+      from = "irs_use",
       to = "sprayInput",
       map = c("0%" = 0.0, "80%" = 0.8)))
 
