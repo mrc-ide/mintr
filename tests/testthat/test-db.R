@@ -43,7 +43,7 @@ test_that("Can read table data", {
                   population = 1000)
   d <- db$get_table(options)
   expect_s3_class(d, "data.frame")
-  expect_equal(nrow(d), 114)
+  expect_equal(nrow(d), 102)
   expect_setequal(
     names(d),
     c("netUse", "irsUse", "intervention",
@@ -172,7 +172,7 @@ test_that("Can scale table results by population", {
   expect_equal(d2[v], d1[v])
   ## Due to rounding error, this is only approximate
   expect_equal(d2$casesAverted, d1$casesAverted / 10,
-               tolerance = 0.001)
+               tolerance = 0.01)
 })
 
 
