@@ -10,12 +10,12 @@ test_that("Can create db", {
                   bitingPeople = "low",
                   levelOfResistance = "80%",
                   itnUsage = "20%",
-                  sprayInput = "0%",
+                  sprayInput = "80%",
                   metabolic = "yes",
                   population = 1000)
   d <- db$get_prevalence(options)
   expect_s3_class(d, "data.frame")
-  expect_equal(nrow(d), 114 * 48)
+  expect_equal(nrow(d), 102 * 49)
   expect_setequal(
     names(d),
     c("month", "netUse", "irsUse", "intervention", "value"))

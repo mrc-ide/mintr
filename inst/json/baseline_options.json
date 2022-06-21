@@ -253,6 +253,10 @@
                   "label": "0% coverage"
                 },
                 {
+                  "id": "60%",
+                  "label": "60% coverage"
+                },
+                {
                   "id": "80%",
                   "label": "80% coverage"
                 }

@@ -94,7 +94,7 @@ mintr_db_process <- function(path) {
   table[as_numeric] <- lapply(table[as_numeric], as.numeric)
 
   ## Check that all cases_averted values are non-negative (see mrc-2206)
-  ## stopifnot(table$casesAverted >= 0)
+  stopifnot(table$casesAverted >= 0)
 
   ## At this point casesAverted is really over 3 years and is cases
   ## averted per person. This number can be greater than one as a
@@ -117,8 +117,6 @@ mintr_db_process <- function(path) {
   rownames(table) <- rownames(t_low) <- rownames(t_high) <- NULL
   v_index <- c("index", "netUse", "irsUse", "netType", "intervention")
 
-  ## Workaround for now, just so we can see if anything else is broken:
-  t_low <- t_high <- table
   stopifnot(identical(table[v_index], t_low[v_index]),
             identical(table[v_index], t_high[v_index]))
 
@@ -198,7 +196,7 @@ import_translate_index <- function(index) {
     list(
       from = "irs_use",
       to = "sprayInput",
-      map = c("0%" = 0.0, "80%" = 0.8)))
+      map = c("0%" = 0.0, "60%" = 0.6, "80%" = 0.8)))
 
   for (x in remap) {
     index <- rename(index, x$from, x$to)
