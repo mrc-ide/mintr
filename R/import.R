@@ -19,7 +19,7 @@ mintr_db_import <- function(path) {
 
   unlink(paths$db, recursive = TRUE)
   unlink(paths$db_lock, recursive = TRUE)
-  db <- thor::mdb_env(paths$db, mapsize = 4e9, subdir = FALSE)
+  db <- thor::mdb_env(paths$db, mapsize = 10e9, subdir = FALSE)
   db$put("index", object_to_bin(index))
   db$put("ignore", object_to_bin(ignore))
 
