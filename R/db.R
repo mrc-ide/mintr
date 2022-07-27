@@ -125,17 +125,27 @@ mintr_db_check_prevalence <- function(index, prevalence) {
 
 mint_intervention <- function(net_use, irs_use, net_type) {
   intervention <- c(# net_use  irs_use  net_type
-    "none",         # == 0     == 0     == std
-    "llin",         #  > 0     == 0     == std
-    "irs",          # == 0      > 0     == std
-    "irs-llin",     #  > 0      > 0     == std
-    "none",         # == 0     == 0     == pto
-    "llin-pbo",     #  > 0     == 0     == pto
-    "irs",          # == 0      > 0     == pto
-    "irs-llin-pbo") #  > 0      > 0     == pto
+    ## Standard
+    "none",            # == 0     == 0     == std
+    "llin",            #  > 0     == 0     == std
+    "irs",             # == 0      > 0     == std
+    "irs-llin",        #  > 0      > 0     == std
+    ## PTO
+    "none",            # == 0     == 0     == pto
+    "llin-pbo",        #  > 0     == 0     == pto
+    "irs",             # == 0      > 0     == pto
+    "irs-llin-pbo",    #  > 0      > 0     == pto
+    ## The Third Net
+    "none",            # == 0     == 0     == ig2
+    "pyrrole-pbo",     #  > 0     == 0     == ig2
+    "irs",             # == 0      > 0     == ig2
+    "irs-pyrrole-pbo") #  > 0      > 0     == ig2
 
   ## Use bit packing to get the above relationship:
-  i <- (net_use > 0) + (irs_use > 0) * 2 + (net_type == "pto") * 4 + 1
+  i <- 1 + (net_use > 0) +
+    (irs_use > 0) * 2 +
+    (net_type == "pto") * 4 +
+    (net_type == "ig2") * 8
   intervention[i]
 }
 
