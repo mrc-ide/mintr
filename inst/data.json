@@ -1,10 +1,10 @@
 {
     "root": "https://mrcdata.dide.ic.ac.uk/mint",
-    "directory": "20220621",
+    "directory": "20220707",
     "files": {
-        "index": "data_index_monthly_run_for_real_20220621.rds",
-        "prevalence": "data_values_monthly_run_for_real_20220621.rds",
-        "table": "data_aggregate_monthly_run_for_real_20220621.rds"
+        "index": "data_index_monthly_run_for_real_20220707.rds",
+        "prevalence": "data_values_monthly_run_for_real_20220707.rds",
+        "table": "data_aggregate_monthly_run_for_real_20220707.rds"
     },
     "interventions": {
         "none": "No intervention",
@@ -12,6 +12,8 @@
         "llin-pbo": "Pyrethroid-PBO LLIN only",
         "irs": "IRS only",
         "irs-llin": "Pyrethroid LLIN with IRS",
-        "irs-llin-pbo": "Pyrethroid-PBO LLIN with IRS"
+        "irs-llin-pbo": "Pyrethroid-PBO LLIN with IRS",
+        "irs-pyrrole-pbo": "Pyrethroid-pyrrole ITN with IRS",
+        "pyrrole-pbo": "Pyrethroid-pyrrole ITN only"
     }
 }

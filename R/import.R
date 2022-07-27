@@ -46,6 +46,7 @@ mintr_db_process <- function(path) {
   raw <- jsonlite::read_json(mintr_path("data.json"))
   paths <- mintr_db_paths(path)
   interventions <- raw$interventions
+  net_types <- c(std = 1, pto = 2, ig2 = 3)
 
   message("Processing index")
   path_index_raw <- file.path(path, raw$directory, raw$files$index)
@@ -63,7 +64,7 @@ mintr_db_process <- function(path) {
           irsUse = "switch_irs",
           netType = "NET_type")
   prevalence <- rename(prevalence, unname(tr), names(tr))
-  prevalence$netType <- relevel(prevalence$netType, c(std = 1, pto = 2))
+  prevalence$netType <- relevel(prevalence$netType, net_types)
   prevalence$intervention <- relevel(prevalence$intervention, interventions)
   prevalence <- prevalence[prevalence$type == "prev", ]
   prevalence$year <- NULL
@@ -117,8 +118,10 @@ mintr_db_process <- function(path) {
   rownames(table) <- rownames(t_low) <- rownames(t_high) <- NULL
   v_index <- c("index", "netUse", "irsUse", "netType", "intervention")
 
-  stopifnot(identical(table[v_index], t_low[v_index]),
-            identical(table[v_index], t_high[v_index]))
+  ## In the 20220707 data set and later, the table 't_low' is not
+  ## aligned with the base data, fix that here as we assume it below.
+  t_low <- sort_table(t_low, table)
+  t_high <- sort_table(t_high, table)
 
   v_uncertainty <- c("casesAverted",
                      "casesAvertedPer1000",
@@ -135,7 +138,7 @@ mintr_db_process <- function(path) {
     table[[paste0(v, "ErrorPlus")]]  <- apply(low_high_mean, 1, max)
   }
 
-  table$netType <- relevel(table$netType, c(std = 1, pto = 2))
+  table$netType <- relevel(table$netType, net_types)
   table$intervention <- relevel(table$intervention, interventions)
 
   drop <- c("uncertainty", grep("_", names(table), value = TRUE))
@@ -216,4 +219,21 @@ mintr_db_docker <- function(path) {
   ## Remove intermediate and derived files so that we get something
   ## nice and small to keep in the docker image:
   unlink(path_downloads, recursive = TRUE)
+}
+
+
+sort_table <- function(t, ref) {
+  v_index <- c("index", "netUse", "irsUse", "netType", "intervention")
+  if (identical(t[v_index], ref[v_index])) {
+    return(t)
+  }
+  message(sprintf("...resorting table %s", deparse(substitute(t))))
+  key_t <- paste(t$index, t$netUse, t$irsUse, t$netType, t$intervention)
+  key_ref <- paste(ref$index, ref$netUse, ref$irsUse, ref$netType,
+                   ref$intervention)
+  i <- match(key_ref, key_t)
+  stopifnot(!anyNA(i))
+  t <- t[i, ]
+  rownames(t) <- NULL
+  t
 }
