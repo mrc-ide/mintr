@@ -8,7 +8,9 @@
       "llin-pbo": "'Pyrethroid-PBO ITN only'",
       "irs": "'IRS* only'",
       "irs-llin": "'Pyrethroid LLIN with IRS*'",
-      "irs-llin-pbo": "'Pyrethroid-PBO ITN with IRS*'"
+      "irs-llin-pbo": "'Pyrethroid-PBO ITN with IRS*'",
+      "pyrrole-pbo": "'Pyrethroid-pyrrole LLIN only'",
+      "irs-pyrrole-pbo": "'Pyrethroid-pyrrole LLIN with IRS'"
     }
   },
   {
