@@ -1,10 +1,10 @@
 {
     "root": "https://mrcdata.dide.ic.ac.uk/mint",
-    "directory": "20220707",
+    "directory": "20221017",
     "files": {
-        "index": "data_index_monthly_run_for_real_20220707.rds",
-        "prevalence": "data_values_monthly_run_for_real_20220707.rds",
-        "table": "data_aggregate_monthly_run_for_real_20220707.rds"
+        "index": "data_index_remove_peak_irs_increase_population_20221017.rds",
+        "prevalence": "data_values_remove_peak_irs_increase_population_20221017.rds",
+        "table": "data_aggregate_remove_peak_irs_increase_population_20221017.rds"
     },
     "interventions": {
         "none": "No intervention",
