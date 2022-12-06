@@ -15,7 +15,7 @@ test_that("Can create db", {
                   population = 1000)
   d <- db$get_prevalence(options)
   expect_s3_class(d, "data.frame")
-  expect_equal(nrow(d), 168 * 147) # was 168 * 147
+  expect_equal(nrow(d), 168 * 183)
   expect_setequal(
     names(d),
     c("month", "netUse", "irsUse", "intervention", "value"))
