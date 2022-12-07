@@ -61,7 +61,7 @@ assert_setequal <- function(values, expected,
 
 
 download_file <- function(url, dest, ...) {
-  oo <- options(timeout = 600) # 10 mins
+  oo <- options(timeout = 1800) # 30 mins
   on.exit(options(oo))
   withCallingHandlers(
     utils::download.file(url, dest, mode = "wb", ...),
