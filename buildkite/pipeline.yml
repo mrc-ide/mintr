@@ -9,7 +9,7 @@ steps:
   - label: ":hammer: Test"
     command: docker/test
     agents:
-      queue: "browser-test
+      queue: "browser-test"
 
   - wait
 
