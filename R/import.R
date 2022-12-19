@@ -2,6 +2,7 @@
 ## mintr database; this will be called in the docker image on startup
 mintr_db_import <- function(path) {
   message("Building database")
+  t0 <- Sys.time()
   paths <- mintr_db_paths(path)
 
   index <- readRDS(paths$index)
@@ -38,6 +39,9 @@ mintr_db_import <- function(path) {
     rownames(d) <- NULL
     db$put(sprintf("prevalence:%s", i), object_to_bin(d))
   }
+
+  message(sprintf(
+    "...complete in %0.2f s", as.numeric(Sys.time() - t0, "secs")))
 }
 
 
