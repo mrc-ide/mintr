@@ -19,9 +19,9 @@ docker run --rm -d \
        -p 8888:8888 \
        --name $NAME_SERVER $TAG_SHA
 
-# Importing the data takes a while, so we'll give this two minutes to come up
+# Importing the data takes a while, so we'll give this five minutes to come up
 set +e
-for attempt in $(seq 30); do
+for attempt in $(seq 75); do
     echo "Attempt $attempt"
     RESPONSE=$(curl --silent http://localhost:8888)
     if [ "$RESPONSE" == '{"status":"success","errors":null,"data":"Welcome to mintr"}' ]; then
