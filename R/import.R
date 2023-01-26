@@ -60,6 +60,7 @@ mintr_db_process <- function(path) {
   message("Processing prevalence")
   path_prevalence_raw <- file.path(path, raw$directory, raw$files$prevalence)
   prevalence <- readRDS(path_prevalence_raw)
+  prevalence <- prevalence[prevalence$uncertainty == "median", ]
   i <- order(prevalence$index)
   prevalence <- prevalence[i, ]
   rownames(prevalence) <- NULL
