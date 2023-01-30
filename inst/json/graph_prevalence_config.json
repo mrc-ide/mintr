@@ -48,7 +48,7 @@
             "id": "pyrrole-pbo",
             "name": "Pyrethroid-pyrrole ITN only",
             "type": "lines",
-            "marker": {"color": "olivee"},
+            "marker": {"color": "darkolivegreen"},
             "hovertemplate": "%{y:.1%}"
         },
         {
@@ -88,7 +88,7 @@
             "line": {
                 "dash": "dash"
             },
-            "marker": {"color": "plum"},
+            "marker": {"color": "olive"},
             "hovertemplate": "%{y:.1%}"
         }
     ],

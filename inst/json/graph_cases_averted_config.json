@@ -53,7 +53,7 @@
             "type": "bar",
             "name": "Pyrethroid-pyrrole ITN only",
             "marker": {
-                "color": "olive",
+                "color": "darkolivegreen",
                 "opacity": 0.5
             },
             "error_y": {
@@ -133,7 +133,7 @@
             "name": "Pyrethroid-pyrrole ITN with IRS*",
             "type": "bar",
             "marker": {
-                "color": "plum",
+                "color": "olive",
                 "opacity": 0.5
             },
             "error_y": {

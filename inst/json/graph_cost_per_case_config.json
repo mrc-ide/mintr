@@ -54,7 +54,7 @@
             "type": "bar",
             "name": "Pyrethroid-pyrrole ITN only",
             "marker": {
-                "color": "olive",
+                "color": "darkolivegreen",
                 "opacity": 0.5
             },
             "hovertemplate": "$%{y:.1f}0 +$%{error_y.array:.1f}0 / -$%{error_y.arrayminus:.1f}0",
@@ -138,7 +138,7 @@
             "name": "Pyrethroid-pyrrole ITN with IRS*",
             "type": "bar",
             "marker": {
-                "color": "plum",
+                "color": "olive",
                 "opacity": 0.5
             },
             "hovertemplate": "$%{y:.1f}0 +$%{error_y.array:.1f}0 / -$%{error_y.arrayminus:.1f}0",

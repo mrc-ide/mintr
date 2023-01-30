@@ -171,20 +171,23 @@ mintr_db_transform_metabolic <- function(d, metabolic) {
 # Rather than the relationship between series and settings
 # decribed in the mint_intervention function, the front-end
 # requires data that adheres to:
-#intervention      net_use  irs_use
-#  "none"         == n/a    == n/a
-#  "llin"         >= 0      == n/a
-#  "irs"          == n/a    >= 0
-#  "irs-llin"     >= 0      >= 0
-#  "llin-pbo"     >= 0      == n/a
-#  "irs"          == n/a    >= 0
-#  "irs-llin-pbo" >= 0      >= 0
+#intervention         net_use  irs_use
+#  "none"            == n/a    == n/a
+#  "llin"            >= 0      == n/a
+#  "irs"             == n/a    >= 0
+#  "irs-llin"        >= 0      >= 0
+#  "llin-pbo"        >= 0      == n/a
+#  "pyrrole-pbo"     >= 0      == n/a  
+#  "irs"             == n/a    >= 0
+#  "irs-llin-pbo"    >= 0      >= 0
+#  "irs-pyrrole-pbo" >= 0      >= 0
+#
 mintr_db_set_not_applicable_values <- function(data) {
   # this special value is used by the front-end to display
   # series for which a chosen setting doesn't apply but the user
   # nevertheless wants to see a comparison against
   not_applicable <- "n/a"
-  data[data$intervention %in% c("llin", "llin-pbo"), ]$irsUse <- not_applicable
+  data[data$intervention %in% c("llin", "llin-pbo", "pyrrole-pbo"), ]$irsUse <- not_applicable
   data[data$intervention =="irs", ]$netUse <- not_applicable
   data[data$intervention =="none", ]$netUse <- not_applicable
   data[data$intervention =="none", ]$irsUse <- not_applicable
