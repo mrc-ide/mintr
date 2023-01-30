@@ -47,6 +47,26 @@
             }
         },
         {
+            "x": ["pyrrole-pbo"],
+            "id": "pyrrole-pbo",
+            "y_formula": ["round({casesAvertedPer1000} / 10) * 10"],
+            "type": "bar",
+            "name": "Pyrethroid-pyrrole ITN only",
+            "marker": {
+                "color": "olive",
+                "opacity": 0.5
+            },
+            "error_y": {
+                "type": "data",
+                "cols": ["round({casesAvertedPer1000ErrorPlus} / 10) * 10"],
+                "colsminus": ["round({casesAvertedPer1000ErrorMinus} / 10) * 10"],
+                "visible": true,
+                "thickness": 1.5,
+                "width": 0,
+                "opacity": 1
+            }
+        },
+        {
             "x": ["irs"],
             "id": "irs",
             "y_formula": ["round({casesAvertedPer1000} / 10) * 10"],
@@ -105,6 +125,26 @@
                 "width": 0,
                 "opacity": 1
             }
+        },
+        {
+            "x": ["irs-pyrrole-pbo"],
+            "id": "irs-pyrrole-pbo",
+            "y_formula": ["round({casesAvertedPer1000} / 10) * 10"],
+            "name": "Pyrethroid-pyrrole ITN with IRS*",
+            "type": "bar",
+            "marker": {
+                "color": "plum",
+                "opacity": 0.5
+            },
+            "error_y": {
+                "type": "data",
+                "cols": ["round({casesAvertedPer1000ErrorPlus} / 10) * 10"],
+                "colsminus": ["round({casesAvertedPer1000ErrorMinus} / 10) * 10"],
+                "visible": true,
+                "thickness": 1.5,
+                "width": 0,
+                "opacity": 1
+            }
         }
     ],
     "layout": {
@@ -117,8 +157,8 @@
         "xaxis": {
             "title": "intervention",
             "showline": true,
-            "tickvals": ["llin", "llin-pbo", "irs", "irs-llin", "irs-llin-pbo"],
-            "ticktext": ["pyr-LLIN", "PBO ITN", "IRS", "pyr-LLIN + IRS", "PBO ITN + IRS"],
+            "tickvals": ["llin", "llin-pbo", "pyrrole-pbo", "irs", "irs-llin", "irs-llin-pbo", "irs-pyrrole-pbo"],
+            "ticktext": ["pyr-LLIN", "PBO ITN", "Pyrrole ITN", "IRS", "pyr-LLIN + IRS", "PBO ITN + IRS", "Pyrrole ITN + IRS"],
             "autorange": true
         },
         "showlegend": true

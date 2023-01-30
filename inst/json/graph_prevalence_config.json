@@ -45,6 +45,13 @@
             "hovertemplate": "%{y:.1%}"
         },
         {
+            "id": "pyrrole-pbo",
+            "name": "Pyrethroid-pyrrole ITN only",
+            "type": "lines",
+            "marker": {"color": "olivee"},
+            "hovertemplate": "%{y:.1%}"
+        },
+        {
             "id": "irs",
             "name": "IRS* only",
             "type": "lines",
@@ -72,6 +79,16 @@
                 "dash": "dash"
             },
             "marker": {"color": "orange"},
+            "hovertemplate": "%{y:.1%}"
+        },
+        {
+            "id": "irs-pyrrole-pbo",
+            "name": "Pyrethroid-pyrrole ITN with IRS*",
+            "type": "lines",
+            "line": {
+                "dash": "dash"
+            },
+            "marker": {"color": "plum"},
             "hovertemplate": "%{y:.1%}"
         }
     ],
