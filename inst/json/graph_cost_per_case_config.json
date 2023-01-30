@@ -54,7 +54,7 @@
             "type": "bar",
             "name": "Pyrethroid-pyrrole ITN only",
             "marker": {
-                "color": "darkolivegreen",
+                "color": "darkgreen",
                 "opacity": 0.5
             },
             "hovertemplate": "$%{y:.1f}0 +$%{error_y.array:.1f}0 / -$%{error_y.arrayminus:.1f}0",
