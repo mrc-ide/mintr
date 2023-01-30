@@ -64,7 +64,7 @@
   },
   {
     "valueCol": "reductionInPrevalence",
-    "displayName": "Relative reduction in prevalence under 5 years (%)",
+    "displayName": "Relative reduction in prevalence at 36 months post intervention",
     "error": {
       "minus": {
         "valueCol": "reductionInPrevalenceErrorMinus"
@@ -77,7 +77,7 @@
   },
   {
     "valueCol": "casesAverted",
-    "displayName": "Mean cases averted per population per year across 3 years since intervention",
+    "displayName": "Mean cases averted annually per population across 3 years since intervention",
     "error": {
       "minus": {
         "valueCol": "casesAvertedErrorMinus"
@@ -89,8 +89,8 @@
     "transform": "round({} / 10) * 10"
   },
   {
-    "valueCol": "casesAvertedPer1000",
-    "displayName": "Mean cases averted per 1,000 people across 3 years since intervention",
+    "valueCol": "casesAvertedPer1000",n
+    "displayName": "Mean cases averted per 1,000 people annually across 3 year since intervention",
     "error": {
       "minus": {
         "valueCol": "casesAvertedPer1000ErrorMinus"
@@ -116,7 +116,7 @@
   },
   {
     "valueCol": "meanCases",
-    "displayName": "Mean cases per person per year across 3 years",
+    "displayName": "Mean cases per person per year averaged across 3 years",
     "error": {
       "minus": {
         "valueCol": "meanCasesErrorMinus"
