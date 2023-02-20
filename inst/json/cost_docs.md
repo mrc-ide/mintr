@@ -22,7 +22,6 @@ and the direction of change is reflective of reality according to model checks a
 averted by the intervention package, averaged across 3 years, relative to the continuation of the 'do-nothing' scenario.
 *   Total costs (USD): The total cost in USD expected for the product procurement and implementation for the
  intervention package to cover a 3-year period of protection.
-to the cost spent to achieve the 'do-nothing' scenario.
 *   Cost per case averted across 3 years: The cost in USD per case averted per 3-year campaign relative to the
 'do-nothing' scenario.
 
