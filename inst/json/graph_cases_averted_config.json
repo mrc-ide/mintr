@@ -133,7 +133,7 @@
             "name": "Pyrethroid-pyrrole ITN with IRS*",
             "type": "bar",
             "marker": {
-                "color": "olive",
+                "color": "limegreen",
                 "opacity": 0.5
             },
             "error_y": {

@@ -109,7 +109,7 @@
                   "y_formula": ["({priceDelivery} + {priceNetPyrrole}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100 + 3 * {priceIRSPerPerson} * {population}"],
                   "name": "Pyrethroid-pyrrole ITN with IRS*",
                   "type": "scatter",
-                  "marker": {"color": "olive", "size": 10},
+                  "marker": {"color": "limegreen", "size": 10},
                   "hovertemplate": "%{x}, $%{y:.3s}",
                   "error_x": {
                       "type": "data",
