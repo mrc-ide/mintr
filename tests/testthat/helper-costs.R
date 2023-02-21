@@ -3,6 +3,7 @@ get_input <- function() {
        procurePeoplePerNet = 1.8,
        priceNetStandard = 1.5,
        priceNetPBO = 2.5,
+       priceNetPyrrole = 3.2,
        priceDelivery = 2.75,
        procureBuffer = 7,
        priceIRSPerPerson = 2.5,
@@ -21,20 +22,25 @@ get_expected_total_costs <- function() {
   procurement_buffer <- (input$procureBuffer + 100) / 100
   cost_per_N1 <- input$priceNetStandard
   cost_per_N2 <- input$priceNetPBO
+  cost_per_N3 <- input$priceNetPyrrole
   price_NET_delivery <- input$priceDelivery
   price_IRS_delivery <- input$priceIRSPerPerson * population
 
   costs_N0 <- 0
   costs_N1 <- (price_NET_delivery + cost_per_N1) * (population / input$procurePeoplePerNet * procurement_buffer)
   costs_N2 <- (price_NET_delivery + cost_per_N2) * (population / input$procurePeoplePerNet * procurement_buffer)
+  costs_N3 <- (price_NET_delivery + cost_per_N3) * (population / input$procurePeoplePerNet * procurement_buffer)
   costs_S1 <- 3 * price_IRS_delivery
   costs_N1_S1 <- costs_N1 + costs_S1
   costs_N2_S1 <- costs_N2 + costs_S1
+  costs_N3_S1 <- costs_N3 + costs_S1
 
   list(costs_N0 = costs_N0,
        costs_N1 = costs_N1,
        costs_N2 = costs_N2,
+       costs_N3 = costs_N3,
        costs_S1 = costs_S1,
        costs_N1_S1 = costs_N1_S1,
-       costs_N2_S1 = costs_N2_S1)
+       costs_N2_S1 = costs_N2_S1,
+       costs_N3_S1 = costs_N3_S1)
 }

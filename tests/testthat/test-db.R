@@ -116,7 +116,7 @@ test_that("index must conform to baseline options", {
 })
 
 
-test_that("prevelance must conform", {
+test_that("prevalence must conform", {
   index <- readRDS("data/index.rds")
   prevalence <- readRDS("data/prevalence.rds")
 
@@ -254,6 +254,7 @@ check_not_applicable_values <- function(res) {
   expect_true(all(res[res$intervention == "irs", "netUse"] == "n/a"))
   expect_true(all(res[res$intervention == "llin", "irsUse"] == "n/a"))
   expect_true(all(res[res$intervention == "llin-pbo", "irsUse"] == "n/a"))
+  expect_true(all(res[res$intervention == "pyrrole-pbo", "irsUse"] == "n/a"))
 }
 
 
