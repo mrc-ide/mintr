@@ -90,7 +90,7 @@
   },
   {
     "valueCol": "casesAvertedPer1000",
-    "displayName": "Mean cases averted per 1,000 people annually across 3 year since intervention",
+    "displayName": "Mean cases averted per 1,000 people annually across 3 years since intervention",
     "error": {
       "minus": {
         "valueCol": "casesAvertedPer1000ErrorMinus"
