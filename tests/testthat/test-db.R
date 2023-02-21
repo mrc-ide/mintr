@@ -122,7 +122,8 @@ test_that("prevelance must conform", {
   raw <- jsonlite::read_json(mintr_path("data.json"))
   path_prevalence_raw <- file.path("data", raw$directory, raw$files$prevalence)
   prevalence <- mintr_db_process_prevalence(readRDS(path_prevalence_raw),
-                                            raw$interventions)
+                                            raw$interventions,
+                                            c(std = 1, pto = 2, ig2 = 3))
 
   expect_error(
     mintr_db_check_prevalence(index, prevalence[names(prevalence) != "irsUse"]),
