@@ -21,7 +21,6 @@ Imports:
     rmpk,
     ROIoptimizer,
     ROI.plugin.glpk,
-    thor,
     tidyr
 Suggests:
     glue,

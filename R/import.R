@@ -13,32 +13,34 @@ mintr_db_import <- function(path) {
   ignore <- mintr_db_check_index(index)
   mintr_db_check_prevalence(index, prevalence)
 
-  unlink(paths$db, recursive = TRUE)
-  unlink(paths$db_lock, recursive = TRUE)
-  unlink(dirname(paths[["prevalence-data"]]), recursive = TRUE)
+  unlink(paths$read$index)
+  unlink(paths$read$ignore)
+  unlink(dirname(paths$read$prevalence), recursive = TRUE)
+  unlink(dirname(paths$read$table), recursive = TRUE)
 
-  message("Importing index")
-  db <- thor::mdb_env(paths$db, subdir = FALSE, mapsize = 1e8)
-  db$put("index", object_to_bin(index))
-  db$put("ignore", object_to_bin(ignore))
+  message("Writing index")
+  saveRDS(index, paths$read$index)
+  saveRDS(ignore, paths$read$ignore)
 
   ## Table:
-  message("Importing table")
+  message("Writing table")
+  dir.create(dirname(paths$read$table), FALSE, TRUE)
   idx <- split(seq_len(nrow(table)), table$index)
   for (i in index$index) {
     d <- table[idx[[i]], !(names(table) %in% c("index", "netType"))]
     rownames(d) <- NULL
-    db$put(sprintf("table:%s", i), object_to_bin(d))
+    dest <- sprintf(paths$read$table, i)
+    saveRDS(d, dest)
   }
 
   ## Prevalence:
   message("Importing prevalence")
+  dir.create(dirname(paths$read$prevalence), FALSE, TRUE)
   idx <- split(seq_len(nrow(prevalence)), prevalence$index)
   for (i in index$index) {
     d <- prevalence[idx[[i]], !(names(prevalence) %in% c("index", "netType"))]
     rownames(d) <- NULL
-    dest <- sprintf(paths[["prevalence-data"]], i)
-    dir.create(dirname(dest), FALSE, TRUE)
+    dest <- sprintf(paths$read$prevalence, i)
     saveRDS(d, dest)
   }
 }

@@ -20,11 +20,9 @@ mintr_db <- R6::R6Class(
   public = list(
     initialize = function(path, docs) {
       private$path <- path
-      private$db <- thor::mdb_env(path$db, readonly = TRUE, lock = FALSE,
-                                  subdir = FALSE)
-      private$index <- unserialize(private$db$get("index"))
+      private$index <- readRDS(path$read$index)
       private$baseline <- setdiff(names(private$index), "index")
-      private$ignore <- unserialize(private$db$get("ignore"))
+      private$ignore <- readRDS(path$read$ignore)
       private$docs <- docs
     },
 
@@ -45,7 +43,7 @@ mintr_db <- R6::R6Class(
 
     get_prevalence = function(options) {
       key <- self$get_index(options)
-      p <- sprintf(private$path[["prevalence-data"]], key)
+      p <- sprintf(private$path$read$prevalence, key)
       ret <- readRDS(p)
       prev <- mintr_db_transform_metabolic(ret, options$metabolic)
       mintr_db_set_not_applicable_values(prev)
@@ -61,8 +59,11 @@ mintr_db <- R6::R6Class(
 
     get_table = function(options) {
       key <- self$get_index(options)
-      ret <- unserialize(private$db$get(sprintf("table:%s", key)))
-      for (v in c("casesAverted", "casesAvertedErrorMinus", "casesAvertedErrorPlus")) {
+      p <- sprintf(private$path$read$table, key)
+      ret <- readRDS(p)
+      to_round <- c("casesAverted", "casesAvertedErrorMinus",
+                    "casesAvertedErrorPlus")
+      for (v in to_round) {
         ret[[v]] <- round(ret[[v]] * options$population)
       }
       table <- mintr_db_transform_metabolic(ret, options$metabolic)
@@ -73,12 +74,14 @@ mintr_db <- R6::R6Class(
 
 ## Some constants that crop up everywhere
 mintr_db_paths <- function(path) {
-  list(db = file.path(path, "mintr.db"),
-       db_lock = file.path(path, "mintr.db-lock"),
-       index = file.path(path, "index.rds"),
+  list(index = file.path(path, "index.rds"),
        prevalence = file.path(path, "prevalence.rds"),
        table = file.path(path, "table.rds"),
-       "prevalence-data" = file.path(path, "prevalence", "%d.rds"))
+       read = list(
+         index = file.path(path, "index2.rds"),
+         ignore = file.path(path, "ignore.rds"),
+         table = file.path(path, "table", "%d.rds"),
+         prevalence = file.path(path, "prevalence", "%d.rds")))
 }
 
 
