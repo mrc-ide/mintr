@@ -1,66 +1,41 @@
-## Convert our processed data (index.rds and prevelance.rds) into a
-## mintr database; this will be called in the docker image on startup
-mintr_db_import <- function(path) {
-  message("Building database")
-  paths <- mintr_db_paths(path)
-
-  index <- readRDS(paths$index)
-  prevalence <- readRDS(paths$prevalence)
-  table <- readRDS(paths$table)
-
-  ignore <- mintr_db_check_index(index)
-  mintr_db_check_prevalence(index, prevalence)
-
-  unlink(paths$db, recursive = TRUE)
-  unlink(paths$db_lock, recursive = TRUE)
-  db <- thor::mdb_env(paths$db, mapsize = 4e9, subdir = FALSE)
-  db$put("index", object_to_bin(index))
-  db$put("ignore", object_to_bin(ignore))
-
-  ## Table:
-  idx <- split(seq_len(nrow(table)), table$index)
-  for (i in index$index) {
-    d <- table[idx[[i]], !(names(table) %in% c("index", "netType"))]
-    rownames(d) <- NULL
-    db$put(sprintf("table:%s", i), object_to_bin(d))
-  }
-
-  ## Prevalence:
-  idx <- split(seq_len(nrow(prevalence)), prevalence$index)
-  for (i in index$index) {
-    d <- prevalence[idx[[i]], !(names(prevalence) %in% c("index", "netType"))]
-    rownames(d) <- NULL
-    db$put(sprintf("prevalence:%s", i), object_to_bin(d))
-  }
-}
-
-
 ## Process raw data; this will be called during the docker image build
 mintr_db_process <- function(path) {
   raw <- jsonlite::read_json(mintr_path("data.json"))
   paths <- mintr_db_paths(path)
   interventions <- raw$interventions
 
+  unlink(paths$index)
+  unlink(paths$ignore)
+  unlink(dirname(paths$prevalence), recursive = TRUE)
+  unlink(dirname(paths$table), recursive = TRUE)
+
   message("Processing index")
   path_index_raw <- file.path(path, raw$directory, raw$files$index)
   index <- import_translate_index(readRDS(path_index_raw))
+  ignore <- mintr_db_check_index(index)
+
   saveRDS(index, paths$index)
+  saveRDS(ignore, paths$ignore)
 
   message("Processing prevalence")
   path_prevalence_raw <- file.path(path, raw$directory, raw$files$prevalence)
-  prevalence <- readRDS(path_prevalence_raw)
-  i <- order(prevalence$index)
-  prevalence <- prevalence[i, ]
-  rownames(prevalence) <- NULL
+  prevalence <- mintr_db_process_prevalence(readRDS(path_prevalence_raw),
+                                            interventions)
 
-  tr <- c(netUse = "switch_nets",
-          irsUse = "switch_irs",
-          netType = "NET_TYPE")
-  prevalence <- rename(prevalence, unname(tr), names(tr))
-  prevalence$netType <- relevel(prevalence$netType, c(std = 1, pto = 2))
-  prevalence$intervention <- relevel(prevalence$intervention, interventions)
-  prevalence$year <- NULL
-  saveRDS(prevalence, paths$prevalence)
+  mintr_db_check_prevalence(index, prevalence)
+
+  message("Writing prevalence")
+  dir.create(dirname(paths$prevalence), FALSE, TRUE)
+  idx <- split(seq_len(nrow(prevalence)), prevalence$index)
+  ## Do int->char conversion (rather than char->int) as it won't fail
+  ## and give a more informative message on corrupt data
+  stopifnot(setequal(as.character(index$index), names(idx)))
+
+  for (i in index$index) {
+    d <- prevalence[idx[[i]], !(names(prevalence) %in% c("index", "netType"))]
+    rownames(d) <- NULL
+    saveRDS(d, sprintf(paths$prevalence, i))
+  }
 
   message("Processing table")
   path_table_raw <- file.path(path, raw$directory, raw$files$table)
@@ -125,7 +100,16 @@ mintr_db_process <- function(path) {
   drop <- c("uncertainty", grep("_", names(table), value = TRUE))
   table <- table[setdiff(names(table), drop)]
 
-  saveRDS(table, paths$table)
+  message("Writing table")
+  dir.create(dirname(paths$table), FALSE, TRUE)
+  idx <- split(seq_len(nrow(table)), table$index)
+  stopifnot(setequal(as.character(index$index), names(idx)))
+  for (i in index$index) {
+    d <- table[idx[[i]], !(names(table) %in% c("index", "netType"))]
+    rownames(d) <- NULL
+    dest <- sprintf(paths$table, i)
+    saveRDS(d, dest)
+  }
 }
 
 
@@ -197,4 +181,20 @@ mintr_db_docker <- function(path) {
   ## Remove intermediate and derived files so that we get something
   ## nice and small to keep in the docker image:
   unlink(path_downloads, recursive = TRUE)
+}
+
+
+mintr_db_process_prevalence <- function(prevalence, interventions) {
+  i <- order(prevalence$index)
+  prevalence <- prevalence[i, ]
+  rownames(prevalence) <- NULL
+
+  tr <- c(netUse = "switch_nets",
+          irsUse = "switch_irs",
+          netType = "NET_TYPE")
+  prevalence <- rename(prevalence, unname(tr), names(tr))
+  prevalence$netType <- relevel(prevalence$netType, c(std = 1, pto = 2))
+  prevalence$intervention <- relevel(prevalence$intervention, interventions)
+  prevalence$year <- NULL
+  prevalence
 }

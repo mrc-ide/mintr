@@ -61,7 +61,7 @@ test_that("Can read table data", {
 test_that("error if db not present", {
   expect_error(
     mintr_db_open(tempfile()),
-    "mintr database does not exist at '.+mintr.db'")
+    "mintr database does not exist at '.+index.rds'")
 })
 
 
@@ -118,7 +118,11 @@ test_that("index must conform to baseline options", {
 
 test_that("prevelance must conform", {
   index <- readRDS("data/index.rds")
-  prevalence <- readRDS("data/prevalence.rds")
+
+  raw <- jsonlite::read_json(mintr_path("data.json"))
+  path_prevalence_raw <- file.path("data", raw$directory, raw$files$prevalence)
+  prevalence <- mintr_db_process_prevalence(readRDS(path_prevalence_raw),
+                                            raw$interventions)
 
   expect_error(
     mintr_db_check_prevalence(index, prevalence[names(prevalence) != "irsUse"]),
@@ -150,7 +154,7 @@ test_that("docker build filters files", {
 
   mintr_db_docker(tmp)
 
-  expect_setequal(dir(tmp), c("index.rds", "prevalence.rds", "table.rds"))
+  expect_setequal(dir(tmp), c("index.rds", "ignore.rds", "prevalence", "table"))
 })
 
 
