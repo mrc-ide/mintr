@@ -1,23 +1,29 @@
-## Convert our processed data (index.rds and prevelance.rds) into a
+## Convert our processed data (index.rds and prevalence/*.rds) into a
 ## mintr database; this will be called in the docker image on startup
 mintr_db_import <- function(path) {
   message("Building database")
   paths <- mintr_db_paths(path)
 
+  message("Reading inputs")
   index <- readRDS(paths$index)
   prevalence <- readRDS(paths$prevalence)
   table <- readRDS(paths$table)
 
+  message("Checking inputs")
   ignore <- mintr_db_check_index(index)
   mintr_db_check_prevalence(index, prevalence)
 
   unlink(paths$db, recursive = TRUE)
   unlink(paths$db_lock, recursive = TRUE)
-  db <- thor::mdb_env(paths$db, mapsize = 4e9, subdir = FALSE)
+  unlink(dirname(paths[["prevalence-data"]]), recursive = TRUE)
+
+  message("Importing index")
+  db <- thor::mdb_env(paths$db, subdir = FALSE, mapsize = 1e8)
   db$put("index", object_to_bin(index))
   db$put("ignore", object_to_bin(ignore))
 
   ## Table:
+  message("Importing table")
   idx <- split(seq_len(nrow(table)), table$index)
   for (i in index$index) {
     d <- table[idx[[i]], !(names(table) %in% c("index", "netType"))]
@@ -26,11 +32,14 @@ mintr_db_import <- function(path) {
   }
 
   ## Prevalence:
+  message("Importing prevalence")
   idx <- split(seq_len(nrow(prevalence)), prevalence$index)
   for (i in index$index) {
     d <- prevalence[idx[[i]], !(names(prevalence) %in% c("index", "netType"))]
     rownames(d) <- NULL
-    db$put(sprintf("prevalence:%s", i), object_to_bin(d))
+    dest <- sprintf(paths[["prevalence-data"]], i)
+    dir.create(dirname(dest), FALSE, TRUE)
+    saveRDS(d, dest)
   }
 }
 

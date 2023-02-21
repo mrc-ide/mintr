@@ -1,15 +1,16 @@
-mintr_db_open <- function(path, docs) {
-  path_db <- mintr_db_paths(path)$db
-  if (!file.exists(path_db)) {
-    stop(sprintf("mintr database does not exist at '%s'", path_db))
+mintr_db_open <- function(path, docs = get_compiled_docs()) {
+  paths <- mintr_db_paths(path)
+  if (!file.exists(paths$db)) {
+    stop(sprintf("mintr database does not exist at '%s'", paths$db))
   }
-  mintr_db$new(path_db, docs)
+  mintr_db$new(paths, docs)
 }
 
 
 mintr_db <- R6::R6Class(
   "mintr_db",
   private = list(
+    path = NULL,
     index = NULL,
     ignore = NULL,
     db = NULL,
@@ -18,7 +19,8 @@ mintr_db <- R6::R6Class(
   ),
   public = list(
     initialize = function(path, docs) {
-      private$db <- thor::mdb_env(path, readonly = TRUE, lock = FALSE,
+      private$path <- path
+      private$db <- thor::mdb_env(path$db, readonly = TRUE, lock = FALSE,
                                   subdir = FALSE)
       private$index <- unserialize(private$db$get("index"))
       private$baseline <- setdiff(names(private$index), "index")
@@ -43,7 +45,8 @@ mintr_db <- R6::R6Class(
 
     get_prevalence = function(options) {
       key <- self$get_index(options)
-      ret <- unserialize(private$db$get(sprintf("prevalence:%s", key)))
+      p <- sprintf(private$path[["prevalence-data"]], key)
+      ret <- readRDS(p)
       prev <- mintr_db_transform_metabolic(ret, options$metabolic)
       mintr_db_set_not_applicable_values(prev)
     },
@@ -74,7 +77,8 @@ mintr_db_paths <- function(path) {
        db_lock = file.path(path, "mintr.db-lock"),
        index = file.path(path, "index.rds"),
        prevalence = file.path(path, "prevalence.rds"),
-       table = file.path(path, "table.rds"))
+       table = file.path(path, "table.rds"),
+       "prevalence-data" = file.path(path, "prevalence", "%d.rds"))
 }
 
 
