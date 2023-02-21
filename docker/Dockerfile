@@ -16,7 +16,6 @@ RUN install2.r --error \
         plumber \
         remotes \
         testthat \
-        thor \
         tidyr \
         dplyr \
         ROI.plugin.glpk

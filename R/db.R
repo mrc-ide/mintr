@@ -1,15 +1,16 @@
-mintr_db_open <- function(path, docs) {
-  path_db <- mintr_db_paths(path)$db
-  if (!file.exists(path_db)) {
-    stop(sprintf("mintr database does not exist at '%s'", path_db))
+mintr_db_open <- function(path, docs = get_compiled_docs()) {
+  paths <- mintr_db_paths(path)
+  if (!file.exists(paths$index)) {
+    stop(sprintf("mintr database does not exist at '%s'", paths$index))
   }
-  mintr_db$new(path_db, docs)
+  mintr_db$new(paths, docs)
 }
 
 
 mintr_db <- R6::R6Class(
   "mintr_db",
   private = list(
+    path = NULL,
     index = NULL,
     ignore = NULL,
     db = NULL,
@@ -18,11 +19,10 @@ mintr_db <- R6::R6Class(
   ),
   public = list(
     initialize = function(path, docs) {
-      private$db <- thor::mdb_env(path, readonly = TRUE, lock = FALSE,
-                                  subdir = FALSE)
-      private$index <- unserialize(private$db$get("index"))
+      private$path <- path
+      private$index <- readRDS(path$index)
       private$baseline <- setdiff(names(private$index), "index")
-      private$ignore <- unserialize(private$db$get("ignore"))
+      private$ignore <- readRDS(path$ignore)
       private$docs <- docs
     },
 
@@ -43,7 +43,8 @@ mintr_db <- R6::R6Class(
 
     get_prevalence = function(options) {
       key <- self$get_index(options)
-      ret <- unserialize(private$db$get(sprintf("prevalence:%s", key)))
+      p <- sprintf(private$path$prevalence, key)
+      ret <- readRDS(p)
       prev <- mintr_db_transform_metabolic(ret, options$metabolic)
       mintr_db_set_not_applicable_values(prev)
     },
@@ -58,8 +59,11 @@ mintr_db <- R6::R6Class(
 
     get_table = function(options) {
       key <- self$get_index(options)
-      ret <- unserialize(private$db$get(sprintf("table:%s", key)))
-      for (v in c("casesAverted", "casesAvertedErrorMinus", "casesAvertedErrorPlus")) {
+      p <- sprintf(private$path$table, key)
+      ret <- readRDS(p)
+      to_round <- c("casesAverted", "casesAvertedErrorMinus",
+                    "casesAvertedErrorPlus")
+      for (v in to_round) {
         ret[[v]] <- round(ret[[v]] * options$population)
       }
       table <- mintr_db_transform_metabolic(ret, options$metabolic)
@@ -70,11 +74,10 @@ mintr_db <- R6::R6Class(
 
 ## Some constants that crop up everywhere
 mintr_db_paths <- function(path) {
-  list(db = file.path(path, "mintr.db"),
-       db_lock = file.path(path, "mintr.db-lock"),
-       index = file.path(path, "index.rds"),
-       prevalence = file.path(path, "prevalence.rds"),
-       table = file.path(path, "table.rds"))
+  list(index = file.path(path, "index.rds"),
+       ignore = file.path(path, "ignore.rds"),
+       table = file.path(path, "table", "%d.rds"),
+       prevalence = file.path(path, "prevalence", "%d.rds"))
 }
 
 
