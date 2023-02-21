@@ -117,9 +117,12 @@ test_that("index must conform to baseline options", {
 
 
 test_that("prevelance must conform", {
-  skip("needs refactor")
   index <- readRDS("data/index.rds")
-  prevalence <- readRDS("data/prevalence.rds")
+
+  raw <- jsonlite::read_json(mintr_path("data.json"))
+  path_prevalence_raw <- file.path("data", raw$directory, raw$files$prevalence)
+  prevalence <- mintr_db_process_prevalence(readRDS(path_prevalence_raw),
+                                            raw$interventions)
 
   expect_error(
     mintr_db_check_prevalence(index, prevalence[names(prevalence) != "irsUse"]),

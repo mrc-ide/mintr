@@ -19,18 +19,8 @@ mintr_db_process <- function(path) {
 
   message("Processing prevalence")
   path_prevalence_raw <- file.path(path, raw$directory, raw$files$prevalence)
-  prevalence <- readRDS(path_prevalence_raw)
-  i <- order(prevalence$index)
-  prevalence <- prevalence[i, ]
-  rownames(prevalence) <- NULL
-
-  tr <- c(netUse = "switch_nets",
-          irsUse = "switch_irs",
-          netType = "NET_TYPE")
-  prevalence <- rename(prevalence, unname(tr), names(tr))
-  prevalence$netType <- relevel(prevalence$netType, c(std = 1, pto = 2))
-  prevalence$intervention <- relevel(prevalence$intervention, interventions)
-  prevalence$year <- NULL
+  prevalence <- mintr_db_process_prevalence(readRDS(path_prevalence_raw),
+                                            interventions)
 
   mintr_db_check_prevalence(index, prevalence)
 
@@ -191,4 +181,20 @@ mintr_db_docker <- function(path) {
   ## Remove intermediate and derived files so that we get something
   ## nice and small to keep in the docker image:
   unlink(path_downloads, recursive = TRUE)
+}
+
+
+mintr_db_process_prevalence <- function(prevalence, interventions) {
+  i <- order(prevalence$index)
+  prevalence <- prevalence[i, ]
+  rownames(prevalence) <- NULL
+
+  tr <- c(netUse = "switch_nets",
+          irsUse = "switch_irs",
+          netType = "NET_TYPE")
+  prevalence <- rename(prevalence, unname(tr), names(tr))
+  prevalence$netType <- relevel(prevalence$netType, c(std = 1, pto = 2))
+  prevalence$intervention <- relevel(prevalence$intervention, interventions)
+  prevalence$year <- NULL
+  prevalence
 }
