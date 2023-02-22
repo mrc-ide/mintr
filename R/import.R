@@ -17,8 +17,9 @@ mintr_db_process <- function(path) {
 
   message("Processing prevalence")
   path_prevalence_raw <- file.path(path, raw$directory, raw$files$prevalence)
-  prev <- readRDS(path_prevalence_raw)
-  prevalence <- mintr_db_process_prevalence(prev, interventions, net_types)
+  prevalence <- mintr_db_process_prevalence(readRDS(path_prevalence_raw),
+                                            interventions, net_types)
+  gc() # running low on RAM on workers, make sure we don't keep another copy
 
   mintr_db_check_prevalence(index, prevalence)
 
