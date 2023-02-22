@@ -33,7 +33,7 @@ COPY . /src
 
 RUN R CMD INSTALL /src && \
         Rscript -e 'mintr:::write_script("/usr/bin")' && \
-        Rscript -e 'mintr:::mintr_db_docker("data")'
+        Rscript -e 'mintr:::mintr_db_download("data")'
 
 EXPOSE 8888
 

@@ -1,5 +1,5 @@
 mintr_db_open <- function(path, docs = get_compiled_docs()) {
-  paths <- mintr_db_paths(path)
+  paths <- mintr_db_paths(file.path(path, mintr_data_version()))
   if (!file.exists(paths$index)) {
     stop(sprintf("mintr database does not exist at '%s'", paths$index))
   }
@@ -74,7 +74,8 @@ mintr_db <- R6::R6Class(
 
 ## Some constants that crop up everywhere
 mintr_db_paths <- function(path) {
-  list(index = file.path(path, "index.rds"),
+  list(hash = file.path(path, "hash.rds"),
+       index = file.path(path, "index.rds"),
        ignore = file.path(path, "ignore.rds"),
        table = file.path(path, "table", "%s.rds"),
        prevalence = file.path(path, "prevalence", "%s.rds"))
