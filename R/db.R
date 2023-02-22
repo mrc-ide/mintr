@@ -76,8 +76,8 @@ mintr_db <- R6::R6Class(
 mintr_db_paths <- function(path) {
   list(index = file.path(path, "index.rds"),
        ignore = file.path(path, "ignore.rds"),
-       table = file.path(path, "table", "%d.rds"),
-       prevalence = file.path(path, "prevalence", "%d.rds"))
+       table = file.path(path, "table", "%s.rds"),
+       prevalence = file.path(path, "prevalence", "%s.rds"))
 }
 
 

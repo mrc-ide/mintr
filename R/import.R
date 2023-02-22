@@ -15,22 +15,17 @@ mintr_db_process <- function(path) {
   index <- import_translate_index(readRDS(path_index_raw))
   ignore <- mintr_db_check_index(index)
 
-  saveRDS(index, paths$index)
-  saveRDS(ignore, paths$ignore)
-
   message("Processing prevalence")
   path_prevalence_raw <- file.path(path, raw$directory, raw$files$prevalence)
-  prevalence <- mintr_db_process_prevalence(readRDS(path_prevalence_raw),
-                                            interventions, net_types)
+  prev <- readRDS(path_prevalence_raw)
+  prevalence <- mintr_db_process_prevalence(prev, interventions, net_types)
 
   mintr_db_check_prevalence(index, prevalence)
 
   message("Writing prevalence")
   dir.create(dirname(paths$prevalence), FALSE, TRUE)
   idx <- split(seq_len(nrow(prevalence)), prevalence$index)
-  ## Do int->char conversion (rather than char->int) as it won't fail
-  ## and give a more informative message on corrupt data
-  stopifnot(setequal(as.character(index$index), names(idx)))
+  stopifnot(setequal(index$index, names(idx)))
 
   for (i in index$index) {
     d <- prevalence[idx[[i]], !(names(prevalence) %in% c("index", "netType"))]
@@ -111,13 +106,18 @@ mintr_db_process <- function(path) {
   message("Writing table")
   dir.create(dirname(paths$table), FALSE, TRUE)
   idx <- split(seq_len(nrow(table)), table$index)
-  stopifnot(setequal(as.character(index$index), names(idx)))
+  stopifnot(setequal(index$index, names(idx)))
   for (i in index$index) {
     d <- table[idx[[i]], !(names(table) %in% c("index", "netType"))]
     rownames(d) <- NULL
     dest <- sprintf(paths$table, i)
     saveRDS(d, dest)
   }
+
+  ## Save the index last; that's the file we'll use to detect if
+  ## things need rebuilding
+  saveRDS(ignore, paths$ignore)
+  saveRDS(index, paths$index)
 }
 
 
@@ -182,6 +182,10 @@ import_translate_index <- function(index) {
   index$net_type_use <- NULL
   index$uncertainty_draw <- NULL
 
+  ## Avoids relying on the index being complete, which is no longer
+  ## the case (since the 20221017 dataset)
+  index$index <- as.character(index$index)
+
   index
 }
 
@@ -226,6 +230,7 @@ mintr_db_process_prevalence <- function(prevalence, interventions, net_types) {
   prevalence$intervention <- relevel(prevalence$intervention, interventions)
   prevalence <- prevalence[prevalence$type == "prev", ]
   prevalence$year <- NULL
+  prevalence$type <- NULL
   prevalence$uncertainty <- NULL
   row.names(prevalence) <- NULL
   prevalence
