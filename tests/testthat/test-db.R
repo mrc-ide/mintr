@@ -15,7 +15,7 @@ test_that("Can create db", {
                   population = 1000)
   d <- db$get_prevalence(options)
   expect_s3_class(d, "data.frame")
-  expect_equal(nrow(d), 168 * 183)
+  expect_equal(nrow(d), 10248) # 61 months * 168 combinations
   expect_setequal(
     names(d),
     c("month", "netUse", "irsUse", "intervention", "value"))
@@ -61,7 +61,7 @@ test_that("Can read table data", {
 test_that("error if db not present", {
   expect_error(
     mintr_db_open(tempfile()),
-    "mintr database does not exist at '.+mintr.db'")
+    "mintr database does not exist at '.+index.rds'")
 })
 
 
@@ -93,64 +93,6 @@ test_that("baseline options", {
     c("seasonalityOfTransmission", "currentPrevalence", "bitingIndoors",
       "bitingPeople", "levelOfResistance", "itnUsage", "sprayInput"))
   expect_setequal(opt$ignore, c("population", "metabolic"))
-})
-
-
-test_that("index must conform to baseline options", {
-  index <- mint_baseline_options()$index
-  expect_error(
-    mintr_db_check_index(index),
-    "Invalid value for 'names(index)':\n  - Missing: index",
-    fixed = TRUE)
-  expect_error(
-    mintr_db_check_index(index[names(index) != "itnUsage"]),
-    "Invalid value for 'names(index)':\n  - Missing: itnUsage, index",
-    fixed = TRUE)
-
-  idx <- do.call(expand.grid, c(index, list(stringsAsFactors = FALSE)))
-  idx$index <- seq_len(nrow(idx))
-  expect_error(
-    mintr_db_check_index(idx[1, ]),
-    "Invalid value for 'index$seasonalityOfTransmission'",
-    fixed = TRUE)
-})
-
-
-test_that("prevelance must conform", {
-  index <- readRDS("data/index.rds")
-  prevalence <- readRDS("data/prevalence.rds")
-
-  expect_error(
-    mintr_db_check_prevalence(index, prevalence[names(prevalence) != "irsUse"]),
-    "Invalid value for 'names(prevalence)':\n  - Missing: irsUse",
-    fixed = TRUE)
-
-  expect_silent(mintr_db_check_prevalence(index, prevalence))
-
-  i <- which(prevalence$intervention == "irs")[10]
-
-  prevalence$intervention[i] <- "other"
-  expect_error(
-    mintr_db_check_prevalence(index, prevalence),
-    "Interventions do not match expected values")
-
-  prevalence$intervention[i] <- "No intervention"
-  expect_error(
-    mintr_db_check_prevalence(index, prevalence),
-    "Interventions do not match expected values")
-})
-
-
-test_that("docker build filters files", {
-  tmp <- tempfile()
-  path_raw <- jsonlite::read_json(mintr_path("data.json"))$directory
-
-  dir.create(tmp, FALSE, TRUE)
-  file.copy(file.path("data", path_raw), tmp, recursive = TRUE)
-
-  mintr_db_docker(tmp)
-
-  expect_setequal(dir(tmp), c("index.rds", "prevalence.rds", "table.rds"))
 })
 
 
@@ -274,4 +216,16 @@ test_that("Not applicable values are set correctly", {
 
   table <- db$get_table(options)
   check_not_applicable_values(table)
+})
+
+
+test_that("can download the db on request", {
+  skip_if_offline()
+  p <- tempfile()
+  on.exit(unlink(p, recursive = TRUE))
+  res <- mintr_db_download(p, quiet = TRUE)
+  expect_equal(basename(res), mintr_data_version())
+  expect_setequal(
+    dir(res),
+    c("hash.rds", "ignore.rds", "index.rds", "prevalence", "table"))
 })
