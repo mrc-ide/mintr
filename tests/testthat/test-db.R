@@ -96,26 +96,6 @@ test_that("baseline options", {
 })
 
 
-test_that("index must conform to baseline options", {
-  index <- mint_baseline_options()$index
-  expect_error(
-    mintr_db_check_index(index),
-    "Invalid value for 'names(index)':\n  - Missing: index",
-    fixed = TRUE)
-  expect_error(
-    mintr_db_check_index(index[names(index) != "itnUsage"]),
-    "Invalid value for 'names(index)':\n  - Missing: itnUsage, index",
-    fixed = TRUE)
-
-  idx <- do.call(expand.grid, c(index, list(stringsAsFactors = FALSE)))
-  idx$index <- seq_len(nrow(idx))
-  expect_error(
-    mintr_db_check_index(idx[1, ]),
-    "Invalid value for 'index$seasonalityOfTransmission'",
-    fixed = TRUE)
-})
-
-
 test_that("Can scale table results by population", {
   db <- mintr_test_db()
   options <- list(seasonalityOfTransmission = "seasonal",

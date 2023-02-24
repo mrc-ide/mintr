@@ -103,30 +103,6 @@ mint_baseline_options <- function() {
 }
 
 
-mintr_db_check_index <- function(index) {
-  baseline <- mint_baseline_options()
-  assert_setequal(names(index), c(names(baseline$index), "index"))
-  for (i in names(baseline$index)) {
-    assert_setequal(index[[i]], baseline$index[[i]], sprintf("index$%s", i))
-  }
-  baseline$ignore
-}
-
-
-mintr_db_check_prevalence <- function(index, prevalence) {
-  cols <- c("month", "value", "netUse", "irsUse", "netType", "intervention",
-            "index")
-  assert_setequal(names(prevalence), cols)
-  assert_setequal(prevalence$index, index$index)
-
-  expected <- mint_intervention(
-    prevalence$netUse, prevalence$irsUse, prevalence$netType)
-  if (!identical(expected, prevalence$intervention)) {
-    stop("Interventions do not match expected values")
-  }
-}
-
-
 mint_intervention <- function(net_use, irs_use, net_type) {
   intervention <- c(# net_use  irs_use  net_type
     ## Standard
