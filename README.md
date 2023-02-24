@@ -28,20 +28,12 @@ See the [spec](inst/schema/spec.md) for more details.
 The basic flow of data coming in:
 
 1. New raw (ish) data will come from the science team, recently at `\\fi--didenas1.dide.ic.ac.uk\malaria\Arran\malaria_projects\MINT\1_ModelSimulations\output\malariasimulation_runs\remove_peak_irs_increase_population`. It's really very slow to work with these against the network drive so it's good to copy these locally on your machine for processing.
-1. Edit `inst/version` to create a new data version - should be an ISO date (`YYYYMMDD`). Typically this date should match the date of the raw data files. 
+1. Edit `inst/version` to create a new data version - should be an ISO date (`YYYYMMDD`). Typically this date should match the date of the raw data files.
 1. Edit the top of `scripts/import` to reflect the new data
 1. Run `./scripts/import path/to/data path/to/output` to produce a file `<date>.tar`
 1. Copy that file to the network share (recent versions are about 500MB)
 1. RDP to `fi--didex1` and copy the tar file to `C:\xampp\htdocs\mrcdata\mint\<date>.tar`
-1. Update the date field in `R/import.R`
-
-
-This will evolve as the upstream data changes and as our needs change. We store the raw data from the science team on mrcdata.dide.ic.ac.uk and pull them in when building the docker images or when building a database for testing.  They will expand into the actual mint database, which is much larger than the rds but faster to read.
-
-1. Acquire new data from the science team; this will come as a number of .rds files, the largest of which will be quite large.
-2. Copy these files onto a network-accessible share (e.g. for Rich `~/net/home/mint`)
-3. RDP to `fi--didex1` and copy these files into `C:\xampp\htdocs\mrcdata\mint\<date>` where `<date>` is YYYYMMDD (just to keep things tidy)
-4. Update the paths in `inst/data.json` to reflect the new data
+1. Rerun the tests in the package, which will pull down the most recent version
 
 Note that the script will avoid downloading the files if they are already present in destination directory, so do not update files on the server without renaming them.
 
