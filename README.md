@@ -28,7 +28,7 @@ See the [spec](inst/schema/spec.md) for more details.
 The basic flow of data coming in:
 
 1. New raw (ish) data will come from the science team, recently at `\\fi--didenas1.dide.ic.ac.uk\malaria\Arran\malaria_projects\MINT\1_ModelSimulations\output\malariasimulation_runs\remove_peak_irs_increase_population`. It's really very slow to work with these against the network drive so it's good to copy these locally on your machine for processing.
-1. Edit `inst/version` to create a new data version - should be an ISO date (`YYYYMMDD`)
+1. Edit `inst/version` to create a new data version - should be an ISO date (`YYYYMMDD`). Typically this date should match the date of the raw data files. 
 1. Edit the top of `scripts/import` to reflect the new data
 1. Run `./scripts/import path/to/data path/to/output` to produce a file `<date>.tar`
 1. Copy that file to the network share (recent versions are about 500MB)
