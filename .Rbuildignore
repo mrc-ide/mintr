@@ -13,3 +13,5 @@
 ^import$
 ^\.github$
 ^\.idea$
+^.*\.Rproj$
+^\.Rproj\.user$

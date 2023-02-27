@@ -48,6 +48,27 @@
             }
         },
         {
+            "x": ["pyrrole-pbo"],
+            "id": "pyrrole-pbo",
+            "y_formula": ["(({priceDelivery} + {priceNetPyrrole}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100) / {casesAverted}"],
+            "type": "bar",
+            "name": "Pyrethroid-pyrrole ITN only",
+            "marker": {
+                "color": "darkgreen",
+                "opacity": 0.5
+            },
+            "hovertemplate": "$%{y:.1f}0 +$%{error_y.array:.1f}0 / -$%{error_y.arrayminus:.1f}0",
+            "error_y": {
+                "type": "data",
+                "cols": ["(({priceDelivery} + {priceNetPyrrole}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100) / {casesAvertedErrorMinus}"],
+                "colsminus": ["(({priceDelivery} + {priceNetPyrrole}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100) / {casesAvertedErrorPlus}"],
+                "visible": true,
+                "thickness": 1.5,
+                "width": 0,
+                "opacity": 1
+            }
+        },
+        {
             "x": ["irs"],
             "id": "irs",
             "y_formula": ["(3 * {priceIRSPerPerson} * {population}) / {casesAverted}"],
@@ -109,6 +130,27 @@
                 "width": 0,
                 "opacity": 1
             }
+        },
+         {
+            "x": ["irs-pyrrole-pbo"],
+            "id": "irs-pyrrole-pbo",
+            "y_formula": ["(({priceDelivery} + {priceNetPyrrole}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100 + 3 * {priceIRSPerPerson} * {population}) / {casesAverted}"],
+            "name": "Pyrethroid-pyrrole ITN with IRS*",
+            "type": "bar",
+            "marker": {
+                "color": "limegreen",
+                "opacity": 0.5
+            },
+            "hovertemplate": "$%{y:.1f}0 +$%{error_y.array:.1f}0 / -$%{error_y.arrayminus:.1f}0",
+            "error_y": {
+                "type": "data",
+                "cols": ["(({priceDelivery} + {priceNetPyrrole}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100 + 3 * {priceIRSPerPerson} * {population}) / {casesAvertedErrorMinus}"],
+                "colsminus": ["(({priceDelivery} + {priceNetPyrrole}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100 + 3 * {priceIRSPerPerson} * {population}) / {casesAvertedErrorPlus}"],
+                "visible": true,
+                "thickness": 1.5,
+                "width": 0,
+                "opacity": 1
+            }
         }
     ],
     "layout": {
@@ -121,8 +163,8 @@
         "xaxis": {
             "title": "intervention",
             "showline": true,
-            "tickvals": ["llin", "llin-pbo", "irs", "irs-llin", "irs-llin-pbo"],
-            "ticktext": ["pyr-LLIN", "PBO ITN", "IRS", "pyr-LLIN + IRS", "PBO ITN + IRS"],
+            "tickvals": ["llin", "llin-pbo", "pyrrole-pbo", "irs", "irs-llin", "irs-llin-pbo", "irs-pyrrole-pbo"],
+            "ticktext": ["pyr-LLIN", "PBO ITN", "Pyrrole ITN", "IRS", "pyr-LLIN + IRS", "PBO ITN + IRS", "Pyrrole ITN + IRS"],
             "autorange": true
         },
         "showlegend": true

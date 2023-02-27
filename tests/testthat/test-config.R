@@ -16,12 +16,16 @@ validate_costs_per_case <- function(formulas, costs) {
   expect_equal(evaluate(ITN), costs$costs_N1)
   PBO <- formulas[[2]]
   expect_equal(evaluate(PBO), costs$costs_N2)
-  IRS <- formulas[[3]]
+  pyrrole <- formulas[[3]]
+  expect_equal(evaluate(pyrrole), costs$costs_N3)
+  IRS <- formulas[[4]]
   expect_equal(evaluate(IRS), costs$costs_S1)
-  ITN_IRS <- formulas[[4]]
+  ITN_IRS <- formulas[[5]]
   expect_equal(evaluate(ITN_IRS), costs$costs_N1_S1)
-  PBO_IRS <- formulas[[5]]
+  PBO_IRS <- formulas[[6]]
   expect_equal(evaluate(PBO_IRS), costs$costs_N2_S1)
+  pyrrole_IRS <- formulas[[7]]
+  expect_equal(evaluate(pyrrole_IRS), costs$costs_N3_S1)
 }
 
 test_that("cost per case graph config formulas give correct results", {
@@ -43,12 +47,16 @@ test_that("cases averted vs costs graph config series formulas give correct resu
   expect_equal(evaluate(ITN), costs$costs_N1)
   PBO <- formulas[[3]]
   expect_equal(evaluate(PBO), costs$costs_N2)
-  IRS <- formulas[[4]]
+  pyrrole <- formulas[[4]]
+  expect_equal(evaluate(pyrrole), costs$costs_N3)
+  IRS <- formulas[[5]]
   expect_equal(evaluate(IRS), costs$costs_S1)
-  ITN_IRS <- formulas[[5]]
+  ITN_IRS <- formulas[[6]]
   expect_equal(evaluate(ITN_IRS), costs$costs_N1_S1)
-  PBO_IRS <- formulas[[6]]
+  PBO_IRS <- formulas[[7]]
   expect_equal(evaluate(PBO_IRS), costs$costs_N2_S1)
+  pyrrole_IRS <- formulas[[8]]
+  expect_equal(evaluate(pyrrole_IRS), costs$costs_N3_S1)
 })
 
 test_that("cases averted vs costs graph config shape formula gives correct results", {
@@ -67,12 +75,16 @@ test_that("cost per case graph config contains valid intervention ids", {
   expect_equal(ITN, mint_intervention(1, 0, "std"))
   PBO <- ids[[2]]
   expect_equal(PBO, mint_intervention(1, 0, "pto"))
-  IRS <- ids[[3]]
+  pyrrole <- ids[[3]]
+  expect_equal(pyrrole, mint_intervention(1, 0, "ig2"))
+  IRS <- ids[[4]]
   expect_equal(IRS, mint_intervention(0, 1, "pto"))
-  ITN_IRS <- ids[[4]]
+  ITN_IRS <- ids[[5]]
   expect_equal(ITN_IRS, mint_intervention(1, 1, "std"))
-  PBO_IRS <- ids[[5]]
+  PBO_IRS <- ids[[6]]
   expect_equal(PBO_IRS, mint_intervention(1, 1, "pto"))
+  pyrrole_IRS <- ids[[7]]
+  expect_equal(pyrrole_IRS, mint_intervention(1, 1, "ig2"))
 })
 
 test_that("cases averted vs costs graph config contains valid intervention ids", {
@@ -85,12 +97,16 @@ test_that("cases averted vs costs graph config contains valid intervention ids",
   expect_equal(ITN, mint_intervention(1, 0, "std"))
   PBO <- ids[[3]]
   expect_equal(PBO, mint_intervention(1, 0, "pto"))
-  IRS <- ids[[4]]
+  pyrrole <- ids[[4]]
+  expect_equal(pyrrole, mint_intervention(1, 0, "ig2"))
+  IRS <- ids[[5]]
   expect_equal(IRS, mint_intervention(0, 1, "pto"))
-  ITN_IRS <- ids[[5]]
+  ITN_IRS <- ids[[6]]
   expect_equal(ITN_IRS, mint_intervention(1, 1, "std"))
-  PBO_IRS <- ids[[6]]
+  PBO_IRS <- ids[[7]]
   expect_equal(PBO_IRS, mint_intervention(1, 1, "pto"))
+  pyrrole_IRS <- ids[[8]]
+  expect_equal(pyrrole_IRS, mint_intervention(1, 1, "ig2"))
 })
 
 test_that("cases averted graph config contains valid intervention ids", {
@@ -102,27 +118,34 @@ test_that("cases averted graph config contains valid intervention ids", {
   expect_equal(ITN, mint_intervention(1, 0, "std"))
   PBO <- ids[[2]]
   expect_equal(PBO, mint_intervention(1, 0, "pto"))
-  IRS <- ids[[3]]
+  pyrrole <- ids[[3]]
+  expect_equal(pyrrole, mint_intervention(1, 0, "ig2"))
+  IRS <- ids[[4]]
   expect_equal(IRS, mint_intervention(0, 1, "pto"))
-  ITN_IRS <- ids[[4]]
+  ITN_IRS <- ids[[5]]
   expect_equal(ITN_IRS, mint_intervention(1, 1, "std"))
-  PBO_IRS <- ids[[5]]
+  PBO_IRS <- ids[[6]]
   expect_equal(PBO_IRS, mint_intervention(1, 1, "pto"))
+  pyrrole_IRS <- ids[[7]]
+  expect_equal(pyrrole_IRS, mint_intervention(1, 1, "ig2"))
 
   ITN <- x[[1]]
   expect_equal(ITN, mint_intervention(1, 0, "std"))
   PBO <- x[[2]]
   expect_equal(PBO, mint_intervention(1, 0, "pto"))
-  IRS <- x[[3]]
+  pyrrole <- x[[3]]
+  expect_equal(pyrrole, mint_intervention(1, 0, "ig2"))
+  IRS <- x[[4]]
   expect_equal(IRS, mint_intervention(0, 1, "pto"))
-  ITN_IRS <- x[[4]]
+  ITN_IRS <- x[[5]]
   expect_equal(ITN_IRS, mint_intervention(1, 1, "std"))
-  PBO_IRS <- x[[5]]
+  PBO_IRS <- x[[6]]
   expect_equal(PBO_IRS, mint_intervention(1, 1, "pto"))
+  pyrrole_IRS <- x[[7]]
+  expect_equal(pyrrole_IRS, mint_intervention(1, 1, "ig2"))
 
   tick_vals <- json$layout$xaxis$tickvals
-  expect_equal(tick_vals, c(ITN, PBO, IRS, ITN_IRS, PBO_IRS))
-
+  expect_equal(tick_vals, c(ITN, PBO, pyrrole, IRS, ITN_IRS, PBO_IRS, pyrrole_IRS))
 })
 
 test_that("prevalence graph config containe valid intervention ids", {
@@ -135,12 +158,16 @@ test_that("prevalence graph config containe valid intervention ids", {
   expect_equal(ITN, mint_intervention(1, 0, "std"))
   PBO <- ids[[3]]
   expect_equal(PBO, mint_intervention(1, 0, "pto"))
-  IRS <- ids[[4]]
+  pyrrole <- ids[[4]]
+  expect_equal(pyrrole, mint_intervention(1, 0, "ig2"))
+  IRS <- ids[[5]]
   expect_equal(IRS, mint_intervention(0, 1, "pto"))
-  ITN_IRS <- ids[[5]]
+  ITN_IRS <- ids[[6]]
   expect_equal(ITN_IRS, mint_intervention(1, 1, "std"))
-  PBO_IRS <- ids[[6]]
+  PBO_IRS <- ids[[7]]
   expect_equal(PBO_IRS, mint_intervention(1, 1, "pto"))
+  pyrrole_IRS <- ids[[8]]
+  expect_equal(pyrrole_IRS, mint_intervention(1, 1, "ig2"))
 })
 
 test_that("impact table config contains valid intervention ids", {
@@ -153,13 +180,16 @@ test_that("impact table config contains valid intervention ids", {
   expect_equal(ITN, mint_intervention(1, 0, "std"))
   PBO <- ids[[3]]
   expect_equal(PBO, mint_intervention(1, 0, "pto"))
-  IRS <- ids[[4]]
+  pyrrole <- ids[[4]]
+  expect_equal(pyrrole, mint_intervention(1, 0, "ig2"))
+  IRS <- ids[[5]]
   expect_equal(IRS, mint_intervention(0, 1, "pto"))
-  ITN_IRS <- ids[[5]]
+  ITN_IRS <- ids[[6]]
   expect_equal(ITN_IRS, mint_intervention(1, 1, "std"))
-  PBO_IRS <- ids[[6]]
+  PBO_IRS <- ids[[7]]
   expect_equal(PBO_IRS, mint_intervention(1, 1, "pto"))
-
+  pyrrole_IRS <- ids[[8]]
+  expect_equal(pyrrole_IRS, mint_intervention(1, 1, "ig2"))
 })
 
 test_that("impact table config formulas give correct results for cases averted", {
@@ -180,13 +210,16 @@ test_that("cost table config contains valid intervention ids", {
   expect_equal(ITN, mint_intervention(1, 0, "std"))
   PBO <- ids[[3]]
   expect_equal(PBO, mint_intervention(1, 0, "pto"))
-  IRS <- ids[[4]]
+  pyrrole <- ids[[4]]
+  expect_equal(pyrrole, mint_intervention(1, 0, "ig2"))
+  IRS <- ids[[5]]
   expect_equal(IRS, mint_intervention(0, 1, "pto"))
-  ITN_IRS <- ids[[5]]
+  ITN_IRS <- ids[[6]]
   expect_equal(ITN_IRS, mint_intervention(1, 1, "std"))
-  PBO_IRS <- ids[[6]]
+  PBO_IRS <- ids[[7]]
   expect_equal(PBO_IRS, mint_intervention(1, 1, "pto"))
-
+  pyrrole_IRS <- ids[[8]]
+  expect_equal(pyrrole_IRS, mint_intervention(1, 1, "ig2"))
 })
 
 test_that("cost table config formulas give correct results for total costs", {
@@ -200,12 +233,16 @@ test_that("cost table config formulas give correct results for total costs", {
   expect_equal(evaluate(ITN), costs$costs_N1)
   PBO <- formulas[[3]]
   expect_equal(evaluate(PBO), costs$costs_N2)
-  IRS <- formulas[[4]]
+  pyrrole <- formulas[[4]]
+  expect_equal(evaluate(pyrrole), costs$costs_N3)
+  IRS <- formulas[[5]]
   expect_equal(evaluate(IRS), costs$costs_S1)
-  ITN_IRS <- formulas[[5]]
+  ITN_IRS <- formulas[[6]]
   expect_equal(evaluate(ITN_IRS), costs$costs_N1_S1)
-  PBO_IRS <- formulas[[6]]
+  PBO_IRS <- formulas[[7]]
   expect_equal(evaluate(PBO_IRS), costs$costs_N2_S1)
+  pyrrole_IRS <- formulas[[8]]
+  expect_equal(evaluate(pyrrole_IRS), costs$costs_N3_S1)
 })
 
 validate_costs_per_cases_averted <- function(formulas, costs) {
@@ -215,12 +252,16 @@ validate_costs_per_cases_averted <- function(formulas, costs) {
   expect_equal(evaluate(ITN), costs$costs_N1)
   PBO <- formulas[[3]]
   expect_equal(evaluate(PBO), costs$costs_N2)
-  IRS <- formulas[[4]]
+  pyrrole <- formulas[[4]]
+  expect_equal(evaluate(pyrrole), costs$costs_N3)
+  IRS <- formulas[[5]]
   expect_equal(evaluate(IRS), costs$costs_S1)
-  ITN_IRS <- formulas[[5]]
+  ITN_IRS <- formulas[[6]]
   expect_equal(evaluate(ITN_IRS), costs$costs_N1_S1)
-  PBO_IRS <- formulas[[6]]
+  PBO_IRS <- formulas[[7]]
   expect_equal(evaluate(PBO_IRS), costs$costs_N2_S1)
+  pyrrole_IRS <- formulas[[8]]
+  expect_equal(evaluate(pyrrole_IRS), costs$costs_N3_S1)
 }
 
 test_that("cost table config formulas give correct results for costs per cases averted", {

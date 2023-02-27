@@ -95,7 +95,6 @@ test_that("baseline options", {
   expect_setequal(opt$ignore, c("population", "metabolic"))
 })
 
-
 test_that("Can scale table results by population", {
   db <- mintr_test_db()
   options <- list(seasonalityOfTransmission = "seasonal",
@@ -196,6 +195,7 @@ check_not_applicable_values <- function(res) {
   expect_true(all(res[res$intervention == "irs", "netUse"] == "n/a"))
   expect_true(all(res[res$intervention == "llin", "irsUse"] == "n/a"))
   expect_true(all(res[res$intervention == "llin-pbo", "irsUse"] == "n/a"))
+  expect_true(all(res[res$intervention == "pyrrole-pbo", "irsUse"] == "n/a"))
 }
 
 
