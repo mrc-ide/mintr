@@ -34,11 +34,6 @@ vcapply <- function(x, fun, ...) {
 }
 
 
-object_to_bin <- function(x) {
-  serialize(x, NULL, xdr = FALSE)
-}
-
-
 assert_setequal <- function(values, expected,
                             name = deparse(substitute(values))) {
   given <- unique(values)
@@ -66,19 +61,4 @@ download_file <- function(url, dest, ...) {
   withCallingHandlers(
     utils::download.file(url, dest, mode = "wb", ...),
     error = function(e) unlink(dest))
-}
-
-
-relevel <- function(x, map) {
-  i <- match(x, map)
-  stopifnot(!any(is.na(i)))
-  names(map)[i]
-}
-
-
-rename <- function(x, from, to) {
-  i <- match(from, names(x))
-  stopifnot(!is.na(i))
-  names(x)[i] <- to
-  x
 }
