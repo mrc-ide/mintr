@@ -13,7 +13,7 @@ Lines show either:
 *   a switch to Pyrethroid-pyrrole ITNs (dark green) 
 *   a switch to IRS only at a user-defined coverage (purple)
 *   continuation with Pyrethroid LLINs plus additional IRS at a coverage determined by the user (dark red)
-*   a switch to Pyrethroid-PBO ITNs plus additional IRS at a coverage determined by the user 
+*   a switch to Pyrethroid-PBO ITNs plus additional IRS at a coverage determined by the user (orange)
 *   or a switch to Pyrethroid-pyrrole ITNs plus additional IRS at a coverage determined by the user (lime green) 
 
 In the second figure, the bars indicate the same intervention packages as above relative to the 'do-nothing' scenario.
