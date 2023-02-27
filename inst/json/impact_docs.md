@@ -35,7 +35,6 @@ may perform well when different assumptions are made.
 *   Prevalence under 5 years: Year 2 post intervention: The prevalence in children of 6-months to 5 years of age two years after the intervention package is implemented.
 *   Prevalence under 5 years: Year 3 post intervention: The prevalence in children of 6-months to 5 years of age three years after the intervention package is implemented.
 *   Relative reduction in prevalence at 36 months post intervention: The relative efficacy of the investigated intervention package against the 'do-nothing' scenario at 3-years post switching to the alternative interventions.
-*   Mean cases averted annually per population across 3 years since intervention: The absolute number of clinical cases averted given the population size inputted and relative to the 'do-nothing' scenario.
 *   Mean cases averted per 1,000 people annually across 3 years since intervention: The mean number of clinical cases averted annually per 1,000 people per year given the population size inputted and relative to the 'do-nothing' scenario.
 *   Relative reduction in clinical cases across 3 years since intervention (%): The percentage-efficacy of the investigated intervention package against clinical cases relative to the 'do-nothing' scenario.
 *   Mean cases per person per year averaged across 3 years: The predicted number of clinical cases per person, averaged across 3 years since intervention.

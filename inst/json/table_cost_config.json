@@ -24,17 +24,17 @@
     "format": "0%"
   },
   {
-    "valueCol": "casesAvertedPer1000",
-    "displayName": "Mean cases averted per 1,000 people per year across 3 years",
+    "valueCol": "casesAverted",
+    "displayName": "Total cases averted",
     "error": {
       "minus": {
-        "valueCol": "casesAvertedPer1000ErrorMinus"
+        "valueCol": "casesAvertedErrorMinus"
       },
       "plus": {
-        "valueCol": "casesAvertedPer1000ErrorPlus"
+        "valueCol": "casesAvertedErrorPlus"
       }
     },
-    "transform": "round({} / 10) * 10"
+    "transform": "round({} * 3 / 10) * 10"
   },
   {
     "valueCol": "intervention",
