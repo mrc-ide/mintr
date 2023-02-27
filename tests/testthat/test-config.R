@@ -145,7 +145,7 @@ test_that("cases averted graph config contains valid intervention ids", {
   expect_equal(pyrrole_IRS, mint_intervention(1, 1, "ig2"))
 
   tick_vals <- json$layout$xaxis$tickvals
-  expect_equal(tick_vals, c(ITN, PBO, PYRROLE, IRS, ITN_IRS, PBO_IRS, PYRROLE_IRS))
+  expect_equal(tick_vals, c(ITN, PBO, pyrrole, IRS, ITN_IRS, PBO_IRS, pyrrole_IRS))
 })
 
 test_that("prevalence graph config containe valid intervention ids", {
@@ -252,12 +252,16 @@ validate_costs_per_cases_averted <- function(formulas, costs) {
   expect_equal(evaluate(ITN), costs$costs_N1)
   PBO <- formulas[[3]]
   expect_equal(evaluate(PBO), costs$costs_N2)
-  IRS <- formulas[[4]]
+  pyrrole <- formulas[[4]]
+  expect_equal(evaluate(pyrrole), costs$costs_N3)
+  IRS <- formulas[[5]]
   expect_equal(evaluate(IRS), costs$costs_S1)
-  ITN_IRS <- formulas[[5]]
+  ITN_IRS <- formulas[[6]]
   expect_equal(evaluate(ITN_IRS), costs$costs_N1_S1)
-  PBO_IRS <- formulas[[6]]
+  PBO_IRS <- formulas[[7]]
   expect_equal(evaluate(PBO_IRS), costs$costs_N2_S1)
+  pyrrole_IRS <- formulas[[8]]
+  expect_equal(evaluate(pyrrole_IRS), costs$costs_N3_S1)
 }
 
 test_that("cost table config formulas give correct results for costs per cases averted", {

@@ -283,7 +283,7 @@ test_that("cost docs", {
 
 test_that("cost", {
   expected_costs <- get_expected_total_costs()
-  interventions <- c("none", "llin", "llin-pbo", "irs", "irs-llin", "irs-llin-pbo")
+  interventions <- c("none", "llin", "llin-pbo", "pyrrole-pbo", "irs", "irs-llin", "irs-llin-pbo", "irs-pyrrole-pbo")
   for (i in seq_along(expected_costs)) {
     expect_equal(get_cost(get_input(), get_input(), interventions[i]), expected_costs[[i]])
   }
