@@ -59,7 +59,7 @@
       "none": "'reference'",
       "llin": "(({priceDelivery} + {priceNetStandard}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100) / ({casesAverted} * 3)",
       "llin-pbo": "(({priceDelivery} + {priceNetPBO}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100) / ({casesAverted} * 3)",
-      "pyrrole-pbo": "(({priceDelivery} + {priceNetPyrrole}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100) / {casesAverted} * 3)",
+      "pyrrole-pbo": "(({priceDelivery} + {priceNetPyrrole}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100) / ({casesAverted} * 3)",
       "irs": "(3 * {priceIRSPerPerson} * {population}) / ({casesAverted} * 3)",
       "irs-llin": "(({priceDelivery} + {priceNetStandard}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100 + 3 * {priceIRSPerPerson} * {population}) / ({casesAverted} * 3)",
       "irs-llin-pbo": "(({priceDelivery} + {priceNetPBO}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100 + 3 * {priceIRSPerPerson} * {population}) / ({casesAverted} * 3)",
