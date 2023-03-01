@@ -16,8 +16,8 @@
                   "error_x": {
                       "type": "data",
                       "width": 0,
-                      "col": "casesAvertedPer1000ErrorPlus",
-                      "colminus": "casesAvertedPer1000ErrorMinus"
+                      "cols": ["{casesAvertedPer1000ErrorPlus} * 3"],
+                      "colsminus": ["{casesAvertedPer1000ErrorMinus} * 3"]
                   }
               },
               {
@@ -30,8 +30,8 @@
                   "error_x": {
                       "type": "data",
                       "width": 0,
-                      "col": "casesAvertedPer1000ErrorPlus",
-                      "colminus": "casesAvertedPer1000ErrorMinus"
+                      "cols": ["{casesAvertedPer1000ErrorPlus} * 3"],
+                      "colsminus": ["{casesAvertedPer1000ErrorMinus} * 3"]
                   }
               },
               {
@@ -44,8 +44,8 @@
                   "error_x": {
                       "type": "data",
                       "width": 0,
-                      "col": "casesAvertedPer1000ErrorPlus",
-                      "colminus": "casesAvertedPer1000ErrorMinus"
+                      "cols": ["{casesAvertedPer1000ErrorPlus} * 3"],
+                      "colsminus": ["{casesAvertedPer1000ErrorMinus} * 3"]
                   }
               },
               {
@@ -58,8 +58,8 @@
                   "error_x": {
                       "type": "data",
                       "width": 0,
-                      "col": "casesAvertedPer1000ErrorPlus",
-                      "colminus": "casesAvertedPer1000ErrorMinus"
+                      "cols": ["{casesAvertedPer1000ErrorPlus} * 3"],
+                      "colsminus": ["{casesAvertedPer1000ErrorMinus} * 3"]
                   }
               },
               {
@@ -72,8 +72,8 @@
                   "error_x": {
                       "type": "data",
                       "width": 0,
-                      "col": "casesAvertedPer1000ErrorPlus",
-                      "colminus": "casesAvertedPer1000ErrorMinus"
+                      "cols": ["{casesAvertedPer1000ErrorPlus} * 3"],
+                      "colsminus": ["{casesAvertedPer1000ErrorMinus} * 3"]
                   }
               },
               {
@@ -86,8 +86,8 @@
                   "error_x": {
                       "type": "data",
                       "width": 0,
-                      "col": "casesAvertedPer1000ErrorPlus",
-                      "colminus": "casesAvertedPer1000ErrorMinus"
+                      "cols": ["{casesAvertedPer1000ErrorPlus} * 3"],
+                      "colsminus": ["{casesAvertedPer1000ErrorMinus} * 3"]
                   }
               },
               {
@@ -100,8 +100,8 @@
                   "error_x": {
                       "type": "data",
                       "width": 0,
-                      "col": "casesAvertedPer1000ErrorPlus",
-                      "colminus": "casesAvertedPer1000ErrorMinus"
+                      "cols": ["{casesAvertedPer1000ErrorPlus} * 3"],
+                      "colsminus": ["{casesAvertedPer1000ErrorMinus} * 3"]
                   }
               },
               {
@@ -114,8 +114,8 @@
                   "error_x": {
                       "type": "data",
                       "width": 0,
-                      "col": "casesAvertedPer1000ErrorPlus",
-                      "colminus": "casesAvertedPer1000ErrorMinus"
+                      "cols": ["{casesAvertedPer1000ErrorPlus} * 3"],
+                      "colsminus": ["{casesAvertedPer1000ErrorMinus} * 3"]
                   }
               }
           ],
