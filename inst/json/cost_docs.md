@@ -2,7 +2,7 @@
 
 **Graphs**
 
-The first figure shows total costs and cases averted following a 3-year intervention package introduced at year 0.
+The first figure shows costs per 1,000 people and cases averted per 1,000 people following a 3-year intervention package introduced at year 0.
 
 The absolute costs are predicted and shown for each intervention package. The summary information provided by the user is shown to indicate the ITN usage expected in
 the zone and the expected IRS coverage to be achieved in the zone.
