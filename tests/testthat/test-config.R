@@ -39,7 +39,7 @@ test_that("cost per case graph config formulas give correct results", {
 test_that("cases averted vs costs graph config series formulas give correct results", {
   json <- jsonlite::fromJSON(mintr_path("json/graph_cost_cases_averted_config.json"))
   formulas <- json$series$y_formula
-  costs <- get_expected_total_costs()
+  costs <- get_expected_costs_per_1000()
 
   none <- formulas[[1]]
   expect_equal(evaluate(none), costs$costs_N0)
