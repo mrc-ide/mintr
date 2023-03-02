@@ -59,12 +59,29 @@ test_that("cases averted vs costs graph config series formulas give correct resu
   expect_equal(evaluate(pyrrole_IRS), costs$costs_N3_S1)
 })
 
+test_that("cases averted vs costs graph config series x error formulas give correct results", {
+  json <- jsonlite::fromJSON(mintr_path("json/graph_cost_cases_averted_config.json"))
+  plus_formulas <- json$series$error_x$cols
+  minus_formulas <- json$series$error_x$cols_minus
+  input <- get_input()
+  
+  lapply(plus_formulas, function(x) expect_equal(evaluate(x), input$casesAvertedPer1000ErrorPlus * 3))
+  lapply(minus_formulas, function(x) expect_equal(evaluate(x), input$casesAvertedPer1000ErrorMinus * 3))
+})
+
 test_that("cases averted vs costs graph config shape formula gives correct results", {
   json <- jsonlite::fromJSON(mintr_path("json/graph_cost_cases_averted_config.json"))
   budgetAllZones <- json$layout$shapes$y_formula
   
   inputs <- get_input()
   expect_equal(evaluate(budgetAllZones), inputs$budgetAllZones)
+})
+
+test_that("cases averted vs costs graph config x_formula gives correct results", {
+  json <- jsonlite::fromJSON(mintr_path("json/graph_cost_cases_averted_config.json"))
+  inputs <- get_input()
+  x_formula <- json$metadata$x_formula
+  expect_equal(evaluate(x_formula), inputs$casesAvertedPer1000 * 3)
 })
 
 test_that("cost per case graph config contains valid intervention ids", {

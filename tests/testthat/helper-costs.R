@@ -7,9 +7,12 @@ get_input <- function() {
        priceDelivery = 2.75,
        procureBuffer = 7,
        priceIRSPerPerson = 2.5,
-       casesAverted = 10,
-       casesAvertedErrorPlus = 11,
-       casesAvertedErrorMinus = 8,
+       casesAverted = 100,
+       casesAvertedErrorPlus = 110,
+       casesAvertedErrorMinus = 80,
+       casesAvertedPer1000 = 10,
+       casesAvertedPer1000ErrorPlus = 11,
+       casesAvertedPer1000ErrorMinus = 8,
        budgetAllZones = 1000)
 }
 
