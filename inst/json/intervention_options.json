@@ -64,7 +64,8 @@
                             "label": "When planning procurement, what number of people per net is used?",
                             "type": "number",
                             "required": true,
-                            "value": 1.8
+                            "value": 1.8,
+                            "step": 0.01
                         }
                     ]
                 },
@@ -93,7 +94,8 @@
                             "label": "Price of pyrethroid LLIN ($USD)",
                             "type": "number",
                             "required": true,
-                            "value": 1.58
+                            "value": 2.00,
+                            "step": 0.01
                         }
                     ]
                 },
@@ -104,7 +106,8 @@
                             "label": "Price of pyrethroid-PBO ITN ($USD)",
                             "type": "number",
                             "required": true,
-                            "value": 2.3
+                            "value": 2.50,
+                            "step": 0.01
                         }
                     ]
                 },
@@ -115,7 +118,8 @@
                             "label": "Price of pyrethroid-pyrrole ITN ($USD)",
                             "type": "number",
                             "required": true,
-                            "value": 3.2
+                            "value": 3.00,
+                            "step": 0.01
                         }
                     ]
                 },
@@ -126,7 +130,8 @@
                             "label": "ITN mass distribution campaign delivery cost per person ($USD)",
                             "type": "number",
                             "required": true,
-                            "value": 2.75
+                            "value": 2.75,
+                            "step": 0.01
                         }
                     ]
                 },
@@ -138,6 +143,7 @@
                             "type": "number",
                             "required": true,
                             "value": 5.73,
+                            "step": 0.01
                             "helpText": "Include the average cost for both the IRS product and implementation of IRS. If different IRS products are used in different years, please average the product costs and provide an annual cost per person protected by IRS (in $USD)"
                         }
                     ]
