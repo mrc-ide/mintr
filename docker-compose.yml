@@ -1,0 +1,12 @@
+version: '3'
+services:
+  mintr:
+    image: mrcide/mintr:master
+  mint:
+    depends_on:
+    - mintr
+    image: mrcide/mint:master
+    ports:
+    - 8080:8080
+    volumes:
+    - ./scripts/mint.properties:/etc/mint/config.properties:ro
