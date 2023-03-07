@@ -5,5 +5,5 @@ test('example', async ({ page }) => {
 });
 
 test('test nonexistent', async ({ page }) => {
-  await page.locator(".doesnotexist");
+   await expect(2).toBe(1);
 });
