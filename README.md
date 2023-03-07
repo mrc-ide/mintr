@@ -51,6 +51,16 @@ After cloning the repository, ensure you have all R package dependencies with
 
 You will need a copy of the data. Run `./scripts/import` which will download, process and import the mintr database in `tests/testthat/data`, which will then be available for tests.
 
+## Browser tests
+
+Browser tests are included (in `tests/e2e`) in order to test config changes made in mintr are rendered correctly in MINT. To run browser tests locally:
+1. Install [Playwright](https://playwright.dev/docs/intro#installing-playwright)
+2. Run mintr and MINT in docker with `./docker/run_app` - this runs the latest mintr docker image pushed for the current branch, and the master branch of MINT, 
+3. Run `npx playwright test` from `tests/e2e`
+
+The browser tests are also run as part of the BuildKite pipeline, in a docker container built from `docker/test-e2e.dockerfile` using config from `tests/e2e/playwright.docker.config.ts`
+
+
 ## Deployment
 
 Deployment on the DIDE network is descrbed in the [Knowledge Base article](https://mrc-ide.myjetbrains.com/youtrack/articles/mrc-A-10/MINT---mintr#server)
