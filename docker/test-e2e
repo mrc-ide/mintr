@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+set -ex
+HERE=$(dirname $0)
+
+E2E_TAG=mintr-e2e
+
+# build the test image
+docker build --tag $E2E_TAG \
+  -f $HERE/test-e2e.dockerfile \
+  .
+
+function cleardocker() {
+  $HERE/clear
+}
+
+trap cleardocker EXIT
+
+# run the mint and mintr images
+. $HERE/run_app
+
+
+# run the test image on the network
+docker run --rm \
+    --network=mintr_default \
+    $E2E_TAG

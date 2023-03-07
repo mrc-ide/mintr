@@ -15,3 +15,10 @@ steps:
 
   - label: ":shipit: Push images"
     command: docker/push
+    
+  - wait
+  
+  - label: ":hammer: Browser tests"
+    command: docker/test-e2e
+    agents:
+      queue: "browser-test"

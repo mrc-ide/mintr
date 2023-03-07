@@ -13,9 +13,9 @@ else
 fi
 
 if [ -n "$BUILDKITE" ]; then
-    GIT_BRANCH=$BUILDKITE_BRANCH
+    export GIT_BRANCH=$BUILDKITE_BRANCH
 else
-    GIT_BRANCH=$(git -C "$PACKAGE_ROOT" symbolic-ref --short HEAD)
+    export GIT_BRANCH=$(git -C "$PACKAGE_ROOT" symbolic-ref --short HEAD)
 fi
 
 
