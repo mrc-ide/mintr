@@ -55,7 +55,7 @@ You will need a copy of the data. Run `./scripts/import` which will download, pr
 
 Browser tests are included (in `tests/e2e`) in order to test config changes made in mintr are rendered correctly in MINT. To run browser tests locally:
 1. Install [Playwright](https://playwright.dev/docs/intro#installing-playwright)
-2. Run mintr and MINT in docker with `./docker/run_app` - this runs the latest mintr docker image pushed for the current branch, and the master branch of MINT, 
+2. Run mintr and MINT in docker with `./docker/run_app` - this runs the latest mintr docker image pushed for the current branch, and the master branch of MINT. Change the line `export MINT_BRANCH=master` to run a different MINT branch. 
 3. Run `npx playwright test` from `tests/e2e`
 
 The browser tests are also run as part of the BuildKite pipeline, in a docker container built from `docker/test-e2e.dockerfile` using config from `tests/e2e/playwright.docker.config.ts`

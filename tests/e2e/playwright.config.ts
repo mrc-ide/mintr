@@ -7,9 +7,7 @@ const config: PlaywrightTestConfig = {
         baseURL: "http://localhost:8080",
         screenshot: "only-on-failure",
         actionTimeout: 0
-    },
-    retries: 1,
-    timeout: 60000
+    }
 };
 
 export default config;

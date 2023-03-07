@@ -5,7 +5,7 @@ services:
   mint:
     depends_on:
     - mintr
-    image: mrcide/mint:master
+    image: mrcide/mint:${MINT_BRANCH}
     ports:
     - 8080:8080
     volumes:
