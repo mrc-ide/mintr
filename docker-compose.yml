@@ -9,4 +9,4 @@ services:
     ports:
     - 8080:8080
     volumes:
-    - ./scripts/mint.properties:/etc/mint/config.properties:ro
+    - ./docker/mint.properties:/etc/mint/config.properties:ro
