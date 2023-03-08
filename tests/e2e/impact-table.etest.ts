@@ -1,5 +1,12 @@
 import { test, expect } from '@playwright/test';
-import { newProject, acceptBaseline, selectCoverageValues, expectColumnValues, getTableRows } from "./helpers";
+import {
+    newProject,
+    acceptBaseline,
+    selectCoverageValues,
+    testCommonTableValues,
+    getTableRows,
+    getTextFromRowCell
+} from "./helpers";
 
 test.beforeEach(async ({ page }) => {
     await page.goto("/");
@@ -26,44 +33,14 @@ test('impact table has expected columns', async ({ page }) => {
     ]);
 });
 
-test("impact table has expected interventions", async ({page}) => {
-    const rows = await getTableRows(page);
-    await expectColumnValues(rows, 0, [
-        "No intervention",
-        "Pyrethroid LLIN only",
-        "IRS* only",
-        "Pyrethroid LLIN with IRS*",
-        "Pyrethroid-PBO ITN only",
-        "Pyrethroid-PBO ITN with IRS*",
-        "Pyrethroid-pyrrole ITN only",
-        "Pyrethroid-pyrrole ITN with IRS*"
-    ]);
+
+test("impact table has expected common table values", async ({page}) => {
+    await testCommonTableValues(page);
 });
 
-test("impact table has expected net use values", async ({page}) => {
-    const rows = await getTableRows(page);
-    await expectColumnValues(rows, 1, [
-        "n/a",
-        "20%",
-        "n/a",
-        "20%",
-        "20%",
-        "20%",
-        "20%",
-        "20%"
-    ]);
-});
-
-test("impact table has expected irs use values", async ({page}) => {
-    const rows = await getTableRows(page);
-    await expectColumnValues(rows, 2, [
-        "n/a",
-        "n/a",
-        "60%",
-        "60%",
-        "n/a",
-        "60%",
-        "n/a",
-        "60%"
-    ]);
+test("impact table has expected no intervention values", async ({page}) => {
+    const firstRow = (await getTableRows(page)).nth(0);
+    await expect(await getTextFromRowCell(firstRow, 6)).toBe("0.0"); // Relative reduction in prevalence
+    await expect(await getTextFromRowCell(firstRow, 7)).toBe("0"); // Mean cases averted per 1,000
+    await expect(await getTextFromRowCell(firstRow, 8)).toBe("0.0"); // Relative reduction in cases
 });
