@@ -17,6 +17,9 @@ trap cleardocker EXIT
 docker build --tag $E2E_TAG \
   -f $HERE/test-e2e.dockerfile \
   .
+  
+# make sure app is available
+curl --retry 10 --retry-connrefused http://localhost:8080   
 
 # run the test image on the network
 docker run --rm \

@@ -3,10 +3,11 @@ export const newProject = async (page) => {
     await page.locator("#name").fill("test project");
     await page.locator(":nth-match(input,2)").fill("test-region");
     await page.locator("button.btn-primary").click();
-};
+}
 
 export const acceptBaseline = async (page) => {
-    (await page.getByText("Next")).click();
+    const next = await page.getByText("Next");
+    await next.click();
 };
 
 export const selectCoverageValues = async (page, itn = "0.2", irs = "0.6") => {
