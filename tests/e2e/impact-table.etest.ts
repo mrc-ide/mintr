@@ -5,7 +5,7 @@ import {
     selectCoverageValues,
     testCommonTableValues,
     getTableRows,
-    getTextFromRowCell
+    getTextFromRowCell, approximatelyEqual
 } from "./helpers";
 
 test.beforeEach(async ({ page }) => {
@@ -43,4 +43,22 @@ test("impact table has expected no intervention values", async ({page}) => {
     await expect(await getTextFromRowCell(firstRow, 6)).toBe("0.0"); // Relative reduction in prevalence
     await expect(await getTextFromRowCell(firstRow, 7)).toBe("0"); // Mean cases averted per 1,000
     await expect(await getTextFromRowCell(firstRow, 8)).toBe("0.0"); // Relative reduction in cases
+});
+
+test("cases averted annually values match total cases averted from costs table", async ({page}) => {
+    const rows = await getTableRows(page);
+    const casesAvertedAnnually = [];
+    for (let idx = 1; idx < 8; idx++) {
+        const value = Number.parseInt(await getTextFromRowCell(rows.nth(idx), 7));
+        casesAvertedAnnually.push(value);
+    }
+
+    await page.locator(".nav-item a").getByText("Cost effectiveness").click();
+    const costRows = await getTableRows(page);
+    for (let idx = 1; idx < 8; idx++) {
+        const totalCasesAverted = Number.parseInt(await getTextFromRowCell(costRows.nth(idx), 3));
+        const annualValue = Number.parseInt(casesAvertedAnnually[idx-1]);
+        // Values are approximately equal because of rounding
+        expect(approximatelyEqual(totalCasesAverted, annualValue * 3, 10)).toBe(true);
+    }
 });

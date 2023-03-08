@@ -5,7 +5,7 @@ import {
     selectCoverageValues,
     testCommonTableValues,
     getTableRows,
-    getTextFromRowCell
+    getTextFromRowCell, costStringToNumber, approximatelyEqual
 } from "./helpers";
 
 test.beforeEach(async ({ page }) => {
@@ -39,4 +39,18 @@ test("cost table has expected no intervention values", async ({page}) => {
     await expect(await getTextFromRowCell(firstRow, 3)).toBe("0"); // Total cases averted
     await expect(await getTextFromRowCell(firstRow, 4)).toBe("$0"); // Total costs
     await expect(await getTextFromRowCell(firstRow, 5)).toBe("reference"); // Cost per case averted
+});
+
+test("cost per case averted values match total cost and cases averted values", async ({page}) => {
+    const expectCostPerCaseAvertedValue = async (row) => {
+        const totalCasesAverted = Number.parseInt(await getTextFromRowCell(row, 3));
+        const totalCosts = costStringToNumber(await getTextFromRowCell(row, 4));
+        const costPerCaseAverted = costStringToNumber(await getTextFromRowCell(row, 5));
+        // Values are approximately equal because of rounding
+        expect(approximatelyEqual(costPerCaseAverted, totalCosts / totalCasesAverted)).toBe(true);
+    };
+    const rows = await getTableRows(page);
+    for (let idx = 1; idx < 8; idx++) {
+        await expectCostPerCaseAvertedValue(await rows.nth(idx));
+    }
 });

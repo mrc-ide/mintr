@@ -70,6 +70,16 @@ export const testCommonTableValues = async (page) => {
 };
 
 export const costStringToNumber = (costString) => {
-    // regex: /\$([0-9.]*)(k?)/gm
-    //.. then expect with rounding to nearest $
+    const regex =  /\$([0-9.]*)(k?)/;
+    const match = costString.match(regex);
+    if (!match) {
+        return null;
+    }
+    const numericPart = Number.parseFloat(match[1]);
+    const kPart = match[2] ? 1000 : 1;
+    return numericPart * kPart;
 };
+
+export const approximatelyEqual = (val1, val2, tolerance = 1) => {
+    return Math.abs(val1 - val2) <= tolerance;
+}
