@@ -1,4 +1,4 @@
-FROM node
+FROM node:19
 
 ADD tests/e2e /usr/app
 
