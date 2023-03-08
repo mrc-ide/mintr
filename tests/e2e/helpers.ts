@@ -6,7 +6,7 @@ export const newProject = async (page) => {
 };
 
 export const acceptBaseline = async (page) => {
-    await page.getByText("Next").click();
+    (await page.getByText("Next")).click();
 };
 
 export const selectCoverageValues = async (page, itn = "0.2", irs = "0.6") => {
