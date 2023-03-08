@@ -19,7 +19,7 @@ docker build --tag $E2E_TAG \
   .
   
 # make sure app is available
-curl --retry 10 --retry-connrefused http://localhost:8080   
+curl --retry 10 --retry-all-errors http://localhost:8080   
 
 # run the test image on the network
 docker run --rm \
