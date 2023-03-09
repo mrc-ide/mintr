@@ -84,3 +84,11 @@ export const costStringToNumber = (costString) => {
 export const approximatelyEqual = (val1, val2, tolerance = 1) => {
     return Math.abs(val1 - val2) <= tolerance;
 }
+
+export const expectOptionLabelAndName = async (optionRow, expectedLabel, expectedName, controlIsSelect = true) => {
+    const label = await optionRow.locator("label").innerText();
+    await expect(label.trim()).toBe(expectedLabel);
+    const controlElementType = controlIsSelect ? "select" : "input";
+    const name = await optionRow.locator(controlElementType).getAttribute("name");
+    await expect(name).toBe(expectedName)
+};

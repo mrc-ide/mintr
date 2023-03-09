@@ -1,20 +1,12 @@
-import { test, expect } from '@playwright/test';
-import {newProject} from "./helpers";
+import { test } from '@playwright/test';
+import {newProject, expectOptionLabelAndName} from "./helpers";
 
 test.beforeEach(async ({ page }) => {
     await page.goto("/");
     await newProject(page);
 });
 
-const expectOptionLabelAndName = async (optionRow, expectedLabel, expectedName, controlIsSelect = true) => {
-    const label = await optionRow.locator("label").innerText();
-    await expect(label.trim()).toBe(expectedLabel);
-    const controlElementType = controlIsSelect ? "select" : "input";
-    const name = await optionRow.locator(controlElementType).getAttribute("name");
-    await expect(name).toBe(expectedName)
-};
-
-test("expected options exist", async ({page}) => {
+test("expected baseline options exist", async ({page}) => {
     const rows = await page.locator(".dynamic-form .row .col-md-6");
     await expectOptionLabelAndName(rows.nth(0), "Size of population at risk", "population", false);
     await expectOptionLabelAndName(rows.nth(1), "Seasonality of transmission", "seasonalityOfTransmission");
