@@ -1,0 +1,12 @@
+version: '3'
+services:
+  mintr:
+    image: mrcide/mintr:${GIT_SHA}
+  mint:
+    depends_on:
+    - mintr
+    image: mrcide/mint:${MINT_BRANCH}
+    ports:
+    - 8080:8080
+    volumes:
+    - ./docker/mint.properties:/etc/mint/config.properties:ro

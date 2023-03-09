@@ -7,9 +7,9 @@ PACKAGE_ORG=mrcide
 # single commit) so you end up with a detached head and git rev-parse
 # doesn't work
 if [ -n "$BUILDKITE" ]; then
-    GIT_SHA=${BUILDKITE_COMMIT:0:7}
+    export GIT_SHA=${BUILDKITE_COMMIT:0:7}
 else
-    GIT_SHA=$(git -C "$PACKAGE_ROOT" rev-parse --short=7 HEAD)
+    export GIT_SHA=$(git -C "$PACKAGE_ROOT" rev-parse --short=7 HEAD)
 fi
 
 if [ -n "$BUILDKITE" ]; then
