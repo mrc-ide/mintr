@@ -1,6 +1,6 @@
 {
          "metadata": {
-              "x_col": "casesAvertedPer1000",
+              "x_formula": ["{casesAvertedPer1000} * 3"],
               "id_col": "intervention",
               "format": "long",
               "settings": ["irsUse", "netUse"]
@@ -16,13 +16,13 @@
                   "error_x": {
                       "type": "data",
                       "width": 0,
-                      "col": "casesAvertedPer1000ErrorPlus",
-                      "colminus": "casesAvertedPer1000ErrorMinus"
+                      "cols": ["{casesAvertedPer1000ErrorPlus} * 3"],
+                      "colsminus": ["{casesAvertedPer1000ErrorMinus} * 3"]
                   }
               },
               {
                   "id": "llin",
-                  "y_formula": ["({priceDelivery} + {priceNetStandard}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100"],
+                  "y_formula": ["({priceDelivery} + {priceNetStandard}) * 1000 / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100"],
                   "name": "Pyrethroid LLIN only",
                   "type": "scatter",
                   "marker": {"color": "blue", "size": 10},
@@ -30,13 +30,13 @@
                   "error_x": {
                       "type": "data",
                       "width": 0,
-                      "col": "casesAvertedPer1000ErrorPlus",
-                      "colminus": "casesAvertedPer1000ErrorMinus"
+                      "cols": ["{casesAvertedPer1000ErrorPlus} * 3"],
+                      "colsminus": ["{casesAvertedPer1000ErrorMinus} * 3"]
                   }
               },
               {
                   "id": "llin-pbo",
-                  "y_formula": ["({priceDelivery} + {priceNetPBO}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100"],
+                  "y_formula": ["({priceDelivery} + {priceNetPBO}) * 1000 / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100"],
                   "name": "Pyrethroid-PBO ITN only",
                   "type": "scatter",
                   "marker": {"color": "turquoise", "size": 10},
@@ -44,13 +44,13 @@
                   "error_x": {
                       "type": "data",
                       "width": 0,
-                      "col": "casesAvertedPer1000ErrorPlus",
-                      "colminus": "casesAvertedPer1000ErrorMinus"
+                      "cols": ["{casesAvertedPer1000ErrorPlus} * 3"],
+                      "colsminus": ["{casesAvertedPer1000ErrorMinus} * 3"]
                   }
               },
               {
                   "id": "pyrrole-pbo",
-                  "y_formula": ["({priceDelivery} + {priceNetPyrrole}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100"],
+                  "y_formula": ["({priceDelivery} + {priceNetPyrrole}) * 1000 / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100"],
                   "name": "Pyrethroid-pyrrole ITN only",
                   "type": "scatter",
                   "marker": {"color": "darkgreen", "size": 10},
@@ -58,13 +58,13 @@
                   "error_x": {
                       "type": "data",
                       "width": 0,
-                      "col": "casesAvertedPer1000ErrorPlus",
-                      "colminus": "casesAvertedPer1000ErrorMinus"
+                      "cols": ["{casesAvertedPer1000ErrorPlus} * 3"],
+                      "colsminus": ["{casesAvertedPer1000ErrorMinus} * 3"]
                   }
               },
               {
                   "id": "irs",
-                  "y_formula": ["3 * {priceIRSPerPerson} * {population}"],
+                  "y_formula": ["3 * {priceIRSPerPerson} * 1000"],
                   "name": "IRS* only",
                   "type": "scatter",
                   "marker": {"color": "purple", "size": 10},
@@ -72,13 +72,13 @@
                   "error_x": {
                       "type": "data",
                       "width": 0,
-                      "col": "casesAvertedPer1000ErrorPlus",
-                      "colminus": "casesAvertedPer1000ErrorMinus"
+                      "cols": ["{casesAvertedPer1000ErrorPlus} * 3"],
+                      "colsminus": ["{casesAvertedPer1000ErrorMinus} * 3"]
                   }
               },
               {
                   "id": "irs-llin",
-                  "y_formula": ["({priceDelivery} + {priceNetStandard}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100 + 3 * {priceIRSPerPerson} * {population}"],
+                  "y_formula": ["({priceDelivery} + {priceNetStandard}) * 1000 / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100 + 3 * {priceIRSPerPerson} * 1000"],
                   "name": "Pyrethroid LLIN with IRS*",
                   "type": "scatter",
                   "marker": {"color": "darkred", "size": 10},
@@ -86,13 +86,13 @@
                   "error_x": {
                       "type": "data",
                       "width": 0,
-                      "col": "casesAvertedPer1000ErrorPlus",
-                      "colminus": "casesAvertedPer1000ErrorMinus"
+                      "cols": ["{casesAvertedPer1000ErrorPlus} * 3"],
+                      "colsminus": ["{casesAvertedPer1000ErrorMinus} * 3"]
                   }
               },
               {
                   "id": "irs-llin-pbo",
-                  "y_formula": ["({priceDelivery} + {priceNetPBO}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100 + 3 * {priceIRSPerPerson} * {population}"],
+                  "y_formula": ["({priceDelivery} + {priceNetPBO}) * 1000 / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100 + 3 * {priceIRSPerPerson} * 1000"],
                   "name": "Pyrethroid-PBO ITN with IRS*",
                   "type": "scatter",
                   "marker": {"color": "orange", "size": 10},
@@ -100,13 +100,13 @@
                   "error_x": {
                       "type": "data",
                       "width": 0,
-                      "col": "casesAvertedPer1000ErrorPlus",
-                      "colminus": "casesAvertedPer1000ErrorMinus"
+                      "cols": ["{casesAvertedPer1000ErrorPlus} * 3"],
+                      "colsminus": ["{casesAvertedPer1000ErrorMinus} * 3"]
                   }
               },
               {
                   "id": "irs-pyrrole-pbo",
-                  "y_formula": ["({priceDelivery} + {priceNetPyrrole}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100 + 3 * {priceIRSPerPerson} * {population}"],
+                  "y_formula": ["({priceDelivery} + {priceNetPyrrole}) * 1000 / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100 + 3 * {priceIRSPerPerson} * 1000"],
                   "name": "Pyrethroid-pyrrole ITN with IRS*",
                   "type": "scatter",
                   "marker": {"color": "limegreen", "size": 10},
@@ -114,8 +114,8 @@
                   "error_x": {
                       "type": "data",
                       "width": 0,
-                      "col": "casesAvertedPer1000ErrorPlus",
-                      "colminus": "casesAvertedPer1000ErrorMinus"
+                      "cols": ["{casesAvertedPer1000ErrorPlus} * 3"],
+                      "colsminus": ["{casesAvertedPer1000ErrorMinus} * 3"]
                   }
               }
           ],
@@ -128,7 +128,7 @@
                   "zeroline": false
               },
               "yaxis": {
-                  "title": "Total costs (USD)",
+                  "title": "Costs per 1,000 people across 3-years (USD)",
                   "showline": true,
                   "autorange": true,
                   "zeroline": false,

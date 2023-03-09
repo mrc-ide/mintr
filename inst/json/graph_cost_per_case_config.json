@@ -8,7 +8,7 @@
         {
             "x": ["llin"],
             "id": "llin",
-            "y_formula": ["(({priceDelivery} + {priceNetStandard}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100) / {casesAverted}"],
+            "y_formula": ["(({priceDelivery} + {priceNetStandard}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100) / ({casesAverted} * 3)"],
             "type": "bar",
             "name": "Pyrethroid LLIN only",
             "marker": {
@@ -18,8 +18,8 @@
             "hovertemplate": "$%{y:.1f}0 +$%{error_y.array:.1f}0 / -$%{error_y.arrayminus:.1f}0",
             "error_y": {
                 "type": "data",
-                "cols": ["(({priceDelivery} + {priceNetStandard}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100) / {casesAvertedErrorMinus}"],
-                "colsminus": ["(({priceDelivery} + {priceNetStandard}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100) / {casesAvertedErrorPlus}"],
+                "cols": ["(({priceDelivery} + {priceNetStandard}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100) / ({casesAvertedErrorMinus} * 3)"],
+                "colsminus": ["(({priceDelivery} + {priceNetStandard}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100) / ({casesAvertedErrorPlus} * 3)"],
                 "visible": true,
                 "thickness": 1.5,
                 "width": 0,
@@ -29,7 +29,7 @@
         {
             "x": ["llin-pbo"],
             "id": "llin-pbo",
-            "y_formula": ["(({priceDelivery} + {priceNetPBO}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100) / {casesAverted}"],
+            "y_formula": ["(({priceDelivery} + {priceNetPBO}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100) / ({casesAverted} * 3)"],
             "type": "bar",
             "name": "Pyrethroid-PBO ITN only",
             "marker": {
@@ -39,8 +39,8 @@
             "hovertemplate": "$%{y:.1f}0 +$%{error_y.array:.1f}0 / -$%{error_y.arrayminus:.1f}0",
             "error_y": {
                 "type": "data",
-                "cols": ["(({priceDelivery} + {priceNetPBO}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100) / {casesAvertedErrorMinus}"],
-                "colsminus": ["(({priceDelivery} + {priceNetPBO}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100) / {casesAvertedErrorPlus}"],
+                "cols": ["(({priceDelivery} + {priceNetPBO}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100) / ({casesAvertedErrorMinus} * 3)"],
+                "colsminus": ["(({priceDelivery} + {priceNetPBO}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100) / ({casesAvertedErrorPlus} * 3)"],
                 "visible": true,
                 "thickness": 1.5,
                 "width": 0,
@@ -50,7 +50,7 @@
         {
             "x": ["pyrrole-pbo"],
             "id": "pyrrole-pbo",
-            "y_formula": ["(({priceDelivery} + {priceNetPyrrole}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100) / {casesAverted}"],
+            "y_formula": ["(({priceDelivery} + {priceNetPyrrole}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100) / ({casesAverted} * 3)"],
             "type": "bar",
             "name": "Pyrethroid-pyrrole ITN only",
             "marker": {
@@ -60,8 +60,8 @@
             "hovertemplate": "$%{y:.1f}0 +$%{error_y.array:.1f}0 / -$%{error_y.arrayminus:.1f}0",
             "error_y": {
                 "type": "data",
-                "cols": ["(({priceDelivery} + {priceNetPyrrole}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100) / {casesAvertedErrorMinus}"],
-                "colsminus": ["(({priceDelivery} + {priceNetPyrrole}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100) / {casesAvertedErrorPlus}"],
+                "cols": ["(({priceDelivery} + {priceNetPyrrole}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100) / ({casesAvertedErrorMinus} * 3)"],
+                "colsminus": ["(({priceDelivery} + {priceNetPyrrole}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100) / ({casesAvertedErrorPlus} * 3)"],
                 "visible": true,
                 "thickness": 1.5,
                 "width": 0,
@@ -71,7 +71,7 @@
         {
             "x": ["irs"],
             "id": "irs",
-            "y_formula": ["(3 * {priceIRSPerPerson} * {population}) / {casesAverted}"],
+            "y_formula": ["(3 * {priceIRSPerPerson} * {population}) / ({casesAverted} * 3)"],
             "name": "IRS* only",
             "type": "bar",
             "marker": {
@@ -81,8 +81,8 @@
             "hovertemplate": "$%{y:.1f}0 +$%{error_y.array:.1f}0 / -$%{error_y.arrayminus:.1f}0",
             "error_y": {
                 "type": "data",
-                "cols": ["(3 * {priceIRSPerPerson} * {population}) / {casesAvertedErrorMinus}"],
-                "colsminus": ["(3 * {priceIRSPerPerson} * {population}) / {casesAvertedErrorPlus}"],
+                "cols": ["(3 * {priceIRSPerPerson} * {population}) / ({casesAvertedErrorMinus} * 3)"],
+                "colsminus": ["(3 * {priceIRSPerPerson} * {population}) / ({casesAvertedErrorPlus} * 3)"],
                 "visible": true,
                 "thickness": 1.5,
                 "width": 0,
@@ -92,7 +92,7 @@
         {
             "x": ["irs-llin"],
             "id": "irs-llin",
-            "y_formula": ["(({priceDelivery} + {priceNetStandard}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100 + 3 * {priceIRSPerPerson} * {population}) / {casesAverted}"],
+            "y_formula": ["(({priceDelivery} + {priceNetStandard}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100 + 3 * {priceIRSPerPerson} * {population}) / ({casesAverted} * 3)"],
             "name": "Pyrethroid LLIN with IRS*",
             "type": "bar",
             "marker": {
@@ -102,8 +102,8 @@
             "hovertemplate": "$%{y:.1f}0 +$%{error_y.array:.1f}0 / -$%{error_y.arrayminus:.1f}0",
             "error_y": {
                 "type": "data",
-                "cols": ["(({priceDelivery} + {priceNetStandard}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100 + 3 * {priceIRSPerPerson} * {population}) / {casesAvertedErrorMinus}"],
-                "colsminus": ["(({priceDelivery} + {priceNetStandard}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100 + 3 * {priceIRSPerPerson} * {population}) / {casesAvertedErrorPlus}"],
+                "cols": ["(({priceDelivery} + {priceNetStandard}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100 + 3 * {priceIRSPerPerson} * {population}) / ({casesAvertedErrorMinus} * 3)"],
+                "colsminus": ["(({priceDelivery} + {priceNetStandard}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100 + 3 * {priceIRSPerPerson} * {population}) / ({casesAvertedErrorPlus} * 3)"],
                 "visible": true,
                 "thickness": 1.5,
                 "width": 0,
@@ -113,7 +113,7 @@
         {
             "x": ["irs-llin-pbo"],
             "id": "irs-llin-pbo",
-            "y_formula": ["(({priceDelivery} + {priceNetPBO}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100 + 3 * {priceIRSPerPerson} * {population}) / {casesAverted}"],
+            "y_formula": ["(({priceDelivery} + {priceNetPBO}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100 + 3 * {priceIRSPerPerson} * {population}) / ({casesAverted} * 3)"],
             "name": "Pyrethroid-PBO ITN with IRS*",
             "type": "bar",
             "marker": {
@@ -123,8 +123,8 @@
             "hovertemplate": "$%{y:.1f}0 +$%{error_y.array:.1f}0 / -$%{error_y.arrayminus:.1f}0",
             "error_y": {
                 "type": "data",
-                "cols": ["(({priceDelivery} + {priceNetPBO}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100 + 3 * {priceIRSPerPerson} * {population}) / {casesAvertedErrorMinus}"],
-                "colsminus": ["(({priceDelivery} + {priceNetPBO}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100 + 3 * {priceIRSPerPerson} * {population}) / {casesAvertedErrorPlus}"],
+                "cols": ["(({priceDelivery} + {priceNetPBO}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100 + 3 * {priceIRSPerPerson} * {population}) / ({casesAvertedErrorMinus} * 3)"],
+                "colsminus": ["(({priceDelivery} + {priceNetPBO}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100 + 3 * {priceIRSPerPerson} * {population}) / ({casesAvertedErrorPlus} * 3)"],
                 "visible": true,
                 "thickness": 1.5,
                 "width": 0,
@@ -134,7 +134,7 @@
          {
             "x": ["irs-pyrrole-pbo"],
             "id": "irs-pyrrole-pbo",
-            "y_formula": ["(({priceDelivery} + {priceNetPyrrole}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100 + 3 * {priceIRSPerPerson} * {population}) / {casesAverted}"],
+            "y_formula": ["(({priceDelivery} + {priceNetPyrrole}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100 + 3 * {priceIRSPerPerson} * {population}) / ({casesAverted} * 3)"],
             "name": "Pyrethroid-pyrrole ITN with IRS*",
             "type": "bar",
             "marker": {
@@ -144,8 +144,8 @@
             "hovertemplate": "$%{y:.1f}0 +$%{error_y.array:.1f}0 / -$%{error_y.arrayminus:.1f}0",
             "error_y": {
                 "type": "data",
-                "cols": ["(({priceDelivery} + {priceNetPyrrole}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100 + 3 * {priceIRSPerPerson} * {population}) / {casesAvertedErrorMinus}"],
-                "colsminus": ["(({priceDelivery} + {priceNetPyrrole}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100 + 3 * {priceIRSPerPerson} * {population}) / {casesAvertedErrorPlus}"],
+                "cols": ["(({priceDelivery} + {priceNetPyrrole}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100 + 3 * {priceIRSPerPerson} * {population}) / ({casesAvertedErrorMinus} * 3)"],
+                "colsminus": ["(({priceDelivery} + {priceNetPyrrole}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100 + 3 * {priceIRSPerPerson} * {population}) / ({casesAvertedErrorPlus} * 3)"],
                 "visible": true,
                 "thickness": 1.5,
                 "width": 0,

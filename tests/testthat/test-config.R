@@ -3,7 +3,7 @@ context("config")
 get_costs_per_cases_averted <- function(casesAvertedField = "casesAverted") {
   input <- get_input()
   total_costs <- get_expected_total_costs()
-  lapply(total_costs, function(x) x/input[[casesAvertedField]])
+  lapply(total_costs, function(x) x/(input[[casesAvertedField]] * 3))
 }
 
 evaluate <- function(formula) {
@@ -39,7 +39,7 @@ test_that("cost per case graph config formulas give correct results", {
 test_that("cases averted vs costs graph config series formulas give correct results", {
   json <- jsonlite::fromJSON(mintr_path("json/graph_cost_cases_averted_config.json"))
   formulas <- json$series$y_formula
-  costs <- get_expected_total_costs()
+  costs <- get_expected_costs_per_1000()
 
   none <- formulas[[1]]
   expect_equal(evaluate(none), costs$costs_N0)
@@ -59,12 +59,29 @@ test_that("cases averted vs costs graph config series formulas give correct resu
   expect_equal(evaluate(pyrrole_IRS), costs$costs_N3_S1)
 })
 
+test_that("cases averted vs costs graph config series x error formulas give correct results", {
+  json <- jsonlite::fromJSON(mintr_path("json/graph_cost_cases_averted_config.json"))
+  plus_formulas <- json$series$error_x$cols
+  minus_formulas <- json$series$error_x$cols_minus
+  input <- get_input()
+  
+  lapply(plus_formulas, function(x) expect_equal(evaluate(x), input$casesAvertedPer1000ErrorPlus * 3))
+  lapply(minus_formulas, function(x) expect_equal(evaluate(x), input$casesAvertedPer1000ErrorMinus * 3))
+})
+
 test_that("cases averted vs costs graph config shape formula gives correct results", {
   json <- jsonlite::fromJSON(mintr_path("json/graph_cost_cases_averted_config.json"))
   budgetAllZones <- json$layout$shapes$y_formula
   
   inputs <- get_input()
   expect_equal(evaluate(budgetAllZones), inputs$budgetAllZones)
+})
+
+test_that("cases averted vs costs graph config x_formula gives correct results", {
+  json <- jsonlite::fromJSON(mintr_path("json/graph_cost_cases_averted_config.json"))
+  inputs <- get_input()
+  x_formula <- json$metadata$x_formula
+  expect_equal(evaluate(x_formula), inputs$casesAvertedPer1000 * 3)
 })
 
 test_that("cost per case graph config contains valid intervention ids", {
@@ -190,14 +207,6 @@ test_that("impact table config contains valid intervention ids", {
   expect_equal(PBO_IRS, mint_intervention(1, 1, "pto"))
   pyrrole_IRS <- ids[[8]]
   expect_equal(pyrrole_IRS, mint_intervention(1, 1, "ig2"))
-})
-
-test_that("impact table config formulas give correct results for cases averted", {
-  json <- jsonlite::fromJSON(mintr_path("json/table_impact_config.json"))
-  input <- get_input()
-  expect_equal(input$casesAverted, input[[json$valueCol[8]]])
-  expect_equal(input$casesAvertedErrorPlus, input[[json$error$plus$valueCol[8]]])
-  expect_equal(input$casesAvertedErrorMinus, input[[json$error$minus$valueCol[8]]])
 })
 
 test_that("cost table config contains valid intervention ids", {

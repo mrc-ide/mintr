@@ -24,17 +24,17 @@
     "format": "0%"
   },
   {
-    "valueCol": "casesAvertedPer1000",
-    "displayName": "Mean cases averted per 1,000 people per year across 3 years",
+    "valueCol": "casesAverted",
+    "displayName": "Total cases averted",
     "error": {
       "minus": {
-        "valueCol": "casesAvertedPer1000ErrorMinus"
+        "valueCol": "casesAvertedErrorMinus"
       },
       "plus": {
-        "valueCol": "casesAvertedPer1000ErrorPlus"
+        "valueCol": "casesAvertedErrorPlus"
       }
     },
-    "transform": "round({} / 10) * 10"
+    "transform": "round({} * 3 / 10) * 10"
   },
   {
     "valueCol": "intervention",
@@ -57,37 +57,37 @@
     "displayName": "Cost per case averted across 3 years",
     "valueTransform": {
       "none": "'reference'",
-      "llin": "(({priceDelivery} + {priceNetStandard}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100) / {casesAverted}",
-      "llin-pbo": "(({priceDelivery} + {priceNetPBO}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100) / {casesAverted}",
-      "pyrrole-pbo": "(({priceDelivery} + {priceNetPyrrole}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100) / {casesAverted}",
-      "irs": "(3 * {priceIRSPerPerson} * {population}) / {casesAverted}",
-      "irs-llin": "(({priceDelivery} + {priceNetStandard}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100 + 3 * {priceIRSPerPerson} * {population}) / {casesAverted}",
-      "irs-llin-pbo": "(({priceDelivery} + {priceNetPBO}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100 + 3 * {priceIRSPerPerson} * {population}) / {casesAverted}",
-      "irs-pyrrole-pbo": "(({priceDelivery} + {priceNetPyrrole}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100 + 3 * {priceIRSPerPerson} * {population}) / {casesAverted}"
+      "llin": "(({priceDelivery} + {priceNetStandard}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100) / ({casesAverted} * 3)",
+      "llin-pbo": "(({priceDelivery} + {priceNetPBO}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100) / ({casesAverted} * 3)",
+      "pyrrole-pbo": "(({priceDelivery} + {priceNetPyrrole}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100) / ({casesAverted} * 3)",
+      "irs": "(3 * {priceIRSPerPerson} * {population}) / ({casesAverted} * 3)",
+      "irs-llin": "(({priceDelivery} + {priceNetStandard}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100 + 3 * {priceIRSPerPerson} * {population}) / ({casesAverted} * 3)",
+      "irs-llin-pbo": "(({priceDelivery} + {priceNetPBO}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100 + 3 * {priceIRSPerPerson} * {population}) / ({casesAverted} * 3)",
+      "irs-pyrrole-pbo": "(({priceDelivery} + {priceNetPyrrole}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100 + 3 * {priceIRSPerPerson} * {population}) / ({casesAverted} * 3)"
     },
     "error": {
       "minus": {
         "valueTransform": {
           "none": "'reference'",
-          "llin": "(({priceDelivery} + {priceNetStandard}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100) / {casesAvertedErrorPlus}",
-          "llin-pbo": "(({priceDelivery} + {priceNetPBO}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100) / {casesAvertedErrorPlus}",
-          "pyrrole-pbo": "(({priceDelivery} + {priceNetPyrrole}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100) / {casesAvertedErrorPlus}",
-          "irs": "(3 * {priceIRSPerPerson} * {population}) / {casesAvertedErrorPlus}",
-          "irs-llin": "(({priceDelivery} + {priceNetStandard}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100 + 3 * {priceIRSPerPerson} * {population}) / {casesAvertedErrorPlus}",
-          "irs-llin-pbo": "(({priceDelivery} + {priceNetPBO}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100 + 3 * {priceIRSPerPerson} * {population}) / {casesAvertedErrorPlus}",
-          "irs-pyrrole-pbo": "(({priceDelivery} + {priceNetPyrrole}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100 + 3 * {priceIRSPerPerson} * {population}) / {casesAvertedErrorPlus}"
+          "llin": "(({priceDelivery} + {priceNetStandard}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100) / ({casesAvertedErrorPlus} * 3)",
+          "llin-pbo": "(({priceDelivery} + {priceNetPBO}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100) / ({casesAvertedErrorPlus} * 3)",
+          "pyrrole-pbo": "(({priceDelivery} + {priceNetPyrrole}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100) / ({casesAvertedErrorPlus} * 3)",
+          "irs": "(3 * {priceIRSPerPerson} * {population}) / ({casesAvertedErrorPlus} * 3)",
+          "irs-llin": "(({priceDelivery} + {priceNetStandard}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100 + 3 * {priceIRSPerPerson} * {population}) / ({casesAvertedErrorPlus} * 3)",
+          "irs-llin-pbo": "(({priceDelivery} + {priceNetPBO}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100 + 3 * {priceIRSPerPerson} * {population}) / ({casesAvertedErrorPlus} * 3)",
+          "irs-pyrrole-pbo": "(({priceDelivery} + {priceNetPyrrole}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100 + 3 * {priceIRSPerPerson} * {population}) / ({casesAvertedErrorPlus} * 3)"
         }
       },
       "plus": {
         "valueTransform": {
           "none": "'reference'",
-          "llin": "(({priceDelivery} + {priceNetStandard}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100) / {casesAvertedErrorMinus}",
-          "llin-pbo": "(({priceDelivery} + {priceNetPBO}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100) / {casesAvertedErrorMinus}",
-          "pyrrole-pbo": "(({priceDelivery} + {priceNetPyrrole}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100) / {casesAvertedErrorMinus}",
-          "irs": "(3 * {priceIRSPerPerson} * {population}) / {casesAvertedErrorMinus}",
-          "irs-llin": "(({priceDelivery} + {priceNetStandard}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100 + 3 * {priceIRSPerPerson} * {population}) / {casesAvertedErrorMinus}",
-          "irs-llin-pbo": "(({priceDelivery} + {priceNetPBO}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100 + 3 * {priceIRSPerPerson} * {population}) / {casesAvertedErrorMinus}",
-          "irs-pyrrole-pbo": "(({priceDelivery} + {priceNetPyrrole}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100 + 3 * {priceIRSPerPerson} * {population}) / {casesAvertedErrorMinus}"
+          "llin": "(({priceDelivery} + {priceNetStandard}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100) / ({casesAvertedErrorMinus} * 3)",
+          "llin-pbo": "(({priceDelivery} + {priceNetPBO}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100) / ({casesAvertedErrorMinus} * 3)",
+          "pyrrole-pbo": "(({priceDelivery} + {priceNetPyrrole}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100) / ({casesAvertedErrorMinus} * 3)",
+          "irs": "(3 * {priceIRSPerPerson} * {population}) / ({casesAvertedErrorMinus} * 3)",
+          "irs-llin": "(({priceDelivery} + {priceNetStandard}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100 + 3 * {priceIRSPerPerson} * {population}) / ({casesAvertedErrorMinus} * 3)",
+          "irs-llin-pbo": "(({priceDelivery} + {priceNetPBO}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100 + 3 * {priceIRSPerPerson} * {population}) / ({casesAvertedErrorMinus} * 3)",
+          "irs-pyrrole-pbo": "(({priceDelivery} + {priceNetPyrrole}) * {population} / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100 + 3 * {priceIRSPerPerson} * {population}) / ({casesAvertedErrorMinus} * 3)"
         }
       }
     },

@@ -2,7 +2,7 @@
 
 **Graphs**
 
-The first figure shows total costs and cases averted following a 3-year intervention package introduced at year 0.
+The first figure shows costs per 1,000 people and cases averted per 1,000 people following a 3-year intervention package introduced at year 0.
 
 The absolute costs are predicted and shown for each intervention package. The summary information provided by the user is shown to indicate the ITN usage expected in
 the zone and the expected IRS coverage to be achieved in the zone.
@@ -18,8 +18,7 @@ and the direction of change is reflective of reality according to model checks a
 *   Interventions: The ITN and IRS combination used for the scenario.
 *   Net use (%): The percentage of people using a ITN the previous night.
 *   IRS cover (%): The percentage of people sleeping in an IRS protected home.
-*   Mean cases averted per 1,000 people per year across 3 years: The predicted number of clinical cases per 1,000 people
-averted by the intervention package, averaged across 3 years, relative to the continuation of the 'do-nothing' scenario.
+*   Total cases averted: Total number of clinical cases averted in the population over 3 years, relative to the 'no intervention' scenario
 *   Total costs (USD): The total cost in USD expected for the product procurement and implementation for the
  intervention package to cover a 3-year period of protection.
 *   Cost per case averted across 3 years: The cost in USD per case averted per 3-year campaign relative to the
