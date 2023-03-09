@@ -1,7 +1,7 @@
 version: '3'
 services:
   mintr:
-    image: mrcide/mintr:${GIT_BRANCH}
+    image: mrcide/mintr:${GIT_SHA}
   mint:
     depends_on:
     - mintr

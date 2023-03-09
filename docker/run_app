@@ -3,6 +3,6 @@ set -ex
 HERE=$(dirname $0)
 . $HERE/common
 
-export MINT_BRANCH=mrc-4039
+export MINT_BRANCH=master
 
 docker-compose up -d

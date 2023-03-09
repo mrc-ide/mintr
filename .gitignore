@@ -1,4 +1,5 @@
 .idea
+.RData
 docs
 js/node_modules
 js/bundle*js
