@@ -92,3 +92,23 @@ export const expectOptionLabelAndName = async (optionRow, expectedLabel, expecte
     const name = await optionRow.locator(controlElementType).getAttribute("name");
     await expect(name).toBe(expectedName)
 };
+
+export const expectPlotDataSummarySeries = async (summary, expectedId, expectedName, expectedType, expectedCount,
+                                                  expectedXFirst, expectedXLast, expectedYMin, expectedYMax, yTolerance = null) => {
+    await expect(await summary.getAttribute("name")).toBe(expectedName);
+    await expect(await summary.getAttribute("id")).toBe(expectedId);
+    await expect(await summary.getAttribute("type")).toBe(expectedType);
+    await expect(parseInt(await summary.getAttribute("count"))).toBe(expectedCount);
+    await expect(await summary.getAttribute("x-first")).toBe(expectedXFirst);
+    await expect(await summary.getAttribute("x-last")).toBe(expectedXLast);
+    const yMin = parseFloat(await summary.getAttribute("y-min"));
+    const yMax = parseFloat(await summary.getAttribute("y-max"));
+    if (yTolerance) {
+        expect(approximatelyEqual(yMin, expectedYMin, yTolerance)).toBe(true);
+        expect(approximatelyEqual(yMax, expectedYMax, yTolerance)).toBe(true);
+
+    } else {
+        expect(yMin).toBe(expectedYMin);
+        expect(yMax).toBe(expectedYMax);
+    }
+};
