@@ -5,4 +5,4 @@ HERE=$(dirname $0)
 
 export MINT_BRANCH=master
 
-docker-compose up -d
+docker-compose up -d --quiet-pull

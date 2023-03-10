@@ -1,7 +1,7 @@
 {
     "controlSections": [
         {
-            "label": "Intervention coverage potential",
+            "label": "Future intervention",
             "controlGroups": [
                 {
                     "controls": [
@@ -64,7 +64,8 @@
                             "label": "When planning procurement, what number of people per net is used?",
                             "type": "number",
                             "required": true,
-                            "value": 1.8
+                            "value": 1.8,
+                            "step": 0.01
                         }
                     ]
                 },
@@ -93,7 +94,8 @@
                             "label": "Price of pyrethroid LLIN ($USD)",
                             "type": "number",
                             "required": true,
-                            "value": 1.58
+                            "value": 2.00,
+                            "step": 0.01
                         }
                     ]
                 },
@@ -104,7 +106,8 @@
                             "label": "Price of pyrethroid-PBO ITN ($USD)",
                             "type": "number",
                             "required": true,
-                            "value": 2.3
+                            "value": 2.50,
+                            "step": 0.01
                         }
                     ]
                 },
@@ -115,7 +118,8 @@
                             "label": "Price of pyrethroid-pyrrole ITN ($USD)",
                             "type": "number",
                             "required": true,
-                            "value": 3.2
+                            "value": 3.00,
+                            "step": 0.01
                         }
                     ]
                 },
@@ -126,7 +130,8 @@
                             "label": "ITN mass distribution campaign delivery cost per person ($USD)",
                             "type": "number",
                             "required": true,
-                            "value": 2.75
+                            "value": 2.75,
+                            "step": 0.01
                         }
                     ]
                 },
@@ -138,13 +143,14 @@
                             "type": "number",
                             "required": true,
                             "value": 5.73,
+                            "step": 0.01,
                             "helpText": "Include the average cost for both the IRS product and implementation of IRS. If different IRS products are used in different years, please average the product costs and provide an annual cost per person protected by IRS (in $USD)"
                         }
                     ]
                 }
             ],
             "collapsible": true,
-            "documentation": "<p>The price of different vector control interventions will vary so can be defined by the user in $USD. For simplicity, it is assumed that there is a linear relationship between cost and population coverage, we do not consider inflation in this iteration of the tool.</p><strong>Price of pyrethroid LLIN ($USD)</strong><p>Price per pyrethroid-only ITN (expected to be replaced every 3-years).</p><strong>Price of Pyrethroid-PBO ITN ($USD)</strong><p>Price per Pyrethroid-PBO ITN (expected to be replaced every 3-years). We are uncertain on the durability of this type of net in the absence on longitudinal data, please be aware for your interpretations.</p><strong>Price of Pyrethroid-pyrrole ITN ($USD)</strong><p>Price per Pyrethroid-pyrrole ITN (expected to be replaced every 3-years). We are uncertain on the durability of this type of net in the absence on longitudinal data, please be aware for your interpretations.</p><strong>ITN mass distribution campaign delivery cost per person ($USD)</strong><p>Cost to deliver nets to each person (equivalent for each ITN type). Enough nets are provided to match the number of people per net and the procurement buffer.</p><strong>Annual cost of IRS* per person ($USD)</strong><p>The price per person of long-lasting IRS product averaged for each year. Include the average cost for both the IRS product and implementation of IRS. If different IRS products are used in different years, please average the product costs and provide an annual cost per person protected by IRS (in $USD)</p><p>To compare the cost effectiveness of products, the costs are estimated across a 3-year period to account for the different distribution schedules of net mass campaigns and IRS deployment.</p><p><i>*IRS refers to a long-lasting non-pyrethroid IRS product (impact reflects recent Actellic 300CS and SumiShield products).</i></p>"
+            "documentation": "<p>The price of different vector control interventions will vary so can be defined by the user in $USD. For simplicity, it is assumed that there is a linear relationship between cost and population coverage, we do not consider inflation in this iteration of the tool.</p><strong>Price of pyrethroid LLIN ($USD)</strong><p>Price per pyrethroid-only ITN (expected to be replaced every 3-years).</p><strong>Price of Pyrethroid-PBO ITN ($USD)</strong><p>Price per Pyrethroid-PBO ITN (expected to be replaced every 3-years). We are uncertain on the durability of this type of net in the absence of longitudinal data, please be aware for your interpretations.</p><strong>Price of Pyrethroid-pyrrole ITN ($USD)</strong><p>Price per Pyrethroid-pyrrole ITN (expected to be replaced every 3-years). We are uncertain on the durability of this type of net in the absence on longitudinal data, please be aware for your interpretations.</p><strong>ITN mass distribution campaign delivery cost per person ($USD)</strong><p>Cost to deliver nets to each person (equivalent for each ITN type). Enough nets are provided to match the number of people per net and the procurement buffer.</p><strong>Annual cost of IRS* per person ($USD)</strong><p>The price per person of long-lasting IRS product averaged for each year. Include the average cost for both the IRS product and implementation of IRS. If different IRS products are used in different years, please average the product costs and provide an annual cost per person protected by IRS (in $USD)</p><p>To compare the cost effectiveness of products, the costs are estimated across a 3-year period to account for the different distribution schedules of net mass campaigns and IRS deployment.</p><p><i>*IRS refers to a long-lasting non-pyrethroid IRS product (impact reflects recent Actellic 300CS and SumiShield products).</i></p>"
         }
     ]
 }
