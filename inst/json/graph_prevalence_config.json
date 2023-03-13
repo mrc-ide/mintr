@@ -19,7 +19,7 @@
             "showline": true,
             "autorange": true,
             "rangemode": "tozero",
-            "tickformat": ".1%"
+            "tickformat": ".0%"
         }
     },
     "series": [
