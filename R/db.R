@@ -178,5 +178,5 @@ mintr_db_set_not_applicable_values <- function(data) {
 # The prevalence graph data in the database goes up to 4 years post-intervention
 # but we only actually want to display 3 years
 mintr_db_filter_to_3_years_post_intervention <- function(data) {
-  data[data$month <= 35, ]
+  data[data$month <= 36, ]
 }
