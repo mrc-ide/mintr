@@ -15,7 +15,7 @@ test_that("Can create db", {
                   population = 1000)
   d <- db$get_prevalence(options)
   expect_s3_class(d, "data.frame")
-  expect_equal(nrow(d), 10248) # 61 months * 168 combinations
+  expect_equal(nrow(d), 8232) # 49 months * 168 combinations
   expect_setequal(
     names(d),
     c("month", "netUse", "irsUse", "intervention", "value"))
@@ -217,7 +217,6 @@ test_that("Not applicable values are set correctly", {
   table <- db$get_table(options)
   check_not_applicable_values(table)
 })
-
 
 test_that("can download the db on request", {
   skip_if_offline()

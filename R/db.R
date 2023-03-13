@@ -45,7 +45,8 @@ mintr_db <- R6::R6Class(
       key <- self$get_index(options)
       p <- sprintf(private$path$prevalence, key)
       ret <- readRDS(p)
-      prev <- mintr_db_transform_metabolic(ret, options$metabolic)
+      filtered <- mintr_db_filter_to_3_years_post_intervention(ret)
+      prev <- mintr_db_transform_metabolic(filtered, options$metabolic)
       mintr_db_set_not_applicable_values(prev)
     },
 
@@ -172,4 +173,10 @@ mintr_db_set_not_applicable_values <- function(data) {
   data[data$intervention =="none", ]$netUse <- not_applicable
   data[data$intervention =="none", ]$irsUse <- not_applicable
   data
+}
+
+# The prevalence graph data in the database goes up to 4 years post-intervention
+# but we only actually want to display 3 years
+mintr_db_filter_to_3_years_post_intervention <- function(data) {
+  data[data$month <= 35, ]
 }
