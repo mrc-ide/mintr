@@ -19,6 +19,7 @@ test_that("Can create db", {
   expect_setequal(
     names(d),
     c("month", "netUse", "irsUse", "intervention", "value"))
+  expect_equal(max(d$month), 36) # should filter out the year 4 values
 
   impact <- db$get_impact_docs()
   cost <- db$get_cost_docs()
