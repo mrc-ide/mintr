@@ -164,7 +164,7 @@
             "title": "intervention",
             "showline": true,
             "tickvals": ["llin", "llin-pbo", "pyrrole-pbo", "irs", "irs-llin", "irs-llin-pbo", "irs-pyrrole-pbo"],
-            "ticktext": ["pyr-LLIN", "PBO ITN", "Pyrrole ITN", "IRS", "pyr-LLIN + IRS", "PBO ITN + IRS", "Pyrrole ITN + IRS"],
+            "ticktext": ["Pyr-only ITN", "Pyr-PBO ITN", "Pyr-pyrr ITN", "IRS", "Pyr-only ITN + IRS", "Pyr-PBO ITN + IRS", "Pyr-pyrr ITN + IRS"],
             "autorange": true
         },
         "showlegend": true
