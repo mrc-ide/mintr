@@ -1,5 +1,11 @@
 import { test, expect } from '@playwright/test';
-import {acceptBaseline, newProject, selectCoverageValues, expectPlotDataSummarySeries} from "./helpers";
+import {
+    acceptBaseline,
+    newProject,
+    selectCoverageValues,
+    expectPlotDataSummarySeries,
+    expectBarchartTicks
+} from "./helpers";
 
 test.beforeEach(async ({ page }) => {
     await page.goto("/");
@@ -50,5 +56,10 @@ test("Costs per case averted has expected values", async ({page}) => {
         1, "irs-llin-pbo", "irs-llin-pbo", 26.24, 26.24, 0.01);
     await expectPlotDataSummarySeries(series.nth(6), "irs-pyrrole-pbo", "Pyrethroid-pyrrole ITN with IRS", "bar",
         1, "irs-pyrrole-pbo", "irs-pyrrole-pbo", 26.63, 26.63, 0.01);
+});
+
+test("Costs per case averted has expected bars", async ({page}) => {
+    const secondPlot = await page.locator(":nth-match(div.plotly, 2)");
+    await expectBarchartTicks(secondPlot);
 });
 

@@ -112,3 +112,15 @@ export const expectPlotDataSummarySeries = async (summary, expectedId, expectedN
         expect(yMax).toBe(expectedYMax);
     }
 };
+
+export const expectBarchartTicks = async(plotlyBarchart) => {
+    const ticks = await plotlyBarchart.locator("g.xtick");
+    await expect(ticks).toHaveCount(7);
+    await expect(ticks.nth(0)).toHaveText("Pyr-only ITN");
+    await expect(ticks.nth(1)).toHaveText("Pyr-PBO ITN");
+    await expect(ticks.nth(2)).toHaveText("Pyr-pyrr ITN");
+    await expect(ticks.nth(3)).toHaveText("IRS");
+    await expect(ticks.nth(4)).toHaveText("Pyr-only ITN + IRS");
+    await expect(ticks.nth(5)).toHaveText("Pyr-PBO ITN + IRS");
+    await expect(ticks.nth(6)).toHaveText("Pyr-pyrr ITN + IRS");
+}
