@@ -19,7 +19,7 @@ test("expected intervention options exist", async ({page}) => {
     const interventionsForm = page.locator(":nth-match(.dynamic-form, 2)");
     const rows = await interventionsForm.locator(".row .col-md-6");
     await expectOptionLabelAndName(rows.nth(0), "Expected ITN population use", "netUse");
-    await expectOptionLabelAndName(rows.nth(1), "Expected IRS* coverage", "irsUse");
+    await expectOptionLabelAndName(rows.nth(1), "Expected IRS coverage", "irsUse");
     await expectOptionLabelAndName(rows.nth(2),
         "When planning procurement, what number of people per net is used?", "procurePeoplePerNet", false);
     await expectOptionLabelAndName(rows.nth(3),
@@ -33,7 +33,7 @@ test("expected intervention options exist", async ({page}) => {
     await expectOptionLabelAndName(rows.nth(7),
         "ITN mass distribution campaign delivery cost per person ($USD)", "priceDelivery", false);
     await expectOptionLabelAndName(rows.nth(8),
-        "Annual cost of IRS* per person ($USD)", "priceIRSPerPerson", false);
+        "Annual cost of IRS per person ($USD)", "priceIRSPerPerson", false);
 });
 
 test("price options have expected values and step", async ({page}) => {

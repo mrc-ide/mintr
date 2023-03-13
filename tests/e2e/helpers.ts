@@ -37,12 +37,12 @@ export const testCommonTableValues = async (page) => {
     await expectColumnValues(rows, 0, [
         "No intervention",
         "Pyrethroid LLIN only",
-        "IRS* only",
-        "Pyrethroid LLIN with IRS*",
+        "IRS only",
+        "Pyrethroid LLIN with IRS",
         "Pyrethroid-PBO ITN only",
-        "Pyrethroid-PBO ITN with IRS*",
+        "Pyrethroid-PBO ITN with IRS",
         "Pyrethroid-pyrrole ITN only",
-        "Pyrethroid-pyrrole ITN with IRS*"
+        "Pyrethroid-pyrrole ITN with IRS"
     ]);
 
     // Net Use

@@ -22,7 +22,7 @@ test('impact table has expected columns', async ({ page }) => {
     await expect(await headers.allInnerTexts()).toStrictEqual([
       "Interventions",
       "Net use (%)",
-      "IRS* cover (%)",
+      "IRS cover (%)",
       "Prevalence under 5 years: Year 1 post intervention",
       "Prevalence under 5 years: Year 2 post intervention",
       "Prevalence under 5 years: Year 3 post intervention",

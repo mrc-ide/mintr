@@ -9,7 +9,7 @@
     "layout": {
         "title": "Projected prevalence in under 5 year olds",
         "xaxis": {
-            "title": "years of intervention",
+            "title": "years since intervention",
             "showline": true,
             "tickvals": [12, 24, 36],
             "ticktext": [1, 2, 3]
@@ -53,7 +53,7 @@
         },
         {
             "id": "irs",
-            "name": "IRS* only",
+            "name": "IRS only",
             "type": "lines",
             "line": {
                 "dash": "dot"
@@ -63,7 +63,7 @@
         },
         {
             "id": "irs-llin",
-            "name": "Pyrethroid LLIN with IRS*",
+            "name": "Pyrethroid LLIN with IRS",
             "type": "lines",
             "line": {
                 "dash": "dash"
@@ -73,7 +73,7 @@
         },
         {
             "id": "irs-llin-pbo",
-            "name": "Pyrethroid-PBO ITN with IRS*",
+            "name": "Pyrethroid-PBO ITN with IRS",
             "type": "lines",
             "line": {
                 "dash": "dash"
@@ -83,7 +83,7 @@
         },
         {
             "id": "irs-pyrrole-pbo",
-            "name": "Pyrethroid-pyrrole ITN with IRS*",
+            "name": "Pyrethroid-pyrrole ITN with IRS",
             "type": "lines",
             "line": {
                 "dash": "dash"
