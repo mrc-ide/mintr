@@ -73,7 +73,8 @@
         "valueCol": "reductionInPrevalenceErrorPlus"
       }
     },
-    "transform": "round({}) + '%'"
+    "transform": "round({} / 100)",
+    "format": "0%"
   },
   {
     "valueCol": "casesAvertedPer1000",
@@ -99,7 +100,8 @@
         "valueCol": "reductionInCasesErrorPlus"
       }
     },
-    "transform": "round({}) + '%'"
+    "transform": "round({} / 100)",
+    "format": "0%"
   },
   {
     "valueCol": "meanCases",
