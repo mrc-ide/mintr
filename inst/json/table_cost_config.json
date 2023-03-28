@@ -34,7 +34,7 @@
         "valueCol": "casesAvertedErrorPlus"
       }
     },
-    "transform": "round({} * 3 / 10) * 10"
+    "transform": "round({} * 3)"
   },
   {
     "valueCol": "intervention",

@@ -86,7 +86,7 @@
         "valueCol": "casesAvertedPer1000ErrorPlus"
       }
     },
-    "transform": "round({} / 10) * 10"
+    "transform": "round({})"
   },
   {
     "valueCol": "reductionInCases",
