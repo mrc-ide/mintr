@@ -74,7 +74,6 @@
       }
     },
     "transform": "{}/100"
-    "format": "0%"
   },
   {
     "valueCol": "casesAvertedPer1000",
@@ -101,7 +100,6 @@
       }
     },
     "transform": "{}/100"
-    "format": "0%"
   },
   {
     "valueCol": "meanCases",

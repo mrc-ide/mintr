@@ -3,6 +3,6 @@ set -ex
 HERE=$(dirname $0)
 . $HERE/common
 
-export MINT_BRANCH=master
+export MINT_BRANCH=mrc-4002
 
 docker-compose up -d --quiet-pull
