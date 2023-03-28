@@ -73,7 +73,7 @@
         "valueCol": "reductionInPrevalenceErrorPlus"
       }
     },
-    "format": "0.0"
+    "format": "0%"
   },
   {
     "valueCol": "casesAvertedPer1000",
@@ -90,7 +90,7 @@
   },
   {
     "valueCol": "reductionInCases",
-    "displayName": "Relative reduction in clinical cases across 3 years since intervention (%)",
+    "displayName": "Relative reduction in clinical cases across 3 years since intervention",
     "error": {
       "minus": {
         "valueCol": "reductionInCasesErrorMinus"
@@ -99,7 +99,7 @@
         "valueCol": "reductionInCasesErrorPlus"
       }
     },
-    "format": "0.0"
+    "format": "0%"
   },
   {
     "valueCol": "meanCases",
@@ -112,6 +112,6 @@
         "valueCol": "meanCasesErrorPlus"
       }
     },
-    "format": "0.0000"
+    "format": "0.000"
   }
 ]
