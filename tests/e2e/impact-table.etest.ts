@@ -28,7 +28,7 @@ test('impact table has expected columns', async ({ page }) => {
       "Prevalence under 5 years: Year 3 post intervention",
       "Relative reduction in prevalence at 36 months post intervention",
       "Mean cases averted per 1,000 people annually across 3 years since intervention",
-      "Relative reduction in clinical cases across 3 years since intervention (%)",
+      "Relative reduction in clinical cases across 3 years since intervention",
       "Mean cases per person per year averaged across 3 years"
     ]);
 });
@@ -40,9 +40,9 @@ test("impact table has expected common table values", async ({page}) => {
 
 test("impact table has expected no intervention values", async ({page}) => {
     const firstRow = (await getTableRows(page)).nth(0);
-    await expect(await getTextFromRowCell(firstRow, 6)).toBe("0.0"); // Relative reduction in prevalence
+    await expect(await getTextFromRowCell(firstRow, 6)).toBe("0%"); // Relative reduction in prevalence
     await expect(await getTextFromRowCell(firstRow, 7)).toBe("0"); // Mean cases averted per 1,000
-    await expect(await getTextFromRowCell(firstRow, 8)).toBe("0.0"); // Relative reduction in cases
+    await expect(await getTextFromRowCell(firstRow, 8)).toBe("0%"); // Relative reduction in cases
 });
 
 test("cases averted annually values match total cases averted from costs table", async ({page}) => {

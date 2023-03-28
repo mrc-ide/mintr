@@ -34,7 +34,7 @@
         "valueCol": "prevYear1ErrorPlus"
       }
     },
-    "format": "0.0"
+    "format": "0%"
   },
   {
     "valueCol": "prevYear2",
@@ -47,7 +47,7 @@
         "valueCol": "prevYear2ErrorPlus"
       }
     },
-    "format": "0.0"
+    "format": "0%"
   },
   {
     "valueCol": "prevYear3",
@@ -60,7 +60,7 @@
         "valueCol": "prevYear3ErrorPlus"
       }
     },
-    "format": "0.0"
+    "format": "0%"
   },
   {
     "valueCol": "reductionInPrevalence",
@@ -73,6 +73,7 @@
         "valueCol": "reductionInPrevalenceErrorPlus"
       }
     },
+    "transform": "{}/100"
     "format": "0%"
   },
   {
@@ -99,6 +100,7 @@
         "valueCol": "reductionInCasesErrorPlus"
       }
     },
+    "transform": "{}/100"
     "format": "0%"
   },
   {
