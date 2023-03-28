@@ -73,7 +73,7 @@
         "valueCol": "reductionInPrevalenceErrorPlus"
       }
     },
-    "transform": "round({} / 100)",
+    "transform": "round({}) / 100",
     "format": "0%"
   },
   {
@@ -100,7 +100,7 @@
         "valueCol": "reductionInCasesErrorPlus"
       }
     },
-    "transform": "round({} / 100)",
+    "transform": "round({}) / 100",
     "format": "0%"
   },
   {
