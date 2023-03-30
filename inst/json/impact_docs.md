@@ -41,5 +41,5 @@ may perform well when different assumptions are made.
 
 You can hover the cursor above a value in the graph or table to observe the uncertainty. Here uncertainty is restricted to effects from ITN or IRS interventions.
 
-*\*IRS refers to a long-lasting non-pyrethroid IRS product (impact reflects recent Actellic 300CS and SumiShield products).*
+*IRS refers to a long-lasting non-pyrethroid IRS product (impact reflects recent Actellic 300CS and SumiShield products).*
 

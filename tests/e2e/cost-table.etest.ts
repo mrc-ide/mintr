@@ -23,7 +23,7 @@ test('cost table has expected columns', async ({ page }) => {
     await expect(await headers.allInnerTexts()).toStrictEqual([
         "Interventions",
         "Net use (%)",
-        "IRS* cover (%)",
+        "IRS cover (%)",
         "Total cases averted",
         "Total costs",
         "Cost per case averted across 3 years"

@@ -65,7 +65,7 @@
               {
                   "id": "irs",
                   "y_formula": ["3 * {priceIRSPerPerson} * 1000"],
-                  "name": "IRS* only",
+                  "name": "IRS only",
                   "type": "scatter",
                   "marker": {"color": "purple", "size": 10},
                   "hovertemplate": "%{x}, $%{y:.3s}",
@@ -79,7 +79,7 @@
               {
                   "id": "irs-llin",
                   "y_formula": ["({priceDelivery} + {priceNetStandard}) * 1000 / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100 + 3 * {priceIRSPerPerson} * 1000"],
-                  "name": "Pyrethroid LLIN with IRS*",
+                  "name": "Pyrethroid LLIN with IRS",
                   "type": "scatter",
                   "marker": {"color": "darkred", "size": 10},
                   "hovertemplate": "%{x}, $%{y:.3s}",
@@ -93,7 +93,7 @@
               {
                   "id": "irs-llin-pbo",
                   "y_formula": ["({priceDelivery} + {priceNetPBO}) * 1000 / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100 + 3 * {priceIRSPerPerson} * 1000"],
-                  "name": "Pyrethroid-PBO ITN with IRS*",
+                  "name": "Pyrethroid-PBO ITN with IRS",
                   "type": "scatter",
                   "marker": {"color": "orange", "size": 10},
                   "hovertemplate": "%{x}, $%{y:.3s}",
@@ -107,7 +107,7 @@
               {
                   "id": "irs-pyrrole-pbo",
                   "y_formula": ["({priceDelivery} + {priceNetPyrrole}) * 1000 / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100 + 3 * {priceIRSPerPerson} * 1000"],
-                  "name": "Pyrethroid-pyrrole ITN with IRS*",
+                  "name": "Pyrethroid-pyrrole ITN with IRS",
                   "type": "scatter",
                   "marker": {"color": "limegreen", "size": 10},
                   "hovertemplate": "%{x}, $%{y:.3s}",
