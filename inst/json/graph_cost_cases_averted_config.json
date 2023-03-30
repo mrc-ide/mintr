@@ -23,7 +23,7 @@
               {
                   "id": "llin",
                   "y_formula": ["({priceDelivery} + {priceNetStandard}) * 1000 / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100"],
-                  "name": "Pyrethroid LLIN only",
+                  "name": "Pyrethroid-only ITN only",
                   "type": "scatter",
                   "marker": {"color": "blue", "size": 10},
                   "hovertemplate": "%{x}, $%{y:.3s}",
@@ -79,7 +79,7 @@
               {
                   "id": "irs-llin",
                   "y_formula": ["({priceDelivery} + {priceNetStandard}) * 1000 / {procurePeoplePerNet} * ({procureBuffer} + 100) / 100 + 3 * {priceIRSPerPerson} * 1000"],
-                  "name": "Pyrethroid LLIN with IRS",
+                  "name": "Pyrethroid-only ITN with IRS",
                   "type": "scatter",
                   "marker": {"color": "darkred", "size": 10},
                   "hovertemplate": "%{x}, $%{y:.3s}",

@@ -11,7 +11,7 @@
             "id": "llin",
             "y_formula": ["round({casesAvertedPer1000} / 10) * 10"],
             "type": "bar",
-            "name": "Pyrethroid LLIN only",
+            "name": "Pyrethroid-only ITN only",
             "marker": {
                 "color": "blue",
                 "opacity": 0.5
@@ -90,7 +90,7 @@
             "x": ["irs-llin"],
             "id": "irs-llin",
             "y_formula": ["round({casesAvertedPer1000} / 10) * 10"],
-            "name": "Pyrethroid LLIN with IRS",
+            "name": "Pyrethroid-only ITN with IRS",
             "type": "bar",
             "marker": {
                 "color": "darkred",

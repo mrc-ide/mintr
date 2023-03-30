@@ -25,7 +25,7 @@ test("expected intervention options exist", async ({page}) => {
     await expectOptionLabelAndName(rows.nth(3),
         "What percentage is your procurement buffer, if used? (%)", "procureBuffer", false);
     await expectOptionLabelAndName(rows.nth(4),
-        "Price of pyrethroid LLIN ($USD)", "priceNetStandard", false);
+        "Price of pyrethroid-only ITN ($USD)", "priceNetStandard", false);
     await expectOptionLabelAndName(rows.nth(5),
         "Price of pyrethroid-PBO ITN ($USD)", "priceNetPBO", false);
     await expectOptionLabelAndName(rows.nth(6),

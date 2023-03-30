@@ -32,7 +32,7 @@
         },
         {
             "id": "llin",
-            "name": "Pyrethroid LLIN only",
+            "name": "Pyrethroid-only ITN only",
             "type": "lines",
             "marker": {"color": "blue"},
             "hovertemplate": "%{y:.1%}"
@@ -63,7 +63,7 @@
         },
         {
             "id": "irs-llin",
-            "name": "Pyrethroid LLIN with IRS",
+            "name": "Pyrethroid-only ITN with IRS",
             "type": "lines",
             "line": {
                 "dash": "dash"
