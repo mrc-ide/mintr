@@ -4,11 +4,11 @@
     "displayName": "Interventions",
     "valueTransform": {
       "none": "'No intervention'",
-      "llin": "'Pyrethroid LLIN only'",
+      "llin": "'Pyrethroid-only ITN only'",
       "llin-pbo": "'Pyrethroid-PBO ITN only'",
       "pyrrole-pbo": "'Pyrethroid-pyrrole ITN only'",
       "irs": "'IRS only'",
-      "irs-llin": "'Pyrethroid LLIN with IRS'",
+      "irs-llin": "'Pyrethroid-only ITN with IRS'",
       "irs-llin-pbo": "'Pyrethroid-PBO ITN with IRS'",
       "irs-pyrrole-pbo": "'Pyrethroid-pyrrole ITN with IRS'"
     }
