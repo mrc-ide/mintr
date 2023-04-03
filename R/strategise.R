@@ -25,7 +25,7 @@ get_intervention_data <- function(baseline_settings, intervention_settings, db) 
   rows <- table$intervention == "none"
   if (intervention_settings$netUse != "0") {
     rows <- rows | (
-      table$intervention %in% c("llin", "llin-pbo") &
+      table$intervention %in% c("llin", "llin-pbo", "pyrrole-pbo") &
       table$netUse == intervention_settings$netUse &
       table$irsUse == "n/a"
     )
@@ -40,7 +40,7 @@ get_intervention_data <- function(baseline_settings, intervention_settings, db) 
   if (intervention_settings$netUse != "0"
     && intervention_settings$irsUse != "0") {
     rows <- rows | (
-      table$intervention %in% c("irs-llin", "irs-llin-pbo") &
+      table$intervention %in% c("irs-llin", "irs-llin-pbo", "irs-pyrrole-pbo") &
       table$netUse == intervention_settings$netUse &
       table$irsUse == intervention_settings$irsUse
     )
