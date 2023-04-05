@@ -40,11 +40,6 @@ jobs:
 
       - uses: r-lib/actions/setup-pandoc@v1
 
-      - name: Install system dependencies
-        if: runner.os == 'macOS'
-        run: |
-          brew install v8
-
       - name: Query dependencies
         run: |
           install.packages('remotes')
