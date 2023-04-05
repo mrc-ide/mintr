@@ -1,6 +1,6 @@
 mintr_db_download <- function(path, quiet = FALSE) {
   version <- mintr_data_version()
-  root <- "https://mrcdata.dide.ic.ac.uk/mint"
+  root <- "https://github.com/mrc-ide/mintr/releases/download/data-20230208"
   url <- sprintf("%s/%s.tar", root, version)
   dir.create(path, FALSE, TRUE)
   path_tar <- file.path(path, basename(url))
