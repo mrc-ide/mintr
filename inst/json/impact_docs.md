@@ -7,7 +7,7 @@ The first figure shows how prevalence is predicted to change given an interventi
 
 Lines show either:
 
-*   a 'do-nothing' scenario where interventions are not replaced (grey)
+*   a no intervention scenario where interventions are not replaced (grey)
 *   continuation of Pyrethroid-only ITNs (blue)
 *   a switch to Pyrethroid-PBO ITNs (green)
 *   a switch to Pyrethroid-pyrrole ITNs (dark green) 
@@ -16,7 +16,7 @@ Lines show either:
 *   a switch to Pyrethroid-PBO ITNs plus additional IRS at a coverage determined by the user (orange)
 *   or a switch to Pyrethroid-pyrrole ITNs plus additional IRS at a coverage determined by the user (lime green) 
 
-In the second figure, the bars indicate the same intervention packages as above relative to the 'do-nothing' scenario.
+In the second figure, the bars indicate the same intervention packages as above relative to the no intervention scenario.
 
 The impact figures present the best achievable option for the zones without consideration of cost. The impact table
  presents the estimated numbers for these estimates. Please note that these are not necessarily accurate but the degree
@@ -34,9 +34,9 @@ may perform well when different assumptions are made.
 *   Prevalence under 5 years: Year 1 post intervention: The prevalence in children of 6-months to 5 years of age one year after the intervention package is implemented.
 *   Prevalence under 5 years: Year 2 post intervention: The prevalence in children of 6-months to 5 years of age two years after the intervention package is implemented.
 *   Prevalence under 5 years: Year 3 post intervention: The prevalence in children of 6-months to 5 years of age three years after the intervention package is implemented.
-*   Relative reduction in prevalence at 36 months post intervention: The relative efficacy of the investigated intervention package against the 'do-nothing' scenario at 3-years post switching to the alternative interventions.
-*   Mean cases averted per 1,000 people annually across 3 years since intervention: The mean number of clinical cases averted annually per 1,000 people per year given the population size inputted and relative to the 'do-nothing' scenario.
-*   Relative reduction in clinical cases across 3 years since intervention (%): The percentage-efficacy of the investigated intervention package against clinical cases relative to the 'do-nothing' scenario.
+*   Relative reduction in prevalence across 36 months post intervention: The relative efficacy of the investigated intervention package against the no intervention scenario across 3-years post switching to the alternative interventions.
+*   Mean cases averted per 1,000 people annually across 3 years since intervention: The mean number of clinical cases averted per 1,000 people per year given the population size provided by the user and relative to the no intervention scenario.
+*   Relative reduction in clinical cases across 3 years since intervention (%): The percentage-efficacy of the investigated intervention package against clinical cases relative to the no intervention scenario.
 *   Mean cases per person per year averaged across 3 years: The predicted number of clinical cases per person, averaged across 3 years since intervention.
 
 You can hover the cursor above a value in the graph or table to observe the uncertainty. Here uncertainty is restricted to effects from ITN or IRS interventions.
