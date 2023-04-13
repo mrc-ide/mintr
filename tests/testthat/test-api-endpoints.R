@@ -53,6 +53,12 @@ test_that("baseline_options", {
   expect_equal(res_api$body, res_endpoint$body)
 })
 
+test_that("baseline options are valid for schema", {
+  res <- target_baseline_options()
+  schema <- read_json(mintr_path("schema/DynamicFormOptions.schema.json"))
+  expect_equal(jsonvalidate::json_validate(res, schema, error = TRUE), TRUE)
+})
+
 
 test_that("graph prevalence config", {
   res <- target_graph_prevalence_config()
@@ -224,6 +230,11 @@ test_that("intervention options", {
   expect_equal(res_api$body, res_endpoint$body)
 })
 
+test_that("intervention options are valid for schema", {
+  res <- target_intervention_options()
+  schema <- read_json(mintr_path("schema/DynamicFormOptions.schema.json"))
+  expect_equal(jsonvalidate::json_validate(res, schema, error = TRUE), TRUE)
+})
 
 test_that("graph cases averted config", {
   res <- target_graph_cases_averted_config()
