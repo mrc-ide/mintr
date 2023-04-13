@@ -74,6 +74,9 @@
                 "priceNetPBO": {
                   "type": "number"
                 },
+                "priceNetPyrrole":{
+                  "type": "number"
+                },
                 "priceNetStandard": {
                   "type": "number"
                 },
@@ -92,6 +95,7 @@
                 "procureBuffer",
                 "priceDelivery",
                 "priceNetPBO",
+                "priceNetPyrrole",
                 "priceNetStandard",
                 "priceIRSPerPerson",
                 "netUse",

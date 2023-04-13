@@ -309,6 +309,7 @@ test_that("strategise", {
     priceDelivery = 3,
     priceNetStandard = 4,
     priceNetPBO = 5,
+    priceNetPyrrole = 6,
     priceIRSPerPerson = 6
   )
   json <- jsonlite::toJSON(list(
