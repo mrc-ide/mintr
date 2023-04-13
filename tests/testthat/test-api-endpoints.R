@@ -19,6 +19,7 @@ test_that("root endpoint", {
   expect_true(res_endpoint$validated)
 })
 
+
 test_that("baseline options have valid defaults", {
   res <- target_baseline_options()
   dat <- jsonlite::fromJSON(res, FALSE)
@@ -53,6 +54,7 @@ test_that("baseline_options", {
   expect_equal(res_api$status, 200)
   expect_equal(res_api$body, res_endpoint$body)
 })
+
 
 test_that("graph prevalence config", {
   res <- target_graph_prevalence_config()
@@ -223,6 +225,7 @@ test_that("intervention options", {
   expect_equal(res_api$status, 200)
   expect_equal(res_api$body, res_endpoint$body)
 })
+
 
 test_that("graph cases averted config", {
   res <- target_graph_cases_averted_config()
