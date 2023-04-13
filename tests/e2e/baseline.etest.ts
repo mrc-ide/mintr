@@ -16,4 +16,5 @@ test("expected baseline options exist", async ({page}) => {
     await expectOptionLabelAndName(rows.nth(5), "Level of pyrethroid resistance", "levelOfResistance");
     await expectOptionLabelAndName(rows.nth(6), "Evidence of PBO synergy", "metabolic");
     await expectOptionLabelAndName(rows.nth(7), "ITN population usage in last survey (%)", "itnUsage");
+    await expectOptionLabelAndName(rows.nth(8), "IRS population coverage in last survey (%)", "itnUsage");
 });
