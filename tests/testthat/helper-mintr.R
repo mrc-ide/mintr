@@ -1,4 +1,4 @@
-Sys.setenv(PKGAPI_VALIDATE = "true")
+Sys.setenv(PORCELAIN_VALIDATE = "true")
 
 mintr_test_db <- function() {
   mintr_db_open("data", get_compiled_docs())

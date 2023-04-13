@@ -15,6 +15,8 @@ test_that("root endpoint", {
   res_api <- api$request("GET", "/")
   expect_equal(res_api$status, 200)
   expect_equal(res_api$body, res_endpoint$body)
+  
+  expect_true(res_endpoint$validated)
 })
 
 
