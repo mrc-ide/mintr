@@ -28,7 +28,7 @@ test('impact table has expected columns', async ({ page }) => {
       "Prevalence under 5 years: Year 1 post intervention",
       "Prevalence under 5 years: Year 2 post intervention",
       "Prevalence under 5 years: Year 3 post intervention",
-      "Relative reduction in prevalence across 36 months post intervention",
+      "Relative reduction in prevalence at 36 months post intervention",
       "Mean cases averted per 1,000 people annually across 3 years since intervention",
       "Relative reduction in clinical cases across 3 years since intervention",
       "Mean cases per person per year averaged across 3 years"
