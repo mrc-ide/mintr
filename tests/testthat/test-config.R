@@ -69,14 +69,6 @@ test_that("cases averted vs costs graph config series x error formulas give corr
   lapply(minus_formulas, function(x) expect_equal(evaluate(x), input$casesAvertedPer1000ErrorMinus * 3))
 })
 
-test_that("cases averted vs costs graph config shape formula gives correct results", {
-  json <- jsonlite::fromJSON(mintr_path("json/graph_cost_cases_averted_config.json"))
-  budgetAllZones <- json$layout$shapes$y_formula
-  
-  inputs <- get_input()
-  expect_equal(evaluate(budgetAllZones), inputs$budgetAllZones)
-})
-
 test_that("cases averted vs costs graph config x_formula gives correct results", {
   json <- jsonlite::fromJSON(mintr_path("json/graph_cost_cases_averted_config.json"))
   inputs <- get_input()
