@@ -64,7 +64,7 @@
   },
   {
     "valueCol": "reductionInPrevalence",
-    "displayName": "Relative reduction in prevalence at 36 months post intervention",
+    "displayName": "Relative reduction in prevalence across 36 months post intervention",
     "error": {
       "minus": {
         "valueCol": "reductionInPrevalenceErrorMinus"

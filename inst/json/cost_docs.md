@@ -22,7 +22,7 @@ and the direction of change is reflective of reality according to model checks a
 *   Total costs (USD): The total cost in USD expected for the product procurement and implementation for the
  intervention package to cover a 3-year period of protection.
 *   Cost per case averted across 3 years: The cost in USD per case averted per 3-year campaign relative to the
-'do-nothing' scenario.
+no intervention scenario.
 
 You can hover the cursor above a value in the graph or table to observe the uncertainty. Here uncertainty is restricted to effects from ITN or IRS interventions.
 
