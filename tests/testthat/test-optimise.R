@@ -3,16 +3,16 @@ get_data <- function() {
     ~zone, ~intervention,                  ~cost,            ~cases_averted,
     "A",   "No intervention",              0,                0,
     "A",   "IRS only",                     2107590,          357880.968553733,
-    "A",   "Pyrethroid LLIN only",         351510.8855,      13119.7945853333,
-    "A",   "Pyrethroid-PBO LLIN only",     410096.033083333, 45938.0737261667,
-    "A",   "Pyrethroid LLIN with IRS",     2459100.8855,     354230.41074385,
-    "A",   "Pyrethroid-PBO LLIN with IRS", 2517686.03308333, 356708.6871857,
+    "A",   "Pyrethroid-only ITN only",         351510.8855,      13119.7945853333,
+    "A",   "Pyrethroid-PBO ITN only",     410096.033083333, 45938.0737261667,
+    "A",   "Pyrethroid-only ITN with IRS",     2459100.8855,     354230.41074385,
+    "A",   "Pyrethroid-PBO ITN with IRS", 2517686.03308333, 356708.6871857,
     "B",   "No intervention",              0,                0,
     "B",   "IRS only",                     210750,           22701.5340775,
-    "B",   "Pyrethroid LLIN only",         35149.5875,       8481.55158091667,
-    "B",   "Pyrethroid-PBO LLIN only",     41007.8520833333, 11145.2462262917,
-    "B",   "Pyrethroid LLIN with IRS",     245899.5875,      22856.8245007917,
-    "B",   "Pyrethroid-PBO LLIN with IRS", 251757.852083333, 23705.0551284583
+    "B",   "Pyrethroid-only ITN only",         35149.5875,       8481.55158091667,
+    "B",   "Pyrethroid-PBO ITN only",     41007.8520833333, 11145.2462262917,
+    "B",   "Pyrethroid-only ITN with IRS",     245899.5875,      22856.8245007917,
+    "B",   "Pyrethroid-PBO ITN with IRS", 251757.852083333, 23705.0551284583
   )
 }
 

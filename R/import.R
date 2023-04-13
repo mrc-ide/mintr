@@ -1,200 +1,21 @@
-## Process raw data; this will be called during the docker image build
-mintr_db_process <- function(path) {
-  raw <- jsonlite::read_json(mintr_path("data.json"))
-  paths <- mintr_db_paths(path)
-  interventions <- raw$interventions
-
-  unlink(paths$index)
-  unlink(paths$ignore)
-  unlink(dirname(paths$prevalence), recursive = TRUE)
-  unlink(dirname(paths$table), recursive = TRUE)
-
-  message("Processing index")
-  path_index_raw <- file.path(path, raw$directory, raw$files$index)
-  index <- import_translate_index(readRDS(path_index_raw))
-  ignore <- mintr_db_check_index(index)
-
-  saveRDS(index, paths$index)
-  saveRDS(ignore, paths$ignore)
-
-  message("Processing prevalence")
-  path_prevalence_raw <- file.path(path, raw$directory, raw$files$prevalence)
-  prevalence <- mintr_db_process_prevalence(readRDS(path_prevalence_raw),
-                                            interventions)
-
-  mintr_db_check_prevalence(index, prevalence)
-
-  message("Writing prevalence")
-  dir.create(dirname(paths$prevalence), FALSE, TRUE)
-  idx <- split(seq_len(nrow(prevalence)), prevalence$index)
-  ## Do int->char conversion (rather than char->int) as it won't fail
-  ## and give a more informative message on corrupt data
-  stopifnot(setequal(as.character(index$index), names(idx)))
-
-  for (i in index$index) {
-    d <- prevalence[idx[[i]], !(names(prevalence) %in% c("index", "netType"))]
-    rownames(d) <- NULL
-    saveRDS(d, sprintf(paths$prevalence, i))
+mintr_db_download <- function(path, quiet = FALSE) {
+  version <- mintr_data_version()
+  root <- "https://github.com/mrc-ide/mintr/releases/download/"
+  url <- sprintf("%s/data-%s/%s.tar", root, version, version)
+  dir.create(path, FALSE, TRUE)
+  path_tar <- file.path(path, basename(url))
+  if (!file.exists(path_tar)) {
+    download_file(url, path_tar, quiet = quiet)
   }
-
-  message("Processing table")
-  path_table_raw <- file.path(path, raw$directory, raw$files$table)
-  table <- readRDS(path_table_raw)
-
-  tr <- c(netUse = "switch_nets",
-          irsUse = "switch_irs",
-          netType = "NET_type",
-          casesAverted = "cases_averted",
-          prevYear1 = "prev_1_yr_post",
-          prevYear2 = "prev_2_yr_post",
-          prevYear3 = "prev_3_yr_post",
-          reductionInPrevalence = "relative_reduction_in_prevalence",
-          reductionInCases = "relative_reduction_in_cases",
-          meanCases = "cases_per_person_3_years")
-  table <- rename(table, unname(tr), names(tr))
-
-  ## Check that all cases_averted values are non-negative (see mrc-2206)
-  stopifnot(table$casesAverted >= 0)
-
-  ## At this point casesAverted is really over 3 years and is cases
-  ## averted per person. This number can be greater than one as a
-  ## person can have more than one case per year. We remove the year
-  ## effect first:
-  table$casesAverted <- table$casesAverted / 3
-
-  ## Then compute the "per 1000" case before the uncertainty calculation:
-  table$casesAvertedPer1000 <- round(table$casesAverted * 1000)
-
-  ## Convert these into as percentages, rounded to the nearest d.p.
-  table$reductionInCases <- round(table$reductionInCases * 100, 1)
-  table$reductionInPrevalence <- round(table$reductionInPrevalence * 100, 1)
-
-  t_low <- table[table$uncertainty == "low", ]
-  t_high <- table[table$uncertainty == "high", ]
-  table <- table[table$uncertainty == "mean", ]
-  ## Check that our tables align so that the uncertainty calculations
-  ## can be added:
-  rownames(table) <- rownames(t_low) <- rownames(t_high) <- NULL
-  v_index <- c("index", "netUse", "irsUse", "netType", "intervention")
-  stopifnot(identical(table[v_index], t_low[v_index]),
-            identical(table[v_index], t_high[v_index]))
-
-  v_uncertainty <- c("casesAverted",
-                     "casesAvertedPer1000",
-                     "prevYear1",
-                     "prevYear2",
-                     "prevYear3",
-                     "reductionInPrevalence",
-                     "reductionInCases",
-                     "meanCases")
-  for (v in v_uncertainty) {
-    ## Re-order confidence values and extend bounds to include mean if necessary (mrc-2193)
-    low_high_mean <- cbind(t_low[[v]], t_high[[v]], table[[v]])
-    table[[paste0(v, "ErrorMinus")]] <- apply(low_high_mean, 1, min)
-    table[[paste0(v, "ErrorPlus")]]  <- apply(low_high_mean, 1, max)
-  }
-
-  table$netType <- relevel(table$netType, c(std = 1, pto = 2))
-  table$intervention <- relevel(table$intervention, interventions)
-
-  drop <- c("uncertainty", grep("_", names(table), value = TRUE))
-  table <- table[setdiff(names(table), drop)]
-
-  message("Writing table")
-  dir.create(dirname(paths$table), FALSE, TRUE)
-  idx <- split(seq_len(nrow(table)), table$index)
-  stopifnot(setequal(as.character(index$index), names(idx)))
-  for (i in index$index) {
-    d <- table[idx[[i]], !(names(table) %in% c("index", "netType"))]
-    rownames(d) <- NULL
-    dest <- sprintf(paths$table, i)
-    saveRDS(d, dest)
-  }
-}
-
-
-## Download raw data; will be called in the docker image build
-mintr_db_download <- function(path) {
-  info <- jsonlite::read_json(mintr_path("data.json"))
-
-  dest <- file.path(path, info$directory)
+  dest <- file.path(path, version)
+  unlink(dest, FALSE, TRUE)
   dir.create(dest, FALSE, TRUE)
-  for (f in info$files) {
-    if (!file.exists(file.path(dest, f))) {
-      message(sprintf("Downloading '%s'", f))
-      download_file(file.path(info$root, info$directory, f),
-                    file.path(dest, f))
-    }
-  }
-  lapply(info$files, function(f) file.path(path, info$directory, f))
-  invisible(file.path(path, info$directory))
+  untar(path_tar, exdir = dest)
+  unlink(path_tar)
+  invisible(dest)
 }
 
 
-## Worked out with Arran by looking at their data
-import_translate_index <- function(index) {
-  remap <- list(
-    list(
-      from = "res1",
-      to = "levelOfResistance",
-      map = c("0%" = 0, "20%" = 20, "40%" = 40,
-              "60%" = 60, "80%" = 80, "100%" = 100)),
-    list(
-      from = "season",
-      to = "seasonalityOfTransmission",
-      map = c(seasonal = 1, perennial = 2)),
-    list(
-      from = "endem",
-      to = "currentPrevalence",
-      map = c("5%" = 0.05, "10%" = 0.1, "20%" = 0.2, "30%" = 0.3, "40%" = 0.4,
-              "50%" = 0.5, "60%" = 0.6)),
-    list(
-      from = "phi",
-      to = "bitingIndoors",
-      map = c(high = 0.97, low = 0.78)),
-    list(
-      from = "Q0",
-      to = "bitingPeople",
-      map = c(high = 0.92, low = 0.74)),
-    list(
-      from = "nets",
-      to = "itnUsage",
-      map = c("0%" = 0.0, "20%" = 0.2, "40%" = 0.4,
-              "60%" = 0.6, "80%" = 0.8)),
-    list(
-      from = "sprays",
-      to = "sprayInput",
-      map = c("0%" = 0.0, "80%" = 0.8)))
-
-  for (x in remap) {
-    index <- rename(index, x$from, x$to)
-    index[[x$to]] <- relevel(index[[x$to]], x$map)
-  }
-
-  index
-}
-
-mintr_db_docker <- function(path) {
-  path_downloads <- mintr_db_download(path)
-  mintr_db_process(path)
-
-  ## Remove intermediate and derived files so that we get something
-  ## nice and small to keep in the docker image:
-  unlink(path_downloads, recursive = TRUE)
-}
-
-
-mintr_db_process_prevalence <- function(prevalence, interventions) {
-  i <- order(prevalence$index)
-  prevalence <- prevalence[i, ]
-  rownames(prevalence) <- NULL
-
-  tr <- c(netUse = "switch_nets",
-          irsUse = "switch_irs",
-          netType = "NET_TYPE")
-  prevalence <- rename(prevalence, unname(tr), names(tr))
-  prevalence$netType <- relevel(prevalence$netType, c(std = 1, pto = 2))
-  prevalence$intervention <- relevel(prevalence$intervention, interventions)
-  prevalence$year <- NULL
-  prevalence
+mintr_data_version <- function() {
+  readLines(mintr_path("version"))
 }

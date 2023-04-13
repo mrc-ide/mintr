@@ -28,7 +28,7 @@ Schema: [DynamicFormOptions.schema.json](./DynamicFormOptions.schema.json)
         "controls": [
            {
              "name": "population",
-             "label": "Population Size",
+             "label": "Size of population at risk",
              "type": "number",
              "required": true,
              "value": 1000,

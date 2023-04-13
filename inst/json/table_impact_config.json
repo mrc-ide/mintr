@@ -4,11 +4,13 @@
     "displayName": "Interventions",
     "valueTransform": {
       "none": "'No intervention'",
-      "llin": "'Pyrethroid LLIN only'",
+      "llin": "'Pyrethroid-only ITN only'",
       "llin-pbo": "'Pyrethroid-PBO ITN only'",
-      "irs": "'IRS* only'",
-      "irs-llin": "'Pyrethroid LLIN with IRS*'",
-      "irs-llin-pbo": "'Pyrethroid-PBO ITN with IRS*'"
+      "pyrrole-pbo": "'Pyrethroid-pyrrole ITN only'",
+      "irs": "'IRS only'",
+      "irs-llin": "'Pyrethroid-only ITN with IRS'",
+      "irs-llin-pbo": "'Pyrethroid-PBO ITN with IRS'",
+      "irs-pyrrole-pbo": "'Pyrethroid-pyrrole ITN with IRS'"
     }
   },
   {
@@ -18,7 +20,7 @@
   },
   {
     "valueCol": "irsUse",
-    "displayName": "IRS* cover (%)",
+    "displayName": "IRS cover (%)",
     "format": "0%"
   },
   {
@@ -32,7 +34,7 @@
         "valueCol": "prevYear1ErrorPlus"
       }
     },
-    "format": "0.0"
+    "format": "0%"
   },
   {
     "valueCol": "prevYear2",
@@ -45,7 +47,7 @@
         "valueCol": "prevYear2ErrorPlus"
       }
     },
-    "format": "0.0"
+    "format": "0%"
   },
   {
     "valueCol": "prevYear3",
@@ -58,11 +60,11 @@
         "valueCol": "prevYear3ErrorPlus"
       }
     },
-    "format": "0.0"
+    "format": "0%"
   },
   {
     "valueCol": "reductionInPrevalence",
-    "displayName": "Relative reduction in prevalence under 5 years (%)",
+    "displayName": "Relative reduction in prevalence across 36 months post intervention",
     "error": {
       "minus": {
         "valueCol": "reductionInPrevalenceErrorMinus"
@@ -71,24 +73,12 @@
         "valueCol": "reductionInPrevalenceErrorPlus"
       }
     },
-    "format": "0.0"
-  },
-  {
-    "valueCol": "casesAverted",
-    "displayName": "Mean cases averted per population per year across 3 years since intervention",
-    "error": {
-      "minus": {
-        "valueCol": "casesAvertedErrorMinus"
-      },
-      "plus": {
-        "valueCol": "casesAvertedErrorPlus"
-      }
-    },
-    "transform": "round({} / 10) * 10"
+    "transform": "round({}) / 100",
+    "format": "0%"
   },
   {
     "valueCol": "casesAvertedPer1000",
-    "displayName": "Mean cases averted per 1,000 people across 3 years since intervention",
+    "displayName": "Mean cases averted per 1,000 people annually across 3 years since intervention",
     "error": {
       "minus": {
         "valueCol": "casesAvertedPer1000ErrorMinus"
@@ -97,11 +87,11 @@
         "valueCol": "casesAvertedPer1000ErrorPlus"
       }
     },
-    "transform": "round({} / 10) * 10"
+    "transform": "round({})"
   },
   {
     "valueCol": "reductionInCases",
-    "displayName": "Relative reduction in clinical cases across 3 years since intervention (%)",
+    "displayName": "Relative reduction in clinical cases across 3 years since intervention",
     "error": {
       "minus": {
         "valueCol": "reductionInCasesErrorMinus"
@@ -110,11 +100,12 @@
         "valueCol": "reductionInCasesErrorPlus"
       }
     },
-    "format": "0.0"
+    "transform": "round({}) / 100",
+    "format": "0%"
   },
   {
     "valueCol": "meanCases",
-    "displayName": "Mean cases per person per year across 3 years",
+    "displayName": "Mean cases per person per year averaged across 3 years",
     "error": {
       "minus": {
         "valueCol": "meanCasesErrorMinus"
@@ -123,6 +114,6 @@
         "valueCol": "meanCasesErrorPlus"
       }
     },
-    "format": "0.0000"
+    "format": "0.000"
   }
 ]

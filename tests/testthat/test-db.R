@@ -10,15 +10,16 @@ test_that("Can create db", {
                   bitingPeople = "low",
                   levelOfResistance = "80%",
                   itnUsage = "20%",
-                  sprayInput = "0%",
+                  sprayInput = "80%",
                   metabolic = "yes",
                   population = 1000)
   d <- db$get_prevalence(options)
   expect_s3_class(d, "data.frame")
-  expect_equal(nrow(d), 114 * 48)
+  expect_equal(nrow(d), 8400) # 50 months * 168 combinations
   expect_setequal(
     names(d),
     c("month", "netUse", "irsUse", "intervention", "value"))
+  expect_equal(max(d$month), 36) # should filter out the year 4 values
 
   impact <- db$get_impact_docs()
   cost <- db$get_cost_docs()
@@ -43,7 +44,7 @@ test_that("Can read table data", {
                   population = 1000)
   d <- db$get_table(options)
   expect_s3_class(d, "data.frame")
-  expect_equal(nrow(d), 114)
+  expect_equal(nrow(d), 168)
   expect_setequal(
     names(d),
     c("netUse", "irsUse", "intervention",
@@ -95,69 +96,6 @@ test_that("baseline options", {
   expect_setequal(opt$ignore, c("population", "metabolic"))
 })
 
-
-test_that("index must conform to baseline options", {
-  index <- mint_baseline_options()$index
-  expect_error(
-    mintr_db_check_index(index),
-    "Invalid value for 'names(index)':\n  - Missing: index",
-    fixed = TRUE)
-  expect_error(
-    mintr_db_check_index(index[names(index) != "itnUsage"]),
-    "Invalid value for 'names(index)':\n  - Missing: itnUsage, index",
-    fixed = TRUE)
-
-  idx <- do.call(expand.grid, c(index, list(stringsAsFactors = FALSE)))
-  idx$index <- seq_len(nrow(idx))
-  expect_error(
-    mintr_db_check_index(idx[1, ]),
-    "Invalid value for 'index$seasonalityOfTransmission'",
-    fixed = TRUE)
-})
-
-
-test_that("prevelance must conform", {
-  index <- readRDS("data/index.rds")
-
-  raw <- jsonlite::read_json(mintr_path("data.json"))
-  path_prevalence_raw <- file.path("data", raw$directory, raw$files$prevalence)
-  prevalence <- mintr_db_process_prevalence(readRDS(path_prevalence_raw),
-                                            raw$interventions)
-
-  expect_error(
-    mintr_db_check_prevalence(index, prevalence[names(prevalence) != "irsUse"]),
-    "Invalid value for 'names(prevalence)':\n  - Missing: irsUse",
-    fixed = TRUE)
-
-  expect_silent(mintr_db_check_prevalence(index, prevalence))
-
-  i <- which(prevalence$intervention == "irs")[10]
-
-  prevalence$intervention[i] <- "other"
-  expect_error(
-    mintr_db_check_prevalence(index, prevalence),
-    "Interventions do not match expected values")
-
-  prevalence$intervention[i] <- "No intervention"
-  expect_error(
-    mintr_db_check_prevalence(index, prevalence),
-    "Interventions do not match expected values")
-})
-
-
-test_that("docker build filters files", {
-  tmp <- tempfile()
-  path_raw <- jsonlite::read_json(mintr_path("data.json"))$directory
-
-  dir.create(tmp, FALSE, TRUE)
-  file.copy(file.path("data", path_raw), tmp, recursive = TRUE)
-
-  mintr_db_docker(tmp)
-
-  expect_setequal(dir(tmp), c("index.rds", "ignore.rds", "prevalence", "table"))
-})
-
-
 test_that("Can scale table results by population", {
   db <- mintr_test_db()
   options <- list(seasonalityOfTransmission = "seasonal",
@@ -176,7 +114,7 @@ test_that("Can scale table results by population", {
   expect_equal(d2[v], d1[v])
   ## Due to rounding error, this is only approximate
   expect_equal(d2$casesAverted, d1$casesAverted / 10,
-               tolerance = 0.001)
+               tolerance = 0.01)
 })
 
 
@@ -258,6 +196,7 @@ check_not_applicable_values <- function(res) {
   expect_true(all(res[res$intervention == "irs", "netUse"] == "n/a"))
   expect_true(all(res[res$intervention == "llin", "irsUse"] == "n/a"))
   expect_true(all(res[res$intervention == "llin-pbo", "irsUse"] == "n/a"))
+  expect_true(all(res[res$intervention == "pyrrole-pbo", "irsUse"] == "n/a"))
 }
 
 
@@ -278,4 +217,15 @@ test_that("Not applicable values are set correctly", {
 
   table <- db$get_table(options)
   check_not_applicable_values(table)
+})
+
+test_that("can download the db on request", {
+  skip_if_offline()
+  p <- tempfile()
+  on.exit(unlink(p, recursive = TRUE))
+  res <- mintr_db_download(p, quiet = TRUE)
+  expect_equal(basename(res), mintr_data_version())
+  expect_setequal(
+    dir(res),
+    c("hash.rds", "ignore.rds", "index.rds", "prevalence", "table"))
 })

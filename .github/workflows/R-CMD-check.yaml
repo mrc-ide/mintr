@@ -9,6 +9,7 @@ on:
     branches:
       - main
       - master
+      - mrc-3461
 
 name: R-CMD-check
 
@@ -22,7 +23,6 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - {os: macOS-latest, r: 'release'}
           - {os: ubuntu-20.04, r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
           - {os: ubuntu-20.04, r: 'devel', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
 
@@ -39,11 +39,6 @@ jobs:
           r-version: ${{ matrix.config.r }}
 
       - uses: r-lib/actions/setup-pandoc@v1
-
-      - name: Install system dependencies
-        if: runner.os == 'macOS'
-        run: |
-          brew install v8
 
       - name: Query dependencies
         run: |

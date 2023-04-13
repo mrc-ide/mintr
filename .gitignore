@@ -1,4 +1,5 @@
 .idea
+.RData
 docs
 js/node_modules
 js/bundle*js
@@ -9,3 +10,9 @@ vignettes/*.R
 .V8history
 import
 tests/testthat/data
+.Rproj.user
+.Rhistory
+package.json
+package-lock.json
+node_modules
+test-results

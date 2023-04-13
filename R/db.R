@@ -1,5 +1,5 @@
 mintr_db_open <- function(path, docs = get_compiled_docs()) {
-  paths <- mintr_db_paths(path)
+  paths <- mintr_db_paths(file.path(path, mintr_data_version()))
   if (!file.exists(paths$index)) {
     stop(sprintf("mintr database does not exist at '%s'", paths$index))
   }
@@ -45,7 +45,8 @@ mintr_db <- R6::R6Class(
       key <- self$get_index(options)
       p <- sprintf(private$path$prevalence, key)
       ret <- readRDS(p)
-      prev <- mintr_db_transform_metabolic(ret, options$metabolic)
+      filtered <- mintr_db_filter_to_3_years_post_intervention(ret)
+      prev <- mintr_db_transform_metabolic(filtered, options$metabolic)
       mintr_db_set_not_applicable_values(prev)
     },
 
@@ -74,10 +75,11 @@ mintr_db <- R6::R6Class(
 
 ## Some constants that crop up everywhere
 mintr_db_paths <- function(path) {
-  list(index = file.path(path, "index.rds"),
+  list(hash = file.path(path, "hash.rds"),
+       index = file.path(path, "index.rds"),
        ignore = file.path(path, "ignore.rds"),
-       table = file.path(path, "table", "%d.rds"),
-       prevalence = file.path(path, "prevalence", "%d.rds"))
+       table = file.path(path, "table", "%s.rds"),
+       prevalence = file.path(path, "prevalence", "%s.rds"))
 }
 
 
@@ -102,43 +104,29 @@ mint_baseline_options <- function() {
 }
 
 
-mintr_db_check_index <- function(index) {
-  baseline <- mint_baseline_options()
-  assert_setequal(names(index), c(names(baseline$index), "index"))
-  for (i in names(baseline$index)) {
-    assert_setequal(index[[i]], baseline$index[[i]], sprintf("index$%s", i))
-  }
-  baseline$ignore
-}
-
-
-mintr_db_check_prevalence <- function(index, prevalence) {
-  cols <- c("month", "value", "netUse", "irsUse", "netType", "intervention",
-            "index")
-  assert_setequal(names(prevalence), cols)
-  assert_setequal(prevalence$index, index$index)
-
-  expected <- mint_intervention(
-    prevalence$netUse, prevalence$irsUse, prevalence$netType)
-  if (!identical(expected, prevalence$intervention)) {
-    stop("Interventions do not match expected values")
-  }
-}
-
-
 mint_intervention <- function(net_use, irs_use, net_type) {
   intervention <- c(# net_use  irs_use  net_type
-    "none",         # == 0     == 0     == std
-    "llin",         #  > 0     == 0     == std
-    "irs",          # == 0      > 0     == std
-    "irs-llin",     #  > 0      > 0     == std
-    "none",         # == 0     == 0     == pto
-    "llin-pbo",     #  > 0     == 0     == pto
-    "irs",          # == 0      > 0     == pto
-    "irs-llin-pbo") #  > 0      > 0     == pto
+    ## Standard
+    "none",            # == 0     == 0     == std
+    "llin",            #  > 0     == 0     == std
+    "irs",             # == 0      > 0     == std
+    "irs-llin",        #  > 0      > 0     == std
+    ## PTO
+    "none",            # == 0     == 0     == pto
+    "llin-pbo",        #  > 0     == 0     == pto
+    "irs",             # == 0      > 0     == pto
+    "irs-llin-pbo",    #  > 0      > 0     == pto
+    ## The Third Net
+    "none",            # == 0     == 0     == ig2
+    "pyrrole-pbo",     #  > 0     == 0     == ig2
+    "irs",             # == 0      > 0     == ig2
+    "irs-pyrrole-pbo") #  > 0      > 0     == ig2
 
   ## Use bit packing to get the above relationship:
-  i <- (net_use > 0) + (irs_use > 0) * 2 + (net_type == "pto") * 4 + 1
+  i <- 1 + (net_use > 0) +
+    (irs_use > 0) * 2 +
+    (net_type == "pto") * 4 +
+    (net_type == "ig2") * 8
   intervention[i]
 }
 
@@ -164,22 +152,31 @@ mintr_db_transform_metabolic <- function(d, metabolic) {
 # Rather than the relationship between series and settings
 # decribed in the mint_intervention function, the front-end
 # requires data that adheres to:
-#intervention      net_use  irs_use
-#  "none"         == n/a    == n/a
-#  "llin"         >= 0      == n/a
-#  "irs"          == n/a    >= 0
-#  "irs-llin"     >= 0      >= 0
-#  "llin-pbo"     >= 0      == n/a
-#  "irs"          == n/a    >= 0
-#  "irs-llin-pbo" >= 0      >= 0
+#intervention         net_use  irs_use
+#  "none"            == n/a    == n/a
+#  "llin"            >= 0      == n/a
+#  "irs"             == n/a    >= 0
+#  "irs-llin"        >= 0      >= 0
+#  "llin-pbo"        >= 0      == n/a
+#  "pyrrole-pbo"     >= 0      == n/a  
+#  "irs"             == n/a    >= 0
+#  "irs-llin-pbo"    >= 0      >= 0
+#  "irs-pyrrole-pbo" >= 0      >= 0
+#
 mintr_db_set_not_applicable_values <- function(data) {
   # this special value is used by the front-end to display
   # series for which a chosen setting doesn't apply but the user
   # nevertheless wants to see a comparison against
   not_applicable <- "n/a"
-  data[data$intervention %in% c("llin", "llin-pbo"), ]$irsUse <- not_applicable
+  data[data$intervention %in% c("llin", "llin-pbo", "pyrrole-pbo"), ]$irsUse <- not_applicable
   data[data$intervention =="irs", ]$netUse <- not_applicable
   data[data$intervention =="none", ]$netUse <- not_applicable
   data[data$intervention =="none", ]$irsUse <- not_applicable
   data
+}
+
+# The prevalence graph data in the database goes up to 4 years post-intervention
+# but we only actually want to display 3 years
+mintr_db_filter_to_3_years_post_intervention <- function(data) {
+  data[data$month <= 36, ]
 }

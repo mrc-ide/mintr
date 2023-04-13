@@ -7,24 +7,25 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         && apt-get clean \
         && rm -rf /var/lib/apt/lists/*
 
-RUN install2.r --error \
-        commonmark \
+COPY docker/install_packages /usr/local/bin/
+
+RUN install_packages \
+        --repo=https://mrc-ide.r-universe.dev \
+        --repo=https://r-opt.r-universe.dev \
         R6 \
+        ROI.plugin.glpk \
+        ROIoptimizer \
+        commonmark \
+        dplyr \
         glue \
         jsonlite \
         jsonvalidate \
         plumber \
+        porcelain \
         remotes \
+        rmpk \
         testthat \
-        tidyr \
-        dplyr \
-        ROI.plugin.glpk
-
-RUN installGithub.r \
-        ropensci/jsonvalidate \
-        reside-ic/porcelain \
-        r-opt/rmpk \
-        r-opt/ROIoptimizer
+        tidyr
 
 WORKDIR /mintr
 
@@ -32,7 +33,7 @@ COPY . /src
 
 RUN R CMD INSTALL /src && \
         Rscript -e 'mintr:::write_script("/usr/bin")' && \
-        Rscript -e 'mintr:::mintr_db_docker("data")'
+        Rscript -e 'mintr:::mintr_db_download("data")'
 
 EXPOSE 8888
 

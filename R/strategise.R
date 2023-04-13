@@ -3,6 +3,7 @@ get_cost <- function(baseline_settings, intervention_settings, intervention) {
   procurement_buffer <- (intervention_settings$procureBuffer + 100) / 100
   cost_per_net_llin <- intervention_settings$priceNetStandard
   cost_per_net_pbo <- intervention_settings$priceNetPBO
+  cost_per_net_pyrrole <- intervention_settings$priceNetPyrrole
   cost_delivery_per_net <- intervention_settings$priceDelivery
   people_per_net <- intervention_settings$procurePeoplePerNet
   cost_irs_per_person <- intervention_settings$priceIRSPerPerson
@@ -11,9 +12,11 @@ get_cost <- function(baseline_settings, intervention_settings, intervention) {
     "none" = 0,
     "llin" = (cost_delivery_per_net + cost_per_net_llin) * (population / people_per_net * procurement_buffer),
     "llin-pbo" = (cost_delivery_per_net + cost_per_net_pbo) * (population / people_per_net * procurement_buffer),
+    "pyrrole-pbo" = (cost_delivery_per_net + cost_per_net_pyrrole) * (population / people_per_net * procurement_buffer),
     "irs" = 3 * cost_irs_per_person * population,
     "irs-llin" = (cost_delivery_per_net + cost_per_net_llin) * (population / people_per_net * procurement_buffer) + 3 * cost_irs_per_person * population,
-    "irs-llin-pbo" = (cost_delivery_per_net + cost_per_net_pbo) * (population / people_per_net * procurement_buffer) + 3 * cost_irs_per_person * population
+    "irs-llin-pbo" = (cost_delivery_per_net + cost_per_net_pbo) * (population / people_per_net * procurement_buffer) + 3 * cost_irs_per_person * population,
+    "irs-pyrrole-pbo" = (cost_delivery_per_net + cost_per_net_pyrrole) * (population / people_per_net * procurement_buffer) + 3 * cost_irs_per_person * population
   )
 }
 
@@ -22,7 +25,7 @@ get_intervention_data <- function(baseline_settings, intervention_settings, db) 
   rows <- table$intervention == "none"
   if (intervention_settings$netUse != "0") {
     rows <- rows | (
-      table$intervention %in% c("llin", "llin-pbo") &
+      table$intervention %in% c("llin", "llin-pbo", "pyrrole-pbo") &
       table$netUse == intervention_settings$netUse &
       table$irsUse == "n/a"
     )
@@ -37,7 +40,7 @@ get_intervention_data <- function(baseline_settings, intervention_settings, db) 
   if (intervention_settings$netUse != "0"
     && intervention_settings$irsUse != "0") {
     rows <- rows | (
-      table$intervention %in% c("irs-llin", "irs-llin-pbo") &
+      table$intervention %in% c("irs-llin", "irs-llin-pbo", "irs-pyrrole-pbo") &
       table$netUse == intervention_settings$netUse &
       table$irsUse == intervention_settings$irsUse
     )

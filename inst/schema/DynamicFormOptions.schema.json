@@ -41,7 +41,8 @@
         "value": { "type": "number" },
         "helpText": { "type": "string" },
         "min": { "type": "number" },
-        "max": { "type": "number" }
+        "max": { "type": "number" },
+        "step": { "type": "number" }
       },
       "additionalProperties": false,
       "required": [ "name", "type", "required" ]

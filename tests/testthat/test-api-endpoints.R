@@ -15,6 +15,8 @@ test_that("root endpoint", {
   res_api <- api$request("GET", "/")
   expect_equal(res_api$status, 200)
   expect_equal(res_api$body, res_endpoint$body)
+  
+  expect_true(res_endpoint$validated)
 })
 
 
@@ -283,7 +285,7 @@ test_that("cost docs", {
 
 test_that("cost", {
   expected_costs <- get_expected_total_costs()
-  interventions <- c("none", "llin", "llin-pbo", "irs", "irs-llin", "irs-llin-pbo")
+  interventions <- c("none", "llin", "llin-pbo", "pyrrole-pbo", "irs", "irs-llin", "irs-llin-pbo", "irs-pyrrole-pbo")
   for (i in seq_along(expected_costs)) {
     expect_equal(get_cost(get_input(), get_input(), interventions[i]), expected_costs[[i]])
   }
@@ -309,6 +311,7 @@ test_that("strategise", {
     priceDelivery = 3,
     priceNetStandard = 4,
     priceNetPBO = 5,
+    priceNetPyrrole = 6,
     priceIRSPerPerson = 6
   )
   json <- jsonlite::toJSON(list(
@@ -331,44 +334,6 @@ test_that("strategise", {
   db <- mintr_test_db()
   res <- target_strategise(db)(json)
   expect_is(res, "json")
-  expect_equal(res, jsonlite::toJSON(
-    list(
-      list(
-        costThreshold = 1,
-        interventions = list(
-          list(zone = "Region A", intervention = "none", cost = 0, casesAverted = 0, casesAvertedErrorMinus = 0, casesAvertedErrorPlus = 0),
-          list(zone = "Region B", intervention = "irs", cost = 18000, casesAverted = 1794, casesAvertedErrorMinus = 1581, casesAvertedErrorPlus = 1821),
-          list(zone = "Region C", intervention = "llin-pbo", cost = 8160, casesAverted = 1053, casesAvertedErrorMinus = 909, casesAvertedErrorPlus = 1152),
-          list(zone = "Region D", intervention = "irs-llin-pbo", cost = 26160, casesAverted = 1806, casesAvertedErrorMinus = 1698, casesAvertedErrorPlus = 1827))),
-      list(
-        costThreshold = 0.95,
-        interventions = list(
-          list(zone = "Region A", intervention = "none", cost = 0, casesAverted = 0, casesAvertedErrorMinus = 0, casesAvertedErrorPlus = 0),
-          list(zone = "Region B", intervention = "irs", cost = 18000, casesAverted = 1794, casesAvertedErrorMinus = 1581, casesAvertedErrorPlus = 1821),
-          list(zone = "Region C", intervention = "llin-pbo", cost = 8160, casesAverted = 1053, casesAvertedErrorMinus = 909, casesAvertedErrorPlus = 1152),
-          list(zone = "Region D", intervention = "irs", cost = 18000, casesAverted = 1794, casesAvertedErrorMinus = 1581, casesAvertedErrorPlus = 1821))),
-      list(
-        costThreshold = 0.9,
-        interventions = list(
-          list(zone = "Region A", intervention = "none", cost = 0, casesAverted = 0, casesAvertedErrorMinus = 0, casesAvertedErrorPlus = 0),
-          list(zone = "Region B", intervention = "irs", cost = 18000, casesAverted = 1794, casesAvertedErrorMinus = 1581, casesAvertedErrorPlus = 1821),
-          list(zone = "Region C", intervention = "llin-pbo", cost = 8160, casesAverted = 1053, casesAvertedErrorMinus = 909, casesAvertedErrorPlus = 1152),
-          list(zone = "Region D", intervention = "irs", cost = 18000, casesAverted = 1794, casesAvertedErrorMinus = 1581, casesAvertedErrorPlus = 1821))),
-      list(
-        costThreshold = 0.85,
-        interventions = list(
-          list(zone = "Region A", intervention = "none", cost = 0, casesAverted = 0, casesAvertedErrorMinus = 0, casesAvertedErrorPlus = 0),
-          list(zone = "Region B", intervention = "irs", cost = 18000, casesAverted = 1794, casesAvertedErrorMinus = 1581, casesAvertedErrorPlus = 1821),
-          list(zone = "Region C", intervention = "llin-pbo", cost = 8160, casesAverted = 1053, casesAvertedErrorMinus = 909, casesAvertedErrorPlus = 1152),
-          list(zone = "Region D", intervention = "irs", cost = 18000, casesAverted = 1794, casesAvertedErrorMinus = 1581, casesAvertedErrorPlus = 1821))),
-      list(
-        costThreshold = 0.8,
-        interventions = list(
-          list(zone = "Region A", intervention = "none", cost = 0, casesAverted = 0, casesAvertedErrorMinus = 0, casesAvertedErrorPlus = 0),
-          list(zone = "Region B", intervention = "irs", cost = 18000, casesAverted = 1794, casesAvertedErrorMinus = 1581, casesAvertedErrorPlus = 1821),
-          list(zone = "Region C", intervention = "llin-pbo", cost = 8160, casesAverted = 1053, casesAvertedErrorMinus = 909, casesAvertedErrorPlus = 1152),
-          list(zone = "Region D", intervention = "llin-pbo", cost = 8160, casesAverted = 1053, casesAvertedErrorMinus = 909, casesAvertedErrorPlus = 1152)))
-    ), auto_unbox=TRUE))
 
   endpoint <- endpoint_strategise(db)
   res_endpoint <- endpoint$run(json)

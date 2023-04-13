@@ -7,7 +7,7 @@
           "controls": [
             {
               "name": "population",
-              "label": "Population Size",
+              "label": "Size of population at risk",
               "type": "number",
               "required": true,
               "value": 1000,
@@ -83,7 +83,7 @@
           ]
         }
       ],
-      "documentation": "<strong>Population size</strong><p>Enter the approximate population size of the district or sub-district to which vector control will be applied to enable incremental cost estimates of any change in vector control.</p><strong>Seasonality of transmission</strong><p>Select seasonal settings if the region of interest has a distinct transmission season or perennial if transmission is throughout the year.</p><strong>Current malaria prevalence</strong><p>Define the current endemicity of your setting as measured by the prevalence of children 6-month to 59-months of age who are diagnosed with falciparum malaria by microscopy. Available options are <=7%, 8-15%, 16-25%, 26-35%, 36-45%, 46-55% and >=56% as measured toward the end of the transmission season.</p>"
+      "documentation": "<strong>Size of population at risk</strong><p>Enter the approximate population size of the district or sub-district to which vector control will be applied to enable incremental cost estimates of any change in vector control.</p><strong>Seasonality of transmission</strong><p>Select seasonal settings if the region of interest has a distinct transmission season or perennial if transmission is throughout the year.</p><strong>Current malaria prevalence</strong><p>Define the current endemicity of your setting as measured by the prevalence of children 6-month to 59-months of age who are diagnosed with falciparum malaria by microscopy. Available options are <=7%, 8-15%, 16-25%, 26-35%, 36-45%, 46-55% and >=56% as measured toward the end of the transmission season.</p>"
     },
     {
       "label": "Mosquito Inputs",
@@ -197,7 +197,7 @@
           ]
         }
       ],
-      "documentation": "<p>Values chosen should represent the average mosquito transmitting malaria throughout the year. If multiple vectors are present then the characteristics should be weighted towards the dominant vector species.</p><strong>Preference for biting indoors</strong><p>Mosquitoes may show differing propensity to bite people when they are indoors. High indicates ~97% bites taken when people are indoors whilst selecting low represents ~78% bites taken when people are indoors.</p><strong>Preference for biting people</strong><p>Mosquitoes show different preference for biting humans relative to other animals. A high value for the preference for biting people corresponds to ~92% of mosquito bites that are taken on humans whilst a low value equates to ~74% of all bites taken on humans.</p><strong>Level of pyrethroid resistance</strong><p>Mosquito survival in 24-hour WHO discriminatory dose bioassays. <ul><li>0% indicates all mosquitoes die and are susceptible to the pyrethroid insecticide in LLINs.</li><li>100% indicates all mosquitoes survive and are resistant to the pyrethroid insecticide in LLINs.</li></ul></p><strong>Evidence of PBO synergy</strong><p>Whether there is evidence that PBO (piperonyl butoxide) synergises pyrethroid insecticide or that metabolic mechanisms contribute resistance in the local mosquito population.</p>"
+      "documentation": "<p>Values chosen should represent the average mosquito transmitting malaria throughout the year. If multiple vectors are present then the characteristics should be weighted towards the dominant vector species.</p><strong>Preference for biting indoors</strong><p>Mosquitoes may show differing propensity to bite people when they are indoors. High indicates ~97% bites taken when people are indoors whilst selecting low represents ~78% bites taken when people are indoors.</p><strong>Preference for biting people</strong><p>Mosquitoes show different preference for biting humans relative to other animals. A high value for the preference for biting people corresponds to ~92% of mosquito bites that are taken on humans whilst a low value equates to ~74% of all bites taken on humans.</p><strong>Level of pyrethroid resistance</strong><p>Mosquito survival in 24-hour WHO discriminatory dose bioassays. <ul><li>0% indicates all mosquitoes die and are susceptible to the pyrethroid insecticide in ITNs.</li><li>100% indicates all mosquitoes survive and are resistant to the pyrethroid insecticide in ITNs.</li></ul></p><strong>Evidence of PBO synergy</strong><p>Whether there is evidence that PBO (piperonyl butoxide) synergises pyrethroid insecticide or that metabolic mechanisms contribute resistance in the local mosquito population.</p>"
     },
     {
       "label": "Past Vector Control",
@@ -251,6 +251,10 @@
                 {
                   "id": "0%",
                   "label": "0% coverage"
+                },
+                {
+                  "id": "60%",
+                  "label": "60% coverage"
                 },
                 {
                   "id": "80%",

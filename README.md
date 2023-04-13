@@ -25,12 +25,15 @@ See the [spec](inst/schema/spec.md) for more details.
 
 ## Updating data
 
-This will evolve as the upstream data changes and as our needs change. We store the raw data from the science team on mrcdata.dide.ic.ac.uk and pull them in when building the docker images or when building a database for testing.  They will expand into the actual mint database, which is much larger than the rds but faster to read.
+The basic flow of data coming in:
 
-1. Acquire new data from the science team; this will come as a number of .rds files, the largest of which will be quite large.
-2. Copy these files onto a network-accessible share (e.g. for Rich `~/net/home/mint`)
-3. RDP to `fi--didex1` and copy these files into `C:\xampp\htdocs\mrcdata\mint\<date>` where `<date>` is YYYYMMDD (just to keep things tidy)
-4. Update the paths in `inst/data.json` to reflect the new data
+1. New raw (ish) data will come from the science team, recently at `\\fi--didenas1.dide.ic.ac.uk\malaria\Arran\malaria_projects\MINT\1_ModelSimulations\output\malariasimulation_runs\remove_peak_irs_increase_population`. It's really very slow to work with these against the network drive so it's good to copy these locally on your machine for processing.
+1. Edit `inst/version` to create a new data version - should be an ISO date (`YYYYMMDD`). Typically this date should match the date of the raw data files.
+1. Edit the top of `scripts/import` to reflect the new data
+1. Run `./scripts/import path/to/data path/to/output` to produce a file `<date>.tar`
+1. Copy that file to the network share (recent versions are about 500MB)
+1. RDP to `fi--didex1` and copy the tar file to `C:\xampp\htdocs\mrcdata\mint\<date>.tar`
+1. Rerun the tests in the package, which will pull down the most recent version
 
 Note that the script will avoid downloading the files if they are already present in destination directory, so do not update files on the server without renaming them.
 
@@ -47,6 +50,16 @@ After cloning the repository, ensure you have all R package dependencies with
 ```
 
 You will need a copy of the data. Run `./scripts/import` which will download, process and import the mintr database in `tests/testthat/data`, which will then be available for tests.
+
+## Browser tests
+
+Browser tests are included (in `tests/e2e`) in order to test config changes made in mintr are rendered correctly in MINT. To run browser tests locally:
+1. Install [Playwright](https://playwright.dev/docs/intro#installing-playwright)
+2. Run mintr and MINT in docker with `./docker/run_app` - this runs the mintr docker image pushed for the current git SHA, and the master branch of MINT. Change the line `export MINT_BRANCH=master` to run a different MINT branch. 
+3. Run `npx playwright test` from `tests/e2e`
+
+The browser tests are also run as part of the BuildKite pipeline, in a docker container built from `docker/test-e2e.dockerfile` using config from `tests/e2e/playwright.docker.config.ts`
+
 
 ## Deployment
 
