@@ -93,6 +93,13 @@ export const expectOptionLabelAndName = async (optionRow, expectedLabel, expecte
     await expect(name).toBe(expectedName)
 };
 
+export const expectSelectOptionLabelAndValue = async (option, expectedLabel, expectedValue) => {
+    const label = await option.innerText();
+    await expect(label).toBe(expectedLabel);
+    const value = option.getAttribute("value");
+    await expect(value).toBe(expectedValue);
+};
+
 export const expectPlotDataSummarySeries = async (summary, expectedId, expectedName, expectedType, expectedCount,
                                                   expectedXFirst, expectedXLast, expectedYMin, expectedYMax, yTolerance = null) => {
     await expect(await summary.getAttribute("name")).toBe(expectedName);
