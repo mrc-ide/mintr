@@ -95,8 +95,8 @@ export const expectOptionLabelAndName = async (optionRow, expectedLabel, expecte
 
 export const expectSelectOptionLabelAndValue = async (option, expectedLabel, expectedValue) => {
     const label = await option.innerText();
-    await expect(label).toBe(expectedLabel);
-    const value = option.getAttribute("value");
+    await expect(label.trim()).toBe(expectedLabel);
+    const value = await option.getAttribute("value");
     await expect(value).toBe(expectedValue);
 };
 
