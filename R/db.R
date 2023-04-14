@@ -46,8 +46,7 @@ mintr_db <- R6::R6Class(
       p <- sprintf(private$path$prevalence, key)
       ret <- readRDS(p)
       filtered <- mintr_db_filter_to_3_years_post_intervention(ret)
-      prev <- mintr_db_transform_metabolic(filtered, options$metabolic)
-      mintr_db_set_not_applicable_values(prev)
+      mintr_db_set_not_applicable_values(filtered)
     },
 
     get_impact_docs = function() {
@@ -67,8 +66,7 @@ mintr_db <- R6::R6Class(
       for (v in to_round) {
         ret[[v]] <- round(ret[[v]] * options$population)
       }
-      table <- mintr_db_transform_metabolic(ret, options$metabolic)
-      mintr_db_set_not_applicable_values(table)
+      mintr_db_set_not_applicable_values(ret)
     }
   ))
 
@@ -92,7 +90,7 @@ mint_baseline_options <- function() {
   for (section in baseline$controlSections) {
     for (group in section$controlGroups) {
       for (control in group$controls) {
-        if (control$type == "select" && control$name != "metabolic") {
+        if (control$type == "select") {
           index[[control$name]] <- vcapply(control$options, "[[", "id")
         } else {
           ignore <- c(ignore, control$name)
@@ -128,25 +126,6 @@ mint_intervention <- function(net_use, irs_use, net_type) {
     (net_type == "pto") * 4 +
     (net_type == "ig2") * 8
   intervention[i]
-}
-
-
-## The metabolic switch controls the effect of the pbo net
-## synergy. When not used (metabolic as "no"), then we basically just
-## over-write the values for PBO interventions with non-PBO
-## interventions. This means that `llin-pbo` is set the same as for
-## `llin` (and similarly for `irs-llin-pbo`/`irs-llin`).
-mintr_db_transform_metabolic <- function(d, metabolic) {
-  if (metabolic == "no") {
-    cols <- setdiff(names(d), "intervention")
-    for (intervention in c("llin-pbo", "irs-llin-pbo")) {
-      i_dest <- d$intervention == intervention
-      i_src <- d$intervention == sub("-pbo$", "", intervention)
-      stopifnot(sum(i_dest) == sum(i_src))
-      d[i_dest, cols] <- d[i_src, cols]
-    }
-  }
-  d
 }
 
 # Rather than the relationship between series and settings

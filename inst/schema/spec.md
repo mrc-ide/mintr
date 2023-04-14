@@ -334,7 +334,6 @@ Return schema: [Strategise.schema.json](./Strategise.schema.json)
         "bitingIndoors": "high",
         "bitingPeople": "low",
         "levelOfResistance": "0%",
-        "metabolic": "yes",
         "itnUsage": "0%",
         "sprayInput": "0%"
       },
