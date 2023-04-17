@@ -68,6 +68,7 @@ mintr_db <- R6::R6Class(
         ret[[v]] <- round(ret[[v]] * options$population)
       }
       table <- mintr_db_transform_metabolic(ret, options$metabolic)
+      # Sort by sensible intervention ordering
       table$intervention <- factor(table$intervention,
                                     levels = c("none", "llin", "llin-pbo", "pyrrole-pbo", "irs", "irs-llin", "irs-llin-pbo", "irs-pyrrole-pbo"))
       sorted <- table[order(table$intervention),]
