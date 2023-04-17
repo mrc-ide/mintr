@@ -68,8 +68,11 @@ mintr_db <- R6::R6Class(
         ret[[v]] <- round(ret[[v]] * options$population)
       }
       table <- mintr_db_transform_metabolic(ret, options$metabolic)
+      table$intervention <- factor(table$intervention,
+                                    levels = c("none", "llin", "llin-pbo", "pyrrole-pbo", "irs", "irs-llin", "irs-llin-pbo", "irs-pyrrole-pbo"))
       sorted <- table[order(table$intervention),]
       mintr_db_set_not_applicable_values(sorted)
+      
     }
   ))
 
