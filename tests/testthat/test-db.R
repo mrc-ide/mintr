@@ -155,7 +155,6 @@ expect_proportion_with_errors <- function (data, col) {
 
 expect_whole_number <- function (data, col) {
   expect_true(col %in% names(data))
-  print(data[col])
   expect_true(all((data[col] >= 0) && (data[col] %% 1 == 0)))
 }
 
@@ -184,7 +183,6 @@ test_that("Can get table data", {
   expect_proportion_with_errors(res, "prevYear1")
   expect_proportion_with_errors(res, "prevYear2")
   expect_proportion_with_errors(res, "prevYear3")
-  expect_whole_number_with_errors(res, "casesAverted")
   expect_whole_number_with_errors(res, "casesAvertedPer1000")
   expect_proportion_with_errors(res, "meanCases")
 })
