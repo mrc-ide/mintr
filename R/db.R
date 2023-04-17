@@ -66,7 +66,12 @@ mintr_db <- R6::R6Class(
       for (v in to_round) {
         ret[[v]] <- round(ret[[v]] * options$population)
       }
-      mintr_db_set_not_applicable_values(ret)
+
+      # Sort by sensible intervention ordering
+      ordering <- c("none", "llin", "llin-pbo", "pyrrole-pbo", "irs", "irs-llin", "irs-llin-pbo", "irs-pyrrole-pbo")
+      sorted  <- ret[order(match(ret$intervention, ordering)), ]
+      
+      mintr_db_set_not_applicable_values(sorted)
     }
   ))
 
