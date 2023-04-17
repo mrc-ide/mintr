@@ -241,12 +241,12 @@
           "controls": [
             {
               "name": "sprayInput",
-              "label": "What was the estimated coverage of spray campaign (last year)",
+              "label": "IRS population coverage in last survey (%)",
               "type": "select",
               "excludeNullOption": true,
               "required": true,
               "value": "0%",
-              "helpText": "If IRS was not used in the past year, select 0% coverage",
+              "helpText": "The current endemicity of a zone is partly determined by the performance and quantity of vector control leading up to now. This is required to approximate the efficacy of interventions moving forward.",
               "options": [
                 {
                   "id": "0%",
@@ -265,7 +265,7 @@
           ]
         }
       ],
-      "documentation": "<p>The endemicity of a setting is determined by the mosquito ecology, community activities and environment but also the historic pressure from interventions that are controlling malaria transmission. Therefore, please answer the following questions to put the zone into context.</p><strong>ITN population usage in last survey (%)</strong><p>This can be found from Demographic Health Surveys or other surveys on net use completed in this zone</p>"
+      "documentation": "<p>The endemicity of a setting is determined by the mosquito ecology, community activities and environment but also the historic pressure from interventions that are controlling malaria transmission. Therefore, please answer the following questions to put the zone into context.</p><strong>ITN population usage in last survey (%)</strong><p>This can be found from Demographic Health Surveys or other surveys on net use completed in this zone</p><strong>IRS population coverage in last survey (%)</strong><p>This can be found from historical surveys recording the percentage of sleeping structures sprayed in the year of the last survey in this zone.</p>"
     }
   ]
 }
