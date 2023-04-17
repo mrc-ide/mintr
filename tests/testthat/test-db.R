@@ -155,8 +155,7 @@ expect_proportion_with_errors <- function (data, col) {
 
 expect_whole_number <- function (data, col) {
   expect_true(col %in% names(data))
-  print(data[col])
-  expect_true(all(data[col] >= 0))
+  expect_true(all(data[col] >= 0) && all(data[col] %% 1 == 0)) 
 }
 
 expect_whole_number_with_errors <- function (data, col) {
