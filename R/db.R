@@ -68,7 +68,11 @@ mintr_db <- R6::R6Class(
         ret[[v]] <- round(ret[[v]] * options$population)
       }
       table <- mintr_db_transform_metabolic(ret, options$metabolic)
-      mintr_db_set_not_applicable_values(table)
+      # Sort by sensible intervention ordering
+     ordering <- c("none", "llin", "llin-pbo", "pyrrole-pbo", "irs", "irs-llin", "irs-llin-pbo", "irs-pyrrole-pbo")
+     sorted  <- table[order(match(table$intervention, ordering)), ]
+     mintr_db_set_not_applicable_values(sorted)
+      
     }
   ))
 

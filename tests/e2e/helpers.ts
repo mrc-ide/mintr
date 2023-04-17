@@ -37,11 +37,11 @@ export const testCommonTableValues = async (page) => {
     await expectColumnValues(rows, 0, [
         "No intervention",
         "Pyrethroid-only ITN only",
+        "Pyrethroid-PBO ITN only",
+        "Pyrethroid-pyrrole ITN only",
         "IRS only",
         "Pyrethroid-only ITN with IRS",
-        "Pyrethroid-PBO ITN only",
         "Pyrethroid-PBO ITN with IRS",
-        "Pyrethroid-pyrrole ITN only",
         "Pyrethroid-pyrrole ITN with IRS"
     ]);
 
@@ -49,9 +49,9 @@ export const testCommonTableValues = async (page) => {
     await expectColumnValues(rows, 1, [
         "n/a",
         "20%",
+        "20%",
+        "20%",
         "n/a",
-        "20%",
-        "20%",
         "20%",
         "20%",
         "20%"
@@ -61,11 +61,11 @@ export const testCommonTableValues = async (page) => {
     await expectColumnValues(rows, 2, [
         "n/a",
         "n/a",
-        "60%",
-        "60%",
+        "n/a",
         "n/a",
         "60%",
-        "n/a",
+        "60%",
+        "60%",
         "60%"
     ]);
 };
