@@ -9,7 +9,7 @@
         {
             "x": ["llin"],
             "id": "llin",
-            "y_formula": ["round({casesAvertedPer1000} / 10) * 10"],
+            "y_formula": ["round({casesAvertedPer1000})"],
             "type": "bar",
             "name": "Pyrethroid-only ITN only",
             "marker": {
@@ -18,8 +18,8 @@
             },
             "error_y": {
                 "type": "data",
-                "cols": ["round({casesAvertedPer1000ErrorPlus} / 10) * 10"],
-                "colsminus": ["round({casesAvertedPer1000ErrorMinus} / 10) * 10"],
+                "cols": ["round({casesAvertedPer1000ErrorPlus})"],
+                "colsminus": ["round({casesAvertedPer1000ErrorMinus})"],
                 "visible": true,
                 "thickness": 1.5,
                 "width": 0,
@@ -29,7 +29,7 @@
         {
             "x": ["llin-pbo"],
             "id": "llin-pbo",
-            "y_formula": ["round({casesAvertedPer1000} / 10) * 10"],
+            "y_formula": ["round({casesAvertedPer1000})"],
             "type": "bar",
             "name": "Pyrethroid-PBO ITN only",
             "marker": {
@@ -38,8 +38,8 @@
             },
             "error_y": {
                 "type": "data",
-                "cols": ["round({casesAvertedPer1000ErrorPlus} / 10) * 10"],
-                "colsminus": ["round({casesAvertedPer1000ErrorMinus} / 10) * 10"],
+                "cols": ["round({casesAvertedPer1000ErrorPlus})"],
+                "colsminus": ["round({casesAvertedPer1000ErrorMinus})"],
                 "visible": true,
                 "thickness": 1.5,
                 "width": 0,
@@ -49,7 +49,7 @@
         {
             "x": ["pyrrole-pbo"],
             "id": "pyrrole-pbo",
-            "y_formula": ["round({casesAvertedPer1000} / 10) * 10"],
+            "y_formula": ["round({casesAvertedPer1000})"],
             "type": "bar",
             "name": "Pyrethroid-pyrrole ITN only",
             "marker": {
@@ -58,8 +58,8 @@
             },
             "error_y": {
                 "type": "data",
-                "cols": ["round({casesAvertedPer1000ErrorPlus} / 10) * 10"],
-                "colsminus": ["round({casesAvertedPer1000ErrorMinus} / 10) * 10"],
+                "cols": ["round({casesAvertedPer1000ErrorPlus})"],
+                "colsminus": ["round({casesAvertedPer1000ErrorMinus})"],
                 "visible": true,
                 "thickness": 1.5,
                 "width": 0,
@@ -69,7 +69,7 @@
         {
             "x": ["irs"],
             "id": "irs",
-            "y_formula": ["round({casesAvertedPer1000} / 10) * 10"],
+            "y_formula": ["round({casesAvertedPer1000})"],
             "name": "IRS only",
             "type": "bar",
             "marker": {
@@ -78,8 +78,8 @@
             },
             "error_y": {
                 "type": "data",
-                "cols": ["round({casesAvertedPer1000ErrorPlus} / 10) * 10"],
-                "colsminus": ["round({casesAvertedPer1000ErrorMinus} / 10) * 10"],
+                "cols": ["round({casesAvertedPer1000ErrorPlus})"],
+                "colsminus": ["round({casesAvertedPer1000ErrorMinus})"],
                 "visible": true,
                 "thickness": 1.5,
                 "width": 0,
@@ -89,7 +89,7 @@
         {
             "x": ["irs-llin"],
             "id": "irs-llin",
-            "y_formula": ["round({casesAvertedPer1000} / 10) * 10"],
+            "y_formula": ["round({casesAvertedPer1000})"],
             "name": "Pyrethroid-only ITN with IRS",
             "type": "bar",
             "marker": {
@@ -98,8 +98,8 @@
             },
             "error_y": {
                 "type": "data",
-                "cols": ["round({casesAvertedPer1000ErrorPlus} / 10) * 10"],
-                "colsminus": ["round({casesAvertedPer1000ErrorMinus} / 10) * 10"],
+                "cols": ["round({casesAvertedPer1000ErrorPlus})"],
+                "colsminus": ["round({casesAvertedPer1000ErrorMinus})"],
                 "visible": true,
                 "thickness": 1.5,
                 "width": 0,
@@ -109,7 +109,7 @@
         {
             "x": ["irs-llin-pbo"],
             "id": "irs-llin-pbo",
-            "y_formula": ["round({casesAvertedPer1000} / 10) * 10"],
+            "y_formula": ["round({casesAvertedPer1000})"],
             "name": "Pyrethroid-PBO ITN with IRS",
             "type": "bar",
             "marker": {
@@ -118,8 +118,8 @@
             },
             "error_y": {
                 "type": "data",
-                "cols": ["round({casesAvertedPer1000ErrorPlus} / 10) * 10"],
-                "colsminus": ["round({casesAvertedPer1000ErrorMinus} / 10) * 10"],
+                "cols": ["round({casesAvertedPer1000ErrorPlus})"],
+                "colsminus": ["round({casesAvertedPer1000ErrorMinus})"],
                 "visible": true,
                 "thickness": 1.5,
                 "width": 0,
@@ -129,7 +129,7 @@
         {
             "x": ["irs-pyrrole-pbo"],
             "id": "irs-pyrrole-pbo",
-            "y_formula": ["round({casesAvertedPer1000} / 10) * 10"],
+            "y_formula": ["round({casesAvertedPer1000})"],
             "name": "Pyrethroid-pyrrole ITN with IRS",
             "type": "bar",
             "marker": {
@@ -138,8 +138,8 @@
             },
             "error_y": {
                 "type": "data",
-                "cols": ["round({casesAvertedPer1000ErrorPlus} / 10) * 10"],
-                "colsminus": ["round({casesAvertedPer1000ErrorMinus} / 10) * 10"],
+                "cols": ["round({casesAvertedPer1000ErrorPlus})"],
+                "colsminus": ["round({casesAvertedPer1000ErrorMinus})"],
                 "visible": true,
                 "thickness": 1.5,
                 "width": 0,
