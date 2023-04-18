@@ -17,5 +17,9 @@ mintr_db_download <- function(path, quiet = FALSE) {
 
 
 mintr_data_version <- function() {
-  readLines(mintr_path("version"))
+  readLines(mintr_path("data_version"))
+}
+
+mintr_version <- function() {
+  readLines(mintr_path("mintr_version"))
 }
