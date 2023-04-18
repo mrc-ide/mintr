@@ -11,7 +11,6 @@ test_that("Can create db", {
                   levelOfResistance = "80%",
                   itnUsage = "20%",
                   sprayInput = "80%",
-                  metabolic = "yes",
                   population = 1000)
   d <- db$get_prevalence(options)
   expect_s3_class(d, "data.frame")
@@ -40,7 +39,6 @@ test_that("Can read table data", {
                   levelOfResistance = "80%",
                   itnUsage = "20%",
                   sprayInput = "0%",
-                  metabolic = "yes",
                   population = 1000)
   d <- db$get_table(options)
   expect_s3_class(d, "data.frame")
@@ -78,8 +76,7 @@ test_that("throw error if accessing impossible data", {
                   levelOfResistance = "80%",
                   itnUsage = "20%",
                   sprayInput = "0%",
-                  population = 1000,
-                  metabolic = "yes")
+                  population = 1000)
   expect_error(db$get_prevalence(options),
                "No matching value 'really-high' for option 'bitingPeople'")
 })
@@ -93,7 +90,7 @@ test_that("baseline options", {
     names(opt$index),
     c("seasonalityOfTransmission", "currentPrevalence", "bitingIndoors",
       "bitingPeople", "levelOfResistance", "itnUsage", "sprayInput"))
-  expect_setequal(opt$ignore, c("population", "metabolic"))
+  expect_setequal(opt$ignore, c("population"))
 })
 
 test_that("Can scale table results by population", {
@@ -105,7 +102,6 @@ test_that("Can scale table results by population", {
                   levelOfResistance = "80%",
                   itnUsage = "20%",
                   sprayInput = "0%",
-                  metabolic = "yes",
                   population = 10000)
   d1 <- db$get_table(options)
   d2 <- db$get_table(modifyList(options, list(population = 1000)))
@@ -128,15 +124,48 @@ test_that("Confidence bounds are ordered and include the mean", {
                   levelOfResistance = "0%",
                   itnUsage = "0%",
                   sprayInput = "0%",
-                  metabolic = "yes",
                   population = 1000)
   d <- db$get_table(options)
   expect_setequal(d$casesAvertedErrorPlus >= d$casesAverted, TRUE)
   expect_setequal(d$casesAverted >= d$casesAvertedErrorMinus, TRUE)
 })
 
+expect_interventions <- function (data) {
+  expect_true(all(data$intervention %in% c("none", "irs", "llin", "llin-pbo", "pyrrole-pbo", "irs-llin", "irs-llin-pbo", "irs-pyrrole-pbo")))
+}
 
-test_that("Can get non-metabolic table data", {
+expect_net_use <- function (data) {
+  expect_true(all(data$netUse %in% c("n/a", "0.2", "0.3", "0.4", "0.5", "0.6", "0.7", "0.8", "0.9", "1")))
+}
+
+expect_irs_use <- function (data) {
+  expect_true(all(data$irsUse %in% c("n/a", "0.6", "0.7", "0.8", "0.9", "1")))
+}
+
+expect_proportion <- function (data, col) {
+  expect_true(col %in% names(data))
+  expect_true(all(data[col] >= 0) && all(data[col] <= 1))
+}
+
+expect_proportion_with_errors <- function (data, col) {
+  expect_proportion(data, col)
+  expect_proportion(data, paste(col, "ErrorPlus", sep=""))
+  expect_proportion(data, paste(col, "ErrorMinus", sep=""))
+}
+
+expect_whole_number <- function (data, col) {
+  expect_true(col %in% names(data))
+  expect_true(all(data[col] >= 0) && all(data[col] %% 1 == 0)) 
+}
+
+expect_whole_number_with_errors <- function (data, col) {
+  expect_whole_number(data, col)
+  expect_whole_number(data, paste(col, "ErrorPlus", sep=""))
+  expect_whole_number(data, paste(col, "ErrorMinus", sep=""))
+}
+
+
+test_that("Can get table data", {
   db <- mintr_test_db()
   options <- list(seasonalityOfTransmission = "seasonal",
                   currentPrevalence = "30%",
@@ -145,25 +174,21 @@ test_that("Can get non-metabolic table data", {
                   levelOfResistance = "80%",
                   itnUsage = "20%",
                   sprayInput = "0%",
-                  metabolic = "yes",
                   population = 1)
 
-  cmp <- db$get_table(options)
-  res <- db$get_table(modifyList(options, list(metabolic = "no")))
-  expect_equal(dim(cmp), dim(res))
-  expect_equal(names(cmp), names(res))
-  expect_equal(res, mintr_db_transform_metabolic(cmp, "no"))
-  cols <- setdiff(names(res), "intervention")
-  expect_equal(res[res$intervention == "llin-pbo", cols],
-               res[res$intervention == "llin", cols],
-               check.attributes = FALSE)
-  expect_equal(res[res$intervention == "irs-llin-pbo", cols],
-               res[res$intervention == "irs-llin", cols],
-               check.attributes = FALSE)
+  res <- db$get_table(options)
+  expect_interventions(res)
+  expect_net_use(res)
+  expect_irs_use(res)
+  expect_proportion_with_errors(res, "prevYear1")
+  expect_proportion_with_errors(res, "prevYear2")
+  expect_proportion_with_errors(res, "prevYear3")
+  expect_whole_number_with_errors(res, "casesAvertedPer1000")
+  expect_proportion_with_errors(res, "meanCases")
 })
 
 
-test_that("Can get non-metabolic prevalence data", {
+test_that("Can get prevalence data", {
   db <- mintr_test_db()
   options <- list(seasonalityOfTransmission = "seasonal",
                   currentPrevalence = "30%",
@@ -172,21 +197,14 @@ test_that("Can get non-metabolic prevalence data", {
                   levelOfResistance = "80%",
                   itnUsage = "20%",
                   sprayInput = "0%",
-                  metabolic = "yes",
                   population = 1)
 
-  cmp <- db$get_prevalence(options)
-  res <- db$get_prevalence(modifyList(options, list(metabolic = "no")))
-  expect_equal(dim(cmp), dim(res))
-  expect_equal(names(cmp), names(res))
-  expect_equal(res, mintr_db_transform_metabolic(cmp, "no"))
-  cols <- setdiff(names(res), "intervention")
-  expect_equal(res[res$intervention == "llin-pbo", cols],
-               res[res$intervention == "llin", cols],
-               check.attributes = FALSE)
-  expect_equal(res[res$intervention == "irs-llin-pbo", cols],
-               res[res$intervention == "irs-llin", cols],
-               check.attributes = FALSE)
+  res <- db$get_prevalence(options)
+  expect_true(all(res$month >= -13) && all(res$month <= 47))
+  expect_proportion(res, "value")
+  expect_net_use(res)
+  expect_irs_use(res)
+  expect_interventions(res)
 })
 
 
@@ -209,7 +227,6 @@ test_that("Not applicable values are set correctly", {
                   levelOfResistance = "80%",
                   itnUsage = "20%",
                   sprayInput = "0%",
-                  metabolic = "yes",
                   population = 1)
 
   prev <- db$get_prevalence(options)

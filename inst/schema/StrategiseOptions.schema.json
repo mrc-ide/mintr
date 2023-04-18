@@ -36,9 +36,6 @@
                 "levelOfResistance": {
                   "type": "string"
                 },
-                "metabolic": {
-                  "type": "string"
-                },
                 "itnUsage": {
                   "type": "string"
                 },
@@ -54,7 +51,6 @@
                 "bitingIndoors",
                 "bitingPeople",
                 "levelOfResistance",
-                "metabolic",
                 "itnUsage",
                 "sprayInput"
               ]

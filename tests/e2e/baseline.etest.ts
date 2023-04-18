@@ -14,9 +14,8 @@ test("expected baseline options exist", async ({page}) => {
     await expectOptionLabelAndName(rows.nth(3), "Preference for biting indoors", "bitingIndoors");
     await expectOptionLabelAndName(rows.nth(4), "Preference for biting people", "bitingPeople");
     await expectOptionLabelAndName(rows.nth(5), "Level of pyrethroid resistance", "levelOfResistance");
-    await expectOptionLabelAndName(rows.nth(6), "Evidence of PBO synergy", "metabolic");
-    await expectOptionLabelAndName(rows.nth(7), "ITN population usage in last survey (%)", "itnUsage");
-    await expectOptionLabelAndName(rows.nth(8), "IRS population coverage in last survey (%)", "sprayInput");
+    await expectOptionLabelAndName(rows.nth(6), "ITN population usage in last survey (%)", "itnUsage");
+    await expectOptionLabelAndName(rows.nth(7), "IRS population coverage in last survey (%)", "sprayInput");
 });
 
 test("expected past ITN usage options exist", async({page}) => {

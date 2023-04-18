@@ -77,7 +77,6 @@ test_that("graph prevalence config", {
 
 test_that("graph prevalence data", {
   options <- list(population = 1000,
-                  metabolic = "yes",
                   seasonalityOfTransmission = "seasonal",
                   currentPrevalence = "30%",
                   bitingIndoors = "high",
@@ -145,7 +144,6 @@ test_that("table impact config", {
 
 test_that("table data", {
   options <- list(population = 1000,
-                  metabolic = "yes",
                   seasonalityOfTransmission = "seasonal",
                   currentPrevalence = "30%",
                   bitingIndoors = "high",
@@ -299,7 +297,6 @@ test_that("strategise", {
     bitingIndoors = "high",
     bitingPeople = "low",
     levelOfResistance = "0%",
-    metabolic = "yes",
     itnUsage = "0%",
     sprayInput = "0%"
   )
