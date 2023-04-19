@@ -57,9 +57,7 @@ endpoint_version <- function() {
 
 
 target_version <- function() {
-  data <- mintr_data_version()
-  mintr <- mintr_version()
-  jsonlite::toJSON(list(data=data, mintr=mintr), auto_unbox= TRUE)
+  jsonlite::toJSON(cache$versions, auto_unbox= TRUE)
 }
 
 

@@ -24,7 +24,7 @@ test_that("version endpoint", {
   res <- target_version()
   list <- jsonlite::fromJSON(res)
   expect_equal(list$data, mintr_data_version())
-  expect_equal(list$mintr, mintr_version())
+  expect_equal(list$mintr, as.character(packageVersion("mintr")))
   
   api <- api_build(mintr_test_db())
   res_api <- api$request("GET", "/version")
