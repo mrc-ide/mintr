@@ -21,5 +21,5 @@ mintr_data_version <- function() {
 }
 
 mintr_version <- function() {
-  readLines(mintr_path("mintr_version"))
+  as.character(utils::packageVersion("mintr"))
 }
