@@ -19,6 +19,7 @@ api_build <- function(db) {
   pr$handle(endpoint_impact_intepretation(db))
   pr$handle(endpoint_cost_intepretation(db))
   pr$handle(endpoint_strategise(db))
+  pr$handle(endpoint_version())
   pr
 }
 
@@ -44,6 +45,19 @@ endpoint_root <- function() {
 
 target_root <- function() {
   jsonlite::unbox("Welcome to mintr")
+}
+
+endpoint_version <- function() {
+  porcelain::porcelain_endpoint$new("GET",
+                                    "/version",
+                                    target_version,
+                                    returning = porcelain::porcelain_returning_json("Version.schema.json",
+                                                                                    schema_root()))
+}
+
+
+target_version <- function() {
+  jsonlite::toJSON(cache$versions, auto_unbox= TRUE)
 }
 
 

@@ -20,6 +20,20 @@ test_that("root endpoint", {
 })
 
 
+test_that("version endpoint", {
+  res <- target_version()
+  list <- jsonlite::fromJSON(res)
+  expect_equal(list$data, mintr_data_version())
+  expect_equal(list$mintr, as.character(packageVersion("mintr")))
+  
+  api <- api_build(mintr_test_db())
+  res_api <- api$request("GET", "/version")
+  expect_equal(res_api$status, 200)
+  body <- jsonlite::fromJSON(res_api$body)
+  expect_equal(list, body$data)
+})
+
+
 test_that("baseline options have valid defaults", {
   res <- target_baseline_options()
   dat <- jsonlite::fromJSON(res, FALSE)

@@ -15,7 +15,12 @@ mintr_db_download <- function(path, quiet = FALSE) {
   invisible(dest)
 }
 
+cache <- new.env(parent = emptyenv())
+## runs automatically when package is attached
+.onLoad <- function(...) {
+  cache$versions <- list(mintr = as.character(utils::packageVersion("mintr")), data = readLines(mintr_path("data_version")))
+}
 
 mintr_data_version <- function() {
-  readLines(mintr_path("version"))
+  cache$versions$data
 }
