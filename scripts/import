@@ -265,12 +265,6 @@ rename <- function(x, from, to) {
   x
 }
 
-import <- function(root) {
-  path_data <- file.path(root, "tests/testthat/data")
-  mintr_db_download(path_data)
-  mintr_db_process(path_data)
-}
-
 with_dir <- function(path, code) {
   owd <- setwd(path)
   on.exit(setwd(owd))

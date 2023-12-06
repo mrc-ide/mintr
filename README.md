@@ -28,18 +28,11 @@ See the [spec](inst/schema/spec.md) for more details.
 The basic flow of data coming in:
 
 1. New raw (ish) data will come from the science team, recently at `\\fi--didenas1.dide.ic.ac.uk\malaria\Arran\malaria_projects\MINT\1_ModelSimulations\output\malariasimulation_runs\remove_peak_irs_increase_population`. It's really very slow to work with these against the network drive so it's good to copy these locally on your machine for processing.
-1. Edit `inst/version` to create a new data version - should be an ISO date (`YYYYMMDD`). Typically this date should match the date of the raw data files.
+1. Edit `inst/data_version` to create a new data version - should be an ISO date (`YYYYMMDD`). Typically this date should match the date of the raw data files.
 1. Edit the top of `scripts/import` to reflect the new data
 1. Run `./scripts/import path/to/data path/to/output` to produce a file `<date>.tar`
-1. Copy that file to the network share (recent versions are about 500MB)
-1. RDP to `fi--didex1` and copy the tar file to `C:\xampp\htdocs\mrcdata\mint\<date>.tar`
-1. Rerun the tests in the package, which will pull down the most recent version
-
-Note that the script will avoid downloading the files if they are already present in destination directory, so do not update files on the server without renaming them.
-
-Then, if needed, adjust the code in `R/import.R` which processes and loads the data. You will need to delete the database at `tests/testthat/data` (all files not in the dated directories should be deleted).
-
-The core data required to build the database, after passing through the import scripts are a few 10s of MB and are baked into the docker image. When the docker container starts, it will inflate this database into the actual data needed. This process will take a few seconds on image startup, but that's worth it for the reduced image size.
+1. Upload that file as a new Github release in the in the `mrc-ide/mintr` repository. The release name should follow `data-YYYMMDD`, using the same date from the `data_version` file.
+1. Build a new Docker image. This will download the new data set from GitHub and embed it into the image.
 
 ## Get going with local development
 
@@ -49,7 +42,7 @@ After cloning the repository, ensure you have all R package dependencies with
 ./scripts/install_deps
 ```
 
-You will need a copy of the data. Run `./scripts/import` which will download, process and import the mintr database in `tests/testthat/data`, which will then be available for tests.
+Running the package's tests (using `devtools::test()` or through RStudio) for the first time will download the dataset off GitHub and store them in `tests/testthat/data`. Subsequent runs will re-use that data.
 
 ## Browser tests
 

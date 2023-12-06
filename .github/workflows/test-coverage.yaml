@@ -4,7 +4,7 @@ on:
   push:
     branches: [main, master]
   pull_request:
-    branches: [main, master, mrc-3461]
+    branches: [main, master]
 
 name: test-coverage
 
