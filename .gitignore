@@ -8,7 +8,6 @@ inst/*.html
 vignettes/*.html
 vignettes/*.R
 .V8history
-import
 tests/testthat/data
 .Rproj.user
 .Rhistory
