@@ -51,8 +51,7 @@ endpoint_version <- function() {
   porcelain::porcelain_endpoint$new("GET",
                                     "/version",
                                     target_version,
-                                    returning = porcelain::porcelain_returning_json("Version.schema.json",
-                                                                                    schema_root()))
+                                    returning = porcelain::porcelain_returning_json("Version"))
 }
 
 
@@ -67,8 +66,7 @@ target_version <- function() {
 endpoint_baseline_options <- function() {
   porcelain::porcelain_endpoint$new(
     "GET", "/baseline/options", target_baseline_options,
-    returning = porcelain::porcelain_returning_json("DynamicFormOptions.schema",
-                                                    schema_root()))
+    returning = porcelain::porcelain_returning_json("DynamicFormOptions"))
 }
 
 
@@ -80,8 +78,7 @@ target_baseline_options <- function() {
 endpoint_graph_prevalence_config <- function() {
   porcelain::porcelain_endpoint$new(
     "GET", "/graph/prevalence/config", target_graph_prevalence_config,
-    returning = porcelain::porcelain_returning_json("Graph.schema",
-                                                    schema_root()))
+    returning = porcelain::porcelain_returning_json("Graph"))
 }
 
 
@@ -91,12 +88,11 @@ target_graph_prevalence_config <- function() {
 
 
 endpoint_graph_prevalence_data <- function(db) {
-  root <- schema_root()
   porcelain::porcelain_endpoint$new(
     "POST", "/graph/prevalence/data",
     target_graph_prevalence_data(db),
-    porcelain::porcelain_input_body_json("options", "DataOptions.schema", root),
-    returning = porcelain::porcelain_returning_json("Data.schema", root))
+    porcelain::porcelain_input_body_json("options", "DataOptions"),
+    returning = porcelain::porcelain_returning_json("Data"))
 }
 
 
@@ -111,8 +107,7 @@ target_graph_prevalence_data <- function(db) {
 endpoint_table_impact_config <- function() {
   porcelain::porcelain_endpoint$new(
     "GET", "/table/impact/config", target_table_impact_config,
-    returning = porcelain::porcelain_returning_json("TableDefinition.schema",
-                                                    schema_root()))
+    returning = porcelain::porcelain_returning_json("TableDefinition"))
 }
 
 
@@ -124,8 +119,7 @@ target_table_impact_config <- function() {
 endpoint_table_cost_config <- function() {
   porcelain::porcelain_endpoint$new(
     "GET", "/table/cost/config", target_table_cost_config,
-    returning = porcelain::porcelain_returning_json("TableDefinition.schema",
-                                                    schema_root()))
+    returning = porcelain::porcelain_returning_json("TableDefinition"))
 }
 
 
@@ -135,11 +129,10 @@ target_table_cost_config <- function() {
 
 
 endpoint_table_data <- function(db) {
-  root <- schema_root()
   porcelain::porcelain_endpoint$new(
     "POST", "/table/data", target_table_data(db),
-    porcelain::porcelain_input_body_json("options", "DataOptions.schema", root),
-    returning = porcelain::porcelain_returning_json("Data.schema", root))
+    porcelain::porcelain_input_body_json("options", "DataOptions"),
+    returning = porcelain::porcelain_returning_json("Data"))
 }
 
 
@@ -154,8 +147,7 @@ target_table_data <- function(db) {
 endpoint_graph_cost_cases_averted_config <- function() {
   porcelain::porcelain_endpoint$new(
     "GET", "/graph/cost/cases-averted/config", target_graph_cost_cases_averted_config,
-    returning = porcelain::porcelain_returning_json("Graph.schema",
-                                                    schema_root()))
+    returning = porcelain::porcelain_returning_json("Graph"))
 }
 
 
@@ -167,8 +159,7 @@ target_graph_cost_cases_averted_config <- function() {
 endpoint_graph_cost_per_case_config <- function() {
   porcelain::porcelain_endpoint$new(
     "GET", "/graph/cost/per-case/config", target_graph_cost_per_case_config,
-    returning = porcelain::porcelain_returning_json("Graph.schema",
-                                                    schema_root()))
+    returning = porcelain::porcelain_returning_json("Graph"))
 }
 
 
@@ -178,10 +169,9 @@ target_graph_cost_per_case_config <- function() {
 
 
 endpoint_intervention_options <- function() {
-  root <- schema_root()
   porcelain::porcelain_endpoint$new(
     "GET", "/intervention/options", target_intervention_options,
-    returning = porcelain::porcelain_returning_json("DynamicFormOptions.schema", root))
+    returning = porcelain::porcelain_returning_json("DynamicFormOptions"))
 }
 
 
@@ -193,8 +183,7 @@ target_intervention_options <- function() {
 endpoint_graph_cases_averted_config <- function() {
   porcelain::porcelain_endpoint$new(
     "GET", "/graph/impact/cases-averted/config", target_graph_cases_averted_config,
-    returning = porcelain::porcelain_returning_json("Graph.schema",
-                                                    schema_root()))
+    returning = porcelain::porcelain_returning_json("Graph"))
 }
 
 
@@ -206,8 +195,7 @@ target_graph_cases_averted_config <- function() {
 endpoint_impact_intepretation <- function(db) {
   porcelain::porcelain_endpoint$new(
     "GET", "/docs/impact", target_impact_interpretation(db),
-    returning = porcelain::porcelain_returning_json("Docs.schema",
-                                                    schema_root()))
+    returning = porcelain::porcelain_returning_json("Docs"))
 }
 
 
@@ -222,8 +210,7 @@ target_impact_interpretation <- function(db) {
 endpoint_cost_intepretation <- function(db) {
   porcelain::porcelain_endpoint$new(
     "GET", "/docs/cost", target_cost_interpretation(db),
-    returning = porcelain::porcelain_returning_json("Docs.schema",
-                                                    schema_root()))
+    returning = porcelain::porcelain_returning_json("Docs"))
 }
 
 target_cost_interpretation <- function(db) {
@@ -234,12 +221,11 @@ target_cost_interpretation <- function(db) {
 }
 
 endpoint_strategise <- function(db) {
-  root <- schema_root()
   porcelain::porcelain_endpoint$new(
     "POST", "/strategise",
     target_strategise(db),
-    porcelain::porcelain_input_body_json("json", "StrategiseOptions.schema", root),
-    returning = porcelain::porcelain_returning_json("Strategise.schema", root))
+    porcelain::porcelain_input_body_json("json", "StrategiseOptions"),
+    returning = porcelain::porcelain_returning_json("Strategise"))
 }
 
 target_strategise <- function(db) {
