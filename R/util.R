@@ -8,12 +8,6 @@ mintr_path <- function(path) {
 }
 
 
-## TODO: This will be removed once RESIDE-121 is fixed
-schema_root <- function() {
-  mintr_path("schema")
-}
-
-
 read_json <- function(path) {
   str <- paste(readLines(path), collapse = "\n")
   class(str) <- "json"
