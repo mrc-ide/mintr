@@ -60,6 +60,18 @@ Browser tests are included (in `tests/e2e`) in order to test config changes made
 
 The browser tests are also run as part of the BuildKite pipeline, in a docker container built from `docker/test-e2e.dockerfile` using config from `tests/e2e/playwright.docker.config.ts`
 
+## Emulator
+
+mintr supports an optional experimental "emulator" mode, in which a machine-learning model is used instead of precomputing data.
+mintr does not execute the model itself. The pre-trained emulator model is exposed by mintr's API. The frontend loads and executes the model directly in the browser.
+
+Since this feature is still under active development, the docker image does not contain any of the artefacts required to use the emulator.
+Instead they need to be bind-mounted onto the container and enabled with a command line argument:
+
+```
+docker run --rm -p 8888:8888 -v /path/to/emulator:/emulator mrcide/mintr:v0.1.0 --emulator=/emulator
+```
+
 
 ## Deployment
 
