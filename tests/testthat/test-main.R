@@ -1,8 +1,21 @@
 context("main")
 
-test_that("cli can parse port", {
-  expect_equal(main_args(character()), list(port = 8888, data = "data"))
-  expect_equal(main_args("--port=1234"), list(port = 1234, data = "data"))
+test_that("cli can parse args", {
+  expect_equal(
+    main_args(character()),
+    list(port = 8888, data = "data", emulator_root=NULL))
+
+  expect_equal(
+    main_args("--port=1234"),
+    list(port = 1234, data = "data", emulator_root=NULL))
+
+  expect_equal(
+    main_args("--data=/path/to/data"),
+    list(port = 8888, data = "/path/to/data", emulator_root=NULL))
+
+  expect_equal(
+    main_args("--emulator=/path/to/emulator"),
+    list(port = 8888, data = "data", emulator_root="/path/to/emulator"))
 })
 
 
