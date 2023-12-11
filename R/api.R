@@ -245,7 +245,7 @@ target_strategise <- function(db) {
 endpoint_emulator_config <- function(emulator_root) {
   porcelain::porcelain_endpoint$new(
     "GET", "/emulator/config", target_emulator_config(emulator_root),
-    returning = porcelain::porcelain_returning_json("EmulatorSchema"))
+    returning = porcelain::porcelain_returning_json("EmulatorOptions"))
 }
 
 target_emulator_config <- function(emulator_root) {
