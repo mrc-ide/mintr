@@ -3,10 +3,11 @@ main_args <- function(args = commandArgs(TRUE)) {
   mintr [options]
 
 Options:
-  --port=PORT   Port to run on [default: 8888]
-  --data=PATH   Path to the mintr data [default: data]"
+  --port=PORT       Port to run on [default: 8888]
+  --data=PATH       Path to the mintr data [default: data]
+  --emulator=PATH   Path to emulator configuration and models"
   dat <- docopt::docopt(usage, args)
-  list(port = as.integer(dat$port), data = dat$data)
+  list(port = as.integer(dat$port), data = dat$data, emulator_root=dat$emulator)
 }
 
 
@@ -18,7 +19,7 @@ main <- function(args = commandArgs(TRUE)) {
   message("Opening database")
   db <- mintr_db_open(opts$data, docs)
   message("Starting API")
-  api_run(port, db)
+  api_run(port, db, opts$emulator_root)
 }
 
 

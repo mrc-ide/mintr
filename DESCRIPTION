@@ -23,6 +23,7 @@ Imports:
     ROI.plugin.glpk,
     tidyr
 Suggests:
+    fs,
     glue,
     jsonvalidate (>= 1.2.2),
     knitr,

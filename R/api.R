@@ -1,10 +1,10 @@
-api_run <- function(port, db) {
-  api_build(db)$run("0.0.0.0", port) # nocov
+api_run <- function(port, db, emulator_root) {
+  api_build(db, emulator_root)$run("0.0.0.0", port) # nocov
 }
 
 
-api_build <- function(db) {
-  pr <- porcelain::porcelain$new()
+api_build <- function(db, emulator_root=NULL) {
+  pr <- porcelain::porcelain$new(validate=TRUE)
   pr$handle(endpoint_root())
   pr$handle(endpoint_baseline_options())
   pr$handle(endpoint_graph_prevalence_data(db))
@@ -20,6 +20,10 @@ api_build <- function(db) {
   pr$handle(endpoint_cost_intepretation(db))
   pr$handle(endpoint_strategise(db))
   pr$handle(endpoint_version())
+  if (!is.null(emulator_root)) {
+    pr$handle(endpoint_emulator_config(emulator_root))
+    pr$handle(endpoint_emulator_model(emulator_root))
+  }
   pr
 }
 
@@ -235,5 +239,30 @@ target_strategise <- function(db) {
       strategise(jsonlite::fromJSON(json, simplifyVector=FALSE), db),
       auto_unbox=TRUE
     )
+  }
+}
+
+endpoint_emulator_config <- function(emulator_root) {
+  porcelain::porcelain_endpoint$new(
+    "GET", "/emulator/config", target_emulator_config(emulator_root),
+    returning = porcelain::porcelain_returning_json("EmulatorOptions"))
+}
+
+target_emulator_config <- function(emulator_root) {
+  function() {
+    read_json(file.path(emulator_root, "config.json"))
+  }
+}
+
+endpoint_emulator_model <- function(emulator_root) {
+  porcelain::porcelain_endpoint$new(
+    "GET", "/emulator/model/<filename>", target_emulator_model(emulator_root),
+    returning = porcelain::porcelain_returning_binary())
+}
+
+target_emulator_model <- function(emulator_root) {
+  function(filename) {
+    path <- file.path(emulator_root, "models", filename)
+    readBin(path, raw(), n = file.size(path))
   }
 }
