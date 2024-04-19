@@ -11,10 +11,10 @@ COPY docker/install_packages /usr/local/bin/
 
 RUN install_packages \
         --repo=https://mrc-ide.r-universe.dev \
-        --repo=https://r-opt.r-universe.dev \
+        # --repo=https://r-opt.r-universe.dev \
         R6 \
         ROI.plugin.glpk \
-        ROIoptimizer \
+        # ROIoptimizer \
         commonmark \
         dplyr \
         glue \
@@ -23,9 +23,11 @@ RUN install_packages \
         plumber \
         porcelain \
         remotes \
-        rmpk \
+        # rmpk \
         testthat \
         tidyr
+
+RUN Rscript -e 'remotes::install_github(c("r-opt/ROIoptimizer", "r-opt/rmpk"))'
 
 WORKDIR /mintr
 
