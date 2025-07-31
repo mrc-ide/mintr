@@ -45,8 +45,8 @@ test_that("Can write script", {
 test_that("can compile docs", {
   res <- get_compiled_docs()
   expect_equal(names(res), c("impact", "cost"))
-  expect_is(res$impact, "json")
-  expect_is(res$cost, "json")
+  expect_s3_class(res$impact, "json")
+  expect_s3_class(res$cost, "json")
 
   expect_true(grepl("<strong>Cost Effectiveness</strong>", res$cost))
   expect_true(grepl("<strong>Impact</strong>", res$impact))

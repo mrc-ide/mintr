@@ -28,7 +28,7 @@ Suggests:
     jsonvalidate (>= 1.2.2),
     knitr,
     mockery,
-    testthat,
+    testthat (>= 3.0.0),
     tibble
 Remotes:
     reside-ic/porcelain,
@@ -36,3 +36,4 @@ Remotes:
     r-opt/rmpk,
     r-opt/ROIoptimizer
 RoxygenNote: 7.1.1
+Config/testthat/edition: 3

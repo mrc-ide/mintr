@@ -20,8 +20,8 @@ test_that("Can create db", {
 
   impact <- db$get_impact_docs()
   cost <- db$get_cost_docs()
-  expect_is(impact, "json")
-  expect_is(cost, "json")
+  expect_s3_class(impact, "json")
+  expect_s3_class(cost, "json")
 
   expect_true(grepl("<strong>Impact</strong>", impact))
   expect_true(grepl("<strong>Cost Effectiveness</strong>", cost))

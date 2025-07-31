@@ -50,7 +50,7 @@ test_that("baseline options have valid defaults", {
 
 test_that("baseline_options", {
   res <- target_baseline_options()
-  expect_is(res, "json")
+  expect_s3_class(res, "json")
   expect_identical(res,
                    read_json(mintr_path("json/baseline_options.json")))
 
@@ -69,7 +69,7 @@ test_that("baseline_options", {
 
 test_that("graph prevalence config", {
   res <- target_graph_prevalence_config()
-  expect_is(res, "json")
+  expect_s3_class(res, "json")
   expect_identical(res,
                    read_json(mintr_path("json/graph_prevalence_config.json")))
 
@@ -117,7 +117,7 @@ test_that("graph prevalence data", {
 
 test_that("table cost config", {
   res <- target_table_cost_config()
-  expect_is(res, "json")
+  expect_s3_class(res, "json")
   expect_identical(res,
                    read_json(mintr_path("json/table_cost_config.json")))
 
@@ -136,7 +136,7 @@ test_that("table cost config", {
 
 test_that("table impact config", {
   res <- target_table_impact_config()
-  expect_is(res, "json")
+  expect_s3_class(res, "json")
   expect_identical(res,
                    read_json(mintr_path("json/table_impact_config.json")))
 
@@ -182,7 +182,7 @@ test_that("table data", {
 
 test_that("graph cost cases averted config", {
   res <- target_graph_cost_cases_averted_config()
-  expect_is(res, "json")
+  expect_s3_class(res, "json")
   expect_identical(res,
                    read_json(mintr_path("json/graph_cost_cases_averted_config.json")))
 
@@ -201,7 +201,7 @@ test_that("graph cost cases averted config", {
 
 test_that("graph cost per case config", {
   res <- target_graph_cost_per_case_config()
-  expect_is(res, "json")
+  expect_s3_class(res, "json")
   expect_identical(res,
                    read_json(mintr_path("json/graph_cost_per_case_config.json")))
 
@@ -219,7 +219,7 @@ test_that("graph cost per case config", {
 
 test_that("intervention options", {
   res <- target_intervention_options()
-  expect_is(res, "json")
+  expect_s3_class(res, "json")
   expect_identical(res,
                    read_json(mintr_path("json/intervention_options.json")))
 
@@ -238,7 +238,7 @@ test_that("intervention options", {
 
 test_that("graph cases averted config", {
   res <- target_graph_cases_averted_config()
-  expect_is(res, "json")
+  expect_s3_class(res, "json")
   expect_identical(res,
                    read_json(mintr_path("json/graph_cases_averted_config.json")))
 
@@ -258,7 +258,7 @@ test_that("graph cases averted config", {
 test_that("impact docs", {
   db <- mintr_test_db()
   res <- target_impact_interpretation(db)()
-  expect_is(res, "json")
+  expect_s3_class(res, "json")
   expect_equal(res, db$get_impact_docs())
 
   endpoint <- endpoint_impact_intepretation(db)
@@ -277,7 +277,7 @@ test_that("impact docs", {
 test_that("cost docs", {
   db <- mintr_test_db()
   res <- target_cost_interpretation(db)()
-  expect_is(res, "json")
+  expect_s3_class(res, "json")
   expect_equal(res, db$get_cost_docs())
 
   endpoint <- endpoint_cost_intepretation(db)
@@ -341,7 +341,7 @@ test_that("strategise", {
 
   db <- mintr_test_db()
   res <- target_strategise(db)(json)
-  expect_is(res, "json")
+  expect_s3_class(res, "json")
 
   endpoint <- endpoint_strategise(db)
   res_endpoint <- endpoint$run(json)
