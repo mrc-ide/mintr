@@ -25,6 +25,8 @@ See the [spec](inst/schema/spec.md) for more details.
 
 ## Updating data
 
+(This is historic and will never happen again)
+
 The basic flow of data coming in:
 
 1. New raw (ish) data will come from the science team, recently at `\\fi--didenas1.dide.ic.ac.uk\malaria\Arran\malaria_projects\MINT\1_ModelSimulations\output\malariasimulation_runs\remove_peak_irs_increase_population`. It's really very slow to work with these against the network drive so it's good to copy these locally on your machine for processing.
@@ -44,16 +46,9 @@ After cloning the repository, ensure you have all R package dependencies with
 
 Running the package's tests (using `devtools::test()` or through RStudio) for the first time will download the dataset off GitHub and store them in `tests/testthat/data`. Subsequent runs will re-use that data.
 
-## Browser tests
-
-Browser tests are included (in `tests/e2e`) in order to test config changes made in mintr are rendered correctly in MINT. To run browser tests locally:
-1. Install [Playwright](https://playwright.dev/docs/intro#installing-playwright)
-2. Run mintr and MINT in docker with `./docker/run_app` - this runs the mintr docker image pushed for the current git SHA, and the master branch of MINT. Change the line `export MINT_BRANCH=master` to run a different MINT branch. 
-3. Run `npx playwright test` from `tests/e2e`
-
-The browser tests are also run as part of the BuildKite pipeline, in a docker container built from `docker/test-e2e.dockerfile` using config from `tests/e2e/playwright.docker.config.ts`
-
 ## Emulator
+
+(This is historic and will not be used in the next version)
 
 mintr supports an optional experimental "emulator" mode, in which a machine-learning model is used instead of precomputing data.
 mintr does not execute the model itself. The pre-trained emulator model is exposed by mintr's API. The frontend loads and executes the model directly in the browser.
@@ -65,11 +60,9 @@ Instead they need to be bind-mounted onto the container and enabled with a comma
 docker run --rm -p 8888:8888 -v /path/to/emulator:/emulator mrcide/mintr:v0.1.0 --emulator=/emulator
 ```
 
-
 ## Deployment
 
 Deployment on the DIDE network is descrbed in the [Knowledge Base article](https://mrc-ide.myjetbrains.com/youtrack/articles/mrc-A-10/MINT---mintr#server)
-
 
 ## License
 
