@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-set -ex
-HERE=$(dirname $0)
-. $HERE/common
-
-export MINT_BRANCH=master
-
-docker-compose up -d --quiet-pull
