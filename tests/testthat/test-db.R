@@ -1,5 +1,3 @@
-context("db")
-
 test_that("Can create db", {
   db <- mintr_test_db()
   expect_error(db$get_prevalence(list()),

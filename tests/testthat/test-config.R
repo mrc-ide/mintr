@@ -1,5 +1,3 @@
-context("config")
-
 get_costs_per_cases_averted <- function(casesAvertedField = "casesAverted") {
   input <- get_input()
   total_costs <- get_expected_total_costs()

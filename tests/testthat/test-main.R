@@ -1,5 +1,3 @@
-context("main")
-
 test_that("cli can parse args", {
   expect_equal(
     main_args(character()),

@@ -1,6 +1,3 @@
-context("api: endpoints")
-
-
 test_that("root endpoint", {
   res <- target_root()
   expect_equal(res, jsonlite::unbox("Welcome to mintr"))
