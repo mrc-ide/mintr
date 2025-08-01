@@ -2,14 +2,14 @@
 
 <!-- badges: start -->
 [![Project Status: Concept – Minimal or no implementation has been done yet, or the repository is only intended to be a limited example, demo, or proof-of-concept.](https://www.repostatus.org/badges/latest/concept.svg)](https://www.repostatus.org/#concept)
-[![R build status](https://github.com/mrc-ide/mintr/workflows/R-CMD-check/badge.svg)](https://github.com/mrc-ide/mintr/actions)
-[![Codecov test coverage](https://codecov.io/gh/mrc-ide/mintr/branch/master/graph/badge.svg)](https://codecov.io/gh/mrc-ide/mintr?branch=master)
+[![Codecov test coverage](https://codecov.io/gh/mrc-ide/mintr/graph/badge.svg)](https://app.codecov.io/gh/mrc-ide/mintr)
+[![R-CMD-check](https://github.com/mrc-ide/mintr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/mrc-ide/mintr/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 Run from docker with:
 
 ```
-docker run --rm -p 8888:8888 mrcide/mintr:v0.1.0
+docker run --rm -p 8888:8888 ghcr.io/mrc-ide/mintr
 ```
 
 Note that at present both `POST` endpoints accept *any* json object as as body (it does however have to be an object following [the spec](inst/schema/Data.schema.json)).  We'll either tighten this later via the schema or do validation in the target functions.
@@ -24,6 +24,8 @@ curl -X POST -H "Content-Type: application/json" --data "{}" http://localhost:88
 See the [spec](inst/schema/spec.md) for more details.
 
 ## Updating data
+
+(This is historic and will never happen again)
 
 The basic flow of data coming in:
 
@@ -44,16 +46,9 @@ After cloning the repository, ensure you have all R package dependencies with
 
 Running the package's tests (using `devtools::test()` or through RStudio) for the first time will download the dataset off GitHub and store them in `tests/testthat/data`. Subsequent runs will re-use that data.
 
-## Browser tests
-
-Browser tests are included (in `tests/e2e`) in order to test config changes made in mintr are rendered correctly in MINT. To run browser tests locally:
-1. Install [Playwright](https://playwright.dev/docs/intro#installing-playwright)
-2. Run mintr and MINT in docker with `./docker/run_app` - this runs the mintr docker image pushed for the current git SHA, and the master branch of MINT. Change the line `export MINT_BRANCH=master` to run a different MINT branch. 
-3. Run `npx playwright test` from `tests/e2e`
-
-The browser tests are also run as part of the BuildKite pipeline, in a docker container built from `docker/test-e2e.dockerfile` using config from `tests/e2e/playwright.docker.config.ts`
-
 ## Emulator
+
+(This is historic and will not be used in the next version)
 
 mintr supports an optional experimental "emulator" mode, in which a machine-learning model is used instead of precomputing data.
 mintr does not execute the model itself. The pre-trained emulator model is exposed by mintr's API. The frontend loads and executes the model directly in the browser.
@@ -62,14 +57,12 @@ Since this feature is still under active development, the docker image does not 
 Instead they need to be bind-mounted onto the container and enabled with a command line argument:
 
 ```
-docker run --rm -p 8888:8888 -v /path/to/emulator:/emulator mrcide/mintr:v0.1.0 --emulator=/emulator
+docker run --rm -p 8888:8888 -v /path/to/emulator:/emulator ghcr.io/mrc-ide/mintr --emulator=/emulator
 ```
-
 
 ## Deployment
 
 Deployment on the DIDE network is descrbed in the [Knowledge Base article](https://mrc-ide.myjetbrains.com/youtrack/articles/mrc-A-10/MINT---mintr#server)
-
 
 ## License
 

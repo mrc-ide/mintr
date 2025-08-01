@@ -1,5 +1,3 @@
-context("config")
-
 get_costs_per_cases_averted <- function(casesAvertedField = "casesAverted") {
   input <- get_input()
   total_costs <- get_expected_total_costs()
@@ -8,7 +6,7 @@ get_costs_per_cases_averted <- function(casesAvertedField = "casesAverted") {
 
 evaluate <- function(formula) {
   input <- get_input()
-  eval(parse(text = glue::glue(formula, .envir = input)))
+  eval(parse(text = glue::glue(formula, .envir = as.environment(input))))
 }
 
 validate_costs_per_case <- function(formulas, costs) {
