@@ -9,7 +9,7 @@
 Run from docker with:
 
 ```
-docker run --rm -p 8888:8888 mrcide/mintr:v0.1.0
+docker run --rm -p 8888:8888 ghcr.io/mrc-ide/mintr
 ```
 
 Note that at present both `POST` endpoints accept *any* json object as as body (it does however have to be an object following [the spec](inst/schema/Data.schema.json)).  We'll either tighten this later via the schema or do validation in the target functions.
@@ -57,7 +57,7 @@ Since this feature is still under active development, the docker image does not 
 Instead they need to be bind-mounted onto the container and enabled with a command line argument:
 
 ```
-docker run --rm -p 8888:8888 -v /path/to/emulator:/emulator mrcide/mintr:v0.1.0 --emulator=/emulator
+docker run --rm -p 8888:8888 -v /path/to/emulator:/emulator ghcr.io/mrc-ide/mintr --emulator=/emulator
 ```
 
 ## Deployment
