@@ -67,6 +67,18 @@ target_version <- function() {
 ## At present these endpoints just return some sample responses
 ## directly from from inst/json - however, it's possible that the
 ## /config endpoints will stay like this as it's not terrible to edit.
+endpoint_options <- function() {
+  porcelain::porcelain_endpoint$new(
+    "GET", "/options", target_options,
+    returning = porcelain::porcelain_returning_json("FormOptions")
+  )
+}
+
+target_options <- function() {
+  read_json(mintr_path("json/options.json"))
+}
+
+# TODO: delete these later
 endpoint_baseline_options <- function() {
   porcelain::porcelain_endpoint$new(
     "GET", "/baseline/options", target_baseline_options,
