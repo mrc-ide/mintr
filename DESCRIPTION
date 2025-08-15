@@ -35,5 +35,5 @@ Remotes:
     ropensci/jsonvalidate,
     r-opt/rmpk,
     r-opt/ROIoptimizer
-RoxygenNote: 7.1.1
+RoxygenNote: 7.3.2
 Config/testthat/edition: 3

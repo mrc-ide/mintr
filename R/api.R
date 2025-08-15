@@ -6,6 +6,7 @@ api_run <- function(port, db, emulator_root) {
 api_build <- function(db, emulator_root=NULL) {
   pr <- porcelain::porcelain$new(validate=TRUE)
   pr$handle(endpoint_root())
+  pr$handle(endpoint_options())
   pr$handle(endpoint_baseline_options())
   pr$handle(endpoint_graph_prevalence_data(db))
   pr$handle(endpoint_graph_prevalence_config())
