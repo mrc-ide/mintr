@@ -108,7 +108,7 @@
         { "$ref": "#/definitions/numericCommon" },
         {
           "properties": {
-            "type": { "const": "number" },
+            "type": { "enum": ["number"] },
             "default": { "type": "number" }
           },
           "required": ["type"]
@@ -121,7 +121,7 @@
         { "$ref": "#/definitions/numericCommon" },
         {
           "properties": {
-            "type": { "const": "slider" },
+            "type": { "enum": ["slider"] },
             "default": { "type": "number" }
           },
           "required": ["type", "min", "max", "step"]
@@ -133,7 +133,7 @@
         { "$ref": "#/definitions/fieldBase" },
         {
           "properties": {
-            "type": { "const": "toggle" },
+            "type": { "enum": ["toggle"] },
             "default": { "type": "boolean" }
           },
           "required": ["type"]
@@ -145,7 +145,7 @@
         { "$ref": "#/definitions/fieldBase" },
         {
           "properties": {
-            "type": { "const": "multiselect" },
+            "type": { "enum": ["multiselect"] },
             "options": {
               "type": "array",
               "minItems": 1,
@@ -186,7 +186,7 @@
     "crossFieldComputation": {
       "type": "object",
       "properties": {
-        "type": { "const": "cross_field" },
+        "type": { "enum": ["cross_field"] },
         "fields": {
           "type": "array",
           "minItems": 1,
@@ -200,7 +200,7 @@
     "disabledCrossFieldCondition": {
       "type": "object",
       "properties": {
-        "type": { "const": "cross_field" },
+        "type": { "enum": ["cross_field"] },
         "fields": {
           "type": "array",
           "minItems": 1,
@@ -214,7 +214,7 @@
     "crossFieldValidationRule": {
       "type": "object",
       "properties": {
-        "type": { "const": "cross_field" },
+        "type": { "enum": ["cross_field"] },
         "fields": {
           "type": "array",
           "minItems": 1,
