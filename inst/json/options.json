@@ -1,0 +1,405 @@
+{
+  "groups": [
+    {
+      "id": "baseline_options",
+      "title": "Baseline Options",
+      "description": "These are the baseline options for the form.",
+      "helpText": "Configure the baseline options for the form.",
+      "collapsible": true,
+      "triggersRerun": true,
+      "preRun": true,
+      "subGroups": [
+        {
+          "id": "site_inputs",
+          "title": "Site Inputs",
+          "description": "Configure the site-specific inputs for the form.",
+          "helpText": "These inputs are specific to the site being configured.",
+          "fields": [
+            {
+              "id": "population",
+              "label": "Size of population",
+              "helpText": "Enter the size of the population in the region.",
+              "type": "number",
+              "required": true,
+              "default": 20000,
+              "min": 0,
+              "max": 1000000000,
+              "step": 100,
+              "integer": true
+            },
+            {
+              "id": "is_seasonal",
+              "label": "Transmission seasonal",
+              "helpText": "Indicate whether the population is seasonal.",
+              "type": "toggle",
+              "required": true,
+              "default": false
+            },
+            {
+              "id": "current_malaria_prevalence",
+              "label": "Current Malaria Prevalence",
+              "helpText": "Enter the current malaria prevalence in the region.",
+              "required": true,
+              "default": 0,
+              "type": "slider",
+              "min": 0,
+              "max": 100,
+              "step": 1,
+              "unit": "%",
+              "integer": true
+            }
+          ]
+        },
+        {
+          "id": "mosquito_inputs",
+          "title": "Mosquito Inputs",
+          "description": "These inputs are specific to the mosquito species in the region.",
+          "helpText": "Configure the mosquito-specific inputs for the form.",
+          "fields": [
+            {
+              "id": "preference_for_biting_in_bed",
+              "label": "Preference for biting in bed",
+              "helpText": "Indicate the mosquito's preference for biting in bed.",
+              "type": "slider",
+              "required": true,
+              "default": 82,
+              "min": 40,
+              "max": 90,
+              "step": 1,
+              "unit": "%",
+              "integer": true
+            },
+            {
+              "id": "preference_for_biting",
+              "label": "Preference for biting",
+              "helpText": "Indicate the mosquito's preference for biting.",
+              "type": "slider",
+              "required": true,
+              "default": 87,
+              "min": 60,
+              "max": 100,
+              "step": 1,
+              "unit": "%",
+              "integer": true
+            },
+            {
+              "id": "pyrethroid_resistance",
+              "label": "Pyrethroid Resistance",
+              "helpText": "Indicate the level of pyrethroid resistance in the mosquito population.",
+              "type": "slider",
+              "required": true,
+              "default": 0,
+              "min": 0,
+              "max": 100,
+              "step": 1,
+              "unit": "%",
+              "integer": true
+            }
+          ]
+        },
+        {
+          "id": "past_vector_control",
+          "title": "Past Vector Control",
+          "helpText": "Configure the past vector control measures in the region.",
+          "description": "These inputs are specific to the past vector control measures in the region.",
+          "collapsible": true,
+          "fields": [
+            {
+              "id": "py_only",
+              "label": "Pyrethroid ITN population usage",
+              "helpText": "Indicate the population usage of pyrethroid ITNs.",
+              "type": "slider",
+              "required": true,
+              "default": 0,
+              "min": 0,
+              "max": 100,
+              "step": 1,
+              "unit": "%",
+              "integer": true
+            },
+            {
+              "id": "py_pbo",
+              "label": "Pyrethroid-PBO ITN population usage",
+              "helpText": "Indicate the population usage of pyrethroid-PBO ITNs.",
+              "type": "slider",
+              "required": true,
+              "default": 0,
+              "min": 0,
+              "max": 100,
+              "step": 1,
+              "unit": "%",
+              "integer": true
+            },
+            {
+              "id": "py_pyrrole",
+              "label": "Pyrethroid-Pyrrole ITN population usage",
+              "helpText": "Indicate the population usage of pyrethroid-Pyrrole ITNs.",
+              "type": "slider",
+              "required": true,
+              "default": 0,
+              "min": 0,
+              "max": 100,
+              "step": 1,
+              "unit": "%",
+              "integer": true
+            },
+            {
+              "id": "py_ppf",
+              "label": "Pyrethroid-pyriproxyfen ITN population usage",
+              "helpText": "Indicate the population usage of Pyrethroid-pyriproxyfen ITNs.",
+              "type": "slider",
+              "required": true,
+              "default": 0,
+              "min": 0,
+              "max": 100,
+              "step": 1,
+              "unit": "%",
+              "integer": true
+            },
+            {
+              "id": "itn_total",
+              "label": "Total ITN population usage",
+              "type": "display",
+              "unit": "%",
+              "value": {
+                "type": "cross_field",
+                "fields": ["py_only", "py_pbo", "py_pyrrole", "py_ppf"],
+                "operator": "sum"
+              }
+            },
+            {
+              "id": "irs_coverage",
+              "label": "IRS Coverage",
+              "helpText": "Indicate the IRS coverage in the region.",
+              "type": "slider",
+              "required": true,
+              "default": 0,
+              "min": 0,
+              "max": 100,
+              "step": 1,
+              "unit": "%",
+              "integer": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "intervention_options",
+      "title": "Intervention Options",
+      "triggersRerun": true,
+      "collapsible": true,
+      "preRun": false,
+      "description": "These are the intervention options for the form.",
+      "helpText": "Configure the intervention options for the form.",
+      "subGroups": [
+        {
+          "id": "future_intervention",
+          "title": "Future Intervention Options",
+          "helpText": "Configure the future intervention options for the form.",
+          "description": "These inputs are specific to the future intervention options in the region.",
+          "collapsible": true,
+          "fields": [
+            {
+              "id": "itn_future",
+              "label": "Expected ITN population use",
+              "helpText": "Indicate the expected ITN population use in the region.",
+              "type": "slider",
+              "required": true,
+              "default": 0,
+              "min": 0,
+              "max": 100,
+              "step": 1,
+              "unit": "%",
+              "integer": true
+            },
+            {
+              "id": "itn_future_types",
+              "label": "Future ITN Types",
+              "helpText": "Select the type of ITNs that will be used in the future.",
+              "type": "multiselect",
+              "options": [
+                { "label": "Pyrethroid ITNs", "value": "py_only" },
+                { "label": "Pyrethroid-PBO ITNs", "value": "py_pbo" },
+                { "label": "Pyrethroid-Pyrrole ITNs", "value": "py_pyrrole" },
+                { "label": "Pyrethroid-Pyriproxyfen ITNs", "value": "py_ppf" }
+              ]
+            },
+            {
+              "id": "routine_coverage",
+              "label": "Continuous distribution of ITNs",
+              "helpText": "Indicate whether continuous distribution of ITNs will be implemented.",
+              "type": "toggle",
+              "required": true,
+              "disabled": {
+                "type": "cross_field",
+                "fields": ["itn_future"],
+                "operator": "falsy"
+              },
+              "default": false
+            },
+            {
+              "id": "irs_future",
+              "label": "Expected IRS Coverage",
+              "helpText": "Indicate the expected IRS coverage in the region.",
+              "type": "slider",
+              "required": true,
+              "default": 0,
+              "min": 0,
+              "max": 100,
+              "step": 1,
+              "unit": "%",
+              "integer": true
+            },
+            {
+              "id": "lsm",
+              "label": "Expected reduction in mosquito density from larval source management",
+              "helpText": "Indicate the expected reduction in mosquito density from larval source management.",
+              "type": "slider",
+              "required": true,
+              "default": 0,
+              "min": 0,
+              "max": 100,
+              "step": 1,
+              "unit": "%",
+              "integer": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cost_options",
+      "title": "Cost Options",
+      "description": "Cost Options",
+      "helpText": "Configure the cost options for the form.",
+      "triggersRerun": false,
+      "collapsible": true,
+      "preRun": false,
+      "subGroups": [
+        {
+          "id": "procurement_distribution",
+          "title": "Procurement and Distribution Costs",
+          "description": "Configure the procurement and distribution costs for the form.",
+          "helpText": "These inputs are specific to the procurement and distribution costs in the region.",
+          "collapsible": true,
+          "fields": [
+            {
+              "id": "people_per_bednet",
+              "label": "Number of People per bed net",
+              "helpText": "When planning procurement, what number of people per net is used?",
+              "type": "number",
+              "required": true,
+              "default": 1.8,
+              "step": 0.1
+            },
+            {
+              "id": "people_per_household",
+              "label": "Number of People per household",
+              "helpText": "When planning procurement, what number of people per household is used?",
+              "type": "number",
+              "required": true,
+              "default": 4,
+              "step": 1
+            },
+            {
+              "id": "procurement_buffer",
+              "label": "Procurement Buffer",
+              "helpText": "When planning procurement, what buffer is used?",
+              "type": "slider",
+              "required": true,
+              "default": 7,
+              "min": 0,
+              "max": 100,
+              "step": 1,
+              "unit": "%",
+              "integer": true
+            }
+          ]
+        },
+        {
+          "id": "intervention_prices",
+          "title": "Price of Interventions",
+          "description": "Configure the prices for the interventions.",
+          "helpText": "Specify the prices for each intervention.",
+          "collapsible": true,
+          "fields": [
+            {
+              "id": "py_only_cost",
+              "label": "Price of Pyrethroid-Only ITNs ($USD)",
+              "type": "number",
+              "required": true,
+              "default": 1.85,
+              "step": 0.01
+            },
+            {
+              "id": "py_pbo_cost",
+              "label": "Price of Pyrethroid-PBO ITNs ($USD)",
+              "type": "number",
+              "required": true,
+              "default": 2.14,
+              "step": 0.01
+            },
+            {
+              "id": "py_pyrrole_cost",
+              "label": "Price of Pyrethroid-Pyrrole ITNs ($USD)",
+              "type": "number",
+              "required": true,
+              "default": 2.56,
+              "step": 0.01
+            },
+            {
+              "id": "py_ppf_cost",
+              "label": "Price of Pyrethroid-Pyriproxyfen ITNs ($USD)",
+              "type": "number",
+              "required": true,
+              "default": 2.86,
+              "step": 0.01
+            },
+            {
+              "id": "mass_distribution_cost",
+              "label": "ITN mass distribution campaign delivery cost per person ($USD)",
+              "type": "number",
+              "required": true,
+              "default": 2.75,
+              "step": 0.01
+            },
+            {
+              "id": "continuous_itn_distribution_cost",
+              "label": "Continuous ITN distribution campaign delivery cost per person ($USD)",
+              "type": "number",
+              "required": true,
+              "default": 2.75,
+              "step": 0.01
+            },
+            {
+              "id": "irs_household_annual_cost",
+              "label": "Annual cost of IRS per household structure ($USD)",
+              "type": "number",
+              "required": true,
+              "default": 5
+            },
+            {
+              "id": "lsm_cost",
+              "label": "Cost of LSM programme per person ($USD)",
+              "type": "number",
+              "required": true,
+              "default": 5,
+              "step": 1
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "customValidationRules": {
+    "itn_total_under_100": {
+      "type": "cross_field",
+      "fields": ["py_only", "py_pbo", "py_pyrrole", "py_ppf"],
+      "operator": "sum_lte",
+      "threshold": 100,
+      "errorFields": ["py_only", "py_pbo", "py_pyrrole", "py_ppf", "itn_total"],
+      "message": "Total ITN population usage must be less than or equal to 100%."
+    }
+  }
+}

@@ -6,6 +6,7 @@ api_run <- function(port, db, emulator_root) {
 api_build <- function(db, emulator_root=NULL) {
   pr <- porcelain::porcelain$new(validate=TRUE)
   pr$handle(endpoint_root())
+  pr$handle(endpoint_options())
   pr$handle(endpoint_baseline_options())
   pr$handle(endpoint_graph_prevalence_data(db))
   pr$handle(endpoint_graph_prevalence_config())
@@ -67,6 +68,18 @@ target_version <- function() {
 ## At present these endpoints just return some sample responses
 ## directly from from inst/json - however, it's possible that the
 ## /config endpoints will stay like this as it's not terrible to edit.
+endpoint_options <- function() {
+  porcelain::porcelain_endpoint$new(
+    "GET", "/options", target_options,
+    returning = porcelain::porcelain_returning_json("FormOptions")
+  )
+}
+
+target_options <- function() {
+  read_json(mintr_path("json/options.json"))
+}
+
+# TODO: delete these later
 endpoint_baseline_options <- function() {
   porcelain::porcelain_endpoint$new(
     "GET", "/baseline/options", target_baseline_options,

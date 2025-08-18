@@ -66,6 +66,23 @@ test_that("baseline_options", {
   expect_equal(res_api$body, res_endpoint$body)
 })
 
+test_that("options", {
+  res <- target_options()
+  expect_s3_class(res, "json")
+  expect_identical(res,
+                   read_json(mintr_path("json/options.json")))
+
+  endpoint <- endpoint_options()
+  res_endpoint <- endpoint$run()
+  expect_equal(res_endpoint$status_code, 200)
+  expect_equal(res_endpoint$content_type, "application/json")
+  expect_equal(res_endpoint$data, res)
+
+  api <- api_build(mintr_test_db())
+  res_api <- api$request("GET", "/options")
+  expect_equal(res_api$status, 200)
+  expect_equal(res_api$body, res_endpoint$body)
+})
 
 test_that("graph prevalence config", {
   res <- target_graph_prevalence_config()
