@@ -29,7 +29,7 @@
             },
             {
               "id": "is_seasonal",
-              "label": "Transmission seasonal",
+              "label": "Seasonal transmission",
               "helpText": "Indicate whether the population is seasonal.",
               "type": "toggle",
               "required": true,
@@ -398,7 +398,7 @@
       "fields": ["py_only", "py_pbo", "py_pyrrole", "py_ppf"],
       "operator": "sum_lte",
       "threshold": 100,
-      "errorFields": ["py_only", "py_pbo", "py_pyrrole", "py_ppf", "itn_total"],
+      "errorFields": ["itn_total"],
       "message": "Total ITN population usage must be less than or equal to 100%."
     }
   }
