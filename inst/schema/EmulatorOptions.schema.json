@@ -1,4 +1,82 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "type": "object"
+  "title": "EmulatorOptions",
+  "type": "object",
+  "properties": {
+    "triggerRun": { "type": "boolean" },
+    "population": { "type": "integer", "minimum": 0 },
+    "is_seasonal": { "type": "boolean" },
+    "current_malaria_prevalence": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "preference_for_biting_in_bed": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "preference_for_biting": { "type": "number", "minimum": 0, "maximum": 100 },
+    "pyrethroid_resistance": { "type": "number", "minimum": 0, "maximum": 100 },
+    "py_only": { "type": "number", "minimum": 0, "maximum": 100 },
+    "py_pbo": { "type": "number", "minimum": 0, "maximum": 100 },
+    "py_pyrrole": { "type": "number", "minimum": 0, "maximum": 100 },
+    "py_ppf": { "type": "number", "minimum": 0, "maximum": 100 },
+    "itn_total": {
+      "type": "null"
+    },
+    "irs_coverage": { "type": "number", "minimum": 0, "maximum": 100 },
+    "itn_future": { "type": "number", "minimum": 0, "maximum": 100 },
+    "itn_future_types": {
+      "type": "array",
+      "items": { "enum": ["py_only", "py_pyrrole", "py_ppf", "py_pbo"] },
+      "uniqueItems": true
+    },
+    "routine_coverage": { "type": "boolean" },
+    "irs_future": { "type": "number", "minimum": 0, "maximum": 100 },
+    "lsm": { "type": "number", "minimum": 0, "maximum": 100 },
+    "people_per_bednet": { "type": "number", "minimum": 0 },
+    "people_per_household": { "type": "integer", "minimum": 1 },
+    "procurement_buffer": { "type": "integer", "minimum": 0 },
+    "py_only_cost": { "type": "number", "minimum": 0 },
+    "py_pbo_cost": { "type": "number", "minimum": 0 },
+    "py_pyrrole_cost": { "type": "number", "minimum": 0 },
+    "py_ppf_cost": { "type": "number", "minimum": 0 },
+    "mass_distribution_cost": { "type": "number", "minimum": 0 },
+    "continuous_itn_distribution_cost": { "type": "number", "minimum": 0 },
+    "irs_household_annual_cost": { "type": "number", "minimum": 0 },
+    "lsm_cost": { "type": "number", "minimum": 0 }
+  },
+  "additionalProperties": false,
+  "required": [
+    "triggerRun",
+    "population",
+    "is_seasonal",
+    "current_malaria_prevalence",
+    "preference_for_biting_in_bed",
+    "preference_for_biting",
+    "pyrethroid_resistance",
+    "py_only",
+    "py_pbo",
+    "py_pyrrole",
+    "py_ppf",
+    "itn_total",
+    "irs_coverage",
+    "itn_future",
+    "itn_future_types",
+    "routine_coverage",
+    "irs_future",
+    "lsm",
+    "people_per_bednet",
+    "people_per_household",
+    "procurement_buffer",
+    "py_only_cost",
+    "py_pbo_cost",
+    "py_pyrrole_cost",
+    "py_ppf_cost",
+    "mass_distribution_cost",
+    "continuous_itn_distribution_cost",
+    "irs_household_annual_cost",
+    "lsm_cost"
+  ]
 }
