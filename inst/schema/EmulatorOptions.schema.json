@@ -1,4 +1,52 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "type": "object"
+  "title": "EmulatorOptions",
+  "type": "object",
+  "properties": {
+    "is_seasonal": { "type": "boolean" },
+    "current_malaria_prevalence": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "preference_for_biting_in_bed": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "preference_for_biting": { "type": "number", "minimum": 0, "maximum": 100 },
+    "pyrethroid_resistance": { "type": "number", "minimum": 0, "maximum": 100 },
+    "py_only": { "type": "number", "minimum": 0, "maximum": 100 },
+    "py_pbo": { "type": "number", "minimum": 0, "maximum": 100 },
+    "py_pyrrole": { "type": "number", "minimum": 0, "maximum": 100 },
+    "py_ppf": { "type": "number", "minimum": 0, "maximum": 100 },
+    "irs_coverage": { "type": "number", "minimum": 0, "maximum": 100 },
+    "itn_future": { "type": "number", "minimum": 0, "maximum": 100 },
+    "itn_future_types": {
+      "type": "array",
+      "items": { "enum": ["py_only", "py_pyrrole", "py_ppf", "py_pbo"] },
+      "uniqueItems": true
+    },
+    "routine_coverage": { "type": "boolean" },
+    "irs_future": { "type": "number", "minimum": 0, "maximum": 100 },
+    "lsm": { "type": "number", "minimum": 0, "maximum": 100 }
+  },
+  "additionalProperties": true,
+  "required": [
+    "is_seasonal",
+    "current_malaria_prevalence",
+    "preference_for_biting_in_bed",
+    "preference_for_biting",
+    "pyrethroid_resistance",
+    "py_only",
+    "py_pbo",
+    "py_pyrrole",
+    "py_ppf",
+    "irs_coverage",
+    "itn_future",
+    "itn_future_types",
+    "routine_coverage",
+    "irs_future",
+    "lsm"
+  ]
 }

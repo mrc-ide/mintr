@@ -21,6 +21,7 @@ api_build <- function(db, emulator_root=NULL) {
   pr$handle(endpoint_cost_intepretation(db))
   pr$handle(endpoint_strategise(db))
   pr$handle(endpoint_version())
+  pr$handle(endpoint_emulator_run())
   if (!is.null(emulator_root)) {
     pr$handle(endpoint_emulator_config(emulator_root))
     pr$handle(endpoint_emulator_model(emulator_root))
@@ -28,6 +29,7 @@ api_build <- function(db, emulator_root=NULL) {
   pr
 }
 
+# TODO: remove all old endpoints later
 
 ## Every endpoint comes as a pair of functions:
 ##
@@ -255,6 +257,18 @@ target_strategise <- function(db) {
   }
 }
 
+endpoint_emulator_run <- function() {
+  porcelain::porcelain_endpoint$new(
+    "POST", "/emulator/run", target_emulator_run,
+    porcelain::porcelain_input_body_json("options", "EmulatorOptions"),
+    returning = porcelain::porcelain_returning_json("EmulatorResults"))
+}
+
+target_emulator_run <- function(options) {
+    run_emulator(jsonlite::fromJSON(options))  
+}
+
+# TODO: remove all old emulator references
 endpoint_emulator_config <- function(emulator_root) {
   porcelain::porcelain_endpoint$new(
     "GET", "/emulator/config", target_emulator_config(emulator_root),
