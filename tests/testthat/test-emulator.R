@@ -1,6 +1,6 @@
 
 # Test data setup
-create_test_options <- function() {
+create_test_form_options <- function() {
     list(
         pyrethroid_resistance = 50,
         py_only = 30,
@@ -22,7 +22,7 @@ create_test_options <- function() {
 }
 
 test_that("transform_options correctly transforms form options", {
-    options <- create_test_options()
+    options <- create_test_form_options()
     result <- transform_options(options)
     
     # Test percentage conversions
@@ -48,7 +48,7 @@ test_that("transform_options correctly transforms form options", {
 })
 
 test_that("transform_options handles FALSE boolean values", {
-    options <- create_test_options()
+    options <- create_test_form_options()
     options$is_seasonal <- FALSE
     options$routine_coverage <- FALSE
     
@@ -207,7 +207,7 @@ test_that("build_minter_params handles complex scenario combinations", {
         res_use = 0.5, py_only = 0.3, py_pbo = 0.2, py_pyrrole = 0.1,
         py_ppf = 0.05, prev = 0.15, Q0 = 0.25, phi = 0.35,
         season = 1L, irs = 0.4, itn_future = 0.45,
-        net_type_future = c("py_only", "py_pbo"), irs_future = 0.6, 
+        net_type_future = c("py_only", "py_pbo", "py_pyrrole", "py_ppf"), irs_future = 0.6, 
         routine = 1L, lsm = 0.3
     )
     
@@ -215,7 +215,9 @@ test_that("build_minter_params handles complex scenario combinations", {
     
     expected_tags <- c("no_intervention", "irs_only", "lsm_only", 
                        "py_only_only", "py_only_with_lsm",
-                       "py_pbo_only", "py_pbo_with_lsm")
+                       "py_pbo_only", "py_pbo_with_lsm",
+                       "py_pyrrole_only", "py_pyrrole_with_lsm",
+                       "py_ppf_only", "py_ppf_with_lsm")
     expect_equal(result$scenario_tag, expected_tags)
-    expect_equal(length(result$scenario_tag), 7)
+    expect_equal(length(result$scenario_tag), 11)
 })

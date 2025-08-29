@@ -3,7 +3,6 @@
   "title": "EmulatorOptions",
   "type": "object",
   "properties": {
-    "population": { "type": "integer", "minimum": 0 },
     "is_seasonal": { "type": "boolean" },
     "current_malaria_prevalence": {
       "type": "number",
@@ -34,7 +33,6 @@
   },
   "additionalProperties": false,
   "required": [
-    "population",
     "is_seasonal",
     "current_malaria_prevalence",
     "preference_for_biting_in_bed",

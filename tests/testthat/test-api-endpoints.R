@@ -372,6 +372,39 @@ test_that("strategise", {
   expect_equal(res_api$body, res_endpoint$body)
 })
 
+test_that("runs emulator and returns cases and prevalence", {
+  form_options <- jsonlite::toJSON(list(
+        pyrethroid_resistance = 50,
+        py_only = 30,
+        py_pbo = 20,
+        py_pyrrole = 10,
+        py_ppf = 5,
+        current_malaria_prevalence = 15,
+        preference_for_biting = 25,
+        preference_for_biting_in_bed = 35,
+        is_seasonal = TRUE,
+        irs_coverage = 40,
+        # interventions
+        itn_future = 45,
+        itn_future_types = c("py_only", "py_pbo"),
+        irs_future = 50,
+        routine_coverage = TRUE,
+        lsm = 60
+    ), auto_unbox = TRUE)
+
+  db <- mintr_test_db()
+  api <- api_build(db)
+
+  res_api <- api$request("POST", "/emulator/run", body = form_options)
+  expect_equal(res_api$status, 200)
+  
+  # TODO: check correct results
+  body <- jsonlite::fromJSON(res_api$body)
+  expect_equal(body$status, "success")
+  expect_named(body$data, c("cases", "prevalence"))  
+})
+
+# TODO: delete old emulator tests
 test_that("emulator is optional", {
   db <- mintr_test_db()
   api <- api_build(db, emulator_root=NULL)

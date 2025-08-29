@@ -3,7 +3,10 @@ run_emulator <- function(options) {
     transformed_options <- transform_options(options)
     minter_params <- build_minter_params(transformed_options)
 
-    minter_params
+    list(
+        cases = c(),
+        prevalence = c()
+    )
 }
 
 transform_options <- function(options) {
@@ -64,9 +67,6 @@ append_scenario <- function(accumulator, scenario) {
 }
 
 build_minter_params <- function(options) {
-    # TODO: will update as cosmo model updates
-    year_start <- 2
-    year_end <- 5
     base_scenario <- create_base_scenario(options)
     minter_params <- base_scenario
 

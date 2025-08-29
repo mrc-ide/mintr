@@ -21,7 +21,7 @@ api_build <- function(db, emulator_root=NULL) {
   pr$handle(endpoint_cost_intepretation(db))
   pr$handle(endpoint_strategise(db))
   pr$handle(endpoint_version())
-  pr$handle(endpoint_emulator_process())
+  pr$handle(endpoint_emulator_run())
   if (!is.null(emulator_root)) {
     pr$handle(endpoint_emulator_config(emulator_root))
     pr$handle(endpoint_emulator_model(emulator_root))
@@ -257,17 +257,15 @@ target_strategise <- function(db) {
   }
 }
 
-endpoint_emulator_process <- function() {
+endpoint_emulator_run <- function() {
   porcelain::porcelain_endpoint$new(
-    "POST", "/emulator/process", target_emulator_process,
+    "POST", "/emulator/run", target_emulator_run,
     porcelain::porcelain_input_body_json("options", "EmulatorOptions"),
     returning = porcelain::porcelain_returning_json("EmulatorResults"))
 }
 
-target_emulator_process <- function() {
-  function(options) {
-    run_emulator(jsonlite::fromJSON(options))
-  }
+target_emulator_run <- function(options) {
+    run_emulator(jsonlite::fromJSON(options))  
 }
 
 # TODO: remove all old emulator references
