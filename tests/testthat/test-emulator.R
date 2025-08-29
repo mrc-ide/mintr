@@ -20,6 +20,28 @@ create_test_form_options <- function() {
         lsm = 60
     )
 }
+test_that("run_emulator returns expected results", {
+    expected_scenarios <- c("irs_only", "lsm_only", "no_intervention", "py_only_only", "py_only_with_lsm", "py_pbo_only", "py_pbo_with_lsm")
+    options <- create_test_form_options()
+
+    result <- run_emulator(options)
+
+    cases <- result$cases
+    prevalence <- result$prevalence
+    
+    # cases checks
+    expect_true(all(c("scenario", "year", "cases_per_1000") %in% colnames(cases)))
+    year_count <- cases |> dplyr::group_by(scenario) |> dplyr::summarise(n_years = n_distinct(year))
+    expect_true(all(year_count$n_years == 4)) # 4 years
+    expect_setequal(expected_scenarios, year_count$scenario)
+    # prevalence checks
+    expect_true(all(c("scenario", "days", "prevalence") %in% colnames(prevalence)))
+    row_count <- prevalence |> dplyr::group_by(scenario) |> count()
+    weeks_in_4_years <- round(365 * 4 / 7)
+    expect_true(all(row_count$n == weeks_in_4_years)) 
+    expect_setequal(expected_scenarios, row_count$scenario)
+
+})
 
 test_that("transform_options correctly transforms form options", {
     options <- create_test_form_options()

@@ -3,10 +3,10 @@ run_emulator <- function(options) {
     transformed_options <- transform_options(options)
     minter_params <- build_minter_params(transformed_options)
 
-    list(
-        cases = c(),
-        prevalence = c()
-    )
+    results <- do.call(MINTer::run_mint_scenarios, minter_params)
+    # post-process results
+
+    post_process_results(results)
 }
 
 transform_options <- function(options) {
@@ -121,4 +121,13 @@ build_minter_params <- function(options) {
     }
 
     minter_params
+}
+
+post_process_results <- function(results) {
+    # prevalence time steps are weekly
+    days_in_week <- 7
+    results$prevalence <- results$prevalence |> dplyr::group_by(scenario) |> dplyr::mutate(days = row_number() * days_in_week)
+    results$cases <- results$cases |> dplyr::group_by(scenario) |> dplyr::mutate(year = row_number())
+    
+    results
 }
