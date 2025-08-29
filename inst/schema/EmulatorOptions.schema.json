@@ -31,7 +31,7 @@
     "irs_future": { "type": "number", "minimum": 0, "maximum": 100 },
     "lsm": { "type": "number", "minimum": 0, "maximum": 100 }
   },
-  "additionalProperties": false,
+  "additionalProperties": true,
   "required": [
     "is_seasonal",
     "current_malaria_prevalence",
