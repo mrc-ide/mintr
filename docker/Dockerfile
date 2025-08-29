@@ -4,6 +4,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         libcurl4-openssl-dev \
         libv8-dev \
         libglpk-dev \
+        python3 \
+        python3-pip \
+        python3-venv \
         && apt-get clean \
         && rm -rf /var/lib/apt/lists/*
 
