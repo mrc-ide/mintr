@@ -1,5 +1,6 @@
 run_emulator <- function(options) {
     transformed_options <- transform_options(options)
+    print(transformed_options) # TODO: remove
     minter_params <- build_minter_params(transformed_options)
 
     results <- do.call(MINTer::run_mint_scenarios, minter_params)
