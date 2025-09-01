@@ -398,7 +398,6 @@ test_that("runs emulator and returns cases and prevalence", {
   res_api <- api$request("POST", "/emulator/run", body = form_options)
   expect_equal(res_api$status, 200)
   
-  # TODO: check correct results
   body <- jsonlite::fromJSON(res_api$body)
   expect_equal(body$status, "success")
   expect_setequal(names(body$data), c("cases", "prevalence"))

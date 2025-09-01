@@ -45,13 +45,6 @@ RUN R CMD INSTALL /src && \
         Rscript -e 'mintr:::write_script("/usr/bin")' && \
         Rscript -e 'mintr:::mintr_db_download("data")'
 
-# ---------- Runtime stage ----------
-FROM rocker/r-ver:latest
-
-COPY --from=build /usr/local/lib/R/site-library /usr/local/lib/R/site-library
-COPY --from=build /usr/local/bin/mintr /usr/local/bin/mintr
-COPY --from=build /opt/venv /opt/venv
-
 EXPOSE 8888
 
 ENTRYPOINT ["/usr/bin/mintr"]
