@@ -10,11 +10,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # Configure repos (mrc-ide + CRAN)
 RUN echo 'options(repos = c(mrcide="https://mrc-ide.r-universe.dev", CRAN="https://cloud.r-project.org"))' >> /usr/local/lib/R/etc/Rprofile.site
 
-# Optional Python (kept from original)
+# Install python dependencies
 COPY --from=ghcr.io/astral-sh/uv:0.8.14 /uv /uvx /bin/
-RUN uv venv
+RUN uv venv /opt/venv
+ENV VIRTUAL_ENV=/opt/venv
+ENV PATH="/opt/venv/bin:$PATH"
 RUN uv pip install torch numpy pandas scikit-learn
-RUN . .venv/bin/activate
 
 # Pre-install R deps from DESCRIPTION for better caching
 WORKDIR /src
