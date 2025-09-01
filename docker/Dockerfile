@@ -8,7 +8,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         && rm -rf /var/lib/apt/lists/*
 
 
-# Install python dependencies
+# Install python dependencies with uv
 COPY --from=ghcr.io/astral-sh/uv:0.8.14 /uv /uvx /bin/
 RUN uv venv /opt/venv
 ENV VIRTUAL_ENV=/opt/venv

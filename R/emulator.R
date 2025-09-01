@@ -5,6 +5,7 @@ run_emulator <- function(options) {
     results <- do.call(MINTer::run_mint_scenarios, minter_params)
     # post-process results
 
+    print(head(results))
     post_process_results(results)
 }
 
