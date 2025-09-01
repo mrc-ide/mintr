@@ -4,11 +4,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         libcurl4-openssl-dev \
         libv8-dev \
         libglpk-dev \
+        python3 \
+        python3-pip \
+        python3-venv \
+        python-is-python3 \
         && apt-get clean \
         && rm -rf /var/lib/apt/lists/*
-
-COPY --from=ghcr.io/astral-sh/uv:0.8.14 /uv /uvx /bin/
-RUN uv python install 3.12
 
 COPY docker/install_packages /usr/local/bin/
 

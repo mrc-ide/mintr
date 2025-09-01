@@ -1,5 +1,4 @@
 run_emulator <- function(options) {
-library(MINTer) # TODO: test and remove if needed
     transformed_options <- transform_options(options)
     minter_params <- build_minter_params(transformed_options)
 
