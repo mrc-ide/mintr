@@ -13,8 +13,8 @@ RUN echo 'options(repos = c(mrcide="https://mrc-ide.r-universe.dev", CRAN="https
 # Optional Python (kept from original)
 COPY --from=ghcr.io/astral-sh/uv:0.8.14 /uv /uvx /bin/
 RUN uv venv
-RUN source .venv/bin/activate
 RUN uv pip install torch numpy pandas scikit-learn
+RUN source .venv/bin/activate
 
 # Pre-install R deps from DESCRIPTION for better caching
 WORKDIR /src
