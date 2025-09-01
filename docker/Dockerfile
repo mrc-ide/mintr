@@ -13,7 +13,7 @@ COPY --from=ghcr.io/astral-sh/uv:0.8.14 /uv /uvx /bin/
 RUN uv venv /opt/venv
 ENV VIRTUAL_ENV=/opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
-RUN uv pip install torch numpy pandas scikit-learn
+RUN uv pip install --no-cache-dir torch numpy pandas scikit-learn
 
 COPY docker/install_packages /usr/local/bin/
 
@@ -44,6 +44,13 @@ COPY . /src
 RUN R CMD INSTALL /src && \
         Rscript -e 'mintr:::write_script("/usr/bin")' && \
         Rscript -e 'mintr:::mintr_db_download("data")'
+
+# ---------- Runtime stage ----------
+FROM rocker/r-ver:latest
+
+COPY --from=build /usr/local/lib/R/site-library /usr/local/lib/R/site-library
+COPY --from=build /usr/local/bin/mintr /usr/local/bin/mintr
+COPY --from=build /opt/venv /opt/venv
 
 EXPOSE 8888
 
