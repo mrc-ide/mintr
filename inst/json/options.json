@@ -218,6 +218,11 @@
               "label": "Future ITN Types",
               "helpText": "Select the type of ITNs that will be used in the future.",
               "type": "multiselect",
+              "disabled": {
+                "type": "cross_field",
+                "fields": ["itn_future"],
+                "operator": "falsy"
+              },
               "options": [
                 { "label": "Pyrethroid ITNs", "value": "py_only" },
                 { "label": "Pyrethroid-PBO ITNs", "value": "py_pbo" },
