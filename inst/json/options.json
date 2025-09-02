@@ -216,7 +216,7 @@
             {
               "id": "itn_future_types",
               "label": "Future ITN Types",
-              "helpText": "Select the type of ITNs that will be used in the future.",
+              "helpText": "Select the type of ITNs that will be used in the future. Must have Expected ITN population use > 0",
               "type": "multiselect",
               "disabled": {
                 "type": "cross_field",
@@ -233,7 +233,7 @@
             {
               "id": "routine_coverage",
               "label": "Continuous distribution of ITNs",
-              "helpText": "Indicate whether continuous distribution of ITNs will be implemented.",
+              "helpText": "Indicate whether continuous distribution of ITNs will be implemented. Must have Expected ITN population use > 0",
               "type": "toggle",
               "required": true,
               "disabled": {
