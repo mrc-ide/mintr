@@ -4,16 +4,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         libcurl4-openssl-dev \
         libv8-dev \
         libglpk-dev \
+        curl \
         && apt-get clean \
         && rm -rf /var/lib/apt/lists/*
 
-
-# Install python dependencies with uv
-COPY --from=ghcr.io/astral-sh/uv:0.8.14 /uv /uvx /bin/
-RUN uv venv /opt/venv
-ENV VIRTUAL_ENV=/opt/venv
-ENV PATH="/opt/venv/bin:$PATH"
-RUN uv pip install --no-cache-dir torch numpy pandas scikit-learn
 
 COPY docker/install_packages /usr/local/bin/
 
