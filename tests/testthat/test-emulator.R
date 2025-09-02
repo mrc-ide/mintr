@@ -31,7 +31,7 @@ test_that("run_emulator returns expected results", {
     
     # cases checks
     expect_true(all(c("scenario", "year", "cases_per_1000") %in% colnames(cases)))
-    year_count <- cases |> dplyr::group_by(scenario) |> dplyr::summarise(n_years = n_distinct(year))
+    year_count <- cases |> dplyr::summarise(n_years = n_distinct(year), .by = scenario)
     expect_true(all(year_count$n_years == 4)) # 4 years
     expect_setequal(expected_scenarios, year_count$scenario)
     # prevalence checks
@@ -40,7 +40,6 @@ test_that("run_emulator returns expected results", {
     weeks_in_4_years <- round(365 * 4 / 7)
     expect_true(all(row_count$n == weeks_in_4_years)) 
     expect_setequal(expected_scenarios, row_count$scenario)
-
 })
 
 test_that("transform_options correctly transforms form options", {
