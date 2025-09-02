@@ -30,7 +30,7 @@
         "description": { "type": "string" },
         "helpText": { "type": "string" },
         "collapsible": { "type": "boolean" },
-        "triggersRerun": { "type": "boolean" },
+        "triggersRun": { "type": "boolean" },
         "preRun": { "type": "boolean" },
         "subGroups": {
           "type": "array",

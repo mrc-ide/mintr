@@ -6,7 +6,7 @@
       "description": "These are the baseline options for the form.",
       "helpText": "Configure the baseline options for the form.",
       "collapsible": true,
-      "triggersRerun": true,
+      "triggersRun": true,
       "preRun": true,
       "subGroups": [
         {
@@ -187,7 +187,7 @@
     {
       "id": "intervention_options",
       "title": "Intervention Options",
-      "triggersRerun": true,
+      "triggersRun": true,
       "collapsible": true,
       "preRun": false,
       "description": "These are the intervention options for the form.",
@@ -273,7 +273,7 @@
       "title": "Cost Options",
       "description": "Cost Options",
       "helpText": "Configure the cost options for the form.",
-      "triggersRerun": false,
+      "triggersRun": false,
       "collapsible": true,
       "preRun": false,
       "subGroups": [
