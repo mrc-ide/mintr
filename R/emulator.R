@@ -124,10 +124,15 @@ build_minter_params <- function(options) {
 post_process_results <- function(results) {
     # prevalence time steps are weekly
     days_in_week <- 7
+    days_in_year <- 365
     results$prevalence <- results$prevalence |>
         dplyr::mutate(days = row_number() * days_in_week, .by = scenario)
     results$cases <- results$cases |>
-        dplyr::mutate(year = row_number(), .by = scenario)
+        dplyr::mutate(
+            year = row_number(),
+            cases_per_1000 = cases_per_1000 * days_in_year,
+            .by = scenario
+        )
 
     results
 }
