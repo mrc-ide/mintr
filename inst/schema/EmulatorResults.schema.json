@@ -9,9 +9,9 @@
         "properties": {
           "scenario": { "type": "string" },
           "year": { "type": "integer" },
-          "cases_per_1000": { "type": "number" }
+          "casesPer1000": { "type": "number" }
         },
-        "required": ["scenario", "year", "cases_per_1000"],
+        "required": ["scenario", "year", "casesPer1000"],
         "additionalProperties": false
       }
     },

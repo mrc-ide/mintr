@@ -127,10 +127,10 @@ post_process_results <- function(results) {
     days_in_year <- 365
     results$prevalence <- results$prevalence |>
         dplyr::mutate(days = row_number() * days_in_week, .by = scenario)
-    results$cases <- results$cases |>
+    results$cases <- results$cases |> rename(casesPer1000 = cases_per_1000) |>
         dplyr::mutate(
             year = row_number(),
-            cases_per_1000 = cases_per_1000 * days_in_year,
+            casesPer1000 = casesPer1000 * days_in_year,
             .by = scenario
         )
 

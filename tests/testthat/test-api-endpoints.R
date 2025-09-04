@@ -401,7 +401,7 @@ test_that("runs emulator and returns cases and prevalence", {
   body <- jsonlite::fromJSON(res_api$body)
   expect_equal(body$status, "success")
   expect_setequal(names(body$data), c("cases", "prevalence"))
-  expect_true(all(body$data$cases$cases_per_1000 > 0))
+  expect_true(all(body$data$cases$casesPer1000 > 0))
   expect_true(all(body$data$prevalence$prevalence > 0))
 })
 
