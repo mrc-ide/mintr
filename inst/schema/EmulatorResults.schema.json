@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "cases": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "scenario": { "type": "string" },
+          "year": { "type": "integer" },
+          "casesPer1000": { "type": "number" }
+        },
+        "required": ["scenario", "year", "casesPer1000"],
+        "additionalProperties": false
+      }
+    },
+    "prevalence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "scenario": { "type": "string" },
+          "days": { "type": "integer" },
+          "prevalence": { "type": "number" }
+        },
+        "required": ["scenario", "days", "prevalence"],
+        "additionalProperties": false
+      }
+    }
+  }
+}

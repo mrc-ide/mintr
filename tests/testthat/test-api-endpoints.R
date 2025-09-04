@@ -372,6 +372,40 @@ test_that("strategise", {
   expect_equal(res_api$body, res_endpoint$body)
 })
 
+test_that("runs emulator and returns cases and prevalence", {
+  form_options <- jsonlite::toJSON(list(
+        pyrethroid_resistance = 50,
+        py_only = 30,
+        py_pbo = 20,
+        py_pyrrole = 10,
+        py_ppf = 5,
+        current_malaria_prevalence = 15,
+        preference_for_biting = 25,
+        preference_for_biting_in_bed = 35,
+        is_seasonal = TRUE,
+        irs_coverage = 40,
+        # interventions
+        itn_future = 45,
+        itn_future_types = c("py_only", "py_pbo"),
+        irs_future = 50,
+        routine_coverage = TRUE,
+        lsm = 60
+    ), auto_unbox = TRUE)
+
+  db <- mintr_test_db()
+  api <- api_build(db)
+
+  res_api <- api$request("POST", "/emulator/run", body = form_options)
+  expect_equal(res_api$status, 200)
+  
+  body <- jsonlite::fromJSON(res_api$body)
+  expect_equal(body$status, "success")
+  expect_setequal(names(body$data), c("cases", "prevalence"))
+  expect_true(all(body$data$cases$casesPer1000 > 0))
+  expect_true(all(body$data$prevalence$prevalence > 0))
+})
+
+# TODO: delete old emulator tests
 test_that("emulator is optional", {
   db <- mintr_test_db()
   api <- api_build(db, emulator_root=NULL)
@@ -380,34 +414,3 @@ test_that("emulator is optional", {
   expect_equal(res_api$status, 404)
 })
 
-test_that("serves emulator content", {
-  # Set up some fake emulator content. Doesn't really matter what goes into this.
-  config <- list(models=list(
-    list(name="FFNN", filename="FFNN.onnx")
-  ))
-  model_data <- as.raw(c(0xde,0xad,0xbe,0xef))
-
-  emulator_root <- tempfile()
-  fs::dir_create(file.path(emulator_root, "models"))
-  writeLines(
-    jsonlite::toJSON(config, auto_unbox = TRUE),
-    file.path(emulator_root, "config.json"))
-  writeBin(model_data, file.path(emulator_root, "models", "FFNN.onnx"))
-
-  db <- mintr_test_db()
-  api <- api_build(db, emulator_root=emulator_root)
-
-  res_config <- api$request("GET", "/emulator/config")
-  expect_equal(res_config$status, 200)
-  expect_equal(res_config$headers$`Content-Type`, "application/json")
-  expect_equal(jsonlite::fromJSON(res_config$body, simplifyVector=FALSE), list(
-    status = "success",
-    errors = NULL,
-    data = config
-  ))
-
-  res_model <- api$request("GET", "/emulator/model/FFNN.onnx")
-  expect_equal(res_model$status, 200)
-  expect_equal(res_model$headers$`Content-Type`, "application/octet-stream")
-  expect_equal(res_model$body, model_data)
-})

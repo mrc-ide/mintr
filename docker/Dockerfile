@@ -4,6 +4,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         libcurl4-openssl-dev \
         libv8-dev \
         libglpk-dev \
+        curl \
         && apt-get clean \
         && rm -rf /var/lib/apt/lists/*
 
@@ -27,7 +28,8 @@ RUN install_packages \
         testthat \
         tidyr
 
-RUN Rscript -e 'remotes::install_github(c("r-opt/ROIoptimizer", "r-opt/rmpk"))'
+RUN Rscript -e 'remotes::install_github(c("r-opt/ROIoptimizer", "r-opt/rmpk", "CosmoNaught/MINTer"))'
+RUN Rscript -e 'MINTer::initialize_python()'
 
 WORKDIR /mintr
 

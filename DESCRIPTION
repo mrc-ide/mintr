@@ -21,7 +21,8 @@ Imports:
     rmpk,
     ROIoptimizer,
     ROI.plugin.glpk,
-    tidyr
+    tidyr,
+    MINTer
 Suggests:
     fs,
     glue,
@@ -34,6 +35,7 @@ Remotes:
     reside-ic/porcelain,
     ropensci/jsonvalidate,
     r-opt/rmpk,
-    r-opt/ROIoptimizer
+    r-opt/ROIoptimizer,
+    CosmoNaught/MINTer
 RoxygenNote: 7.3.2
 Config/testthat/edition: 3
