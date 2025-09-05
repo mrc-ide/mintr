@@ -2,7 +2,7 @@ run_emulator <- function(options) {
     transformed_options <- transform_options(options)
     minter_params <- build_minter_params(transformed_options)
 
-    results <- do.call(MINTer::run_minter_scenarios, minter_params)
+    results <- do.call(MINTer::run_mintweb_controller, minter_params)
 
     post_process_results(results)
 }
