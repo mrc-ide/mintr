@@ -2,7 +2,7 @@ run_emulator <- function(options) {
     transformed_options <- transform_options(options)
     minter_params <- build_minter_params(transformed_options)
 
-    results <- do.call(MINTer::run_mint_scenarios, minter_params)
+    results <- do.call(MINTer::run_mintweb_controller, minter_params)
 
     post_process_results(results)
 }
@@ -122,11 +122,11 @@ build_minter_params <- function(options) {
 }
 
 post_process_results <- function(results) {
-    # prevalence time steps are weekly
-    days_in_week <- 7
+    # prevalence time steps are fortnightly
+    days_in_fortnight <- 14
     days_in_year <- 365
     results$prevalence <- results$prevalence |>
-        dplyr::mutate(days = row_number() * days_in_week, .by = scenario)
+        dplyr::mutate(days = row_number() * days_in_fortnight, .by = scenario)
     results$cases <- results$cases |> rename(casesPer1000 = cases_per_1000) |>
         dplyr::mutate(
             year = row_number(),
