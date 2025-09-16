@@ -13,7 +13,7 @@ create_test_form_options <- function() {
         is_seasonal = TRUE,
         irs_coverage = 40,
         # interventions
-        itn_future = 0,
+        itn_future = 45,
         itn_future_types = c("py_only", "py_pbo"),
         irs_future = 50,
         routine_coverage = TRUE,

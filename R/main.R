@@ -16,8 +16,13 @@ main <- function(args = commandArgs(TRUE)) {
   port <- opts$port
   message("Compiling docs")
   docs <- get_compiled_docs()
+
   message("Opening database")
   db <- mintr_db_open(opts$data, docs)
+  
+  message("Loading emulator models")
+  MINTer::preload_all_models()
+  
   message("Starting API")
   api_run(port, db, opts$emulator_root)
 }

@@ -29,7 +29,6 @@ RUN install_packages \
         tidyr
 
 RUN Rscript -e 'remotes::install_github(c("r-opt/ROIoptimizer", "r-opt/rmpk", "CosmoNaught/MINTer"))'
-RUN Rscript -e 'MINTer::preload_all_models()'
 
 WORKDIR /mintr
 
