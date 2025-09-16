@@ -8,8 +8,13 @@ run_emulator <- function(options) {
 }
 
 transform_options <- function(options) {
+  # if no ITNs are distributed, clear the net types to avoid invalid combinations  
+  if (options$itn_future == 0 && length(options$itn_future_types) > 0) {
+    options$itn_future_types <- character(0)
+  }  
+  
   list(
-  # baseline 
+  # baseline
   res_use = options$pyrethroid_resistance/100,
   py_only = options$py_only/100,
   py_pbo = options$py_pbo/100,

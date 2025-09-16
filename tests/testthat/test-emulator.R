@@ -13,7 +13,7 @@ create_test_form_options <- function() {
         is_seasonal = TRUE,
         irs_coverage = 40,
         # interventions
-        itn_future = 45,
+        itn_future = 0,
         itn_future_types = c("py_only", "py_pbo"),
         irs_future = 50,
         routine_coverage = TRUE,
@@ -77,6 +77,17 @@ test_that("transform_options handles FALSE boolean values", {
     
     expect_equal(result$season, 0L)
     expect_equal(result$routine, 0L)
+})
+
+test_that("transform_options clears net types when no ITNs are distributed", {
+    options <- create_test_form_options()
+    options$itn_future <- 0
+    options$itn_future_types <- c("py_only", "py_pbo")
+    
+    result <- transform_options(options)
+    
+    expect_equal(result$itn_future, 0)
+    expect_equal(result$net_type_future, character(0))  # should be cleared
 })
 
 test_that("create_base_scenario creates correct baseline scenario", {
