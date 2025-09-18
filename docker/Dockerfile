@@ -12,6 +12,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 COPY docker/install_packages /usr/local/bin/
 
 RUN install_packages reticulate
+RUN Rscript -e 'reticulate::py_config()'
 RUN Rscript -e 'reticulate::py_require("numpy"); reticulate::py_require("pandas"); reticulate::py_require("scipy"); reticulate::py_require("scikit-learn"); reticulate::py_require("torch")'
 
 
