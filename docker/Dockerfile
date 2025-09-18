@@ -1,4 +1,5 @@
-FROM rocker/r-ver:latest as base
+# Stage 1: Python and reticulate setup
+FROM rocker/r-ver:latest AS python-setup
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
         libcurl4-openssl-dev \
@@ -13,6 +14,9 @@ COPY docker/install_packages /usr/local/bin/
 RUN install_packages reticulate
 RUN Rscript -e 'reticulate::py_require("numpy"); reticulate::py_require("pandas"); reticulate::py_require("scipy"); reticulate::py_require("scikit-learn") reticulate::py_require("torch")'
 
+
+# Stage 2: R package installation
+FROM python-setup AS r-packages
 
 RUN install_packages \
         --repo=https://mrc-ide.r-universe.dev \
@@ -34,6 +38,10 @@ RUN install_packages \
 
 RUN Rscript -e 'remotes::install_github(c("r-opt/ROIoptimizer", "r-opt/rmpk", "CosmoNaught/MINTer"))'
 RUN Rscript -e 'MINTer::initialize_python()'
+
+
+# Stage 3: Final runtime stage
+FROM r-packages AS runtime
 
 WORKDIR /mintr
 
