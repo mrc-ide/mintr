@@ -8,6 +8,7 @@ run_emulator <- function(options) {
 }
 
 transform_options <- function(options) {
+    print("check if caching works")
   # if no ITNs are distributed, clear the net types to avoid invalid combinations  
   if (options$itn_future == 0 && length(options$itn_future_types) > 0) {
     options$itn_future_types <- character(0)
