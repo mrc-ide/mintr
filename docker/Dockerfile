@@ -1,4 +1,4 @@
-FROM rocker/r-ver:latest
+FROM rocker/r-ver:latest as base
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
         libcurl4-openssl-dev \
@@ -9,6 +9,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         && rm -rf /var/lib/apt/lists/*
 
 COPY docker/install_packages /usr/local/bin/
+
+RUN install_packages reticulate
+RUN Rscript -e 'reticulate::py_require("numpy"); reticulate::py_require("pandas"); reticulate::py_require("scipy"); reticulate::py_require("scikit-learn") reticulate::py_require("torch")'
+
 
 RUN install_packages \
         --repo=https://mrc-ide.r-universe.dev \
