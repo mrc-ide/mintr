@@ -15,7 +15,8 @@ RUN install_packages reticulate
 # Install PyTorch CPU-only version and other packages
 RUN Rscript -e 'reticulate::py_install(c("numpy", "pandas", "scipy", "scikit-learn"), pip = TRUE)'
 RUN Rscript -e 'reticulate::py_install("torch", pip = TRUE, pip_options = c("--index-url", "https://download.pytorch.org/whl/cpu"))'
-
+# Verify installation
+RUN Rscript -e 'reticulate::py_config()'
 
 # Stage 2: R package installation
 FROM python-setup AS r-packages
