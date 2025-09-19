@@ -12,11 +12,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 COPY docker/install_packages /usr/local/bin/
 
 RUN install_packages reticulate
-# Install PyTorch CPU-only version and other packages
-RUN Rscript -e 'reticulate::py_install(c("numpy", "pandas", "scipy", "scikit-learn"), pip = TRUE)'
-RUN Rscript -e 'reticulate::py_install("torch", pip = TRUE, pip_options = c("--index-url", "https://download.pytorch.org/whl/cpu"))'
-# Verify installation
-RUN Rscript -e 'reticulate::py_config()'
+RUN Rscript -e 'reticulate::py_config(); reticulate::py_require("pandas"); reticulate::py_require("scipy"); reticulate::py_require("scikit-learn"); reticulate::py_require("torch");'
+
 
 # Stage 2: R package installation
 FROM python-setup AS r-packages
@@ -40,7 +37,6 @@ RUN install_packages \
         tidyr
 
 RUN Rscript -e 'remotes::install_github(c("r-opt/ROIoptimizer", "r-opt/rmpk", "CosmoNaught/MINTer"))'
-RUN Rscript -e 'MINTer::initialize_python()'
 
 
 # Stage 3: Final runtime stage
