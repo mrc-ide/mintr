@@ -382,7 +382,7 @@
               "label": "Annual cost of IRS per household structure ($USD)",
               "type": "number",
               "required": true,
-              "default": 5
+              "default": 20
             },
             {
               "id": "lsm_cost",
