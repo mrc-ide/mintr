@@ -14,7 +14,7 @@
             {
               "type": "object",
               "properties": {
-                "zone": {
+                "region": {
                   "type": "string"
                 },
                 "intervention": {
@@ -25,32 +25,16 @@
                 },
                 "casesAverted": {
                   "type": "number"
-                },
-                "casesAvertedErrorMinus": {
-                  "type": "number"
-                },
-                "casesAvertedErrorPlus": {
-                  "type": "number"
                 }
               },
               "additionalProperties": false,
-              "required": [
-                "zone",
-                "intervention",
-                "cost",
-                "casesAverted",
-                "casesAvertedErrorMinus",
-                "casesAvertedErrorPlus"
-              ]
+              "required": ["region", "intervention", "cost", "casesAverted"]
             }
           ]
         }
       },
       "additionalProperties": false,
-      "required": [
-        "costThreshold",
-        "interventions"
-      ]
+      "required": ["costThreshold", "interventions"]
     }
   ]
 }
