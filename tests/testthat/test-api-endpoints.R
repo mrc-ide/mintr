@@ -321,10 +321,9 @@ test_that("strategise", {
   expect_equal(body$status, "success")
   expect_equal(body$data$costThreshold, c(1.0, 0.95, 0.9, 0.85, 0.8))
 
-  for (i in seq_along(result)) {
-      expect_true("costThreshold" %in% names(result[[i]]))
-      expect_true("interventions" %in% names(result[[i]]))
-      expect_equal(nrow(result[[i]]$interventions), 3) # 1 for each region
+  interventions <- body$data$interventions
+  for (i in seq_along(interventions)) {
+      expect_equal(nrow(interventions[[i]]), 3) # 1 for each region
     }
 })
 
