@@ -5,41 +5,107 @@
     "budget": {
       "type": "number"
     },
-    "regions": {
+    "zones": {
       "type": "array",
       "minItems": 1,
-      "items": {
-        "type": "object",
-        "properties": {
-          "region": {
-            "type": "string"
-          },
-          "interventions": {
-            "type": "array",
-            "minItems": 1,
-            "items": {
+      "items": [
+        {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "baselineSettings": {
               "type": "object",
               "properties": {
-                "intervention": {
+                "population": {
+                  "type": "integer"
+                },
+                "seasonalityOfTransmission": {
                   "type": "string"
                 },
-                "cost": {
-                  "type": "number"
+                "currentPrevalence": {
+                  "type": "string"
                 },
-                "casesAverted": {
-                  "type": "number"
+                "bitingIndoors": {
+                  "type": "string"
+                },
+                "bitingPeople": {
+                  "type": "string"
+                },
+                "levelOfResistance": {
+                  "type": "string"
+                },
+                "itnUsage": {
+                  "type": "string"
+                },
+                "sprayInput": {
+                  "type": "string"
                 }
               },
               "additionalProperties": false,
-              "required": ["intervention", "cost", "casesAverted"]
+              "required": [
+                "population",
+                "seasonalityOfTransmission",
+                "currentPrevalence",
+                "bitingIndoors",
+                "bitingPeople",
+                "levelOfResistance",
+                "itnUsage",
+                "sprayInput"
+              ]
+            },
+            "interventionSettings": {
+              "type": "object",
+              "properties": {
+                "procurePeoplePerNet": {
+                  "type": "number"
+                },
+                "procureBuffer": {
+                  "type": "number"
+                },
+                "priceDelivery": {
+                  "type": "number"
+                },
+                "priceNetPBO": {
+                  "type": "number"
+                },
+                "priceNetPyrrole":{
+                  "type": "number"
+                },
+                "priceNetStandard": {
+                  "type": "number"
+                },
+                "priceIRSPerPerson": {
+                  "type": "number"
+                },
+                "netUse": {
+                  "type": "string"
+                },
+                "irsUse": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "procurePeoplePerNet",
+                "procureBuffer",
+                "priceDelivery",
+                "priceNetPBO",
+                "priceNetPyrrole",
+                "priceNetStandard",
+                "priceIRSPerPerson",
+                "netUse",
+                "irsUse"
+              ]
             }
           }
-        },
-        "additionalProperties": false,
-        "required": ["region", "interventions"]
-      }
+        }
+      ]
     }
   },
   "additionalProperties": false,
-  "required": ["budget", "regions"]
+  "required": [
+    "budget",
+    "zones"
+  ]
 }

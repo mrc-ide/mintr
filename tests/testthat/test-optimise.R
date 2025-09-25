@@ -1,6 +1,6 @@
 get_data <- function() {
   tibble::tribble(
-    ~region, ~intervention,                  ~cost,            ~casesAverted,
+    ~zone, ~intervention,                  ~cost,            ~cases_averted,
     "A",   "No intervention",              0,                0,
     "A",   "IRS only",                     2107590,          357880.968553733,
     "A",   "Pyrethroid-only ITN only",         351510.8855,      13119.7945853333,
@@ -29,7 +29,7 @@ test_that("optimise gives the expected results", {
   expect_equal(res_reduced_cost, as.data.frame(slice(data, 4, 12)))
 
   expect_lte(sum(res_reduced_cost$cost), sum(res_full_cost$cost))
-  expect_lte(sum(res_reduced_cost$casesAverted), sum(res_full_cost$casesAverted))
+  expect_lte(sum(res_reduced_cost$cases_averted), sum(res_full_cost$cases_averted))
 })
 
 test_that("optimise gives the expected results with minimal cost", {
