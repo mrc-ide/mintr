@@ -3,7 +3,7 @@
 do_optimise <- function(data, budget) {
   # rmpk requires an equal number of scenarios for each region, so we add missing
   # combinations ensuring that they are less attractive than no intervention
-  data <- complete(data, region, intervention, fill = list(cost = max(data$cost), casesAverted = 0))
+  data <- complete(data, region, intervention, fill = list(cost = max(data$cost), casesAverted = -.Machine$double.xmax))
   region <- intervention <- cost <- casesAverted <- i <- j <- NULL # used by dplyr
   cost_df <- distinct(data, region, intervention, cost) %>%
     group_by(intervention) %>%
