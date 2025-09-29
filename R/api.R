@@ -19,7 +19,7 @@ api_build <- function(db, emulator_root=NULL) {
   pr$handle(endpoint_graph_cases_averted_config())
   pr$handle(endpoint_impact_intepretation(db))
   pr$handle(endpoint_cost_intepretation(db))
-  pr$handle(endpoint_strategise(db))
+  pr$handle(endpoint_strategise())
   pr$handle(endpoint_version())
   pr$handle(endpoint_emulator_run())
   if (!is.null(emulator_root)) {
@@ -239,22 +239,19 @@ target_cost_interpretation <- function(db) {
   }
 }
 
-endpoint_strategise <- function(db) {
+endpoint_strategise <- function() {
   porcelain::porcelain_endpoint$new(
     "POST", "/strategise",
-    target_strategise(db),
+    target_strategise,
     porcelain::porcelain_input_body_json("json", "StrategiseOptions"),
     returning = porcelain::porcelain_returning_json("Strategise"))
 }
 
-target_strategise <- function(db) {
-  force(db)
-  function(json) {
-    jsonlite::toJSON(
-      strategise(jsonlite::fromJSON(json, simplifyVector=FALSE), db),
-      auto_unbox=TRUE
-    )
-  }
+target_strategise <- function(json) {
+  jsonlite::toJSON(
+    strategise(jsonlite::fromJSON(json, simplifyVector=TRUE, flatten=TRUE)),
+    auto_unbox=TRUE
+  )
 }
 
 endpoint_emulator_run <- function() {

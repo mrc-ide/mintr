@@ -309,67 +309,22 @@ test_that("cost docs", {
   expect_equal(res_api$body, res_endpoint$body)
 })
 
-test_that("cost", {
-  expected_costs <- get_expected_total_costs()
-  interventions <- c("none", "llin", "llin-pbo", "pyrrole-pbo", "irs", "irs-llin", "irs-llin-pbo", "irs-pyrrole-pbo")
-  for (i in seq_along(expected_costs)) {
-    expect_equal(get_cost(get_input(), get_input(), interventions[i]), expected_costs[[i]])
-  }
-})
-
 test_that("strategise", {
-  baseline_settings <- list(
-    population = 1000,
-    seasonalityOfTransmission = "seasonal",
-    currentPrevalence = "30%",
-    bitingIndoors = "high",
-    bitingPeople = "low",
-    levelOfResistance = "0%",
-    itnUsage = "0%",
-    sprayInput = "0%"
-  )
-  intervention_settings <- list(
-    netUse = "0",
-    irsUse = "0",
-    procurePeoplePerNet = 1,
-    procureBuffer = 2,
-    priceDelivery = 3,
-    priceNetStandard = 4,
-    priceNetPBO = 5,
-    priceNetPyrrole = 6,
-    priceIRSPerPerson = 6
-  )
-  json <- jsonlite::toJSON(list(
-    budget = 52500,
-    zones = list(
-      list(name = "Region A", baselineSettings = baseline_settings,
-           interventionSettings = intervention_settings),
-      list(name = "Region B", baselineSettings = baseline_settings,
-           interventionSettings = modifyList(intervention_settings,
-                                             list(irsUse = 0.8))),
-      list(name = "Region C", baselineSettings = baseline_settings,
-           interventionSettings = modifyList(intervention_settings,
-                                             list(netUse = 0.4))),
-      list(name = "Region D", baselineSettings = baseline_settings,
-           interventionSettings = modifyList(intervention_settings,
-                                             list(irsUse = 0.8, netUse = 0.4)))
-    )
-  ), auto_unbox=TRUE)
-
-  db <- mintr_test_db()
-  res <- target_strategise(db)(json)
-  expect_s3_class(res, "json")
-
-  endpoint <- endpoint_strategise(db)
-  res_endpoint <- endpoint$run(json)
-  expect_equal(res_endpoint$status_code, 200)
-  expect_equal(res_endpoint$content_type, "application/json")
-  expect_equal(res_endpoint$data, res)
-
+  test_data <- jsonlite::toJSON(create_strategise_test_data(), auto_unbox = TRUE)
+  db <- mintr_test_db() 
   api <- api_build(db)
-  res_api <- api$request("POST", "/strategise", body = json)
+  
+  res_api <- api$request("POST", "/strategise", body = test_data)
+  
   expect_equal(res_api$status, 200)
-  expect_equal(res_api$body, res_endpoint$body)
+  body <- jsonlite::fromJSON(res_api$body)
+  expect_equal(body$status, "success")
+  expect_equal(body$data$costThreshold, c(1.0, 0.95, 0.9, 0.85, 0.8))
+
+  interventions <- body$data$interventions
+  for (i in seq_along(interventions)) {
+      expect_equal(nrow(interventions[[i]]), 3) # 1 for each region
+    }
 })
 
 test_that("runs emulator and returns cases and prevalence", {
