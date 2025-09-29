@@ -1,5 +1,5 @@
 strategise <- function(options) {
-  combined_region_data <- combine_region_data(options$regions)
+  combined_region_data <- unnest_region_data(options$regions)
   cost_thresholds <- c(1, 0.95, 0.9, 0.85, 0.8)
   
   lapply(cost_thresholds, function(threshold) {
@@ -13,7 +13,7 @@ strategise <- function(options) {
   })
 }
 
-combine_region_data <- function(regions_df) {  
+unnest_region_data <- function(regions_df) {  
   regions_df |>
     # add no_intervention to each region's interventions
     dplyr::mutate(

@@ -36,20 +36,20 @@ test_that("add_no_intervention works with empty interventions", {
   expect_equal(result$casesAverted, 0)
 })
 
-test_that("combine_region_data processes regions correctly", {  
+test_that("unnest_region_data processes regions correctly", {  
   # Test with subset of regions
   regions_subset <- create_strategise_test_data()$regions  
-  result <- combine_region_data(regions_subset)
+  result <- unnest_region_data(regions_subset)
 
   expect_equal(sum(result$region == "Region A"), 2) # 1 original + 1 no_intervention
   expect_equal(sum(result$region == "Region B"), 4) # 3 original + 1 no_intervention
   expect_equal(sum(result$region == "Region C"), 5) # 4 original + 1 no_intervention
 })
 
-test_that("combine_region_data handles single region", {
+test_that("unnest_region_data handles single region", {
   single_region <- create_strategise_test_data()$regions[1, , drop = FALSE]
   
-  result <- combine_region_data(single_region)
+  result <- unnest_region_data(single_region)
   
   expect_true(nrow(result) > 0)
   expect_true("no_intervention" %in% result$intervention)
