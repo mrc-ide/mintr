@@ -1,8 +1,10 @@
 strategise <- function(options) {
   combined_region_data <- unnest_region_data(options$regions)
-  cost_thresholds <- c(1, 0.95, 0.9, 0.85, 0.8)
+  min_cost <- combined_region_data |> filter(cost > 0) |> summarise(min_cost = min(cost)) |> pull(min_cost)
+  max_cost <- combined_region_data |> group_by(region) |> summarise(max_cost = max(cost), .groups = "drop") |> summarise(total = sum(max_cost)) |> pull()
+  cost_thresholds <- seq(from = min_cost, to = max_cost, length.out = 150) |> round()
   
-  lapply(cost_thresholds, function(threshold) {
+  result <- parallel::mclapply(cost_thresholds, function(threshold) {
     budget <- options$budget * threshold
     interventions <- do_optimise(combined_region_data, budget)
 
@@ -10,7 +12,9 @@ strategise <- function(options) {
       costThreshold = threshold,
       interventions = interventions
     )
-  })
+  }, mc.cores = ceiling(parallel::detectCores() / 4))
+
+  result
 }
 
 unnest_region_data <- function(regions_df) {  
