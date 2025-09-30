@@ -5,8 +5,7 @@ strategise <- function(options) {
   cost_thresholds <- seq(from = min_cost, to = max_cost, length.out = 150) |> round()
   
   result <- parallel::mclapply(cost_thresholds, function(threshold) {
-    budget <- options$budget * threshold
-    interventions <- do_optimise(combined_region_data, budget)
+    interventions <- do_optimise(combined_region_data, threshold)
 
     list(
       costThreshold = threshold,
