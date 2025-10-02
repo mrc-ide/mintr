@@ -2,7 +2,10 @@
   "$schema": "http://json-schema.org/draft-04/schema#",
   "type": "object",
   "properties": {
-    "budget": {
+    "maxCost": {
+      "type": "number"
+    },
+    "minCost": {
       "type": "number"
     },
     "regions": {
@@ -41,5 +44,5 @@
     }
   },
   "additionalProperties": false,
-  "required": ["budget", "regions"]
+  "required": ["maxCost", "minCost", "regions"]
 }
