@@ -57,10 +57,11 @@ test_that("unnest_region_data handles single region", {
 })
 
 test_that("strategise returns correct structure", {
-    result <- strategise(create_strategise_test_data())
-    
-    # Check that result is a list with 5 elements (one for each threshold)
-    expect_equal(length(result), 5)
+  test_data <- create_strategise_test_data()
+  result <- strategise(test_data)
+
+    # Check that result is a list with 200 elements
+    expect_equal(length(result), 200)
     
     # Check structure of each threshold result
     for (i in seq_along(result)) {
@@ -70,33 +71,9 @@ test_that("strategise returns correct structure", {
     }
     
     # Check that cost thresholds are correct
-    expected_thresholds <- c(1, 0.95, 0.9, 0.85, 0.8)
+    expected_thresholds  <- seq(from = test_data$minCost, to = test_data$maxCost, length.out = 200) |> round()
     actual_thresholds <- sapply(result, function(x) x$costThreshold)
     expect_equal(actual_thresholds, expected_thresholds)
-})
-
-test_that("strategise applies budget thresholds correctly", {
-  # Mock do_optimise to capture budget parameter
-  budgets_used <- c()
-  
-  with_mocked_bindings(
-  do_optimise = function(data, budget) {
-    budgets_used <<- c(budgets_used, budget)
-    data.frame(
-    region = "Region A",
-    intervention = "lsm_only",
-    cost = 1000,
-    casesAverted = 50
-    )
-  },
-  {
-    test_data <- create_strategise_test_data()
-    result <- strategise(test_data)
-
-    expected_budgets <- test_data$budget * c(1, 0.95, 0.9, 0.85, 0.8)
-    expect_equal(budgets_used, expected_budgets)
-  }
-  )
 })
 
 
