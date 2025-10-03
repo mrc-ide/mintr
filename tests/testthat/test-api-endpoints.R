@@ -310,21 +310,39 @@ test_that("cost docs", {
 })
 
 test_that("strategise", {
-  test_data <- jsonlite::toJSON(create_strategise_test_data(), auto_unbox = TRUE)
-  db <- mintr_test_db() 
+  test_data <- create_strategise_test_data()
+  test_data_json <- jsonlite::toJSON(test_data, auto_unbox = TRUE)
+  db <- mintr_test_db()
   api <- api_build(db)
-  
-  res_api <- api$request("POST", "/strategise", body = test_data)
-  
+
+  res_api <- api$request("POST", "/strategise", body = test_data_json)
+
   expect_equal(res_api$status, 200)
   body <- jsonlite::fromJSON(res_api$body)
   expect_equal(body$status, "success")
-  expect_equal(body$data$costThreshold, c(1.0, 0.95, 0.9, 0.85, 0.8))
+  expected_thresholds  <- seq(from = test_data$minCost, to = test_data$maxCost, length.out = 200) |> round()
+  expect_equal(body$data$costThreshold, expected_thresholds)
 
   interventions <- body$data$interventions
   for (i in seq_along(interventions)) {
       expect_equal(nrow(interventions[[i]]), 3) # 1 for each region
     }
+})
+
+test_that("strategise with invalid input returns 400", {
+  test_data <- create_strategise_test_data()
+  test_data$minCost <- 5000
+  test_data$maxCost <- 3000
+  test_data_json <- jsonlite::toJSON(test_data, auto_unbox = TRUE)
+  db <- mintr_test_db()
+  api <- api_build(db)
+
+  res_api <- api$request("POST", "/strategise", body = test_data_json)
+
+  expect_equal(res_api$status, 400)
+  body <- jsonlite::fromJSON(res_api$body)
+  expect_equal(body$error$error, "BAD_REQUEST")
+  expect_equal(body$error$detail, "minCost must be less than maxCost")
 })
 
 test_that("runs emulator and returns cases and prevalence", {

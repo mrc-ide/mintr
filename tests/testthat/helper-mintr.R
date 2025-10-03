@@ -14,7 +14,8 @@ mintr_test_db_init <- function() {
 
 create_strategise_test_data <- function() {
   json_txt <- '{
-  "budget": 10000,
+  "maxCost": 10000,
+  "minCost": 1000,
   "regions": [
     {"region": "Region A", "interventions": [
       {"intervention": "lsm_only", "cost": 1000, "casesAverted": 50}
