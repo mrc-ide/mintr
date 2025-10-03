@@ -248,8 +248,15 @@ endpoint_strategise <- function() {
 }
 
 target_strategise <- function(json) {
+  options <- jsonlite::fromJSON(json, simplifyVector=TRUE, flatten=TRUE)
+  if (options$minCost >= options$maxCost) {
+    porcelain::porcelain_stop("minCost must be less than maxCost",
+     code = "BAD_REQUEST",
+     status_code = 400)
+  }
+  result <- strategise(options)
   jsonlite::toJSON(
-    strategise(jsonlite::fromJSON(json, simplifyVector=TRUE, flatten=TRUE)),
+    result,
     auto_unbox=TRUE
   )
 }
