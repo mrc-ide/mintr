@@ -9,7 +9,7 @@ strategise <- function(options) {
       costThreshold = threshold,
       interventions = interventions
     )
-  }, mc.cores = ceiling(parallel::detectCores() / 4))
+  }, mc.cores = ceiling(parallel::detectCores() %||% 1 / 4))
 
   result
 }
