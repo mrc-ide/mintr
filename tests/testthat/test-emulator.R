@@ -37,7 +37,7 @@ test_that("run_emulator returns expected results", {
     # prevalence checks
     expect_true(all(c("scenario", "days", "prevalence") %in% colnames(prevalence)))
     row_count <- prevalence |> dplyr::group_by(scenario) |> count()
-    fortnights_in_4_years <- ceiling(365 * 4 / 14)
+    fortnights_in_4_years <- floor(365 * 4 / 14)
     expect_true(all(row_count$n == fortnights_in_4_years)) 
     expect_setequal(expected_scenarios, row_count$scenario)
 })
