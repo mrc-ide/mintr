@@ -129,13 +129,11 @@ build_minter_params <- function(options) {
 post_process_results <- function(results) {
     # prevalence time steps are fortnightly
     days_in_fortnight <- 14
-    days_in_year <- 365
     results$prevalence <- results$prevalence |>
         dplyr::mutate(days = row_number() * days_in_fortnight, .by = scenario)
     results$cases <- results$cases |> rename(casesPer1000 = cases_per_1000) |>
         dplyr::mutate(
             year = row_number(),
-            casesPer1000 = casesPer1000 * days_in_year,
             .by = scenario
         )
 
