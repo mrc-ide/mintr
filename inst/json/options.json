@@ -3,7 +3,7 @@
     {
       "id": "baseline_options",
       "title": "Baseline Options",
-      "description": "These are the baseline options for the form.",
+      "description": "",
       "helpText": "Configure the baseline options for the form.",
       "collapsible": true,
       "triggersRun": true,
@@ -12,12 +12,12 @@
         {
           "id": "site_inputs",
           "title": "Site Inputs",
-          "description": "Configure the site-specific inputs for the form.",
+          "description": "",
           "helpText": "These inputs are specific to the site being configured.",
           "fields": [
             {
               "id": "population",
-              "label": "Size of population",
+              "label": "Size of population at risk",
               "helpText": "Enter the size of the population in the region.",
               "type": "number",
               "required": true,
@@ -29,21 +29,21 @@
             },
             {
               "id": "is_seasonal",
-              "label": "Seasonal transmission",
-              "helpText": "Indicate whether the population is seasonal.",
+              "label": "Seasonality of transmission",
+              "helpText": "Seasonal: a region with a transmission season. Perennial: a region with year-round transmission.",
               "type": "toggle",
               "required": true,
               "default": false
             },
             {
               "id": "current_malaria_prevalence",
-              "label": "Current Malaria Prevalence",
-              "helpText": "Enter the current malaria prevalence in the region.",
+              "label": "Current malaria prevalence",
+              "helpText": "Define the current endemicity of your setting as measured by the prevalence of children 6-month to 59-months of age who are diagnosed with falciparum malaria by microscopy. The prevalence estimate should relate to the mean value from the previous year. On the prevalence graphic below, the prevalence input will match to the average prevalence across the year before new interventions (grey box). ",
               "required": true,
-              "default": 0,
+              "default": 2,
               "type": "slider",
-              "min": 0,
-              "max": 100,
+              "min": 2,
+              "max": 70,
               "step": 1,
               "unit": "%",
               "integer": true
@@ -53,13 +53,13 @@
         {
           "id": "mosquito_inputs",
           "title": "Mosquito Inputs",
-          "description": "These inputs are specific to the mosquito species in the region.",
-          "helpText": "Configure the mosquito-specific inputs for the form.",
+          "description": "",
+          "helpText": "Values chosen should represent the average mosquito transmitting malaria throughout the year. If multiple vectors are present then the characteristics should be weighted towards the dominant vector species.",
           "fields": [
             {
               "id": "preference_for_biting_in_bed",
               "label": "Preference for biting in bed",
-              "helpText": "Indicate the mosquito's preference for biting in bed.",
+              "helpText": "An estimate of the % of bites that are taken in bed (default suggestion: 82%).",
               "type": "slider",
               "required": true,
               "default": 82,
@@ -71,8 +71,8 @@
             },
             {
               "id": "preference_for_biting",
-              "label": "Preference for biting",
-              "helpText": "Indicate the mosquito's preference for biting.",
+              "label": "Preference for biting humans",
+              "helpText": "An estimate of the % of bites that are taken on humans (default suggestion: 87%).",
               "type": "slider",
               "required": true,
               "default": 87,
@@ -84,8 +84,8 @@
             },
             {
               "id": "pyrethroid_resistance",
-              "label": "Pyrethroid Resistance",
-              "helpText": "Indicate the level of pyrethroid resistance in the mosquito population.",
+              "label": "Level of pyrethroid resistance",
+              "helpText": "Mosquito survival in 24-hour WHO discriminatory dose bioassays. 0% indicates all mosquitoes die and are susceptible to the pyrethroid insecticide in ITNs. 100% indicates that no mosquitoes die or are susceptible to the pyrethroid insecticide in ITNs. Select values that best represent the region. For example, if the region has susceptibility bioassay test estimates that range from 23% to 42% of mosquitoes being killed, then explore pyrethroid resistance scenarios ranging from 58% to 77%.",
               "type": "slider",
               "required": true,
               "default": 0,
@@ -100,14 +100,14 @@
         {
           "id": "past_vector_control",
           "title": "Past Vector Control",
-          "helpText": "Configure the past vector control measures in the region.",
-          "description": "These inputs are specific to the past vector control measures in the region.",
-          "collapsible": true,
+          "description": "",
+          "helpText": "The current endemicity of a region is partly determined by the performance and quantity of vector control leading up to now. This is required to approximate the efficacy of interventions moving forward. ",
+          "collapsible": false,
           "fields": [
             {
               "id": "py_only",
-              "label": "Pyrethroid ITN population usage",
-              "helpText": "Indicate the population usage of pyrethroid ITNs.",
+              "label": "Pyrethroid-only ITN population usage ",
+              "helpText": "Enter estimates of the levels of pyrethroid-only ITN use (%) achieved immediately after the last mass campaign. Note that the total usage across all types of ITN cannot exceed 100%.",
               "type": "slider",
               "required": true,
               "default": 0,
@@ -120,7 +120,7 @@
             {
               "id": "py_pbo",
               "label": "Pyrethroid-PBO ITN population usage",
-              "helpText": "Indicate the population usage of pyrethroid-PBO ITNs.",
+              "helpText": "Enter estimates of the levels of pyrethroid-PBO ITN use (%) achieved immediately after the last mass campaign. Note that the total usage across all types of ITN cannot exceed 100%. ",
               "type": "slider",
               "required": true,
               "default": 0,
@@ -132,8 +132,8 @@
             },
             {
               "id": "py_pyrrole",
-              "label": "Pyrethroid-Pyrrole ITN population usage",
-              "helpText": "Indicate the population usage of pyrethroid-Pyrrole ITNs.",
+              "label": "Pyrethroid-pyrrole ITN population usage",
+              "helpText": "Enter estimates of the levels of pyrethroid-pyrrole ITN use (%) achieved immediately after the last mass campaign. Note that the total usage across all types of ITN cannot exceed 100%.",
               "type": "slider",
               "required": true,
               "default": 0,
@@ -146,7 +146,7 @@
             {
               "id": "py_ppf",
               "label": "Pyrethroid-pyriproxyfen ITN population usage",
-              "helpText": "Indicate the population usage of Pyrethroid-pyriproxyfen ITNs.",
+              "helpText": "Enter estimates of the levels of pyrethroid-pyriproxyfen ITN use (%) achieved immediately after the last mass campaign. Note that the total usage across all types of ITN cannot exceed 100%.",
               "type": "slider",
               "required": true,
               "default": 0,
@@ -169,8 +169,8 @@
             },
             {
               "id": "irs_coverage",
-              "label": "IRS Coverage",
-              "helpText": "Indicate the IRS coverage in the region.",
+              "label": "IRS population coverage",
+              "helpText": "Enter the percentage of sleeping structures sprayed in the year of the last survey in this region.",
               "type": "slider",
               "required": true,
               "default": 0,
@@ -190,20 +190,20 @@
       "triggersRun": true,
       "collapsible": true,
       "preRun": false,
-      "description": "These are the intervention options for the form.",
+      "description": "Enter the details of the planned intervention options for this region.",
       "helpText": "Configure the intervention options for the form.",
       "subGroups": [
         {
           "id": "future_intervention",
           "title": "Future Intervention Options",
           "helpText": "Configure the future intervention options for the form.",
-          "description": "These inputs are specific to the future intervention options in the region.",
+          "description": "",
           "collapsible": true,
           "fields": [
             {
               "id": "itn_future",
-              "label": "Expected ITN population use",
-              "helpText": "Indicate the expected ITN population use in the region.",
+              "label": "Expected ITN population usage",
+              "helpText": "Enter the anticipated level of ITN use (%) that will be achieved immediately after the planned mass campaign. Only one type of ITN is implemented at a time.",
               "type": "slider",
               "required": true,
               "default": 0,
@@ -215,8 +215,8 @@
             },
             {
               "id": "itn_future_types",
-              "label": "Future ITN Types",
-              "helpText": "Select the type of ITNs that will be used in the future. This field becomes enabled when Expected ITN population use > 0.",
+              "label": "Future ITN types",
+              "helpText": "Select the type of ITN that will be distributed in the planned mass campaign. Note these options are only enabled when “Expected ITN population usage” is above 0%.",
               "type": "multiselect",
               "disabled": {
                 "type": "cross_field",
@@ -224,16 +224,16 @@
                 "operator": "falsy"
               },
               "options": [
-                { "label": "Pyrethroid ITNs", "value": "py_only" },
-                { "label": "Pyrethroid-PBO ITNs", "value": "py_pbo" },
-                { "label": "Pyrethroid-Pyrrole ITNs", "value": "py_pyrrole" },
-                { "label": "Pyrethroid-Pyriproxyfen ITNs", "value": "py_ppf" }
+                { "label": "Pyrethroid-only ITNs", "value": "py_only" },
+                { "label": "Pyrethroid-pBO ITNs", "value": "py_pbo" },
+                { "label": "Pyrethroid-pyrrole ITNs", "value": "py_pyrrole" },
+                { "label": "Pyrethroid-pyriproxyfen ITNs", "value": "py_ppf" }
               ]
             },
             {
               "id": "routine_coverage",
               "label": "Continuous distribution of ITNs",
-              "helpText": "Indicate whether continuous distribution of ITNs will be implemented. This field becomes enabled when Expected ITN population use > 0.",
+              "helpText": "Select whether continuous distribution of ITNs is planned in addition to the mass campaign. Note this option is only enabled when “Expected ITN population usage” is above 0%.",
               "type": "toggle",
               "required": true,
               "disabled": {
@@ -245,8 +245,8 @@
             },
             {
               "id": "irs_future",
-              "label": "Expected IRS Coverage",
-              "helpText": "Indicate the expected IRS coverage in the region.",
+              "label": "Expected IRS coverage",
+              "helpText": "Enter the anticipated percentage of the population living in houses that will be sprayed during the planned IRS campaign. The model predicts the impact of a long-lasting IRS product (for example Actellic 300CS or Sumishield) where spraying is repeated annually prior to the peak of the transmission season (if seasonal setting selected in baseline inputs). Care should be taken interpreting results as IRS is often highly clustered within small geographical areas.",
               "type": "slider",
               "required": true,
               "default": 0,
@@ -258,13 +258,13 @@
             },
             {
               "id": "lsm",
-              "label": "Expected reduction in mosquito density from larval source management",
-              "helpText": "Indicate the expected reduction in mosquito density from larval source management.",
+              "label": "Expected reduction in mosquito density achieved through larval source management",
+              "helpText": "Enter the anticipated reduction in mosquito density (%) that will be achieved through the planned LSM campaign. Ideally this should be based on empirical measurements from previous applications of larvicide in this setting.",
               "type": "slider",
               "required": true,
               "default": 0,
               "min": 0,
-              "max": 100,
+              "max": 90,
               "step": 1,
               "unit": "%",
               "integer": true
@@ -276,7 +276,7 @@
     {
       "id": "cost_options",
       "title": "Cost Options",
-      "description": "Cost Options",
+      "description": "",
       "helpText": "Configure the cost options for the form.",
       "triggersRun": false,
       "collapsible": true,
@@ -284,15 +284,15 @@
       "subGroups": [
         {
           "id": "procurement_distribution",
-          "title": "Procurement and Distribution Costs",
-          "description": "Configure the procurement and distribution costs for the form.",
+          "title": "Procurement and Distribution options",
+          "description": "The delivery of nets and sprays is conducted differently in each country. Enter the procurement assumptions for the planned intervention options for this region.",
           "helpText": "These inputs are specific to the procurement and distribution costs in the region.",
           "collapsible": true,
           "fields": [
             {
               "id": "people_per_bednet",
-              "label": "Number of People per bed net",
-              "helpText": "When planning procurement, what number of people per net is used?",
+              "label": "Number of people per ITN",
+              "helpText": "When planning ITN procurement, what number of people per ITN is used? This planning assumption is used to calculate the cost of the ITN campaign.",
               "type": "number",
               "required": true,
               "default": 1.8,
@@ -300,8 +300,8 @@
             },
             {
               "id": "people_per_household",
-              "label": "Number of People per household",
-              "helpText": "When planning procurement, what number of people per household is used?",
+              "label": "Average number of people per household",
+              "helpText": "When planning IRS procurement, what average number of people per household is used? This planning assumption is used to calculate the cost of the IRS campaign.",
               "type": "number",
               "required": true,
               "default": 4,
@@ -309,8 +309,8 @@
             },
             {
               "id": "procurement_buffer",
-              "label": "Procurement Buffer",
-              "helpText": "When planning procurement, what buffer is used?",
+              "label": "Procurement buffer",
+              "helpText": "When nets are procured, there is a buffer to ensure there is not a short fall. Please indicate your estimate here. This is used to adjust cost estimates.",
               "type": "slider",
               "required": true,
               "default": 7,
@@ -325,13 +325,13 @@
         {
           "id": "intervention_prices",
           "title": "Price of Interventions",
-          "description": "Configure the prices for the interventions.",
+          "description": "Specify the product and implementation costs for different intervention options.",
           "helpText": "Specify the prices for each intervention.",
           "collapsible": true,
           "fields": [
             {
               "id": "py_only_cost",
-              "label": "Price of Pyrethroid-Only ITNs ($USD)",
+              "label": "Price of pyrethroid-only ITNs ($USD)",
               "type": "number",
               "required": true,
               "default": 1.85,
@@ -339,7 +339,7 @@
             },
             {
               "id": "py_pbo_cost",
-              "label": "Price of Pyrethroid-PBO ITNs ($USD)",
+              "label": "Price of pyrethroid-PBO ITNs ($USD)",
               "type": "number",
               "required": true,
               "default": 2.14,
@@ -347,7 +347,7 @@
             },
             {
               "id": "py_pyrrole_cost",
-              "label": "Price of Pyrethroid-Pyrrole ITNs ($USD)",
+              "label": "Price of pyrethroid-pyrrole ITNs ($USD)",
               "type": "number",
               "required": true,
               "default": 2.56,
@@ -355,7 +355,7 @@
             },
             {
               "id": "py_ppf_cost",
-              "label": "Price of Pyrethroid-Pyriproxyfen ITNs ($USD)",
+              "label": "Price of pyrethroid-pyriproxyfen ITNs ($USD)",
               "type": "number",
               "required": true,
               "default": 2.86,
@@ -363,7 +363,8 @@
             },
             {
               "id": "mass_distribution_cost",
-              "label": "ITN mass distribution campaign delivery cost per person ($USD)",
+              "label": "ITN mass distribution campaign; delivery cost per ITN ($USD)",
+              "helpText": "Enter the estimated cost to deliver each ITN that is distributed through the mass campaign.",
               "type": "number",
               "required": true,
               "default": 2.75,
@@ -371,7 +372,8 @@
             },
             {
               "id": "continuous_itn_distribution_cost",
-              "label": "Continuous ITN distribution campaign delivery cost per person ($USD)",
+              "label": "ITN continuous distribution campaign; delivery cost per ITN ($USD)",
+              "helpText": "Enter the estimated cost to deliver each ITN that is distributed through continuous channels.",
               "type": "number",
               "required": true,
               "default": 2.75,
@@ -379,14 +381,16 @@
             },
             {
               "id": "irs_household_annual_cost",
-              "label": "Annual cost of IRS per household structure ($USD)",
+              "label": "Estimated annual cost of IRS per household structure ($USD)",
+              "helpText": "This is the estimated cost to spray an average sized household structure (as defined by the user in the Procurement and Distribution Options section above). Include both the cost of the IRS product and implementation costs.",
               "type": "number",
               "required": true,
               "default": 20
             },
             {
               "id": "lsm_cost",
-              "label": "Cost of LSM programme per person ($USD)",
+              "label": "Estimated cost of LSM programme per person ($USD)",
+              "helpText": "This is the estimated total cost to conduct an LSM programme that will achieve the reduction in mosquito density defined in the Intervention Options section above, divided by the population size for this region.",
               "type": "number",
               "required": true,
               "default": 5,
