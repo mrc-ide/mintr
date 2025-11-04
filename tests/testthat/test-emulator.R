@@ -29,6 +29,8 @@ test_that("run_emulator returns expected results", {
     cases <- result$cases
     prevalence <- result$prevalence
     
+    # eir valid
+    expect_true(result$eirValid)
     # cases checks
     expect_true(all(c("scenario", "year", "casesPer1000") %in% colnames(cases)))
     year_count <- cases |> dplyr::summarise(n_years = n_distinct(year), .by = scenario)
