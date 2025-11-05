@@ -29,8 +29,8 @@
             },
             {
               "id": "is_seasonal",
-              "label": "Seasonality of transmission",
-              "helpText": "Seasonal: a region with a transmission season. Perennial: a region with year-round transmission.",
+              "label": "Is transmission seasonal?",
+              "helpText": "Seasonal: a region with a transmission season. If toggle off we assume transmission is perennial: a region with year-round transmission.",
               "type": "toggle",
               "required": true,
               "default": false
@@ -38,7 +38,7 @@
             {
               "id": "current_malaria_prevalence",
               "label": "Current malaria prevalence",
-              "helpText": "Define the current endemicity of your setting as measured by the prevalence of children 6-month to 59-months of age who are diagnosed with falciparum malaria by microscopy. The prevalence estimate should relate to the mean value from the previous year. On the prevalence graphic below, the prevalence input will match to the average prevalence across the year before new interventions (grey box). ",
+              "helpText": "Define the current endemicity of your setting as measured by the prevalence of children 6-month to 59-months of age who are diagnosed with falciparum malaria by microscopy. The prevalence estimate should relate to the mean value from the previous year.",
               "required": true,
               "default": 2,
               "type": "slider",
@@ -85,7 +85,7 @@
             {
               "id": "pyrethroid_resistance",
               "label": "Level of pyrethroid resistance",
-              "helpText": "Mosquito survival in 24-hour WHO discriminatory dose bioassays. 0% indicates all mosquitoes die and are susceptible to the pyrethroid insecticide in ITNs. 100% indicates that no mosquitoes die or are susceptible to the pyrethroid insecticide in ITNs. Select values that best represent the region. For example, if the region has susceptibility bioassay test estimates that range from 23% to 42% of mosquitoes being killed, then explore pyrethroid resistance scenarios ranging from 58% to 77%.",
+              "helpText": "Mosquito survival in 24-hour WHO discriminatory dose bioassays. 0% indicates all mosquitoes die and are susceptible to the pyrethroid insecticide in ITNs. 100% indicates that no mosquitoes die or are susceptible to the pyrethroid insecticide in ITNs.",
               "type": "slider",
               "required": true,
               "default": 0,
@@ -198,7 +198,7 @@
           "title": "Future Intervention Options",
           "helpText": "Configure the future intervention options for the form.",
           "description": "",
-          "collapsible": true,
+          "collapsible": false,
           "fields": [
             {
               "id": "itn_future",
@@ -225,7 +225,7 @@
               },
               "options": [
                 { "label": "Pyrethroid-only ITNs", "value": "py_only" },
-                { "label": "Pyrethroid-pBO ITNs", "value": "py_pbo" },
+                { "label": "Pyrethroid-PBO ITNs", "value": "py_pbo" },
                 { "label": "Pyrethroid-pyrrole ITNs", "value": "py_pyrrole" },
                 { "label": "Pyrethroid-pyriproxyfen ITNs", "value": "py_ppf" }
               ]
@@ -246,7 +246,7 @@
             {
               "id": "irs_future",
               "label": "Expected IRS coverage",
-              "helpText": "Enter the anticipated percentage of the population living in houses that will be sprayed during the planned IRS campaign. The model predicts the impact of a long-lasting IRS product (for example Actellic 300CS or Sumishield) where spraying is repeated annually prior to the peak of the transmission season (if seasonal setting selected in baseline inputs). Care should be taken interpreting results as IRS is often highly clustered within small geographical areas.",
+              "helpText": "Enter the anticipated percentage of the population living in houses that will be sprayed during the planned IRS campaign.",
               "type": "slider",
               "required": true,
               "default": 0,
@@ -259,7 +259,7 @@
             {
               "id": "lsm",
               "label": "Expected reduction in mosquito density achieved through larval source management",
-              "helpText": "Enter the anticipated reduction in mosquito density (%) that will be achieved through the planned LSM campaign. Ideally this should be based on empirical measurements from previous applications of larvicide in this setting.",
+              "helpText": "Enter the anticipated reduction in mosquito density (%) that will be achieved through the planned LSM campaign.",
               "type": "slider",
               "required": true,
               "default": 0,
@@ -291,8 +291,8 @@
           "fields": [
             {
               "id": "people_per_bednet",
-              "label": "Number of people per ITN",
-              "helpText": "When planning ITN procurement, what number of people per ITN is used? This planning assumption is used to calculate the cost of the ITN campaign.",
+              "label": "People per ITN",
+              "helpText": "When planning ITN procurement, what number of people per ITN is used?",
               "type": "number",
               "required": true,
               "default": 1.8,
@@ -300,8 +300,8 @@
             },
             {
               "id": "people_per_household",
-              "label": "Average number of people per household",
-              "helpText": "When planning IRS procurement, what average number of people per household is used? This planning assumption is used to calculate the cost of the IRS campaign.",
+              "label": "Average people per household",
+              "helpText": "When planning IRS procurement, what average number of people per household is used?",
               "type": "number",
               "required": true,
               "default": 4,
