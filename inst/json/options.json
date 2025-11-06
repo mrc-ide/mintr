@@ -363,7 +363,7 @@
             },
             {
               "id": "mass_distribution_cost",
-              "label": "ITN mass distribution campaign; delivery cost per ITN ($USD)",
+              "label": "ITN mass distribution campaign: delivery cost per ITN ($USD)",
               "helpText": "Enter the estimated cost to deliver each ITN that is distributed through the mass campaign.",
               "type": "number",
               "required": true,
@@ -372,7 +372,7 @@
             },
             {
               "id": "continuous_itn_distribution_cost",
-              "label": "ITN continuous distribution campaign; delivery cost per ITN ($USD)",
+              "label": "ITN continuous distribution campaign: delivery cost per ITN ($USD)",
               "helpText": "Enter the estimated cost to deliver each ITN that is distributed through continuous channels.",
               "type": "number",
               "required": true,
