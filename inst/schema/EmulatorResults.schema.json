@@ -11,8 +11,7 @@
           "year": { "type": "integer" },
           "casesPer1000": { "type": "number" }
         },
-        "required": ["scenario", "year", "casesPer1000"],
-        "additionalProperties": false
+        "required": ["scenario", "year", "casesPer1000"]
       }
     },
     "prevalence": {
@@ -24,9 +23,10 @@
           "days": { "type": "integer" },
           "prevalence": { "type": "number" }
         },
-        "required": ["scenario", "days", "prevalence"],
-        "additionalProperties": false
+        "required": ["scenario", "days", "prevalence"]
       }
-    }
-  }
+    },
+    "eirValid": { "type": "boolean" }
+  },
+  "required": ["cases", "prevalence", "eirValid"]
 }

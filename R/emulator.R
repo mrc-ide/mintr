@@ -136,6 +136,8 @@ post_process_results <- function(results) {
             year = row_number(),
             .by = scenario
         )
+    
+    results$eirValid <- jsonlite::unbox(results$eir_valid)
 
     results
 }
