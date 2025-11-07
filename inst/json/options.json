@@ -30,7 +30,7 @@
             {
               "id": "is_seasonal",
               "label": "Is transmission seasonal?",
-              "helpText": "Seasonal: a region with a transmission season. If toggle off we assume transmission is perennial: a region with year-round transmission.",
+              "helpText": "Seasonal: a region with a transmission season. If the toggle is off we assume transmission is perennial: a region with year-round transmission.",
               "type": "toggle",
               "required": true,
               "default": false
@@ -382,7 +382,7 @@
             {
               "id": "irs_household_annual_cost",
               "label": "Estimated annual cost of IRS per household structure ($USD)",
-              "helpText": "This is the estimated cost to spray an average sized household structure (as defined by the user in the Procurement and Distribution Options section above). Include both the cost of the IRS product and implementation costs.",
+              "helpText": "This is the estimated cost to spray an average sized household structure (as defined by the user in the Procurement and Distribution Options section above). Includes both the cost of the IRS product and implementation costs.",
               "type": "number",
               "required": true,
               "default": 20
