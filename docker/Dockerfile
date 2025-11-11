@@ -28,7 +28,7 @@ RUN install_packages \
         testthat \
         tidyr
 
-RUN Rscript -e 'remotes::install_github(c("r-opt/ROIoptimizer", "r-opt/rmpk", "CosmoNaught/MINTer@v1.0.2"))'
+RUN Rscript -e 'remotes::install_github(c("r-opt/ROIoptimizer", "r-opt/rmpk", "CosmoNaught/MINTer@v1.0.3"))'
 RUN Rscript -e 'MINTer::initialize_python()'
 
 WORKDIR /mintr
