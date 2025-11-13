@@ -4,7 +4,7 @@
       "id": "baseline_options",
       "title": "Baseline Options",
       "description": "",
-      "helpText": "Configure the baseline options for the form.",
+      "helpText": "",
       "collapsible": true,
       "triggersRun": true,
       "preRun": true,
@@ -13,7 +13,7 @@
           "id": "site_inputs",
           "title": "Site Inputs",
           "description": "",
-          "helpText": "These inputs are specific to the site being configured.",
+          "helpText": "",
           "fields": [
             {
               "id": "population",
@@ -30,7 +30,7 @@
             {
               "id": "is_seasonal",
               "label": "Is transmission seasonal?",
-              "helpText": "Seasonal: a region with a transmission season. If the toggle is off we assume transmission is perennial: a region with year-round transmission.",
+              "helpText": "Seasonal: a region with a transmission season. If toggle is off we assume transmission is perennial: a region with year-round transmission.",
               "type": "toggle",
               "required": true,
               "default": false
@@ -191,12 +191,12 @@
       "collapsible": true,
       "preRun": false,
       "description": "Enter the details of the planned intervention options for this region.",
-      "helpText": "Configure the intervention options for the form.",
+      "helpText": "",
       "subGroups": [
         {
           "id": "future_intervention",
           "title": "Future Intervention Options",
-          "helpText": "Configure the future intervention options for the form.",
+          "helpText": "",
           "description": "",
           "collapsible": false,
           "fields": [
@@ -277,16 +277,16 @@
       "id": "cost_options",
       "title": "Cost Options",
       "description": "",
-      "helpText": "Configure the cost options for the form.",
+      "helpText": "",
       "triggersRun": false,
       "collapsible": true,
       "preRun": false,
       "subGroups": [
         {
           "id": "procurement_distribution",
-          "title": "Procurement and Distribution options",
+          "title": "Procurement and Distribution Options",
           "description": "The delivery of nets and sprays is conducted differently in each country. Enter the procurement assumptions for the planned intervention options for this region.",
-          "helpText": "These inputs are specific to the procurement and distribution costs in the region.",
+          "helpText": "",
           "collapsible": true,
           "fields": [
             {
@@ -310,7 +310,7 @@
             {
               "id": "procurement_buffer",
               "label": "Procurement buffer",
-              "helpText": "When nets are procured, there is a buffer to ensure there is not a short fall. Please indicate your estimate here. This is used to adjust cost estimates.",
+              "helpText": "When nets are procured, there is a buffer to ensure there is not a shortfall. Please indicate your estimate here. This is used to adjust cost estimates.",
               "type": "slider",
               "required": true,
               "default": 7,
@@ -326,12 +326,12 @@
           "id": "intervention_prices",
           "title": "Price of Interventions",
           "description": "Specify the product and implementation costs for different intervention options.",
-          "helpText": "Specify the prices for each intervention.",
+          "helpText": "",
           "collapsible": true,
           "fields": [
             {
               "id": "py_only_cost",
-              "label": "Price of pyrethroid-only ITNs ($USD)",
+              "label": "Price per pyrethroid-only ITN ($USD)",
               "type": "number",
               "required": true,
               "default": 1.85,
@@ -339,7 +339,7 @@
             },
             {
               "id": "py_pbo_cost",
-              "label": "Price of pyrethroid-PBO ITNs ($USD)",
+              "label": "Price per pyrethroid-PBO ITN ($USD)",
               "type": "number",
               "required": true,
               "default": 2.14,
@@ -347,7 +347,7 @@
             },
             {
               "id": "py_pyrrole_cost",
-              "label": "Price of pyrethroid-pyrrole ITNs ($USD)",
+              "label": "Price per pyrethroid-pyrrole ITN ($USD)",
               "type": "number",
               "required": true,
               "default": 2.56,
@@ -355,7 +355,7 @@
             },
             {
               "id": "py_ppf_cost",
-              "label": "Price of pyrethroid-pyriproxyfen ITNs ($USD)",
+              "label": "Price per pyrethroid-pyriproxyfen ITN ($USD)",
               "type": "number",
               "required": true,
               "default": 2.86,
@@ -380,12 +380,20 @@
               "step": 0.01
             },
             {
-              "id": "irs_household_annual_cost",
-              "label": "Estimated annual cost of IRS per household structure ($USD)",
-              "helpText": "This is the estimated cost to spray an average sized household structure (as defined by the user in the Procurement and Distribution Options section above). Includes both the cost of the IRS product and implementation costs.",
+              "id": "irs_household_annual_cost_product",
+              "label": "Estimated annual cost of IRS product per household structure ($USD)",
+              "helpText": "This is the cost of the IRS products needed to spray an average sized household structure (as defined by the user in the Procurement and Distribution Options section above).",
               "type": "number",
               "required": true,
-              "default": 20
+              "default": 12
+            },
+            {
+              "id": "irs_household_annual_cost_deployment",
+              "label": "Estimated annual cost of IRS deployment per household structure ($USD)",
+              "helpText": "This is the logistics costs involved with spraying an average sized household structure (as defined by the user in the Procurement and Distribution Options section above).",
+              "type": "number",
+              "required": true,
+              "default": 12
             },
             {
               "id": "lsm_cost",
@@ -393,8 +401,7 @@
               "helpText": "This is the estimated total cost to conduct an LSM programme that will achieve the reduction in mosquito density defined in the Intervention Options section above, divided by the population size for this region.",
               "type": "number",
               "required": true,
-              "default": 5,
-              "step": 1
+              "default": 10
             }
           ]
         }
