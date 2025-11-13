@@ -331,7 +331,7 @@
           "fields": [
             {
               "id": "py_only_cost",
-              "label": "Price of pyrethroid-only ITNs ($USD)",
+              "label": "Price per pyrethroid-only ITN ($USD)",
               "type": "number",
               "required": true,
               "default": 1.85,
@@ -339,7 +339,7 @@
             },
             {
               "id": "py_pbo_cost",
-              "label": "Price of pyrethroid-PBO ITNs ($USD)",
+              "label": "Price per pyrethroid-PBO ITN ($USD)",
               "type": "number",
               "required": true,
               "default": 2.14,
@@ -347,7 +347,7 @@
             },
             {
               "id": "py_pyrrole_cost",
-              "label": "Price of pyrethroid-pyrrole ITNs ($USD)",
+              "label": "Price per pyrethroid-pyrrole ITN ($USD)",
               "type": "number",
               "required": true,
               "default": 2.56,
@@ -355,7 +355,7 @@
             },
             {
               "id": "py_ppf_cost",
-              "label": "Price of pyrethroid-pyriproxyfen ITNs ($USD)",
+              "label": "Price per pyrethroid-pyriproxyfen ITN ($USD)",
               "type": "number",
               "required": true,
               "default": 2.86,
